@@ -1,0 +1,4 @@
+ng new module auth --routing
+ng generate feature auth/Auth -m auth --group
+ng generate container auth/LoginPage --state reducers/login-page.ts -m auth
+ng generate reducer auth/reducers/LoginPage --reducers auth.reducer.ts -m auth

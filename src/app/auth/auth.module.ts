@@ -6,13 +6,15 @@ import { StoreModule } from '@ngrx/store';
 import * as fromAuth from './reducers/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './effects/auth.effects';
+import * as fromLoginPage from './reducers/login-page.reducer';
 
 @NgModule({
   imports: [
     CommonModule,
     AuthRoutingModule,
     StoreModule.forFeature('auth', fromAuth.reducer),
-    EffectsModule.forFeature([AuthEffects])
+    EffectsModule.forFeature([AuthEffects]),
+    StoreModule.forFeature('loginPage', fromLoginPage.reducer)
   ],
   declarations: []
 })

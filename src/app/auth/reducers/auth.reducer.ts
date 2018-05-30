@@ -1,8 +1,10 @@
 import { Action } from '@ngrx/store';
 import { AuthActions, AuthActionTypes } from '../actions/auth.actions';
+import * as fromLoginPage from './login-page.reducer';
 
 export interface State {
 
+  loginPage: fromLoginPage.State;
 }
 
 export const initialState: State = {
