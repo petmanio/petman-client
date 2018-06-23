@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -17,6 +17,16 @@
       "dom"
     ],
     "paths": {
+      "@environments/*": ["environments/*"],
+      "@auth/*": ["app/modules/auth/*"],
+      "@adopt/*": ["app/modules/adopt/*"],
+      "@core/*": ["app/modules/core/*"],
+      "@map/*": ["app/modules/map/*"],
+      "@material/*": ["app/modules/material/*"],
+      "@organization/*": ["app/modules/organization/*"],
+      "@shared/*": ["app/modules/shared/*"],
+      "@shelter/*": ["app/modules/shelter/*"],
+      "@walker/*": ["app/modules/walker/*"],
       "@nestjs/swagger": [
         "../node_modules/@petman/common/dist/mock/package"
       ]

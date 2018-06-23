@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateModule } from '@ngx-translate/core';
-import { ShareButtonsModule } from 'ngx-sharebuttons';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 import { MaterialModule } from '@material/material.module';
 
@@ -28,12 +28,9 @@ import { LocalStorageService } from './services/local-storage/local-storage.serv
 import { SharedService } from './services/shared/shared.service';
 
 import { CardComponent } from './components/card/card.component';
-import { MuuriComponent } from './components/muuri/muuri.component';
-import { MuuriItemComponent } from './components/muuri-item/muuri-item.component';
 import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
-import { BrickComponent } from './components/brick/brick.component';
 import { MasonryComponent } from './components/masonry/masonry.component';
 import { MasonryItemComponent } from './components/masonry-item/masonry-item.component';
 import { AddApplicationComponent } from './components/add-application/add-application.component';
@@ -65,12 +62,9 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
     StripTagsPipe,
     UcFirstPipe,
     CardComponent,
-    MuuriComponent,
-    MuuriItemComponent,
     ShareDialogComponent,
     ConfirmationDialogComponent,
     UserDetailsComponent,
-    BrickComponent,
     MasonryComponent,
     MasonryItemComponent,
     AddApplicationComponent,
@@ -96,12 +90,9 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
     StripTagsPipe,
     UcFirstPipe,
     CardComponent,
-    MuuriComponent,
-    MuuriItemComponent,
     ShareDialogComponent,
     ConfirmationDialogComponent,
     UserDetailsComponent,
-    BrickComponent,
     MasonryComponent,
     MasonryItemComponent,
     AddApplicationComponent,

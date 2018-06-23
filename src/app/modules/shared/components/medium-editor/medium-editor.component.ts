@@ -30,9 +30,9 @@ export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnCh
   editor: MediumEditor.MediumEditor;
 
   propagateChange: any = () => {
-  };
+  }
   validateFn: any = () => {
-  };
+  }
 
   constructor() {
   }

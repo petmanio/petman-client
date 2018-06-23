@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { UserDto } from '../../../../../common/models/user.model';
+import { UserDto } from '@petman/common';
 
 @Component({
   selector: 'app-add-application',

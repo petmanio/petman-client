@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Pipe({
   name: 'appAsyncDelay'

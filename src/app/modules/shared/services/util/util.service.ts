@@ -3,11 +3,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { MatIconRegistry } from '@angular/material';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ReplaySubject } from 'rxjs';
+import { environment } from '@environments/environment';
 
-import { environment } from '../../../../environments/environment';
-import { NgxGalleryOptions } from 'ngx-gallery';
+// import { NgxGalleryOptions } from 'ngx-gallery';
 
 export interface IUtilService {
   externalScripts(): void;
@@ -17,20 +17,20 @@ export interface IUtilService {
 
 @Injectable()
 export class UtilService implements IUtilService {
-  static galleryOptions: NgxGalleryOptions[] = [
-    {
-      previewCloseOnEsc: true,
-      previewKeyboardNavigation: true,
-      imageSwipe: true,
-      thumbnailsSwipe: true,
-      previewSwipe: true,
-      thumbnailsRemainingCount: true,
-      thumbnailsColumns: 4,
-      width: '80%',
-      height: '400px'
-    },
-    { breakpoint: 600, thumbnails: false, width: '100%', height: '300px' },
-  ];
+  // static galleryOptions: NgxGalleryOptions[] = [
+  //   {
+  //     previewCloseOnEsc: true,
+  //     previewKeyboardNavigation: true,
+  //     imageSwipe: true,
+  //     thumbnailsSwipe: true,
+  //     previewSwipe: true,
+  //     thumbnailsRemainingCount: true,
+  //     thumbnailsColumns: 4,
+  //     width: '80%',
+  //     height: '400px'
+  //   },
+  //   { breakpoint: 600, thumbnails: false, width: '100%', height: '300px' },
+  // ];
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private matIconRegistry: MatIconRegistry,

@@ -2,8 +2,8 @@ import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '
 import { extend } from 'lodash';
 import { google } from 'google-maps';
 
-import { environment } from '../../../../environments/environment';
-import { Pin } from '../../../../../common/shared';
+import { Pin } from '@petman/common';
+import { environment } from '@environments/environment';
 
 const GoogleMapsLoader = require('google-maps');
 GoogleMapsLoader.KEY = environment.mapApiKey;
