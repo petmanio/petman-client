@@ -1,0 +1,124 @@
+a img {
+  border: 0;
+}
+
+::-moz-selection, ::selection {
+  background-color: #6ab344;
+  color: #fff;
+}
+
+.pm-be-together-section {
+  position: relative;
+  height: 800px;
+  width: auto;
+  background-color: #f3f3f3;
+  background: url('/assets/main-cover.jpg') center 30% no-repeat;
+  background-size: cover;
+}
+
+.logo-font {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1;
+  color: #fff;
+  font-weight: 500;
+}
+
+.pm-slogan {
+  font-size: 60px;
+  padding-top: 200px;
+}
+
+.pm-sub-slogan {
+  font-size: 21px;
+  padding-top: 24px;
+}
+
+.pm-map-section {
+  position: relative;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  app-google-map {
+    min-height: 400px;
+  }
+}
+
+.pm-link {
+  text-decoration: none;
+  color: #8bc34a !important;
+  &:hover {
+    color: #7cb342 !important;
+  }
+  .material-icons {
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+  }
+}
+
+.pm-more-section {
+  padding: 80px 0;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  .pm-section-title {
+    margin-left: 12px;
+    margin-bottom: 24px;
+  }
+}
+
+.pm-card-container {
+  .mdl-card__media {
+    overflow: hidden;
+    background: transparent;
+    img {
+      width: 100%;
+    }
+  }
+  .mdl-card__title {
+    background: transparent;
+    height: auto;
+  }
+  .mdl-card__title-text {
+    color: black;
+    height: auto;
+  }
+  .mdl-card__supporting-text {
+    height: auto;
+    color: black;
+    padding-bottom: 56px;
+  }
+  .mdl-card__actions {
+    position: absolute;
+    bottom: 0;
+    a {
+      border-top: none;
+      font-size: 16px;
+    }
+  }
+}
+
+/**** Mobile layout ****/
+@media (max-width: 900px) {
+  .pm-more-button {
+    display: none;
+  }
+
+  .pm-be-together-section {
+    height: 350px;
+  }
+  .pm-slogan {
+    font-size: 26px;
+    margin: 0 16px;
+    padding-top: 24px;
+  }
+  .pm-sub-slogan {
+    font-size: 16px;
+    margin: 0 16px;
+    padding-top: 8px;
+  }
+}
+
+.pm-preview-content {
+  height: 80px;
+}

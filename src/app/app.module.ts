@@ -23,10 +23,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppEffects } from './app.effects';
 import { CustomHeadersInterceptor } from './interseptors/custom-headers/custom-headers.interceptor';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserAnimationsModule,
