@@ -2,8 +2,21 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "module": "es2015",
-    "types": []
+    "baseUrl": "./",
+    "module": "commonjs",
+    "types": [ "node" ],
+    "paths": {
+      "@environments/*": ["./environments/*"],
+      "@auth/*": ["./app/modules/auth/*"],
+      "@adopt/*": ["./app/modules/adopt/*"],
+      "@core/*": ["./app/modules/core/*"],
+      "@map/*": ["./app/modules/map/*"],
+      "@material/*": ["./app/modules/material/*"],
+      "@organization/*": ["./app/modules/organization/*"],
+      "@shared/*": ["./app/modules/shared/*"],
+      "@shelter/*": ["./app/modules/shelter/*"],
+      "@walker/*": ["./app/modules/walker/*"]
+    }
   },
   "exclude": [
     "src/test.ts",

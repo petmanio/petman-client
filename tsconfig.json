@@ -15,6 +15,11 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@nestjs/swagger": [
+        "../node_modules/@petman/common/dist/mock/package"
+      ]
+    }
   }
 }

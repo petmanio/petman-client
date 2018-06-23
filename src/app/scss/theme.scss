@@ -1,0 +1,67 @@
+@import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
+
+// (optional) Additional themes
+//@import '~@covalent/markdown/markdown-theme';
+//@import '~@covalent/highlight/highlight-theme';
+
+@include mat-core();
+
+// Include the core styles for Covalent
+//@include covalent-core();
+
+// Include pre-bundled material-icons
+//$mat-font-url: '../node_modules/@covalent/core/common/styles/font/';
+//@include covalent-material-icons();
+// Alternative way to include material-icons
+// @import '~@covalent/core/common/material-icons.css';
+
+// Include covalent utility classes
+//@include covalent-utilities();
+
+// Include flex layout classes
+@include covalent-layout();
+
+// Include covalent typography classes
+//@include covalent-typography();
+
+// Include covalent color classes
+//@include covalent-colors();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$primary: mat-palette($mat-green);
+$accent:  mat-palette($mat-amber, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$theme: mat-light-theme($primary, $accent, $warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include covalent-theme($theme);
+@include angular-material-theme($theme);
+// TODO: check why "covalent-theme" overrides angular-material-theme
+
+// (optional) Additional themes
+// @include covalent-markdown-theme($theme);
+// @include covalent-highlight-theme();
+
+// Unfortunately transform changes positioning context and preview won't work properly.
+// To avoid this situation you have to override material styles
+// .mat-sidenav-container,
+// .mat-sidenav-content,
+// .mat-tab-body-content,
+// .mat-sidenav {
+//   transform: none !important;
+// }
+
+// override global image with/height styles from bulma
+.mat-card-image {
+  max-width: inherit;
+  height: inherit;
+}

@@ -1,0 +1,17 @@
+@import "../../scss/mixins";
+
+:host {
+  cursor: pointer;
+}
+
+.avatar {
+  background-size: cover;
+}
+
+p {
+  @include word-wrap;
+}
+
+/deep/ .pm-card .mat-chip-list-wrapper {
+  margin-bottom: 12px;
+}

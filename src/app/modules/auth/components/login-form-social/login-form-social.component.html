@@ -1,0 +1,12 @@
+<mat-card>
+  <img src="/assets/logo.svg" width="80px" height="80px">
+  <mat-card-header>
+    <mat-card-title>{{'NEW_TO_PETMAN' | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <button type="submit" mat-raised-button class="button-facebook" (click)="submitted.emit()" i18n>
+        <mat-icon svgIcon="app:facebook"></mat-icon>{{'SIGN_UP_WITH_FACEBOOK' | translate}}</button>
+    </p>
+  </mat-card-content>
+</mat-card>

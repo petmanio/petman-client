@@ -1,0 +1,20 @@
+<mat-card class="pm-card">
+  <mat-chip-list *ngIf="config.chips && config.chips.length">
+    <mat-chip *ngFor="let chip of config.chips" [color]="chip.color" selected="true">{{chip.text}}</mat-chip>
+  </mat-chip-list>
+  <mat-card-header>
+    <div mat-card-avatar class="avatar" *ngIf="config.avatar"
+         [ngStyle]="{'background-image': 'url(' + config.avatar + ')'}"></div>
+    <mat-card-title>{{config.title}}</mat-card-title>
+    <mat-card-subtitle>{{config.subtitle}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image *ngIf="config.image" [src]="config.image">
+  <mat-card-content *ngIf="config.contentHTML || config.content || config.price">
+    <p *ngIf="config.price"><i class="mdi mdi-cash"></i> {{config.price | number}} {{'AMD' | translate }}</p>
+    <p *ngIf="config.content">{{config.content}}</p>
+    <app-medium-editor *ngIf="config.contentHTML" [value]="config.contentHTML" readonly="true"></app-medium-editor>
+  </mat-card-content>
+  <mat-card-actions class="has-text-right" *ngIf="config.actions">
+    <button mat-raised-button (click)="onShareLocal($event)">{{ 'SHARE' | translate }}</button>
+  </mat-card-actions>
+</mat-card>

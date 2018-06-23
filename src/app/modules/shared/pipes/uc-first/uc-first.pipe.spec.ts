@@ -1,0 +1,3 @@
+describe('Pipe: UcFirst', () => {
+
+});

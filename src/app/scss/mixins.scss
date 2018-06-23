@@ -1,0 +1,90 @@
+
+@mixin mobile-mini {
+  @media (min-width: #{320px}) {
+    @content;
+  }
+}
+
+@mixin mobile-l {
+  @media (min-width: #{480px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{768px}) {
+    @content;
+  }
+}
+
+@mixin tablet-middle {
+  @media (min-width: #{992px}) {
+    @content;
+  }
+}
+
+@mixin tablet-l {
+  @media (min-width: #{1024px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{1280px}) {
+    @content;
+  }
+}
+
+@mixin desktop-full-hd {
+  @media (min-width: #{1360px}) {
+    @content;
+  }
+}
+
+@mixin mat-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size !important;
+}
+
+@mixin word-wrap() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+
+@mixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin calc($property, $expression) {
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+.p-full-height {
+  @include calc(height, '100vh - 56px');
+  @include desktop {
+    @include calc(height, '100vh - 64px');
+  }
+  overflow: auto;
+}
+
+.p-column-full-height {
+  @include calc(height, '100vh - 64px');
+  @include desktop {
+    @include calc(height, '100vh - 72px');
+  }
+  overflow: auto;
+}

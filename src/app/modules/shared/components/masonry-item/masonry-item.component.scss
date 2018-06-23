@@ -1,0 +1,6 @@
+:host {
+  @media (max-width: 780px) {
+    // FIXME: remove workaround
+    position: initial !important;
+  }
+}

@@ -1,0 +1,43 @@
+@import '../../../../shared/scss/variables';
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 72px 0;
+}
+
+mat-card {
+  position: relative;
+}
+
+mat-card-header {
+  margin-top: 15px;
+}
+
+mat-card-title,
+mat-card-header,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+p {
+  width: 300px;
+}
+
+img {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: -40px;
+  left: 150px;
+}
+
+.button-facebook {
+  background: $facebook;
+  color: #ffffff !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: auto;
+}
