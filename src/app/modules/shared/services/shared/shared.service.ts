@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
-import { ListQueryDto, ServiceListDto } from '@petman/common';
+import { ListQueryRequestDto, ServiceListResponseDto } from '@petman/common';
 import { environment } from '@environments/environment';
 
 export interface ISharedService {
-  serviceList(query: ListQueryDto): Observable<ServiceListDto>;
+  serviceList(query: ListQueryRequestDto): Observable<ServiceListResponseDto>;
 }
 
 @Injectable()
@@ -15,10 +15,10 @@ export class SharedService implements ISharedService {
   constructor(@Inject(PLATFORM_ID) protected platformId: Object, private http: HttpClient) {
   }
 
-  serviceList(query: ListQueryDto): Observable<ServiceListDto> {
+  serviceList(query: ListQueryRequestDto): Observable<ServiceListResponseDto> {
     return this.http
-      .get<ServiceListDto>(`${environment.api}/api/services`).pipe(
-        map(response => plainToClass(ServiceListDto, response, { groups: ['petman-client'] }))
+      .get<ServiceListResponseDto>(`${environment.api}/api/services`).pipe(
+        map(response => plainToClass(ServiceListResponseDto, response, { groups: ['petman-client'] }))
       );
   }
 }

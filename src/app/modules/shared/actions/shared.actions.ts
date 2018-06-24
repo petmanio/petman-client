@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
-import { ListQueryDto, ServiceListDto } from '@petman/common';
+import { ListQueryRequestDto, ServiceListResponseDto } from '@petman/common';
 
 export enum SharedActionTypes {
   SERVICE_LIST = '[Service] List',
@@ -15,14 +15,14 @@ export enum SharedActionTypes {
 export class ServiceList implements Action {
   readonly type = SharedActionTypes.SERVICE_LIST;
 
-  constructor(public payload: ListQueryDto = null) {
+  constructor(public payload: ListQueryRequestDto = null) {
   }
 }
 
 export class ServiceListSuccess implements Action {
   readonly type = SharedActionTypes.SERVICE_LIST_SUCCESS;
 
-  constructor(public payload: ServiceListDto) {
+  constructor(public payload: ServiceListResponseDto) {
   }
 }
 

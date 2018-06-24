@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as fromStore from '../reducers/login-page.reducer';
+import * as fromStore from '@auth/reducers/login-page.reducer';
+import { FbLogin } from '@auth/actions/auth.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -9,10 +10,16 @@ import * as fromStore from '../reducers/login-page.reducer';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
+  pending$ = this.store.select(fromStore.getPending);
+  error$ = this.store.select(fromStore.getError);
 
   constructor(private store: Store<fromStore.State>) { }
 
   ngOnInit() {
+  }
+
+  onSubmit(): void {
+    this.store.dispatch(new FbLogin());
   }
 
 }

@@ -1,0 +1,69 @@
+import { Injectable, NgZone } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { LoginFacebookRequestDto, LoginFacebookResponseDto, UserDto } from '@petman/common';
+
+import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
+import { environment } from '@environments/environment';
+import { plainToClass } from 'class-transformer';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService, private ngZone: NgZone) {
+  }
+
+  getFacebookToken(): Observable<string> {
+    return new Observable(observer => {
+      FB.login((response) => {
+        this.ngZone.run(() => {
+          if (response.authResponse) {
+            observer.next(response.authResponse.accessToken);
+          } else {
+            // TODO: handle error
+            observer.error(new Error());
+          }
+        });
+      }, { scope: environment.fb.scope });
+    });
+  }
+
+  fbLogin(options: LoginFacebookRequestDto): Observable<LoginFacebookResponseDto> {
+    return this.http
+      .post<LoginFacebookResponseDto>(`${environment.api}/api/auth/login/fb`, options).pipe(
+        map(response => {
+          this.localStorageService.setItem('token', response.token);
+          return response;
+        })
+      );
+  }
+
+  user(): Observable<UserDto> {
+    return this.http
+      .get<UserDto>(`${environment.api}/api/auth/user`, {}).pipe(
+        map(response => plainToClass(UserDto, response, { groups: ['petman-client'] })),
+        map(response => {
+          this.localStorageService.setItem('user', response);
+          return response;
+        })
+      );
+  }
+
+  logOut(): void {
+    this.localStorageService.setItem('user', null);
+    this.localStorageService.setItem('token', null);
+    this.localStorageService.setItem('selectedUserId', null);
+  }
+
+  changeUser(selectedUserId: number): void {
+    const storedSelectedId = this.localStorageService.getItem('selectedUserId');
+    if (selectedUserId.toString() !== storedSelectedId) {
+      this.localStorageService.setItem('selectedUserId', selectedUserId.toString());
+      // location.reload();
+    }
+  }
+}

@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:out": "ng serve --aot",
     "build": "ng build",
     "build:prod": "ng build --prod",
     "test": "ng test",
@@ -52,6 +53,7 @@
     "class-validator": "^0.8.5",
     "core-js": "^2.5.4",
     "google-maps": "^3.3.0",
+    "lodash": "^4.17.10",
     "masonry-layout": "^4.2.1",
     "medium-editor": "^5.23.3",
     "moment": "^2.22.2",

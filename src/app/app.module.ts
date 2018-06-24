@@ -16,7 +16,7 @@ import { environment } from '@environments/environment';
 import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
 import { UtilService } from '@shared/services/util/util.service';
-import { AuthModule } from '@auth/auth.module';
+// import { AuthModule } from '@auth/auth.module';
 
 import { reducers, metaReducers } from './reducers';
 import { AppRoutingModule } from './app-routing.module';
@@ -53,7 +53,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 
     SharedModule.forRoot(),
     MaterialModule.forRoot(),
-    AuthModule.forRoot(),
+    // AuthModule.forRoot(),
     AppRoutingModule
   ],
   providers: [

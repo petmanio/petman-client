@@ -7,7 +7,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 const routes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full', data: { showSidenav: false } },
   { path: 'auth', loadChildren: './modules/auth/auth.module#AuthModule' },
-  { path: '**', component: NotFoundPageComponent, data: { showSidenav: false } }
+  { path: '404', component: NotFoundPageComponent, data: { showSidenav: false } },
+  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({
