@@ -92,5 +92,8 @@
   "NO": "No",
   "HY": "Հայերեն",
   "EN": "English",
-  "AROUND_THE_WEB": "Around the web"
+  "AROUND_THE_WEB": "Around the web",
+  "NOT_FOUND_HEADER": "404: Not Found",
+  "NOT_FOUND_CONTENT": "Hey! It looks like this page doesn't exist yet.",
+  "TAKE_ME_HOME": "Take Me Home"
 }

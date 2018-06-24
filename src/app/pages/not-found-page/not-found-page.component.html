@@ -1,10 +1,9 @@
 <mat-card>
-  <!--TODO: translations-->
-  <mat-card-title>404: Not Found</mat-card-title>
+  <mat-card-title>{{'NOT_FOUND_HEADER' | translate}}</mat-card-title>
   <mat-card-content>
-    <p>Hey! It looks like this page doesn't exist yet.</p>
+    <p>{{'NOT_FOUND_CONTENT' | translate}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" routerLink="/" i18n>Take Me Home</button>
+    <button mat-raised-button color="primary" routerLink="/">{{'TAKE_ME_HOME' | translate}}</button>
   </mat-card-actions>
 </mat-card>

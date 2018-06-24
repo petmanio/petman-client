@@ -1,10 +1,11 @@
 :host {
   text-align: center;
-  min-height: 100%;
+  min-height: calc(100% - 140px);
   display: block;
   background: #fff;
 }
 
 mat-card {
   box-shadow: none !important;
+  padding-top: 100px;
 }
