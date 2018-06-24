@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as fromStore from '@auth/reducers/login-page.reducer';
+import * as fromAuth from '@auth/reducers';
 import { FbLogin } from '@auth/actions/auth.actions';
 
 @Component({
@@ -11,10 +11,10 @@ import { FbLogin } from '@auth/actions/auth.actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent implements OnInit {
-  pending$ = this.store.select(fromStore.getPending);
-  error$ = this.store.select(fromStore.getError);
+  pending$ = this.store.select(fromAuth.getLoginPagePending);
+  error$ = this.store.select(fromAuth.getLoginPageError);
 
-  constructor(private store: Store<fromStore.State>) { }
+  constructor(private store: Store<fromAuth.State>) { }
 
   ngOnInit() {
   }

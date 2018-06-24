@@ -6,8 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '@shared/shared.module';
 import { MaterialModule } from '@material/material.module';
 
-import * as fromAuth from '@auth/reducers/auth.reducer';
-import * as fromLoginPage from '@auth/reducers/login-page.reducer';
+import { reducers } from '@auth/reducers';
 import { AuthRoutingModule } from '@auth/auth-routing.module';
 import { AuthEffects } from '@auth/effects/auth.effects';
 import { AuthService } from '@auth/auth.service';
@@ -20,9 +19,8 @@ import { LoginFormSocialComponent } from '@auth/components/login-form-social/log
   imports: [
     CommonModule,
     AuthRoutingModule,
-    StoreModule.forFeature('auth', fromAuth.reducer),
+    StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([AuthEffects]),
-    StoreModule.forFeature('auth.loginPage', fromLoginPage.reducer),
 
     SharedModule,
     MaterialModule

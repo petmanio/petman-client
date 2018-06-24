@@ -1,5 +1,4 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { AuthActions, AuthActionTypes } from '@auth/actions/auth.actions';
 
@@ -30,7 +29,5 @@ export function reducer(state = initialState, action: AuthActions): State {
   }
 }
 
-export const selectState = createFeatureSelector<State>('auth.loginPage');
-
-export const getError = createSelector(selectState, state => state.error);
-export const getPending = createSelector(selectState, state => state.pending);
+export const getError = (state: State) => state.error;
+export const getPending = (state: State) => state.pending;

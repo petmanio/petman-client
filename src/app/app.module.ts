@@ -17,7 +17,7 @@ import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
 import { UtilService } from '@shared/services/util/util.service';
 import { CoreModule } from '@core/core.module';
-// import { AuthModule } from '@auth/auth.module';
+import { AuthModule } from '@auth/auth.module';
 
 import { reducers, metaReducers } from '@app/reducers';
 import { AppRoutingModule } from '@app/app-routing.module';
@@ -55,7 +55,7 @@ import { HomePageComponent } from '@app/pages/home-page/home-page.component';
     SharedModule.forRoot(),
     MaterialModule.forRoot(),
     CoreModule.forRoot(),
-    // AuthModule.forRoot(),
+    AuthModule.forRoot(),
     AppRoutingModule
   ],
   providers: [

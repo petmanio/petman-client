@@ -85,7 +85,7 @@ export class UtilService implements IUtilService {
     if (!lang) {
       return null;
     }
-    return lang.toLocaleUpperCase().replace('-', '_');
+    return lang.toLocaleUpperCase();
   }
 
   static stripHtml = (html: string): string => {

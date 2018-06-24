@@ -1,3 +1,14 @@
-<div>
+<ng-progress thick="true" color="#6fb5fc"></ng-progress>
+<app-toolbar [loggedIn]="(loggedIn$ | async)"
+             [selectedUser]="(selectedUser$ | async)"
+             (onLogOut)="onLogOut()"
+             (toggleMenu)="toggleSidenav($event)">
+</app-toolbar>
+<app-sidenav [open]="sideNavState"
+             [mode]="sideNavMode"
+             [user]="user$ | async"
+             [selectedUser]="selectedUser$ | async"
+             (onSelectedUserChange)="onSelectedUserChange($event)">
   <router-outlet></router-outlet>
-</div>
+  <app-footer [currentLanguage]="currentLanguage" (onLanguageChange)="onLanguageChange($event)"></app-footer>
+</app-sidenav>
