@@ -1,4 +1,4 @@
-import { LayoutActions, LayoutActionTypes } from '@app/actions/layout.action';
+import { LayoutActions, LayoutActionTypes } from '@app/actions/layout.actions';
 
 export interface State {
   showSidenav: boolean;

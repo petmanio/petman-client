@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 
-import * as fromAuth from '@auth/reducers/auth.reducer';
+import * as fromAuth from '@auth/reducers';
 import { AuthService } from '@auth/auth.service';
 import { LoginRedirect, UserSuccess } from '@auth/actions/auth.actions';
 

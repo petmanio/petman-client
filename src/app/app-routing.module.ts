@@ -8,6 +8,7 @@ import { NotFoundPageComponent } from '@app/pages/not-found-page/not-found-page.
 const routes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full', data: { showSidenav: false } },
   { path: 'auth', loadChildren: './modules/auth/auth.module#AuthModule', canActivate: [DenyAuthGuard], data: { showSidenav: false } },
+  { path: 'shelters', loadChildren: './modules/shelter/shelter.module#ShelterModule', data: { showSidenav: true } },
   { path: '404', component: NotFoundPageComponent, data: { showSidenav: false } },
   { path: '**', redirectTo: '404' }
 ];

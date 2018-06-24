@@ -14,7 +14,7 @@ import * as fromRoot from '@app/reducers';
 import * as fromAuth from '@auth/reducers';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
-import { CloseSidenav, OpenSidenav } from '@app/actions/layout.action';
+import { CloseSidenav, OpenSidenav } from '@app/actions/layout.actions';
 import { ServiceList } from '@shared/actions/shared.actions';
 
 @Component({
