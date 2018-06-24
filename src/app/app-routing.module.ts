@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { DenyAuthGuard } from '@auth/deny-auth.guard';
+import { HomePageComponent } from '@app/pages/home-page/home-page.component';
+import { NotFoundPageComponent } from '@app/pages/not-found-page/not-found-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent, pathMatch: 'full', data: { showSidenav: false } },
-  { path: 'auth', loadChildren: './modules/auth/auth.module#AuthModule' },
+  { path: 'auth', loadChildren: './modules/auth/auth.module#AuthModule', canActivate: [DenyAuthGuard], data: { showSidenav: false } },
   { path: '404', component: NotFoundPageComponent, data: { showSidenav: false } },
   { path: '**', redirectTo: '404' }
 ];

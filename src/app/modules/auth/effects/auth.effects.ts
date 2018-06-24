@@ -23,8 +23,8 @@ export class AuthEffects {
     })
   );
 
-  @Effect({ dispatch: false })
-  fbLoginSuccess = this.actions$.pipe(
+  @Effect()
+  fbLoginSuccess$ = this.actions$.pipe(
     ofType(AuthActionTypes.FB_LOGIN_SUCCESS),
     map(() => new User()),
     tap(() => this.router.navigate(['/']))
@@ -45,9 +45,7 @@ export class AuthEffects {
   userChange$ = this.actions$.pipe(
     ofType(AuthActionTypes.CHANGE_USER),
     map((action: ChangeUser) => action.payload),
-    tap((selectedUserId) => {
-      this.authService.changeUser(selectedUserId);
-    })
+    tap((selectedUserId) => this.authService.changeUser(selectedUserId))
   );
 
   @Effect({ dispatch: false })

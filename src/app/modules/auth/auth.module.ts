@@ -11,6 +11,7 @@ import { AuthRoutingModule } from '@auth/auth-routing.module';
 import { AuthEffects } from '@auth/effects/auth.effects';
 import { AuthService } from '@auth/auth.service';
 import { AuthGuard } from '@auth/auth.guard';
+import { DenyAuthGuard } from '@auth/deny-auth.guard';
 import { LoginPageComponent } from '@auth/login-page/login-page.component';
 import { LoginFormComponent } from '@auth/components/login-form/login-form.component';
 import { LoginFormSocialComponent } from '@auth/components/login-form-social/login-form-social.component';
@@ -30,7 +31,7 @@ import { LoginFormSocialComponent } from '@auth/components/login-form-social/log
     LoginFormSocialComponent,
     LoginPageComponent
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, DenyAuthGuard],
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders {
