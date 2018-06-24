@@ -15,7 +15,7 @@ export enum SharedActionTypes {
 export class ServiceList implements Action {
   readonly type = SharedActionTypes.SERVICE_LIST;
 
-  constructor(public payload: ListQueryRequestDto = null) {
+  constructor(public payload: ListQueryRequestDto) {
   }
 }
 

@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // TODO: use effects init
     this.store.dispatch(new ChangeUser(+this.localStorageService.getItem('selectedUserId')));
     this.store.dispatch(new CloseSidenav());
-    this.store.dispatch(new ServiceList());
+    this.store.dispatch(new ServiceList({ limit: 10, offset: 0 }));
 
     const sidenavSubscription = this.showSidenav$.subscribe(state => {
       this.sideNavState = state;

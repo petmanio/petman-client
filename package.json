@@ -58,6 +58,7 @@
     "masonry-layout": "^4.2.1",
     "medium-editor": "^5.23.3",
     "moment": "^2.22.2",
+    "normalize.css": "^8.0.0",
     "rxjs": "^6.2.1",
     "zone.js": "^0.8.26"
   },

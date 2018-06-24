@@ -17,7 +17,7 @@ export class SharedService implements ISharedService {
 
   serviceList(query: ListQueryRequestDto): Observable<ServiceListResponseDto> {
     return this.http
-      .get<ServiceListResponseDto>(`${environment.api}/api/services`).pipe(
+      .get<ServiceListResponseDto>(`${environment.api}/api/services`, { params: <any>query }).pipe(
         map(response => plainToClass(ServiceListResponseDto, response, { groups: ['petman-client'] }))
       );
   }
