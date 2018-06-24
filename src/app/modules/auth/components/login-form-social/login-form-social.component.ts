@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-login-form-social',
   templateUrl: './login-form-social.component.html',
-  styleUrls: ['./login-form-social.component.scss']
+  styleUrls: ['./login-form-social.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormSocialComponent {
   @Input() errorMessage: string | null;

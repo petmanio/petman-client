@@ -27,6 +27,7 @@
       "@shared/*": ["app/modules/shared/*"],
       "@shelter/*": ["app/modules/shelter/*"],
       "@walker/*": ["app/modules/walker/*"],
+      "@app/*": ["app/*"],
       "@nestjs/swagger": [
         "../node_modules/@petman/common/dist/mock/package"
       ]

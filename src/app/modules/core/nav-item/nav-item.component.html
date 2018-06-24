@@ -1,0 +1,16 @@
+<a mat-list-item
+   [routerLink]="routerLink"
+   (click)="activate.emit()"
+   [routerLinkActive]="routerLinkActive"
+   ngClass="{{activeClass}}">
+  <mat-icon *ngIf="icon" mat-list-icon>{{ icon }}</mat-icon>
+  <mat-icon *ngIf="svgIcon" [svgIcon]="svgIcon" mat-list-icon></mat-icon>
+
+  <span mat-line>
+    <ng-content></ng-content>
+    <mat-chip-list *ngIf="chip">
+      <mat-chip>{{chip}}</mat-chip>
+    </mat-chip-list>
+  </span>
+  <span mat-line class="secondary">{{ hint }}</span>
+</a>

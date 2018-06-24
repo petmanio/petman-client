@@ -1,0 +1,34 @@
+<footer>
+  <div class="columns is-marginless">
+    <div class="column">
+      <p>{{'ABOUT_US_CONTENT' | translate}}</p>
+    </div>
+    <div class="column is-4 has-text-centered">
+      <div class="button-row">
+        <a href="https://www.facebook.com/petman.io" target="_blank" mat-fab color=""
+           style="background-color: #3A5BA2">
+          <mat-icon svgIcon="app:facebook"></mat-icon>
+        </a>
+        <a href="https://twitter.com/petmanio" target="_blank" mat-fab color="" style="background-color: #1EBEF0">
+          <mat-icon svgIcon="app:twitter"></mat-icon>
+        </a>
+        <a href="mailto:info@petman.io" target="_top" mat-fab color="">
+          <mat-icon>email</mat-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="columns is-marginless">
+    <div class="column">
+      <p>
+        © 2017 Copyright: <a href="https://petman.io"> Petman.io </a>
+      </p>
+    </div>
+    <div class="column is-4 has-text-right">
+      <a class="button is-white"
+         *ngFor="let language of Language | appKeys"
+         [class.is-active]="currentLanguage === language.key"
+         (click)="onLanguageChange.emit(language.key)">{{language.key | translate}}</a>
+    </div>
+  </div>
+</footer>

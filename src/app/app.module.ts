@@ -16,15 +16,16 @@ import { environment } from '@environments/environment';
 import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
 import { UtilService } from '@shared/services/util/util.service';
+import { CoreModule } from '@core/core.module';
 // import { AuthModule } from '@auth/auth.module';
 
-import { reducers, metaReducers } from './reducers';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AppEffects } from './app.effects';
-import { CustomHeadersInterceptor } from './interseptors/custom-headers/custom-headers.interceptor';
-import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
+import { reducers, metaReducers } from '@app/reducers';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { AppComponent } from '@app/app.component';
+import { AppEffects } from '@app/app.effects';
+import { CustomHeadersInterceptor } from '@app/interseptors/custom-headers/custom-headers.interceptor';
+import { NotFoundPageComponent } from '@app/pages/not-found-page/not-found-page.component';
+import { HomePageComponent } from '@app/pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 
     SharedModule.forRoot(),
     MaterialModule.forRoot(),
+    CoreModule.forRoot(),
     // AuthModule.forRoot(),
     AppRoutingModule
   ],

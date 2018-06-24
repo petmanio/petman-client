@@ -1,0 +1,26 @@
+@import '../../../scss/mixins';
+@import '../../../scss/variables';
+
+mat-sidenav {
+  width: 250px;
+}
+mat-sidenav-container {
+  @extend .p-full-height;
+}
+
+.disabled {
+  display: block;
+  opacity: 0.5;
+}
+
+.change-user-sidenav {
+  text-align: center;
+}
+
+/deep/ .change-user-sidenav .mat-select-value {
+  color: inherit;
+}
+
+/deep/ .change-user-sidenav .mat-select-arrow {
+  color: inherit;
+}
