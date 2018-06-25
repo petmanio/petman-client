@@ -1,11 +1,16 @@
+@import '../../scss/mixins';
+
 :host {
   text-align: center;
-  min-height: calc(100% - 140px);
+  height: 100vh;
   display: block;
-  background: #fff;
+  background: url('/assets/not-found-cover.jpg') center no-repeat;
+  background-size: cover;
 }
 
-mat-card {
-  box-shadow: none !important;
+.pm-not-found {
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
   padding-top: 200px;
+  height: 100%;
 }
