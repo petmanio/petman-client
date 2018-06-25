@@ -9,6 +9,8 @@
              [user]="user$ | async"
              [selectedUser]="selectedUser$ | async"
              (onSelectedUserChange)="onSelectedUserChange($event)">
-  <router-outlet></router-outlet>
+  <div class="pm-page-container">
+    <router-outlet></router-outlet>
+  </div>
   <app-footer [currentLanguage]="currentLanguage" (onLanguageChange)="onLanguageChange($event)"></app-footer>
 </app-sidenav>

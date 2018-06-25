@@ -31,7 +31,6 @@ export class ListPageComponent implements OnInit, OnDestroy {
   selectedUser$ = this.store.select(fromAuth.getSelectedUser);
   private subscriptions: Subscription[] = [];
 
-
   constructor(
     private router: Router,
     private location: Location,
