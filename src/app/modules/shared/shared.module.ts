@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
@@ -71,7 +71,7 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
     MediumEditorComponent,
     GoogleMapComponent
   ],
-  providers: [UtilService, LocalStorageService, SharedService],
+  providers: [DatePipe, UtilService, LocalStorageService, SharedService],
   exports: [
     CommonModule,
     FormsModule,

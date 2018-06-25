@@ -1,0 +1,33 @@
+<div infinite-scroll
+     infiniteScrollContainer="mat-sidenav-content"
+     infiniteScrollDistance="2"
+     infiniteScrollThrottle="300"
+     fromRoot="true"
+     (scrolled)="onLoadMore()">
+  <div class="columns is-marginless is-paddingless">
+    <div class="column">
+      <app-masonry class="columns is-marginless is-paddingless"
+                   [options]="{ transitionDuration: '0.5s', percentPosition: true, resize: true }">
+        <app-masonry-item class="column is-3-fullhd is-4-desktop is-6-tablet is-marginless">
+          <a [routerLink]="['/shelters', 'add']">
+            <app-add-application [user]="selectedUser$ | async"></app-add-application>
+          </a>
+        </app-masonry-item>
+        <app-masonry-item class="column is-3-fullhd is-4-desktop is-6-tablet is-marginless"
+                          *ngFor="let item of list$ | async">
+          <a [routerLink]="['/shelters', item.id]">
+            <app-card [config]="getCardConfig(item)" (onShare)="onShare(item)"></app-card>
+          </a>
+        </app-masonry-item>
+      </app-masonry>
+    </div>
+    <button mat-fab color="accent" class="pm-fab" routerLink="add">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="columns is-marginless" [hidden]="!(list$ | appAsyncDelay | async)?.length">
+    <div class="column has-text-centered" [hidden]="!canLoadMore">
+      <button mat-raised-button (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
+    </div>
+  </div>
+</div>
