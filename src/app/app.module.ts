@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 import { environment } from '@environments/environment';
 import { MaterialModule } from '@material/material.module';
@@ -51,6 +52,7 @@ import { HomePageComponent } from '@app/pages/home-page/home-page.component';
         deps: [HttpClient]
       }
     }),
+    ShareButtonsModule.forRoot(),
 
     SharedModule.forRoot(),
     MaterialModule.forRoot(),

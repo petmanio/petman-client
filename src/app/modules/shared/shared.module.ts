@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateModule } from '@ngx-translate/core';
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { MaterialModule } from '@material/material.module';
 
@@ -44,7 +45,9 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
     ReactiveFormsModule,
     RouterModule,
     TranslateModule,
-    ShareButtonsModule.forRoot(),
+    ShareButtonsModule,
+    InfiniteScrollModule,
+
     StoreModule.forFeature('shared', fromShared.reducer),
     EffectsModule.forFeature([SharedEffects]),
 
@@ -78,6 +81,7 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
     ReactiveFormsModule,
     RouterModule,
     TranslateModule,
+    InfiniteScrollModule,
 
     AsyncDelayPipe,
     ChunkPipe,

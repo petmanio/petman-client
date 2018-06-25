@@ -36,6 +36,7 @@
     "@covalent/markdown": "^2.0.0-beta.2",
     "@fortawesome/angular-fontawesome": "0.1.0-10",
     "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@fortawesome/free-brands-svg-icons": "^5.1.0",
     "@fortawesome/free-solid-svg-icons": "^5.1.0",
     "@ngrx/effects": "^6.0.1",
     "@ngrx/entity": "^6.0.1",
@@ -58,6 +59,7 @@
     "masonry-layout": "^4.2.1",
     "medium-editor": "^5.23.3",
     "moment": "^2.22.2",
+    "ngx-infinite-scroll": "^6.0.1",
     "normalize.css": "^8.0.0",
     "rxjs": "^6.2.1",
     "zone.js": "^0.8.26"
