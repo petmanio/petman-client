@@ -3,8 +3,17 @@
   display: block;
 }
 
+app-masonry-item {
+  width: 100%;
+}
+
 /deep/ {
   .td-loading-wrapper {
     min-height: calc(100vh - 64px);
+  }
+
+  mat-progress-spinner {
+    position: fixed !important;
+    top: 50%;
   }
 }

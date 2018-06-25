@@ -27,8 +27,8 @@
       </button>
     </div>
     <div class="columns is-marginless" [hidden]="!(list$ | appAsyncDelay | async)?.length">
-      <div class="column has-text-centered" [hidden]="!canLoadMore">
-        <button mat-raised-button (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
+      <div class="column has-text-centered">
+        <button mat-raised-button [disabled]="!canLoadMore || (pending$ | appAsyncDelay | async)" (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
       </div>
     </div>
   </div>
