@@ -27,7 +27,7 @@ export class ShelterExistsGuard implements CanActivate {
   }
 
   hasDataInStore(id: number): Observable<boolean> {
-    return this.store.select(fromShelter.getShelterEntities)
+    return this.store.select(fromShelter.getEntities)
       .pipe(
         map(entities => !!entities[id]),
         take(1)

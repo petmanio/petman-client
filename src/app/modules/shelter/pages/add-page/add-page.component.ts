@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import * as fromShelter from '@shelter/reducers';
+import { Create } from '@shelter/actions/shelter.actions';
 
 @Component({
   selector: 'app-shelter-add-page',
@@ -10,12 +12,25 @@ import * as fromShelter from '@shelter/reducers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddPageComponent implements OnInit {
+  form: FormGroup;
   pending$ = this.store.select(fromShelter.getAddPagePending);
   error$ = this.store.select(fromShelter.getAddPageError);
 
-  constructor(private store: Store<fromShelter.State>) {
+  constructor(@Inject(FormBuilder) private formBuilder: FormBuilder, private store: Store<fromShelter.State>) {
+    this.form = formBuilder.group({
+      price: ['', Validators.required],
+      description: ['', Validators.required],
+      images: [
+        null,
+        Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(4)])
+      ]
+    });
   }
 
   ngOnInit() {
+  }
+
+  create(): void {
+    this.store.dispatch(new Create(this.form.value));
   }
 }

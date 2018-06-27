@@ -95,5 +95,10 @@
   "AROUND_THE_WEB": "Around the web",
   "NOT_FOUND_HEADER": "404: Not Found",
   "NOT_FOUND_CONTENT": "Hey! It looks like this page doesn't exist yet.",
-  "TAKE_ME_HOME": "Take Me Home"
+  "TAKE_ME_HOME": "Take Me Home",
+  "BECAME_SHELTER_INTO": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ",
+  "CLEAR": "Clear",
+  "MAXIMUM_IMAGE_LIMIT_ERROR": "MAXIMUM_IMAGE_LIMIT_ERROR",
+  "INTERNAL_ERROR_TITLE": "Error!",
+  "INTERNAL_ERROR": "We encountered an error. Please try again."
 }

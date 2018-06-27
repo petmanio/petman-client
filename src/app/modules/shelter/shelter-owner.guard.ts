@@ -14,7 +14,7 @@ export class ShelterOwnerGuard implements CanActivate {
   }
 
   isOwner(id: number): Observable<boolean> {
-    return this.store.select(fromShelter.getShelterEntities)
+    return this.store.select(fromShelter.getEntities)
       .pipe(
         filter(entities => !!entities[id]),
         map(entities => entities[id]),

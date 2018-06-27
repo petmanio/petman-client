@@ -10,33 +10,58 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { MaterialModule } from '@material/material.module';
 
-import * as fromShared from './reducers/shared.reducer';
-import { SharedEffects } from './effects/shared.effects';
+import * as fromShared from '@shared/reducers/shared.reducer';
+import { SharedEffects } from '@shared/effects/shared.effects';
 
-import { AsyncDelayPipe } from './pipes/async-delay/async-delay.pipe';
-import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
-import { GalleryImagesPipe } from './pipes/gallery-images/gallery-images.pipe';
-import { KeysPipe } from './pipes/keys/keys.pipe';
-import { ChunkPipe } from './pipes/chunk/chunk.pipe';
-import { EllipsisPipe } from './pipes/ellipsis/ellipsis.pipe';
-import { FromNowPipe } from './pipes/from-now/from-now.pipe';
-import { SplicePipe } from './pipes/splice/splice.pipe';
-import { StripTagsPipe } from './pipes/strip-tags/strip-tags.pipe';
-import { UcFirstPipe } from './pipes/uc-first/uc-first.pipe';
+import { AsyncDelayPipe } from '@shared/pipes/async-delay/async-delay.pipe';
+import { SafeHtmlPipe } from '@shared/pipes/safe-html/safe-html.pipe';
+import { GalleryImagesPipe } from '@shared/pipes/gallery-images/gallery-images.pipe';
+import { KeysPipe } from '@shared/pipes/keys/keys.pipe';
+import { ChunkPipe } from '@shared/pipes/chunk/chunk.pipe';
+import { EllipsisPipe } from '@shared/pipes/ellipsis/ellipsis.pipe';
+import { FromNowPipe } from '@shared/pipes/from-now/from-now.pipe';
+import { SplicePipe } from '@shared/pipes/splice/splice.pipe';
+import { StripTagsPipe } from '@shared/pipes/strip-tags/strip-tags.pipe';
+import { UcFirstPipe } from '@shared/pipes/uc-first/uc-first.pipe';
 
-import { UtilService } from './services/util/util.service';
-import { LocalStorageService } from './services/local-storage/local-storage.service';
-import { SharedService } from './services/shared/shared.service';
+import { UtilService } from '@shared/services/util/util.service';
+import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
+import { SharedService } from '@shared/services/shared/shared.service';
+import { ValidationService } from '@shared/services/validation/validation.service';
 
-import { CardComponent } from './components/card/card.component';
-import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
-import { UserDetailsComponent } from './components/user-details/user-details.component';
-import { MasonryComponent } from './components/masonry/masonry.component';
-import { MasonryItemComponent } from './components/masonry-item/masonry-item.component';
-import { AddApplicationComponent } from './components/add-application/add-application.component';
-import { MediumEditorComponent } from './components/medium-editor/medium-editor.component';
-import { GoogleMapComponent } from './components/google-map/google-map.component';
+import { CardComponent } from '@shared/components/card/card.component';
+import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
+import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
+import { UserDetailsComponent } from '@shared/components/user-details/user-details.component';
+import { MasonryComponent } from '@shared/components/masonry/masonry.component';
+import { MasonryItemComponent } from '@shared/components/masonry-item/masonry-item.component';
+import { AddApplicationComponent } from '@shared/components/add-application/add-application.component';
+import { MediumEditorComponent } from '@shared/components/medium-editor/medium-editor.component';
+import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
+import { ControlMessagesComponent } from '@shared/components/control-messages/control-messages.component';
+
+const declarations = [
+  AsyncDelayPipe,
+  ChunkPipe,
+  EllipsisPipe,
+  FromNowPipe,
+  SafeHtmlPipe,
+  GalleryImagesPipe,
+  KeysPipe,
+  SplicePipe,
+  StripTagsPipe,
+  UcFirstPipe,
+  CardComponent,
+  ShareDialogComponent,
+  ConfirmationDialogComponent,
+  UserDetailsComponent,
+  MasonryComponent,
+  MasonryItemComponent,
+  AddApplicationComponent,
+  MediumEditorComponent,
+  GoogleMapComponent,
+  ControlMessagesComponent
+];
 
 @NgModule({
   imports: [
@@ -54,27 +79,9 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
     MaterialModule,
   ],
   declarations: [
-    AsyncDelayPipe,
-    ChunkPipe,
-    EllipsisPipe,
-    FromNowPipe,
-    SafeHtmlPipe,
-    GalleryImagesPipe,
-    KeysPipe,
-    SplicePipe,
-    StripTagsPipe,
-    UcFirstPipe,
-    CardComponent,
-    ShareDialogComponent,
-    ConfirmationDialogComponent,
-    UserDetailsComponent,
-    MasonryComponent,
-    MasonryItemComponent,
-    AddApplicationComponent,
-    MediumEditorComponent,
-    GoogleMapComponent
+    ...declarations
   ],
-  providers: [DatePipe, UtilService, LocalStorageService, SharedService],
+  providers: [DatePipe, UtilService, LocalStorageService, SharedService, ValidationService],
   exports: [
     CommonModule,
     FormsModule,
@@ -83,25 +90,7 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
     TranslateModule,
     InfiniteScrollModule,
 
-    AsyncDelayPipe,
-    ChunkPipe,
-    EllipsisPipe,
-    FromNowPipe,
-    SafeHtmlPipe,
-    GalleryImagesPipe,
-    KeysPipe,
-    SplicePipe,
-    StripTagsPipe,
-    UcFirstPipe,
-    CardComponent,
-    ShareDialogComponent,
-    ConfirmationDialogComponent,
-    UserDetailsComponent,
-    MasonryComponent,
-    MasonryItemComponent,
-    AddApplicationComponent,
-    MediumEditorComponent,
-    GoogleMapComponent
+    ...declarations
   ],
   entryComponents: [ShareDialogComponent, ConfirmationDialogComponent]
 })

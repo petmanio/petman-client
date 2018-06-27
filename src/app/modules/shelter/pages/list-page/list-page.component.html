@@ -1,4 +1,5 @@
-<div *tdLoading="let item until !(pending$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
+<div class="pm-full-loader">
+  <div *tdLoading="let item until !(pending$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
   <div infinite-scroll
        infiniteScrollContainer="mat-sidenav-content"
        infiniteScrollDistance="2"
@@ -8,7 +9,7 @@
     <div class="columns is-marginless is-paddingless">
       <div class="column">
         <app-masonry class="columns is-marginless is-paddingless"
-                     [options]="{ transitionDuration: '0.5s', percentPosition: true, resize: true }">
+                     [options]="{ transitionDuration: '0.3s', percentPosition: true, resize: true }">
           <app-masonry-item class="column is-3-fullhd is-4-desktop is-6-tablet is-marginless">
             <a [routerLink]="['/shelters', 'add']">
               <app-add-application [user]="selectedUser$ | async"></app-add-application>
@@ -32,4 +33,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

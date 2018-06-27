@@ -8,6 +8,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 export interface State extends EntityState<ShelterDto> {
   selectedId: number | null;
   total: number;
+  isListLoaded: boolean;
 }
 
 export const adapter: EntityAdapter<ShelterDto> = createEntityAdapter<ShelterDto>({
@@ -17,7 +18,8 @@ export const adapter: EntityAdapter<ShelterDto> = createEntityAdapter<ShelterDto
 
 export const initialState: State = adapter.getInitialState({
   selectedId: null,
-  total: null
+  total: null,
+  isListLoaded: false
 });
 
 export function reducer(state = initialState, action: ShelterActions): State {
@@ -35,7 +37,7 @@ export function reducer(state = initialState, action: ShelterActions): State {
       return { ...state, ...adapter.addOne(action.payload, state) };
 
     case ShelterActionTypes.LIST_SUCCESS:
-      return { ...state, ...adapter.addAll(action.payload.list, state), total: action.payload.total };
+      return { ...state, ...adapter.addAll(action.payload.list, state), total: action.payload.total, isListLoaded: true };
 
     case ShelterActionTypes.MORE_SUCCESS:
       return { ...state, ...adapter.addMany(action.payload.list, state), total: action.payload.total };
@@ -50,3 +52,4 @@ export function reducer(state = initialState, action: ShelterActions): State {
 
 export const getSelectedId = (state: State) => state.selectedId;
 export const getTotal = (state: State) => state.total;
+export const getIsListLoaded = (state: State) => state.isListLoaded;

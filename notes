@@ -2,3 +2,5 @@ ng generate module modules/auth --routing
 ng generate feature modules/auth/Auth -m modules/auth --group
 ng generate reducer auth/reducers/LoginPage --reducers auth.reducer.ts -m modules/auth
 ng generate container auth/LoginPage --state reducers/login-page.reducer.ts -m modules/auth
+
+1. list page overflow-x

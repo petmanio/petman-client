@@ -3,6 +3,7 @@ import { DatePipe, DOCUMENT, Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
+import { takeWhile, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { ListQueryRequestDto, ModalSize, ShelterDto } from '@petman/common';
@@ -24,8 +25,9 @@ export class ListPageComponent implements OnInit, OnDestroy {
   limit = 12;
   total: number;
   offset = 0;
-  list$ = this.store.select(fromShelter.getAllShelters);
-  total$ = this.store.select(fromShelter.getTotalShelters);
+  list$ = this.store.select(fromShelter.getAll);
+  total$ = this.store.select(fromShelter.getTotal);
+  isListLoaded$ = this.store.select(fromShelter.getIsListLoaded);
   error$ = this.store.select(fromShelter.getListPageError);
   pending$ = this.store.select(fromShelter.getListPagePending);
   selectedUser$ = this.store.select(fromAuth.getSelectedUser);
@@ -46,6 +48,11 @@ export class ListPageComponent implements OnInit, OnDestroy {
     });
     const totalSubscription = this.total$.subscribe(total => this.total = total);
 
+    this.isListLoaded$.pipe(
+      takeWhile(loaded => !loaded),
+      tap(() => this.store.dispatch(new List(this.listRequest)))
+    ).subscribe();
+
     this.subscriptions.push(...[listSubscription, totalSubscription]);
   }
 
@@ -61,7 +68,6 @@ export class ListPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new List(this.listRequest));
   }
 
   ngOnDestroy(): void {

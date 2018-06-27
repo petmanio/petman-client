@@ -237,3 +237,23 @@ mat-icon {
   justify-content: center;
   flex-direction: column;
 }
+
+.pm-full-loader {
+  .td-loading-wrapper {
+    min-height: calc(100vh - 172px);
+  }
+
+  mat-progress-spinner {
+    position: fixed !important;
+    top: 40%;
+  }
+}
+
+.pm-image-upload {
+  margin: 0.75rem 0;
+
+  td-file-upload {
+    display: block;
+    margin-bottom: 0.375rem;
+  }
+}

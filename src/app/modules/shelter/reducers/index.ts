@@ -24,16 +24,17 @@ export const getShelterState = createFeatureSelector<State>('shelter');
 /**
  * Entities
  */
-export const getShelterEntitiesState = createSelector(getShelterState, state => state.shelter);
-export const getSelectedShelterId = createSelector(getShelterEntitiesState, fromShelter.getSelectedId);
-export const getTotalShelters = createSelector(getShelterEntitiesState, fromShelter.getTotal);
+export const getEntitiesState = createSelector(getShelterState, state => state.shelter);
+export const getSelectedId = createSelector(getEntitiesState, fromShelter.getSelectedId);
+export const getTotal = createSelector(getEntitiesState, fromShelter.getTotal);
+export const getIsListLoaded = createSelector(getEntitiesState, fromShelter.getIsListLoaded);
 export const {
-  selectIds: getShelterIds,
-  selectEntities: getShelterEntities,
-  selectAll: getAllShelters,
-  selectTotal: getTotalSheltersInStore,
-} = fromShelter.adapter.getSelectors(getShelterEntitiesState);
-export const getSelectedShelter = createSelector(getShelterEntities, getSelectedShelterId, (entities, selectedId) => {
+  selectIds: getIds,
+  selectEntities: getEntities,
+  selectAll: getAll,
+  selectTotal: getTotalInStore,
+} = fromShelter.adapter.getSelectors(getEntitiesState);
+export const getSelected = createSelector(getEntities, getSelectedId, (entities, selectedId) => {
     return selectedId && entities[selectedId];
   }
 );
