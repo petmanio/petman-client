@@ -24,7 +24,11 @@ export class ShelterService {
       formData.append('description', body.description);
       formData.append('price', (body.price || '').toString());
 
-      forEach(body.images, file => formData.append('images', file, file.name));
+      if (body.images instanceof FileList) {
+        forEach(body.images, file => formData.append('images', file, file.name));
+      } else if (body.images instanceof File) {
+        formData.append('images', body.images, body.images.name);
+      }
     }
     return this.http.post<ShelterDto>(`${environment.api}/api/shelters`, formData).pipe(
       map(response => plainToClass(ShelterDto, response, { groups: ['petman-client'] }))
