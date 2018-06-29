@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, Inject, Input, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Slider, SliderOptions } from 'materialize-css';
 
@@ -11,7 +11,7 @@ export interface SlideConfig {
   templateUrl: './mz-slider.component.html',
   styleUrls: ['./mz-slider.component.scss']
 })
-export class MzSliderComponent implements OnInit, AfterViewInit {
+export class MzSliderComponent implements OnInit, AfterViewChecked {
   @Input() slides: SlideConfig[] = [];
   @Input() options?: Partial<SliderOptions> = {};
   private instances: Slider[] = [];
@@ -22,7 +22,7 @@ export class MzSliderComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.instances = Slider.init(this.document.querySelectorAll('.slider'), this.options);
   }
 }

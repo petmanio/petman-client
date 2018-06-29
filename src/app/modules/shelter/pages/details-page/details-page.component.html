@@ -6,7 +6,11 @@
       </div>
       <div class="column is-9">
         <app-mz-slider [slides]="slides"></app-mz-slider>
-        <p><i class="mdi mdi-cash"></i> {{(shelter$ | async)?.price | number}} {{ 'AMD' | translate }}</p>
+        <div>
+          <fa-icon icon="money-bill-alt"></fa-icon>
+          {{'DAILY_PRICE' | translate}}<br>
+          <h5>{{(shelter$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
+        </div>
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
             <p class='oblique'>
@@ -16,7 +20,7 @@
         </blockquote>
         <div class="field is-grouped">
           <p class="control pm-m-left-auto">
-            <button mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>
+            <button color="primary" mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>
           </p>
           <p class="control" *ngIf="(shelter$ | async)?.isOwner">
             <button [routerLink]="['/shelters', shelter.id, 'edit']" mat-raised-button>{{ 'EDIT' | translate }}</button>

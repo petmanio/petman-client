@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateModule } from '@ngx-translate/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -70,6 +71,7 @@ const declarations = [
     ReactiveFormsModule,
     RouterModule,
     TranslateModule,
+    FontAwesomeModule,
     ShareButtonsModule,
     InfiniteScrollModule,
 
@@ -88,6 +90,7 @@ const declarations = [
     ReactiveFormsModule,
     RouterModule,
     TranslateModule,
+    FontAwesomeModule,
     InfiniteScrollModule,
 
     ...declarations
