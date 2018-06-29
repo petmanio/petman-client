@@ -217,3 +217,45 @@ mat-icon {
     margin-bottom: 0.375rem;
   }
 }
+
+.pm-m-left-auto {
+  margin-left: auto;
+}
+
+.pm-blockquote {
+  width: 100%;
+  border: none;
+  padding: 0.75rem 0;
+  margin: 0;
+  .pm-blockquote-content {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    border-top: 10px solid $light-blue;
+    background-color: #fff;
+    position: relative;
+    p {
+      padding: 0.75rem;
+    }
+    &:before {
+      width: 250px;
+      height: 250px;
+      display: block;
+      background-color: $light-blue;
+      content: " ";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+      opacity: 0.3;
+      transform: translate(30%, 30%);
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+    }
+    p {
+      position: relative;
+      font-style: oblique;
+      z-index: 2;
+    }
+  }
+}

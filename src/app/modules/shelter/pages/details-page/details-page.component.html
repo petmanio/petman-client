@@ -7,9 +7,15 @@
       <div class="column is-9">
         <app-mz-slider [slides]="slides"></app-mz-slider>
         <p><i class="mdi mdi-cash"></i> {{(shelter$ | async)?.price | number}} {{ 'AMD' | translate }}</p>
-        <app-medium-editor [value]="(shelter$ | async)?.description" readonly="true" ></app-medium-editor>
+        <blockquote class="pm-blockquote">
+          <div class='pm-blockquote-content'>
+            <p class='oblique'>
+              {{shelter?.description}}
+            </p>
+          </div>
+        </blockquote>
         <div class="field is-grouped">
-          <p class="control">
+          <p class="control pm-m-left-auto">
             <button mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>
           </p>
           <p class="control" *ngIf="(shelter$ | async)?.isOwner">
