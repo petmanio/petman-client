@@ -1,4 +1,5 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
@@ -12,6 +13,8 @@ import { NavItemComponent } from '@core/nav-item/nav-item.component';
 @NgModule({
   imports: [
     MaterialModule,
+    RouterModule,
+
     SharedModule
   ],
   declarations: [

@@ -1,0 +1,24 @@
+<div class="columns is-marginless">
+  <div class="column is-10 is-offset-1">
+    <div class="columns">
+      <div class="column is-3 has-text-centered">
+        <app-user-details [user]="(shelter$ | async)?.user"></app-user-details>
+      </div>
+      <div class="column is-9">
+        <app-mz-slider [slides]="slides"></app-mz-slider>
+        <p><i class="mdi mdi-cash"></i> {{(shelter$ | async)?.price | number}} {{ 'AMD' | translate }}</p>
+        <app-medium-editor [value]="(shelter$ | async)?.description" readonly="true" ></app-medium-editor>
+        <div class="field is-grouped">
+          <p class="control">
+            <button mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>
+          </p>
+          <p class="control" *ngIf="(shelter$ | async)?.isOwner">
+            <button [routerLink]="['/shelters', shelter.id, 'edit']" mat-raised-button>{{ 'EDIT' | translate }}</button>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+    </div>
+  </div>
+</div>

@@ -23,47 +23,7 @@ html {
   }
 }
 
-.pm-gallery-custom {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: -5px;
-  ngx-gallery-image {
-    height: 100% !important;
-  }
-  ngx-gallery-thumbnails {
-    width: 18%;
-    height: 100% !important;
-    position: absolute;
-    right: 0;
-    margin-top: 0 !important;
-    .ngx-gallery-thumbnail {
-      width: 100% !important;
-      position: initial !important;
-      height: 20% !important;
-      margin-bottom: 5%;
-    }
-  }
-}
 
-
-image-upload {
-  /deep/ {
-    .drag-box-message {
-      display: none !important;
-      @include desktop {
-        display: block !important;
-      }
-    }
-
-    .img-ul-clear {
-      display: none !important;
-    }
-
-    .img-ul-upload {
-      background-color: $primary !important;
-    }
-  }
-}
 
 .pm-fab {
   position: fixed !important;

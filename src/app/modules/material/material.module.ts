@@ -1,4 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   MatButtonModule,
   MatCardModule,
@@ -26,58 +27,42 @@ import {
   CovalentSearchModule
 } from '@covalent/core';
 
+import { MzSliderComponent } from '@material/components/mz-slider/mz-slider.component';
+
+const modules = [
+  MatIconModule,
+  MatInputModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatToolbarModule,
+  MatButtonModule,
+  MatProgressBarModule,
+  MatSelectModule,
+  MatMenuModule,
+  MatSidenavModule,
+  MatChipsModule,
+  MatPaginatorModule,
+  MatCardModule,
+  MatListModule,
+  LayoutModule,
+
+  CovalentSearchModule,
+  CovalentNotificationsModule,
+  CovalentMenuModule,
+  CovalentLayoutModule,
+  CovalentFileModule,
+  CovalentLoadingModule,
+  CovalentMessageModule,
+];
+
+const declarations = [
+  MzSliderComponent
+];
+
 @NgModule({
-  imports: [
-    MatIconModule,
-    MatInputModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatChipsModule,
-    MatPaginatorModule,
-    MatCardModule,
-    MatListModule,
-    LayoutModule,
-
-    CovalentSearchModule,
-    CovalentNotificationsModule,
-    CovalentMenuModule,
-    CovalentLayoutModule,
-    CovalentFileModule,
-    CovalentLoadingModule,
-    CovalentMessageModule,
-  ],
-  exports: [
-    MatIconModule,
-    MatInputModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatChipsModule,
-    MatPaginatorModule,
-    MatCardModule,
-    MatListModule,
-    LayoutModule,
-
-    CovalentSearchModule,
-    CovalentNotificationsModule,
-    CovalentMenuModule,
-    CovalentLayoutModule,
-    CovalentFileModule,
-    CovalentLoadingModule,
-    CovalentMessageModule,
-  ],
-  declarations: []
+  imports: [CommonModule, ...modules],
+  exports: [...modules, ...declarations],
+  declarations: declarations
 })
 export class MaterialModule {
   static forRoot(): ModuleWithProviders {
