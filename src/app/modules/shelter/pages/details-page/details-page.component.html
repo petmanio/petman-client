@@ -6,7 +6,7 @@
       </div>
       <div class="column is-9">
         <app-mz-slider [slides]="slides"></app-mz-slider>
-        <div>
+        <div class="has-text-right">
           <fa-icon icon="money-bill-alt"></fa-icon>
           {{'DAILY_PRICE' | translate}}<br>
           <h5>{{(shelter$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
