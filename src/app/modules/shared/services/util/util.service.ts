@@ -71,6 +71,15 @@ export class UtilService {
     return tmp.textContent || tmp.innerText || '';
   }
 
+  static getImageHeight(src: string): Promise<number> {
+    return new Promise<number>(resolve => {
+      const img = new Image();
+      img.src = src;
+
+      img.onload = () => resolve(img.height);
+    });
+  }
+
   externalScripts() {
     if (isPlatformBrowser(this.platformId)) {
       // TODO: use ngx-facebook

@@ -28,6 +28,7 @@ import {
 } from '@covalent/core';
 
 import { MzSliderComponent } from '@material/components/mz-slider/mz-slider.component';
+import { MzCarouselComponent } from '@material/components/mz-carousel/mz-carousel.component';
 
 const modules = [
   MatIconModule,
@@ -56,7 +57,8 @@ const modules = [
 ];
 
 const declarations = [
-  MzSliderComponent
+  MzSliderComponent,
+  MzCarouselComponent
 ];
 
 @NgModule({

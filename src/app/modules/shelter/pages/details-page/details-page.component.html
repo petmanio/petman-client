@@ -5,7 +5,7 @@
         <app-user-details [user]="(shelter$ | async)?.user"></app-user-details>
       </div>
       <div class="column is-9">
-        <app-mz-slider [slides]="slides"></app-mz-slider>
+        <app-mz-slider [slides]="slides" [options]="{ height: 500 }"></app-mz-slider>
         <div class="has-text-right">
           <fa-icon icon="money-bill-alt"></fa-icon>
           {{'DAILY_PRICE' | translate}}<br>
