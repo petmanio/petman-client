@@ -9,7 +9,7 @@ import { select, Store } from '@ngrx/store';
 import { ModalSize, ShelterDto } from '@petman/common';
 
 import * as fromShelter from '@shelter/reducers';
-import { Delete, Select } from '@shelter/actions/shelter.actions';
+import { Delete, Select, Update } from '@shelter/actions/shelter.actions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
 
@@ -70,7 +70,7 @@ export class EditPageComponent implements OnDestroy {
   }
 
   update() {
-    this.store.dispatch(this.form.value);
+    this.store.dispatch(new Update(this.form.value));
   }
 
   onDelete() {
