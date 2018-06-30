@@ -8,6 +8,7 @@ import { MaterialModule } from '@material/material.module';
 
 import { reducers } from '@shelter/reducers';
 import { ShelterRoutingModule } from '@shelter/shelter-routing.module';
+import { ShelterService } from '@shelter/shelter.service';
 import { ShelterEffects } from '@shelter/effects/shelter.effects';
 import { ShelterExistsGuard } from '@shelter/shelter-exists.guard';
 import { ShelterOwnerGuard } from '@shelter/shelter-owner.guard';
@@ -32,7 +33,7 @@ import { EditPageComponent } from '@shelter/pages/edit-page/edit-page.component'
     DetailsPageComponent,
     EditPageComponent,
   ],
-  providers: [ShelterExistsGuard, ShelterOwnerGuard],
+  providers: [ShelterService, ShelterExistsGuard, ShelterOwnerGuard],
 })
 export class ShelterModule {
   static forRoot(): ModuleWithProviders {

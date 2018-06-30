@@ -9,7 +9,6 @@ import { MaterialModule } from '@material/material.module';
 import { reducers } from '@auth/reducers';
 import { AuthRoutingModule } from '@auth/auth-routing.module';
 import { AuthEffects } from '@auth/effects/auth.effects';
-import { AuthService } from '@auth/auth.service';
 import { AuthGuard } from '@auth/auth.guard';
 import { DenyAuthGuard } from '@auth/deny-auth.guard';
 import { LoginPageComponent } from '@auth/login-page/login-page.component';
@@ -31,7 +30,7 @@ import { LoginFormSocialComponent } from '@auth/components/login-form-social/log
     LoginFormSocialComponent,
     LoginPageComponent
   ],
-  providers: [AuthService, AuthGuard, DenyAuthGuard],
+  providers: [AuthGuard, DenyAuthGuard],
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders {
