@@ -1,19 +1,13 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-export interface ILocalStorageService {
-  setItem(key: string, value: any): void;
-
-  getItem(key: string): any;
-}
-
 @Injectable()
-export class LocalStorageService implements ILocalStorageService {
+export class LocalStorageService {
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object) {
   }
 
-  setItem(key: string, value: any): void {
+  setItem(key: string, value: any) {
     if (isPlatformBrowser(this.platformId)) {
       try {
         localStorage.setItem(key, JSON.stringify(value));

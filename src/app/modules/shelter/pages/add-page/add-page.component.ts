@@ -30,7 +30,7 @@ export class AddPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  create(): void {
+  create() {
     this.store.dispatch(new Create(this.form.value));
   }
 }

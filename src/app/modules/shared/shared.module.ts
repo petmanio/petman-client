@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {NgPipesModule} from 'ngx-pipes';
 
 import { MaterialModule } from '@material/material.module';
 
@@ -74,6 +75,7 @@ const declarations = [
     FontAwesomeModule,
     ShareButtonsModule,
     InfiniteScrollModule,
+    NgPipesModule,
 
     StoreModule.forFeature('shared', fromShared.reducer),
     EffectsModule.forFeature([SharedEffects]),
@@ -92,6 +94,7 @@ const declarations = [
     TranslateModule,
     FontAwesomeModule,
     InfiniteScrollModule,
+    NgPipesModule,
 
     ...declarations
   ],

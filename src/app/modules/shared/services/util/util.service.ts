@@ -7,31 +7,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ReplaySubject } from 'rxjs';
 import { environment } from '@environments/environment';
 
-// import { NgxGalleryOptions } from 'ngx-gallery';
-
-export interface IUtilService {
-  externalScripts(): void;
-
-  registerNewIcons(): void;
-}
-
 @Injectable()
-export class UtilService implements IUtilService {
-  // static galleryOptions: NgxGalleryOptions[] = [
-  //   {
-  //     previewCloseOnEsc: true,
-  //     previewKeyboardNavigation: true,
-  //     imageSwipe: true,
-  //     thumbnailsSwipe: true,
-  //     previewSwipe: true,
-  //     thumbnailsRemainingCount: true,
-  //     thumbnailsColumns: 4,
-  //     width: '80%',
-  //     height: '400px'
-  //   },
-  //   { breakpoint: 600, thumbnails: false, width: '100%', height: '300px' },
-  // ];
-
+export class UtilService {
   constructor(@Inject(PLATFORM_ID) protected platformId: Object,
               private matIconRegistry: MatIconRegistry,
               private sanitizer: DomSanitizer) {
@@ -94,7 +71,7 @@ export class UtilService implements IUtilService {
     return tmp.textContent || tmp.innerText || '';
   }
 
-  externalScripts(): void {
+  externalScripts() {
     if (isPlatformBrowser(this.platformId)) {
       // TODO: use ngx-facebook
       (<any>window).fbAsyncInit = () => {
@@ -147,7 +124,7 @@ export class UtilService implements IUtilService {
     }
   }
 
-  registerNewIcons(): void {
+  registerNewIcons() {
     this.matIconRegistry
       .addSvgIconInNamespace('app', 'pet_health', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/stethoscope.svg'))
       .addSvgIconInNamespace('app', 'facebook', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/facebook.svg'))

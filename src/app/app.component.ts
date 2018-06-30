@@ -52,7 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.selectedUser$ = this.store.select(fromAuth.getSelectedUser);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.initLanguage();
 
     // TODO: use effects init
@@ -92,15 +92,15 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.push(routerBreakpointSubscription);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  onSelectedUserChange($event): void {
+  onSelectedUserChange($event) {
     this.store.dispatch(new ChangeUser($event.value));
   }
 
-  toggleSidenav($event: Event): void {
+  toggleSidenav($event: Event) {
     $event.stopPropagation();
     if (this.sideNavState) {
       this.store.dispatch(new CloseSidenav());
@@ -109,18 +109,18 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  onLanguageChange(key: string): void {
+  onLanguageChange(key: string) {
     const language = Language[key];
     this.currentLanguage = key;
     this.localStorageService.setItem('language', language);
     this.translate.use(language);
   }
 
-  onLogOut(): void {
+  onLogOut() {
     this.store.dispatch(new Logout());
   }
 
-  private initLanguage(): void {
+  private initLanguage() {
     let languageKey = UtilService.getBrowserLanguageToEnumKey(
       this.localStorageService.getItem('language') ||
       this.translate.getBrowserLang()

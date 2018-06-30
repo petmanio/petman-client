@@ -46,10 +46,10 @@ export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnCh
     this.propagateChange(val);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     if (this.readonly) {
       return;
     }
@@ -59,7 +59,7 @@ export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnCh
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges) {
     this.propagateChange(this.value);
   }
 

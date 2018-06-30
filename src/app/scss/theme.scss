@@ -51,15 +51,6 @@ $theme: mat-light-theme($primary, $accent, $warn);
 // @include covalent-markdown-theme($theme);
 // @include covalent-highlight-theme();
 
-// Unfortunately transform changes positioning context and preview won't work properly.
-// To avoid this situation you have to override material styles
-// .mat-sidenav-container,
-// .mat-sidenav-content,
-// .mat-tab-body-content,
-// .mat-sidenav {
-//   transform: none !important;
-// }
-
 // override global image with/height styles from bulma
 .mat-card-image {
   max-width: inherit;

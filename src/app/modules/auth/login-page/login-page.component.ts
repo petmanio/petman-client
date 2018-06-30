@@ -19,7 +19,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(): void {
+  onSubmit() {
     this.store.dispatch(new FbLogin());
   }
 

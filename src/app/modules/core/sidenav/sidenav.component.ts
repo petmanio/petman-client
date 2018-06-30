@@ -4,7 +4,7 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { UserDto } from '@petman/common';
 
 interface ISidenavComponent {
-  onClick($event: Event): void;
+  onClick($event: Event);
 }
 
 @Component({
@@ -26,7 +26,7 @@ export class SidenavComponent implements ISidenavComponent, OnInit {
   constructor(private router: Router) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
 
@@ -36,7 +36,7 @@ export class SidenavComponent implements ISidenavComponent, OnInit {
     });
   }
 
-  onClick($event: Event): void {
+  onClick($event: Event) {
     $event.stopPropagation();
   }
 }

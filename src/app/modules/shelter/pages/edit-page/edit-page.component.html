@@ -1,0 +1,60 @@
+<div class="pm-full-loader">
+  <div
+    *tdLoading="let item until !(pending$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'"
+    class="columns is-marginless">
+    <div class="column is-8 is-offset-2">
+      <td-message [opened]="error$ | async" [label]="'INTERNAL_ERROR_TITLE' | translate"
+                  [sublabel]="'INTERNAL_ERROR' | translate"
+                  color="warn" icon="error"></td-message>
+      <form [formGroup]="form">
+        <br>
+        <mat-form-field class="example-full-width">
+          <textarea formControlName='description' matInput [placeholder]="'DESCRIPTION' | translate"></textarea>
+        </mat-form-field>
+        <div class="pm-image-upload">
+          <td-file-upload #fileMultipleUpload
+                          formControlName='images'
+                          accept="image/gif, image/jpeg, image/png"
+                          defaultColor="accent" activeColor="warn" cancelColor="primary" multiple>
+            <mat-icon>file_upload</mat-icon>
+            <span>
+              {{ fileMultipleUpload.value?.name }}
+              <span *ngIf="fileMultipleUpload.value?.length"
+                    translate [translateParams]="{n: fileMultipleUpload.value.length}">N_FILES_SELECTED</span>
+            </span>
+            <ng-template td-file-input-label>
+              <mat-icon>attach_file</mat-icon>
+              <span>
+              {{'SELECT_IMAGES' | translate}}
+            </span>
+            </ng-template>
+          </td-file-upload>
+          <mat-error *ngIf="form.get('images').hasError('maxlength')">
+            <span>{{'MAXIMUM_IMAGE_LIMIT_ERROR' | translate}}</span>
+          </mat-error>
+          <!--<div class="pm-image-preview" [hidden]="form.get('images').value">-->
+            <!--<div *ngFor="let image of shelter?.images" [style.background-image]="'url(' + image + ')'">-->
+              <!--<fa-icon icon="times-circle"></fa-icon>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+        <div class="columns is-vcentered">
+          <div class="column is-4">
+            <mat-form-field>
+              <input formControlName='price' matInput type="number" [placeholder]="'DAILY_PRICE' | translate" min="0"/>
+            </mat-form-field>
+          </div>
+          <div class="column">
+            <button mat-raised-button [disabled]="!form.valid" type="submit" color="accent" (click)="update()">
+              {{ 'UPDATE' | translate }}
+            </button>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

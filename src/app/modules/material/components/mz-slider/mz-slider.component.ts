@@ -1,5 +1,5 @@
-import { AfterViewChecked, Component, Inject, Input, OnInit } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Slider, SliderOptions } from 'materialize-css';
 
 export interface SlideConfig {
@@ -9,20 +9,27 @@ export interface SlideConfig {
 @Component({
   selector: 'app-mz-slider',
   templateUrl: './mz-slider.component.html',
-  styleUrls: ['./mz-slider.component.scss']
+  styleUrls: ['./mz-slider.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MzSliderComponent implements OnInit, AfterViewChecked {
+export class MzSliderComponent implements OnInit, AfterViewInit {
   @Input() slides: SlideConfig[] = [];
   @Input() options?: Partial<SliderOptions> = {};
-  private instances: Slider[] = [];
+  private instance: Slider;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object, private el: ElementRef) {
   }
 
   ngOnInit() {
   }
 
-  ngAfterViewChecked() {
-    this.instances = Slider.init(this.document.querySelectorAll('.slider'), this.options);
+  ngAfterViewInit() {
+    this.initSlider();
+  }
+
+  private initSlider() {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => this.instance = Slider.init(this.el.nativeElement.querySelector('.slider'), this.options), 300);
+    }
   }
 }

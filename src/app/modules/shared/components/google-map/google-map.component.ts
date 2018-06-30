@@ -17,28 +17,12 @@ const MAP_DEFAULT_OPTIONS: google.maps.MapOptions = {
 };
 const MAP_DEFAULT_ICON = '/assets/icons/placeholder.png';
 
-export interface IGoogleMapComponent {
-  createMap(): void;
-
-  initMap(): void;
-
-  triggerResize(): void;
-
-  panToPin(pin: Pin): void;
-
-  panToMarker(marker: google.maps.Marker): void;
-
-  setZoom(level): void;
-
-  clearMap(): void;
-}
-
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.scss']
 })
-export class GoogleMapComponent implements OnInit, OnChanges, IGoogleMapComponent {
+export class GoogleMapComponent implements OnInit, OnChanges {
   @Input() fitBounds = true;
   @Input() options: google.maps.MapOptions;
   @Input() pins: Pin[];
@@ -51,27 +35,27 @@ export class GoogleMapComponent implements OnInit, OnChanges, IGoogleMapComponen
   constructor(private el: ElementRef) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     GoogleMapsLoader.load(g => {
       this.google = g;
       this.createMap();
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges) {
     if (this.map) {
       this.initMap();
     }
   }
 
-  createMap(): void {
+  createMap() {
     this.map = new this.google.maps.Map(this.el.nativeElement, extend({}, MAP_DEFAULT_OPTIONS, this.options));
     this.bounds = new google.maps.LatLngBounds();
     this.infoWindow = new google.maps.InfoWindow();
     this.initMap();
   }
 
-  initMap(): void {
+  initMap() {
     this.clearMap();
     this.markers = this.pins.map(pin => {
       const marker = this.createMarker(pin);
@@ -117,28 +101,28 @@ export class GoogleMapComponent implements OnInit, OnChanges, IGoogleMapComponen
     return marker;
   }
 
-  triggerResize(): void {
+  triggerResize() {
     if (this.map) {
       this.google.maps.event.trigger(this.map, 'resize');
     }
   }
 
-  panToPin(pin: Pin): void {
+  panToPin(pin: Pin) {
     const found = this.markers.find(marker => marker['pin'] === pin);
     if (found) {
       this.map.panTo(found.getPosition());
     }
   }
 
-  panToMarker(marker: google.maps.Marker): void {
+  panToMarker(marker: google.maps.Marker) {
     this.map.panTo(marker.getPosition());
   }
 
-  setZoom(level): void {
+  setZoom(level) {
     this.map.setZoom(level);
   }
 
-  clearMap(): void {
+  clearMap() {
     while (this.markers.length) {
       this.markers.pop().setMap(null);
     }

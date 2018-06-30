@@ -26,7 +26,7 @@ export class MasonryComponent implements OnInit, AfterViewChecked, OnDestroy {
   constructor(private el: ElementRef, private renderer: Renderer2) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.renderer.setStyle(this.el.nativeElement, 'visibility', 'hidden');
     this.instance = new Masonry(this.el.nativeElement, this.options);
     this.reloadItems = debounce(this.instance.reloadItems.bind(this.instance));
@@ -34,14 +34,14 @@ export class MasonryComponent implements OnInit, AfterViewChecked, OnDestroy {
     setTimeout(() => this.renderer.setStyle(this.el.nativeElement, 'visibility', 'visible'), 300);
   }
 
-  ngAfterViewChecked(): void {
+  ngAfterViewChecked() {
     if (this.instance) {
       this.reloadItems(300);
       this.layout(300);
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.instance) {
       this.instance.destroy();
     }

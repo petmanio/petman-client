@@ -100,5 +100,6 @@
   "CLEAR": "Clear",
   "MAXIMUM_IMAGE_LIMIT_ERROR": "MAXIMUM_IMAGE_LIMIT_ERROR",
   "INTERNAL_ERROR_TITLE": "Error!",
-  "INTERNAL_ERROR": "We encountered an error. Please try again."
+  "INTERNAL_ERROR": "We encountered an error. Please try again.",
+  "N_FILES_SELECTED": "{{n}} files selected"
 }

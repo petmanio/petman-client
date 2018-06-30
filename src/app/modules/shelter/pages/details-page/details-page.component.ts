@@ -22,6 +22,7 @@ import { Select } from '@shelter/actions/shelter.actions';
 export class DetailsPageComponent implements OnInit, OnDestroy {
   shelter: ShelterDto;
   shelter$ = this.store.pipe(select(fromShelter.getSelected));
+  slides: SlideConfig[] = [];
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -36,13 +37,12 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
       .pipe(map(params => new Select(params.id)))
       .subscribe(store);
 
-    const shelterSubscription = this.shelter$.subscribe(shelter => this.shelter = shelter);
+    const shelterSubscription = this.shelter$.subscribe(shelter => {
+      this.shelter = shelter;
+      this.slides = this.shelter.images.map(img => ({ src: img }));
+    });
 
     this.subscriptions.push(...[paramsSubscription, shelterSubscription]);
-  }
-
-  get slides(): SlideConfig[] {
-    return this.shelter.images.map(img => ({ src: img }));
   }
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  onShare(): void {
+  onShare() {
     const url = this.document.location.origin + this.router.createUrlTree(['shelters', this.shelter.id]).toString();
     const _dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,

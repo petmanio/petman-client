@@ -7,10 +7,12 @@ import { plainToClass } from 'class-transformer';
 import { forEach } from 'lodash';
 
 import { ListQueryRequestDto, ShelterCreateRequestDto, ShelterDto, ShelterListResponseDto } from '@petman/common';
+
 import { environment } from '@environments/environment';
+import { ShelterModule } from '@shelter/shelter.module';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: ShelterModule
 })
 export class ShelterService {
 
@@ -41,13 +43,20 @@ export class ShelterService {
       formData = new FormData();
       formData.append('description', body.description);
       formData.append('price', (body.price || '').toString());
-      forEach(body.images, (file: any) => {
-        if (typeof file === 'string') {
-          formData.append('images', file);
-        } else {
-          formData.append('images', file, file.name);
-        }
-      });
+
+      if (body.images instanceof FileList) {
+        forEach(body.images as any, file => formData.append('images', file, file.name));
+      } else if (body.images instanceof File) {
+        formData.append('images', body.images, body.images.name);
+      } else {
+        forEach(body.images as any, file => {
+          if (file instanceof File) {
+            formData.append('images', file, file.name);
+          } else {
+            formData.append('images', file);
+          }
+        });
+      }
     }
     return this.http.put<ShelterDto>(`${environment.api}/api/shelters/${body.id}`, formData).pipe(
       map(response => plainToClass(ShelterDto, response, { groups: ['petman-client'] }))

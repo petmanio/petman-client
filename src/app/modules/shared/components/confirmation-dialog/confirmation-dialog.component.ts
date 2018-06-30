@@ -11,16 +11,12 @@ export interface IConfirmationDialogData {
   poiId: string;
 }
 
-export interface IConfirmationDialogComponent {
-  onCancel(): void;
-}
-
 @Component({
   selector: 'app-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.scss']
 })
-export class ConfirmationDialogComponent implements IConfirmationDialogComponent {
+export class ConfirmationDialogComponent {
   ConfirmationDialogType = ConfirmationDialogType;
 
   constructor(
@@ -28,7 +24,7 @@ export class ConfirmationDialogComponent implements IConfirmationDialogComponent
     @Inject(MAT_DIALOG_DATA) public data: IConfirmationDialogData) {
   }
 
-  onCancel(): void {
+  onCancel() {
     this.dialogRef.close();
   }
 }

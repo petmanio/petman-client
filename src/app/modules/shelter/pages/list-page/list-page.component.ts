@@ -67,10 +67,10 @@ export class ListPageComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
@@ -86,14 +86,14 @@ export class ListPageComponent implements OnInit, OnDestroy {
     };
   }
 
-  onLoadMore(): void {
+  onLoadMore() {
     if (this.canLoadMore) {
       this.offset += this.limit;
       this.store.dispatch(new More(this.listRequest));
     }
   }
 
-  onShare(shelter: ShelterDto): void {
+  onShare(shelter: ShelterDto) {
     const url = this.document.location.origin + this.router.createUrlTree(['shelters', shelter.id]).toString();
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,

@@ -12,26 +12,22 @@ export interface Config {
   actions?: boolean;
 }
 
-export interface ICardComponent {
-  onShareLocal($event: Event): void;
-}
-
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit, ICardComponent {
+export class CardComponent implements OnInit {
   @Input() config: Config = <Config>{};
   @Output() onShare = new EventEmitter();
 
   constructor() {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  onShareLocal($event: Event): void {
+  onShareLocal($event: Event) {
     $event.preventDefault();
     $event.stopPropagation();
     this.onShare.emit();
