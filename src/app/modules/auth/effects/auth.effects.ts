@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { defer, Observable } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 
-import { AuthActionTypes, ChangeUser, FbLoginFailure, FbLoginSuccess, User, UserFailure, UserSuccess } from '@auth/actions/auth.actions';
+import {
+  AuthActionTypes,
+  ChangeUser,
+  FbLoginFailure,
+  FbLoginSuccess,
+  LoginRedirect,
+  User,
+  UserFailure,
+  UserSuccess
+} from '@auth/actions/auth.actions';
 import { AuthService } from '@auth/auth.service';
 
 @Injectable()
@@ -27,7 +36,7 @@ export class AuthEffects {
   fbLoginSuccess$ = this.actions$.pipe(
     ofType(AuthActionTypes.FB_LOGIN_SUCCESS),
     map(() => new User()),
-    tap(() => this.router.navigate(['/']))
+    tap(() => this.router.navigate([this.route.snapshot.queryParams.next || '/']))
   );
 
   @Effect()
@@ -51,7 +60,8 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   loginRedirect = this.actions$.pipe(
     ofType(AuthActionTypes.LOGIN_REDIRECT),
-    tap(() => this.router.navigate(['/auth/login']))
+    map((action: LoginRedirect) => action.payload),
+    tap(({ next }) => this.router.navigate(['/auth/login'], { queryParams: { next } }))
   );
 
   @Effect({ dispatch: false })
@@ -68,6 +78,6 @@ export class AuthEffects {
     return of(new User());
   });
 
-  constructor(private router: Router, private actions$: Actions, private authService: AuthService) {
+  constructor(private router: Router, private route: ActivatedRoute, private actions$: Actions, private authService: AuthService) {
   }
 }

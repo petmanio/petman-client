@@ -79,7 +79,7 @@ export class Logout implements Action {
 export class LoginRedirect implements Action {
   readonly type = AuthActionTypes.LOGIN_REDIRECT;
 
-  constructor(public payload: any) {
+  constructor(public payload: { next?: string }) {
   }
 }
 
