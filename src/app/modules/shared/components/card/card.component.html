@@ -11,7 +11,7 @@
   <img mat-card-image *ngIf="config.image" [src]="config.image">
   <mat-card-content *ngIf="config.contentHTML || config.content || config.price">
     <p *ngIf="config.price"><i class="mdi mdi-cash"></i> {{config.price | number}} {{'AMD' | translate }}</p>
-    <p *ngIf="config.content">{{config.content}}</p>
+    <p *ngIf="config.content">{{config.content | appEllipsis:100}}</p>
     <app-medium-editor *ngIf="config.contentHTML" [value]="config.contentHTML" readonly="true"></app-medium-editor>
   </mat-card-content>
   <mat-card-actions class="has-text-right" *ngIf="config.actions">

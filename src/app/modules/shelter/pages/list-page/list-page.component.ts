@@ -94,7 +94,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
       subtitle: this.datePipe.transform(item.created),
       image: item.images && item.images[0],
       price: item.price,
-      contentHTML: item.description,
+      content: item.description,
       actions: true
     };
   }
