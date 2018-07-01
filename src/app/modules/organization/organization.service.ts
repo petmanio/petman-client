@@ -1,11 +1,19 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
+import { isArray } from 'lodash';
 
-import { ListQueryRequestDto, OrganizationCreateRequestDto, OrganizationDto, OrganizationListResponseDto } from '@petman/common';
+import {
+  OrganizationCreateRequestDto,
+  OrganizationDto,
+  OrganizationListQueryRequestDto,
+  OrganizationListResponseDto,
+  OrganizationPinsQueryRequestDto,
+  PinDto
+} from '@petman/common';
 
 import { environment } from '@environments/environment';
 import { OrganizationModule } from '@organization/organization.module';
@@ -49,10 +57,31 @@ export class OrganizationService {
       );
   }
 
-  list(query: ListQueryRequestDto): Observable<OrganizationListResponseDto> {
+  list(query: OrganizationListQueryRequestDto): Observable<OrganizationListResponseDto> {
+    let params = new HttpParams()
+      .set('offset', query.offset.toString())
+      .set('limit', query.limit.toString());
+
+    if (query.services) {
+      (isArray(query.services) ? query.services : [query.services]).forEach(svc => params = params.append('service', svc.toString()));
+    }
     return this.http
-      .get<OrganizationListResponseDto>(`${environment.api}/api/organizations`, { params: <any>query }).pipe(
+      .get<OrganizationListResponseDto>(`${environment.api}/api/organizations`, { params }).pipe(
         map(response => plainToClass(OrganizationListResponseDto, response, { groups: ['petman-client'] }))
+      );
+  }
+
+  pins(query: OrganizationPinsQueryRequestDto): Observable<PinDto[]> {
+    let params = new HttpParams()
+      .set('offset', query.offset.toString())
+      .set('limit', query.limit.toString());
+
+    if (query.services) {
+      (isArray(query.services) ? query.services : [query.services]).forEach(svc => params = params.append('service', svc.toString()));
+    }
+    return this.http
+      .get<PinDto[]>(`${environment.api}/api/organizations/pins`, { params }).pipe(
+        map(response => plainToClass(PinDto, response, { groups: ['petman-client'] }))
       );
   }
 }

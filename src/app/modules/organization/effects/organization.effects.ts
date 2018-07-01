@@ -20,6 +20,9 @@ import {
   MoreFailure,
   MoreSuccess,
   OrganizationActionTypes,
+  Pins,
+  PinsFailure,
+  PinsSuccess,
   Update,
   UpdateFailure,
   UpdateSuccess
@@ -134,6 +137,20 @@ export class OrganizationEffects {
           .pipe(
             map(response => new MoreSuccess(response)),
             catchError(error => of(new MoreFailure(error)))
+          );
+      })
+    );
+
+  @Effect()
+  pins$ = this.actions$
+    .ofType(OrganizationActionTypes.PINS)
+    .pipe(
+      map((action: Pins) => action.payload),
+      switchMap(query => {
+        return this.organizationService.pins(query)
+          .pipe(
+            map(response => new PinsSuccess(response)),
+            catchError(error => of(new PinsFailure(error)))
           );
       })
     );

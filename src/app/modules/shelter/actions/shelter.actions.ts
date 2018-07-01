@@ -176,6 +176,9 @@ export class MoreFailure implements Action {
   }
 }
 
+/**
+ * Shared
+ */
 export class Select implements Action {
   readonly type = ShelterActionTypes.SELECT;
 

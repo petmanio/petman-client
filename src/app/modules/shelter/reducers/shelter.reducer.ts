@@ -1,7 +1,8 @@
-import { ShelterActions, ShelterActionTypes } from '../actions/shelter.actions';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { ShelterDto } from '@petman/common';
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+
+import { ShelterActions, ShelterActionTypes } from '@shelter/actions/shelter.actions';
 
 export interface State extends EntityState<ShelterDto> {
   selectedId: number | null;

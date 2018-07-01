@@ -1,7 +1,13 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { ListQueryRequestDto, OrganizationDto, OrganizationListResponseDto } from '@petman/common';
+import {
+  OrganizationDto,
+  OrganizationListQueryRequestDto,
+  OrganizationListResponseDto,
+  OrganizationPinsQueryRequestDto,
+  PinDto
+} from '@petman/common';
 
 export enum OrganizationActionTypes {
   CREATE = '[Organization] Create',
@@ -28,6 +34,10 @@ export enum OrganizationActionTypes {
   MORE = '[Organization] More',
   MORE_SUCCESS = '[Organization] More success',
   MORE_FAILURE = '[Organization] More failure',
+
+  PINS = '[Organization] Pins',
+  PINS_FAILURE = '[Organization] Pins failure',
+  PINS_SUCCESS = '[Organization] Pins success',
 
   SELECT = '[Organization] Select'
 }
@@ -134,7 +144,7 @@ export class LoadFailure implements Action {
 export class List implements Action {
   readonly type = OrganizationActionTypes.LIST;
 
-  constructor(public payload: ListQueryRequestDto) {
+  constructor(public payload: OrganizationListQueryRequestDto) {
   }
 }
 
@@ -158,7 +168,7 @@ export class ListFailure implements Action {
 export class More implements Action {
   readonly type = OrganizationActionTypes.MORE;
 
-  constructor(public payload: ListQueryRequestDto) {
+  constructor(public payload: OrganizationListQueryRequestDto) {
   }
 }
 
@@ -176,6 +186,34 @@ export class MoreFailure implements Action {
   }
 }
 
+
+/**
+ * Pins
+ */
+export class Pins implements Action {
+  readonly type = OrganizationActionTypes.PINS;
+
+  constructor(public payload: OrganizationPinsQueryRequestDto) {
+  }
+}
+
+export class PinsSuccess implements Action {
+  readonly type = OrganizationActionTypes.PINS_SUCCESS;
+
+  constructor(public payload: PinDto[]) {
+  }
+}
+
+export class PinsFailure implements Action {
+  readonly type = OrganizationActionTypes.PINS_FAILURE;
+
+  constructor(public payload: HttpErrorResponse) {
+  }
+}
+
+/**
+ * Shared
+ */
 export class Select implements Action {
   readonly type = OrganizationActionTypes.SELECT;
 
@@ -202,4 +240,7 @@ export type OrganizationActions =
   | More
   | MoreSuccess
   | MoreFailure
+  | Pins
+  | PinsSuccess
+  | PinsFailure
   | Select;

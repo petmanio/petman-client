@@ -1,12 +1,14 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromOrganization from '@organization/reducers/organization.reducer';
+import * as fromPin from '@organization/reducers/pin.reducer';
 import * as fromListPage from '@organization/reducers/list-page.reducer';
 import * as fromAddPage from '@organization/reducers/add-page.reducer';
 import * as fromEditPage from '@organization/reducers/edit-page.reducer';
 
 export interface State {
   organization: fromOrganization.State;
+  pin: fromPin.State;
   addPage: fromAddPage.State;
   listPage: fromListPage.State;
   editPage: fromEditPage.State;
@@ -14,6 +16,7 @@ export interface State {
 
 export const reducers: ActionReducerMap<State> = {
   organization: fromOrganization.reducer,
+  pin: fromPin.reducer,
   addPage: fromAddPage.reducer,
   editPage: fromEditPage.reducer,
   listPage: fromListPage.reducer
@@ -35,6 +38,23 @@ export const {
   selectTotal: getTotalInStore,
 } = fromOrganization.adapter.getSelectors(getEntitiesState);
 export const getSelected = createSelector(getEntities, getSelectedId, (entities, selectedId) => {
+    return selectedId && entities[selectedId];
+  }
+);
+
+/**
+ * Pin entities
+ */
+export const getPinEntitiesState = createSelector(getOrganizationState, state => state.pin);
+export const getPinSelectedId = createSelector(getPinEntitiesState, fromPin.getSelectedId);
+export const getPinTotal = createSelector(getPinEntitiesState, fromPin.getTotal);
+export const {
+  selectIds: getPinIds,
+  selectEntities: getPinEntities,
+  selectAll: getPinAll,
+  selectTotal: getPinTotalInStore,
+} = fromPin.adapter.getSelectors(getPinEntitiesState);
+export const getPinSelected = createSelector(getPinEntities, getPinSelectedId, (entities, selectedId) => {
     return selectedId && entities[selectedId];
   }
 );

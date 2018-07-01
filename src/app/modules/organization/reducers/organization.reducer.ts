@@ -1,7 +1,8 @@
-import { OrganizationActions, OrganizationActionTypes } from '../actions/organization.actions';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { OrganizationDto } from '@petman/common';
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+
+import { OrganizationActions, OrganizationActionTypes } from '@organization/actions/organization.actions';
 
 export interface State extends EntityState<OrganizationDto> {
   selectedId: number | null;
