@@ -25,6 +25,19 @@ export class ListPageComponent implements OnInit, OnDestroy {
   limit = 12;
   total: number;
   offset = 0;
+  masonryOptions = {
+    trueOrder: false,
+    waitForImages: true,
+    useOwnImageLoader: false,
+    mobileFirst: true,
+    columns: 1,
+    margin: 24,
+    breakAt: {
+      940: 4,
+      520: 2,
+      400: 1
+    }
+  };
   list$ = this.store.select(fromShelter.getAll);
   total$ = this.store.select(fromShelter.getTotal);
   isListLoaded$ = this.store.select(fromShelter.getIsListLoaded);

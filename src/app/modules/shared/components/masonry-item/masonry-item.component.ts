@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-masonry-item',
   templateUrl: './masonry-item.component.html',
-  styleUrls: ['./masonry-item.component.scss']
+  styleUrls: ['./masonry-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MasonryItemComponent implements OnInit {
 

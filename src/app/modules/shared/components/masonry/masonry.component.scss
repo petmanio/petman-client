@@ -1,4 +1,13 @@
 :host {
   display: block;
   overflow: hidden;
+  visibility: hidden;
+
+  &:before {
+    content: ""; display: table; clear: both;
+  }
+
+  &:after {
+    content: ""; display: table; clear: both;
+  }
 }

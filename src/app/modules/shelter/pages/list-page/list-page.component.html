@@ -1,35 +1,30 @@
 <div class="pm-full-loader">
-  <div *tdLoading="let item until !(pending$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
+  <div *tdLoading="let item until (isListLoaded$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
   <div infinite-scroll
        infiniteScrollContainer="mat-sidenav-content"
        infiniteScrollDistance="2"
        infiniteScrollThrottle="300"
        fromRoot="true"
        (scrolled)="onLoadMore()">
-    <div class="columns is-marginless is-paddingless">
-      <div class="column">
-        <app-masonry class="columns is-marginless is-paddingless"
-                     [options]="{ transitionDuration: '0.3s', percentPosition: true, resize: true }">
-          <app-masonry-item class="column is-3-fullhd is-4-desktop is-6-tablet is-marginless">
-            <a [routerLink]="['/shelters', 'add']">
-              <app-add-application [user]="selectedUser$ | async"></app-add-application>
-            </a>
-          </app-masonry-item>
-          <app-masonry-item class="column is-3-fullhd is-4-desktop is-6-tablet is-marginless"
-                            *ngFor="let item of list$ | async">
-            <a [routerLink]="['/shelters', item.id]">
-              <app-card [config]="getCardConfig(item)" (onShare)="onShare(item)"></app-card>
-            </a>
-          </app-masonry-item>
-        </app-masonry>
-      </div>
+    <div>
+      <app-masonry [options]="masonryOptions">
+        <app-masonry-item>
+          <app-add-application [user]="selectedUser$ | async"></app-add-application>
+        </app-masonry-item>
+
+        <app-masonry-item *ngFor="let item of list$ | async">
+          <a [routerLink]="['/shelters', item.id]">
+            <app-card [config]="getCardConfig(item)" (onShare)="onShare(item)"></app-card>
+          </a>
+        </app-masonry-item>
+      </app-masonry>
       <button mat-fab color="accent" class="pm-fab" routerLink="add">
         <mat-icon>add</mat-icon>
       </button>
     </div>
     <div class="columns is-marginless" [hidden]="!(list$ | appAsyncDelay | async)?.length">
       <div class="column has-text-centered">
-        <button mat-raised-button [disabled]="!canLoadMore || (pending$ | appAsyncDelay | async)" (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
+        <button mat-raised-button [disabled]="!canLoadMore" (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
       </div>
     </div>
   </div>

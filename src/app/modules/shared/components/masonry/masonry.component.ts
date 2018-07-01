@@ -1,6 +1,7 @@
-import * as Masonry from 'masonry-layout';
+import * as Macy from 'macy';
 import {
   AfterViewChecked,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -11,39 +12,58 @@ import {
 } from '@angular/core';
 import { debounce } from 'lodash';
 
+import { UtilService } from '@shared/services/util/util.service';
+
+export interface MacyOptions {
+  trueOrder?: boolean;
+  waitForImages?: boolean;
+  useOwnImageLoader?: boolean;
+  debug?: boolean;
+  mobileFirst?: boolean;
+  columns?: number;
+  margin?: number;
+  breakAt?: {
+    [width: number]: number;
+  };
+}
+
 @Component({
   selector: 'app-masonry',
   templateUrl: './masonry.component.html',
   styleUrls: ['./masonry.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MasonryComponent implements OnInit, AfterViewChecked, OnDestroy {
-  @Input() options: Masonry.Options;
-  private instance: Masonry;
-  private reloadItems: Function;
-  private layout: Function;
+export class MasonryComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
+  private static WAIT_TIMEOUT = 300;
+
+  @Input() options: MacyOptions = {};
+  id = UtilService.randomHtmlId();
+  private instance: Macy;
+  private recalculate: Function;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
   }
 
   ngOnInit() {
-    this.renderer.setStyle(this.el.nativeElement, 'visibility', 'hidden');
-    this.instance = new Masonry(this.el.nativeElement, this.options);
-    this.reloadItems = debounce(this.instance.reloadItems.bind(this.instance));
-    this.layout = debounce(this.instance.layout.bind(this.instance));
-    setTimeout(() => this.renderer.setStyle(this.el.nativeElement, 'visibility', 'visible'), 300);
+    setTimeout(() => this.renderer.setStyle(this.el.nativeElement, 'visibility', 'visible'), MasonryComponent.WAIT_TIMEOUT);
+  }
+
+  ngAfterViewInit() {
+    this.instance = new Macy({
+      container: `#${this.id}`,
+      ...this.options
+    });
+
+    this.recalculate = debounce(() => this.instance.recalculate(), MasonryComponent.WAIT_TIMEOUT);
   }
 
   ngAfterViewChecked() {
-    if (this.instance) {
-      this.reloadItems(300);
-      this.layout(300);
-    }
+    this.recalculate();
   }
 
   ngOnDestroy() {
     if (this.instance) {
-      this.instance.destroy();
+      this.instance.remove();
     }
   }
 }

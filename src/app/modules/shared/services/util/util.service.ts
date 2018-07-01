@@ -36,6 +36,17 @@ export class UtilService {
     }
   }
 
+  static randomHtmlId(len: number = 5): string {
+    let text = '';
+    const possible = '_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+    for (let i = 0; i < len; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return text;
+  }
+
   static getRouteDataByKey(activatedRoute, key: string): any {
     // TODO: Find better way to get data from activated route
     return activatedRoute.snapshot.data[key] ||

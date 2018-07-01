@@ -1,8 +1,7 @@
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
@@ -20,7 +19,7 @@ import { UtilService } from '@shared/services/util/util.service';
 import { CoreModule } from '@core/core.module';
 import { AuthModule } from '@auth/auth.module';
 
-import { reducers, metaReducers } from '@app/reducers';
+import { metaReducers, reducers } from '@app/reducers';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { AppEffects } from '@app/app.effects';
