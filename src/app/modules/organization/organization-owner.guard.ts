@@ -5,15 +5,15 @@ import { Observable } from 'rxjs/internal/Observable';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 
-import * as fromShelter from '@shelter/reducers';
+import * as fromOrganization from '@organization/reducers';
 
 @Injectable()
-export class ShelterOwnerGuard implements CanActivate {
-  constructor(private store: Store<fromShelter.State>, private router: Router) {
+export class OrganizationOwnerGuard implements CanActivate {
+  constructor(private store: Store<fromOrganization.State>, private router: Router) {
   }
 
   isOwner(id: number): Observable<boolean> {
-    return this.store.select(fromShelter.getEntities)
+    return this.store.select(fromOrganization.getEntities)
       .pipe(
         filter(entities => !!entities[id]),
         map(entities => entities[id]),
