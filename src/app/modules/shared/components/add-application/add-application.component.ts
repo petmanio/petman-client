@@ -18,7 +18,7 @@ export class AddApplicationComponent implements OnInit {
     if (this.user) {
       return this.user.userData.avatar;
     }
-    return '/assets/logo.png';
+    return '/assets/icons/icon-72x72.png';
   }
 
   ngOnInit() {
