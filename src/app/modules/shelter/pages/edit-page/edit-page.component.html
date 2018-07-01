@@ -8,8 +8,12 @@
                   color="warn" icon="error"></td-message>
       <form [formGroup]="form">
         <br>
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <textarea formControlName='description' matInput [placeholder]="'DESCRIPTION' | translate"></textarea>
+          <mat-hint>{{'DESCRIPTION_HINT' | translate}}</mat-hint>
+          <mat-error *ngIf="form.get('description').hasError('minlength') || form.get('description').hasError('maxlength')">
+            {{'DESCRIPTION_ERROR' | translate}}
+          </mat-error>
         </mat-form-field>
         <div class="pm-image-upload">
           <td-file-upload #fileMultipleUpload
@@ -29,9 +33,8 @@
             </span>
             </ng-template>
           </td-file-upload>
-          <mat-error *ngIf="form.get('images').hasError('maxlength')">
-            <span>{{'MAXIMUM_IMAGE_LIMIT_ERROR' | translate}}</span>
-          </mat-error>
+          <mat-hint *ngIf="!form.get('images').hasError('maxlength')">{{'IMAGE_HINT' | translate}}</mat-hint>
+          <mat-error *ngIf="form.get('images').hasError('maxlength')">{{'IMAGE_ERROR' | translate}}</mat-error>
           <!--<div class="pm-image-preview" [hidden]="form.get('images').value">-->
             <!--<div *ngFor="let image of shelter?.images" [style.background-image]="'url(' + image + ')'">-->
               <!--<fa-icon icon="times-circle"></fa-icon>-->
@@ -42,16 +45,14 @@
           <div class="column is-4">
             <mat-form-field>
               <input formControlName='price' matInput type="number" [placeholder]="'DAILY_PRICE' | translate" min="0"/>
+              <mat-hint>{{'REQUIRED' | translate}}</mat-hint>
+              <mat-error *ngIf="form.get('price').hasError('required')">{{'REQUIRED' | translate}}</mat-error>
             </mat-form-field>
           </div>
           <div class="column">
             <button mat-raised-button [disabled]="!form.valid" type="submit" color="accent" (click)="update()">
               {{ 'UPDATE' | translate }}
             </button>
-          </div>
-        </div>
-        <div class="columns">
-          <div class="column">
           </div>
         </div>
       </form>

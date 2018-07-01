@@ -57,7 +57,10 @@ export class EditPageComponent implements OnDestroy {
     return this.formBuilder.group({
       id: this.shelter.id,
       price: [this.shelter.price, Validators.required],
-      description: [this.shelter.description, Validators.required],
+      description: [
+        this.shelter.description,
+        Validators.compose([Validators.required, Validators.minLength(200), Validators.maxLength(2000)])
+      ],
       images: [
         this.shelter.images,
         Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(4)])

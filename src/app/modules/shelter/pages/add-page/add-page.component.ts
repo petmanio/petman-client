@@ -19,7 +19,7 @@ export class AddPageComponent implements OnInit {
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder, private store: Store<fromShelter.State>) {
     this.form = formBuilder.group({
       price: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', Validators.compose([Validators.required, Validators.minLength(200), Validators.maxLength(1000)])],
       images: [
         null,
         Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(4)])

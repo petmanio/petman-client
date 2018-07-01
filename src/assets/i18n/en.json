@@ -98,8 +98,12 @@
   "TAKE_ME_HOME": "Take Me Home",
   "BECAME_SHELTER_INTO": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ",
   "CLEAR": "Clear",
-  "MAXIMUM_IMAGE_LIMIT_ERROR": "MAXIMUM_IMAGE_LIMIT_ERROR",
   "INTERNAL_ERROR_TITLE": "Error!",
   "INTERNAL_ERROR": "We encountered an error. Please try again.",
-  "N_FILES_SELECTED": "{{n}} files selected"
+  "N_FILES_SELECTED": "{{n}} files selected",
+  "REQUIRED": "Required",
+  "IMAGE_HINT": "IMAGE_HINT",
+  "IMAGE_ERROR": "IMAGE_ERROR",
+  "DESCRIPTION_HINT": "DESCRIPTION_HINT",
+  "DESCRIPTION_ERROR": "DESCRIPTION_ERROR"
 }
