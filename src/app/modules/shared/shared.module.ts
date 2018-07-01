@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import {NgPipesModule} from 'ngx-pipes';
+import { NgPipesModule } from 'ngx-pipes';
 
 import { MaterialModule } from '@material/material.module';
 
@@ -42,6 +42,19 @@ import { MediumEditorComponent } from '@shared/components/medium-editor/medium-e
 import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
 import { ControlMessagesComponent } from '@shared/components/control-messages/control-messages.component';
 
+const modules = [
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+  RouterModule,
+  TranslateModule,
+  FontAwesomeModule,
+  ShareButtonsModule,
+  InfiniteScrollModule,
+  NgPipesModule
+];
+
+
 const declarations = [
   AsyncDelayPipe,
   ChunkPipe,
@@ -67,15 +80,7 @@ const declarations = [
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    TranslateModule,
-    FontAwesomeModule,
-    ShareButtonsModule,
-    InfiniteScrollModule,
-    NgPipesModule,
+    ...modules,
 
     StoreModule.forFeature('shared', fromShared.reducer),
     EffectsModule.forFeature([SharedEffects]),
@@ -87,15 +92,7 @@ const declarations = [
   ],
   providers: [DatePipe, UtilService, LocalStorageService, SharedService, ValidationService],
   exports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    TranslateModule,
-    FontAwesomeModule,
-    InfiniteScrollModule,
-    NgPipesModule,
-
+    ...modules,
     ...declarations
   ],
   entryComponents: [ShareDialogComponent, ConfirmationDialogComponent]

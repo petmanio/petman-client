@@ -9,7 +9,9 @@
     <div>
       <app-masonry [options]="masonryOptions">
         <app-masonry-item>
-          <app-add-application [user]="selectedUser$ | async"></app-add-application>
+          <a [routerLink]="['/shelters', 'add']">
+            <app-add-application [user]="selectedUser$ | async"></app-add-application>
+          </a>
         </app-masonry-item>
 
         <app-masonry-item *ngFor="let item of list$ | async">

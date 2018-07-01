@@ -29,7 +29,7 @@ export class MzCarouselComponent implements OnInit, AfterViewInit {
 
   private initSlider() {
     if (isPlatformBrowser(this.platformId)) {
-      setTimeout(() => this.instance = Carousel.init(this.el.nativeElement.querySelector('.carousel'), this.options), 1000);
+      setTimeout(() => this.instance = Carousel.init(this.el.nativeElement.querySelector('.carousel'), this.options), 300);
     }
   }
 }
