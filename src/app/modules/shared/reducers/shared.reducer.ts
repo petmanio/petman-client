@@ -31,11 +31,5 @@ export function reducer(state = initialState, action: SharedActions): State {
   }
 }
 
-export const selectState = createFeatureSelector<State>('shared');
-export const getServiceSelectedId = createSelector(selectState, state => state.serviceSelectedId);
-export const getServiceTotal = createSelector(selectState, state => state.serviceTotal);
-export const {
-  selectEntities: getServiceEntities,
-  selectAll: getServiceAll,
-  selectTotal: getServiceTotalInStore
-} = adapter.getSelectors(selectState);
+export const getServiceSelectedId = (state: State) => state.serviceSelectedId;
+export const getServiceTotal = (state: State) => state.serviceTotal;

@@ -1,0 +1,16 @@
+<div class="pm-full-loader">
+  <div *tdLoading="let item until !(pending$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
+    <div class="columns is-marginless">
+      <div class="column">
+        <mat-form-field>
+          <mat-select [placeholder]="'SERVICES' | translate" multiple="true">
+            <mat-option *ngFor="let service of services$ | async" [value]="service.id">{{service.title | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="columns is-marginless">
+      <div class="column"></div>
+    </div>
+  </div>
+</div>

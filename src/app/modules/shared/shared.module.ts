@@ -12,7 +12,7 @@ import { NgPipesModule } from 'ngx-pipes';
 
 import { MaterialModule } from '@material/material.module';
 
-import * as fromShared from '@shared/reducers/shared.reducer';
+import * as fromShared from '@shared/reducers';
 import { SharedEffects } from '@shared/effects/shared.effects';
 
 import { AsyncDelayPipe } from '@shared/pipes/async-delay/async-delay.pipe';
@@ -82,7 +82,7 @@ const declarations = [
   imports: [
     ...modules,
 
-    StoreModule.forFeature('shared', fromShared.reducer),
+    StoreModule.forFeature('shared', fromShared.reducers),
     EffectsModule.forFeature([SharedEffects]),
 
     MaterialModule,

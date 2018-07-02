@@ -75,8 +75,8 @@ export class ListPageComponent implements OnInit, OnDestroy {
 
   private get listRequest(): ListQueryRequestDto {
     return {
-      limit: this.limit,
-      offset: this.offset
+      offset: this.offset,
+      limit: this.limit
     };
   }
 
