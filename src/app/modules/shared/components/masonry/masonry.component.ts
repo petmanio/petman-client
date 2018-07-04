@@ -38,8 +38,8 @@ export class MasonryComponent implements OnInit, AfterViewInit, AfterViewChecked
 
   @Input() options: MacyOptions = {};
   id = UtilService.randomHtmlId();
-  private instance: Macy;
-  private recalculate: Function;
+  instance: Macy;
+  recalculate: Function;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
   }

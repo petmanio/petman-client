@@ -63,7 +63,7 @@ export class OrganizationService {
       .set('limit', query.limit.toString());
 
     if (query.services) {
-      (isArray(query.services) ? query.services : [query.services]).forEach(svc => params = params.append('service', svc.toString()));
+      (isArray(query.services) ? query.services : [query.services]).forEach(svc => params = params.append('services', svc.toString()));
     }
     return this.http
       .get<OrganizationListResponseDto>(`${environment.api}/api/organizations`, { params }).pipe(
@@ -77,7 +77,7 @@ export class OrganizationService {
       .set('limit', query.limit.toString());
 
     if (query.services) {
-      (isArray(query.services) ? query.services : [query.services]).forEach(svc => params = params.append('service', svc.toString()));
+      (isArray(query.services) ? query.services : [query.services]).forEach(svc => params = params.append('services', svc.toString()));
     }
     return this.http
       .get<PinDto[]>(`${environment.api}/api/organizations/pins`, { params }).pipe(

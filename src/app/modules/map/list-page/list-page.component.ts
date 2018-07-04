@@ -1,16 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Store } from '@ngrx/store';
+import { Actions } from '@ngrx/effects';
 import { Subscription } from 'rxjs';
+import { delay, take, tap } from 'rxjs/operators';
 
 import { BranchDto, OrganizationDto, OrganizationListQueryRequestDto, OrganizationPinsQueryRequestDto, Pin, PinDto } from '@petman/common';
 
 import * as fromShared from '@shared/reducers';
 import * as fromMap from '@map/reducers';
 import * as fromOrganization from '@organization/reducers';
-import { List, More, Pins } from '@organization/actions/organization.actions';
+import { List, More, OrganizationActionTypes, Pins } from '@organization/actions/organization.actions';
 import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
 import { Config } from '@shared/components/card/card.component';
+import { MasonryComponent } from '@shared/components/masonry/masonry.component';
 
 @Component({
   selector: 'app-map-list-page',
@@ -20,6 +23,7 @@ import { Config } from '@shared/components/card/card.component';
 })
 export class ListPageComponent implements OnInit, OnDestroy {
   @ViewChild(GoogleMapComponent) map: GoogleMapComponent;
+  @ViewChild(MasonryComponent) masonry: MasonryComponent;
   list: OrganizationDto[];
   limit = 12;
   total: number;
@@ -29,10 +33,11 @@ export class ListPageComponent implements OnInit, OnDestroy {
     waitForImages: true,
     useOwnImageLoader: false,
     mobileFirst: true,
+    onInit: true,
     columns: 1,
     margin: 24,
     breakAt: {
-      940: 4,
+      940: 3,
       520: 2,
       400: 1
     }
@@ -47,7 +52,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
   pending$ = this.store.select(fromMap.getListPagePending);
   private subscriptions: Subscription[] = [];
 
-  constructor(private store: Store<fromMap.State>, private datePipe: DatePipe) {
+  constructor(private datePipe: DatePipe, private store: Store<fromMap.State>, private actions$: Actions) {
     const listSubscription = this.list$.subscribe(list => {
       this.list = list;
       this.offset = Math.max(0, this.list.length - this.limit);
@@ -130,6 +135,15 @@ export class ListPageComponent implements OnInit, OnDestroy {
     this.limit = 12;
     this.store.dispatch(new List(this.listRequest));
     this.store.dispatch(new Pins(this.pinsRequest));
+
+    // TODO: find better way for recalculating
+    this.actions$
+      .ofType(OrganizationActionTypes.LIST_SUCCESS, OrganizationActionTypes.LIST_FAILURE)
+      .pipe(
+        take(1),
+        delay(300),
+        tap(() => this.masonry.instance.recalculate(true)),
+      ).subscribe();
   }
 
   panTo(org: BranchDto | OrganizationDto) {

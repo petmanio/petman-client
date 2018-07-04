@@ -3,14 +3,43 @@
     <div class="columns is-marginless">
       <div class="column">
         <mat-form-field>
-          <mat-select [placeholder]="'SERVICES' | translate" multiple="true">
-            <mat-option *ngFor="let service of services$ | async" [value]="service.id">{{service.title | translate}}</mat-option>
+          <mat-select [placeholder]="'SERVICES' | translate" multiple="true" [(ngModel)]="selectedServices"
+                      (ngModelChange)="updateList()">
+            <mat-option *ngFor="let service of services$ | async" [value]="service.id">{{service.title}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </div>
     <div class="columns is-marginless">
-      <div class="column"></div>
+      <div class="column">
+        <div infinite-scroll
+             infiniteScrollContainer="mat-sidenav-content"
+             infiniteScrollDistance="2"
+             infiniteScrollThrottle="300"
+             fromRoot="true"
+             (scrolled)="onLoadMore()">
+          <div>
+            <app-masonry [options]="masonryOptions">
+              <ng-container *ngFor="let item of list$ | async">
+                <app-masonry-item>
+                  <app-card [config]="getCardConfig(item)" (click)="panTo(item)"></app-card>
+                </app-masonry-item>
+                <app-masonry-item *ngFor="let branch of item.branches">
+                  <app-card [config]="getCardConfig(branch)" (click)="panTo(branch)"></app-card>
+                </app-masonry-item>
+              </ng-container>
+            </app-masonry>
+          </div>
+          <div class="columns is-marginless" [hidden]="!(list$ | appAsyncDelay | async)?.length">
+            <div class="column has-text-centered">
+              <button mat-raised-button [disabled]="!canLoadMore" (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        Abc
+      </div>
     </div>
   </div>
 </div>
