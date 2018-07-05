@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 
-import { OrganizationService } from '@organization/organization.service';
+import { PoiService } from '@poi/poi.service';
 import {
   Create,
   CreateFailure,
@@ -19,27 +19,27 @@ import {
   More,
   MoreFailure,
   MoreSuccess,
-  OrganizationActionTypes,
+  PoiActionTypes,
   Pins,
   PinsFailure,
   PinsSuccess,
   Update,
   UpdateFailure,
-  UpdateSuccess
-} from '@organization/actions/organization.actions';
+  UpdateSuccess, CategoriesFailure, CategoriesSuccess, Categories
+} from '@poi/actions/poi.actions';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable()
-export class OrganizationEffects {
+export class PoiEffects {
 
   @Effect()
   create$ = this.actions$
-    .ofType(OrganizationActionTypes.CREATE)
+    .ofType(PoiActionTypes.CREATE)
     .pipe(
       map((action: Create) => action.payload),
-      switchMap(organization => {
-        return this.organizationService.create(organization)
+      switchMap(poi => {
+        return this.poiService.create(poi)
           .pipe(
             map(response => new CreateSuccess(response)),
             catchError(error => of(new CreateFailure(error)))
@@ -49,19 +49,19 @@ export class OrganizationEffects {
 
   @Effect({ dispatch: false })
   createSuccess$ = this.actions$
-    .ofType(OrganizationActionTypes.CREATE_SUCCESS)
+    .ofType(PoiActionTypes.CREATE_SUCCESS)
     .pipe(
       map((action: CreateSuccess) => action.payload),
-      tap(organization => this.router.navigate(['organizations', organization.id]))
+      tap(poi => this.router.navigate(['pois', poi.id]))
     );
 
   @Effect()
   update$ = this.actions$
-    .ofType(OrganizationActionTypes.UPDATE)
+    .ofType(PoiActionTypes.UPDATE)
     .pipe(
       map((action: Update) => action.payload),
-      switchMap(organization => {
-        return this.organizationService.update(organization)
+      switchMap(poi => {
+        return this.poiService.update(poi)
           .pipe(
             map(response => new UpdateSuccess(response)),
             catchError(error => of(new UpdateFailure(error)))
@@ -71,19 +71,19 @@ export class OrganizationEffects {
 
   @Effect({ dispatch: false })
   updateSuccess$ = this.actions$
-    .ofType(OrganizationActionTypes.UPDATE_SUCCESS)
+    .ofType(PoiActionTypes.UPDATE_SUCCESS)
     .pipe(
       map((action: CreateSuccess) => action.payload),
-      tap(organization => this.router.navigate(['organizations', organization.id]))
+      tap(poi => this.router.navigate(['pois', poi.id]))
     );
 
   @Effect()
   delete$ = this.actions$
-    .ofType(OrganizationActionTypes.DELETE)
+    .ofType(PoiActionTypes.DELETE)
     .pipe(
       map((action: Delete) => action.payload),
       switchMap(id => {
-        return this.organizationService.delete(id)
+        return this.poiService.delete(id)
           .pipe(
             map(() => new DeleteSuccess(id)),
             catchError(error => of(new DeleteFailure(error)))
@@ -93,19 +93,19 @@ export class OrganizationEffects {
 
   @Effect({ dispatch: false })
   deleteSuccess$ = this.actions$
-    .ofType(OrganizationActionTypes.DELETE_SUCCESS)
+    .ofType(PoiActionTypes.DELETE_SUCCESS)
     .pipe(
       map((action: CreateSuccess) => action.payload),
-      tap(organization => this.router.navigate(['organizations']))
+      tap(poi => this.router.navigate(['pois']))
     );
 
   @Effect()
   load$ = this.actions$
-    .ofType(OrganizationActionTypes.LOAD)
+    .ofType(PoiActionTypes.LOAD)
     .pipe(
       map((action: Load) => action.payload),
       switchMap(id => {
-        return this.organizationService.getById(id)
+        return this.poiService.getById(id)
           .pipe(
             map(response => new LoadSuccess(response)),
             catchError(error => of(new LoadFailure(error)))
@@ -115,11 +115,11 @@ export class OrganizationEffects {
 
   @Effect()
   list$ = this.actions$
-    .ofType(OrganizationActionTypes.LIST)
+    .ofType(PoiActionTypes.LIST)
     .pipe(
       map((action: List) => action.payload),
       switchMap(query => {
-        return this.organizationService.list(query)
+        return this.poiService.list(query)
           .pipe(
             map(response => new ListSuccess(response)),
             catchError(error => of(new ListFailure(error)))
@@ -129,11 +129,11 @@ export class OrganizationEffects {
 
   @Effect()
   more$ = this.actions$
-    .ofType(OrganizationActionTypes.MORE)
+    .ofType(PoiActionTypes.MORE)
     .pipe(
       map((action: More) => action.payload),
       switchMap(query => {
-        return this.organizationService.list(query)
+        return this.poiService.list(query)
           .pipe(
             map(response => new MoreSuccess(response)),
             catchError(error => of(new MoreFailure(error)))
@@ -143,11 +143,11 @@ export class OrganizationEffects {
 
   @Effect()
   pins$ = this.actions$
-    .ofType(OrganizationActionTypes.PINS)
+    .ofType(PoiActionTypes.PINS)
     .pipe(
       map((action: Pins) => action.payload),
       switchMap(query => {
-        return this.organizationService.pins(query)
+        return this.poiService.pins(query)
           .pipe(
             map(response => new PinsSuccess(response)),
             catchError(error => of(new PinsFailure(error)))
@@ -155,6 +155,20 @@ export class OrganizationEffects {
       })
     );
 
-  constructor(private router: Router, private actions$: Actions, private organizationService: OrganizationService) {
+  @Effect()
+  categories$ = this.actions$
+    .ofType(PoiActionTypes.CATEGORIES)
+    .pipe(
+      map((action: Categories) => action.payload),
+      switchMap(query => {
+        return this.poiService.categories(query)
+          .pipe(
+            map(response => new CategoriesSuccess(response)),
+            catchError(error => of(new CategoriesFailure(error)))
+          );
+      })
+    );
+
+  constructor(private router: Router, private actions$: Actions, private poiService: PoiService) {
   }
 }

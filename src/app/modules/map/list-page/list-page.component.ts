@@ -5,15 +5,14 @@ import { Actions } from '@ngrx/effects';
 import { Subscription } from 'rxjs';
 import { delay, take, tap } from 'rxjs/operators';
 
-import { BranchDto, OrganizationDto, OrganizationListQueryRequestDto, OrganizationPinsQueryRequestDto, Pin, PinDto } from '@petman/common';
+import { Pin, PinDto, PoiDto, PoiListQueryRequestDto, PoiPinsQueryRequestDto } from '@petman/common';
 
-import * as fromShared from '@shared/reducers';
 import * as fromMap from '@map/reducers';
-import * as fromOrganization from '@organization/reducers';
-import { List, More, OrganizationActionTypes, Pins } from '@organization/actions/organization.actions';
+import * as fromPoi from '@poi/reducers';
 import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
 import { Config } from '@shared/components/card/card.component';
 import { MasonryComponent } from '@shared/components/masonry/masonry.component';
+import { List, More, Pins, PoiActionTypes } from '@poi/actions/poi.actions';
 
 @Component({
   selector: 'app-map-list-page',
@@ -24,7 +23,7 @@ import { MasonryComponent } from '@shared/components/masonry/masonry.component';
 export class ListPageComponent implements OnInit, OnDestroy {
   @ViewChild(GoogleMapComponent) map: GoogleMapComponent;
   @ViewChild(MasonryComponent) masonry: MasonryComponent;
-  list: OrganizationDto[];
+  list: PoiDto[];
   limit = 12;
   total: number;
   offset = 0;
@@ -42,12 +41,12 @@ export class ListPageComponent implements OnInit, OnDestroy {
       400: 1
     }
   };
-  selectedServices: number[];
+  selectedPrimaryCategories: number[];
   pins: Pin[];
-  list$ = this.store.select(fromOrganization.getAll);
-  total$ = this.store.select(fromOrganization.getTotal);
-  pins$ = this.store.select(fromOrganization.getPinAll);
-  services$ = this.store.select(fromShared.getServiceAll);
+  list$ = this.store.select(fromPoi.getAll);
+  total$ = this.store.select(fromPoi.getTotal);
+  pins$ = this.store.select(fromPoi.getPinAll);
+  primaryCategories$ = this.store.select(fromPoi.getCategoryAll);
   error$ = this.store.select(fromMap.getListPageError);
   pending$ = this.store.select(fromMap.getListPagePending);
   private subscriptions: Subscription[] = [];
@@ -68,19 +67,19 @@ export class ListPageComponent implements OnInit, OnDestroy {
     return this.offset + this.limit < this.total;
   }
 
-  private get listRequest(): OrganizationListQueryRequestDto {
+  private get listRequest(): PoiListQueryRequestDto {
     return {
       offset: this.offset,
       limit: this.limit,
-      services: this.selectedServices
+      primaryCategories: this.selectedPrimaryCategories
     };
   }
 
-  private get pinsRequest(): OrganizationPinsQueryRequestDto {
+  private get pinsRequest(): PoiPinsQueryRequestDto {
     return {
       offset: 0,
       limit: 100,
-      services: this.selectedServices
+      primaryCategories: this.selectedPrimaryCategories
     };
   }
 
@@ -88,7 +87,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
     return {
       lat: entity.address.point.x,
       lng: entity.address.point.y,
-      title: entity.title,
+      title: entity.name,
       meta: entity,
       infoWindow: {
         contentFn: ListPageComponent.pinInfoWindowContentFn
@@ -113,12 +112,12 @@ export class ListPageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  getCardConfig(item: OrganizationDto | BranchDto): Config {
+  getCardConfig(item: PoiDto): Config {
     return {
-      title: item.title,
+      title: item.name,
       subtitle: this.datePipe.transform(item.created),
       image: item.images && item.images[0],
-      chips: item.services.map(service => ({ color: '', text: service.title })),
+      chips: [{ color: '', text: item.primaryCategory.name }],
       content: item.description
     };
   }
@@ -138,7 +137,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
 
     // TODO: find better way for recalculating
     this.actions$
-      .ofType(OrganizationActionTypes.LIST_SUCCESS, OrganizationActionTypes.LIST_FAILURE)
+      .ofType(PoiActionTypes.LIST_SUCCESS, PoiActionTypes.LIST_FAILURE)
       .pipe(
         take(1),
         delay(300),
@@ -146,10 +145,10 @@ export class ListPageComponent implements OnInit, OnDestroy {
       ).subscribe();
   }
 
-  panTo(org: BranchDto | OrganizationDto) {
+  panTo(pin: PoiDto) {
     // const foundPin = find(this.pins, pin => {
-    //   const type = org instanceof BranchDto ? OrganizationPinType.BRANCH
-    //     : OrganizationPinType.ORGANIZATION;
+    //   const type = org instanceof BranchDto ? PoiPinType.BRANCH
+    //     : PoiPinType.ORGANIZATION;
     //   return pin.meta.type === type && pin.meta.id === org.id;
     // });
     //

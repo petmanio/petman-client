@@ -23,7 +23,7 @@
       "@core/*": ["app/modules/core/*"],
       "@map/*": ["app/modules/map/*"],
       "@material/*": ["app/modules/material/*"],
-      "@organization/*": ["app/modules/organization/*"],
+      "@poi/*": ["app/modules/poi/*"],
       "@shared/*": ["app/modules/shared/*"],
       "@shelter/*": ["app/modules/shelter/*"],
       "@walker/*": ["app/modules/walker/*"],

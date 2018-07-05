@@ -1,6 +1,6 @@
-import { reducer, initialState } from './organization.reducer';
+import { reducer, initialState } from './poi.reducer';
 
-describe('Organization Reducer', () => {
+describe('Pin Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AuthActions, AuthActionTypes } from '@auth/actions/auth.actions';
 
 export interface State {
-  error: HttpErrorResponse | null;
+  error: HttpErrorResponse;
   pending: boolean;
 }
 

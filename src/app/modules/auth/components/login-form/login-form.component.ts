@@ -10,7 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent implements OnInit {
-  @Input() errorMessage: string | null;
+  @Input() errorMessage: string;
   // @Output() submitted = new EventEmitter<Authenticate>();
   form: FormGroup = new FormGroup({
     username: new FormControl(''),

@@ -2,15 +2,15 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { PinDto } from '@petman/common';
 
-import { OrganizationActions, OrganizationActionTypes } from '@organization/actions/organization.actions';
+import { PoiActions, PoiActionTypes } from '@poi/actions/poi.actions';
 
 export interface State extends EntityState<PinDto> {
-  selectedId: number | null;
+  selectedId: number;
   total: number;
 }
 
 export const adapter: EntityAdapter<PinDto> = createEntityAdapter<PinDto>({
-  selectId: (s: PinDto) => s.title,
+  selectId: (s: PinDto) => s.name,
   sortComparer: false,
 });
 
@@ -19,9 +19,9 @@ export const initialState: State = adapter.getInitialState({
   total: null,
 });
 
-export function reducer(state = initialState, action: OrganizationActions): State {
+export function reducer(state = initialState, action: PoiActions): State {
   switch (action.type) {
-    case OrganizationActionTypes.PINS_SUCCESS:
+    case PoiActionTypes.PINS_SUCCESS:
       return { ...state, ...adapter.addAll(action.payload, state), total: action.payload.length };
 
     default:

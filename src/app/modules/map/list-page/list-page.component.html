@@ -3,9 +3,9 @@
     <div class="columns is-marginless">
       <div class="column">
         <mat-form-field>
-          <mat-select [placeholder]="'SERVICES' | translate" multiple="true" [(ngModel)]="selectedServices"
+          <mat-select [placeholder]="'CATEGORIES' | translate" multiple="true" [(ngModel)]="selectedPrimaryCategories"
                       (ngModelChange)="updateList()">
-            <mat-option *ngFor="let service of services$ | async" [value]="service.id">{{service.title}}</mat-option>
+            <mat-option *ngFor="let primaryCategory of primaryCategories$ | async" [value]="primaryCategory.id">{{primaryCategory.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

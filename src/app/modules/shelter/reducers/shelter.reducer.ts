@@ -5,7 +5,7 @@ import { ShelterDto } from '@petman/common';
 import { ShelterActions, ShelterActionTypes } from '@shelter/actions/shelter.actions';
 
 export interface State extends EntityState<ShelterDto> {
-  selectedId: number | null;
+  selectedId: number;
   total: number;
   isListLoaded: boolean;
 }

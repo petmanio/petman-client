@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { OrganizationActions, OrganizationActionTypes } from '@organization/actions/organization.actions';
+import { PoiActions, PoiActionTypes } from '@poi/actions/poi.actions';
 
 export interface State {
-  error: HttpErrorResponse | null;
+  error: HttpErrorResponse;
   pending: boolean;
 }
 
@@ -12,18 +12,15 @@ export const initialState: State = {
   pending: false,
 };
 
-export function reducer(state = initialState, action: OrganizationActions): State {
+export function reducer(state = initialState, action: PoiActions): State {
   switch (action.type) {
-    case OrganizationActionTypes.UPDATE:
-    case OrganizationActionTypes.DELETE:
+    case PoiActionTypes.CREATE:
       return { ...state, error: null, pending: true };
 
-    case OrganizationActionTypes.UPDATE_SUCCESS:
-    case OrganizationActionTypes.DELETE_SUCCESS:
+    case PoiActionTypes.CREATE_SUCCESS:
       return { ...state, error: null, pending: false };
 
-    case OrganizationActionTypes.UPDATE_FAILURE:
-    case OrganizationActionTypes.DELETE_FAILURE:
+    case PoiActionTypes.CREATE_FAILURE:
       return { ...state, error: action.payload, pending: false };
 
     default:

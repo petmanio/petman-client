@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormSocialComponent {
-  @Input() errorMessage: string | null;
+  @Input() errorMessage: string;
   @Input() pending: boolean;
   @Output() submitted = new EventEmitter();
 

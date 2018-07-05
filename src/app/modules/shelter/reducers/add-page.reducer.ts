@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ShelterActions, ShelterActionTypes } from '@shelter/actions/shelter.actions';
 
 export interface State {
-  error: HttpErrorResponse | null;
+  error: HttpErrorResponse;
   pending: boolean;
 }
 

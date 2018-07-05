@@ -15,7 +15,7 @@ import * as fromAuth from '@auth/reducers';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
 import { CloseSidenav, OpenSidenav } from '@app/actions/layout.actions';
-import { ServiceList } from '@shared/actions/shared.actions';
+import { Categories } from '@poi/actions/poi.actions';
 
 @Component({
   selector: 'app-root',
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // TODO: use effects init
     this.store.dispatch(new ChangeUser(+this.localStorageService.getItem('selectedUserId')));
     this.store.dispatch(new CloseSidenav());
-    this.store.dispatch(new ServiceList({ limit: 10, offset: 0 }));
+    this.store.dispatch(new Categories({ limit: 10, offset: 0 }));
 
     const sidenavSubscription = this.showSidenav$.subscribe(state => {
       this.sideNavState = state;

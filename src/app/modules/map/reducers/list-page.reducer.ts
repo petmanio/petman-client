@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { OrganizationActions, OrganizationActionTypes } from '@organization/actions/organization.actions';
-import { MapActions, MapActionTypes } from '@map/actions/map.actions';
+import { PoiActions, PoiActionTypes } from '@poi/actions/poi.actions';
+import { MapActions } from '@map/actions/map.actions';
 
 export interface State {
-  error: HttpErrorResponse | null;
+  error: HttpErrorResponse;
   pending: boolean;
 }
 
@@ -13,21 +13,21 @@ export const initialState: State = {
   pending: false,
 };
 
-export function reducer(state = initialState, action: MapActions | OrganizationActions): State {
+export function reducer(state = initialState, action: MapActions | PoiActions): State {
   switch (action.type) {
-    case OrganizationActionTypes.LIST:
-    case OrganizationActionTypes.MORE:
-    case OrganizationActionTypes.PINS:
+    case PoiActionTypes.LIST:
+    case PoiActionTypes.MORE:
+    case PoiActionTypes.PINS:
       return { ...state, error: null, pending: true };
 
-    case OrganizationActionTypes.LIST_SUCCESS:
-    case OrganizationActionTypes.MORE_SUCCESS:
-    case OrganizationActionTypes.PINS_SUCCESS:
+    case PoiActionTypes.LIST_SUCCESS:
+    case PoiActionTypes.MORE_SUCCESS:
+    case PoiActionTypes.PINS_SUCCESS:
       return { ...state, error: null, pending: false };
 
-    case OrganizationActionTypes.LIST_FAILURE:
-    case OrganizationActionTypes.MORE_FAILURE:
-    case OrganizationActionTypes.PINS_FAILURE:
+    case PoiActionTypes.LIST_FAILURE:
+    case PoiActionTypes.MORE_FAILURE:
+    case PoiActionTypes.PINS_FAILURE:
       return { ...state, error: action.payload, pending: false };
 
     default:

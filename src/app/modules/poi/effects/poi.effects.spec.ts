@@ -2,21 +2,21 @@ import { TestBed, inject } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { OrganizationEffects } from './organization.effects';
+import { PoiEffects } from './poi.effects';
 
-describe('OrganizationService', () => {
+describe('PoiService', () => {
   let actions$: Observable<any>;
-  let effects: OrganizationEffects;
+  let effects: PoiEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        OrganizationEffects,
+        PoiEffects,
         provideMockActions(() => actions$)
       ]
     });
 
-    effects = TestBed.get(OrganizationEffects);
+    effects = TestBed.get(PoiEffects);
   });
 
   it('should be created', () => {

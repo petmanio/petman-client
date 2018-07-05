@@ -9,7 +9,7 @@ describe('MapService', () => {
     });
   });
 
-  it('should be created', inject([MapService], (service: MapService) => {
-    expect(service).toBeTruthy();
+  it('should be created', inject([MapService], (primaryCategory: MapService) => {
+    expect(primaryCategory).toBeTruthy();
   }));
 });

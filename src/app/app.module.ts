@@ -18,7 +18,7 @@ import { SharedModule } from '@shared/shared.module';
 import { UtilService } from '@shared/services/util/util.service';
 import { CoreModule } from '@core/core.module';
 import { AuthModule } from '@auth/auth.module';
-import { OrganizationModule } from '@organization/organization.module';
+import { PoiModule } from '@poi/poi.module';
 
 import { metaReducers, reducers } from '@app/reducers';
 import { AppRoutingModule } from '@app/app-routing.module';
@@ -58,7 +58,7 @@ import { HomePageComponent } from '@app/pages/home-page/home-page.component';
     MaterialModule.forRoot(),
     CoreModule.forRoot(),
     AuthModule.forRoot(),
-    OrganizationModule.forRoot(),
+    PoiModule.forRoot(),
     AppRoutingModule
   ],
   providers: [
