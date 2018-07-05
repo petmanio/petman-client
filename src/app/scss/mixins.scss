@@ -73,7 +73,7 @@
   #{$property}: calc(#{$expression});
 }
 
-.p-full-height {
+.pm-full-height {
   @include calc(height, '100vh - 64px');
   @include desktop {
     @include calc(height, '100vh - 64px');

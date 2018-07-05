@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { extend } from 'lodash';
 import { google } from 'google-maps';
 
@@ -20,9 +20,10 @@ const MAP_DEFAULT_ICON = '/assets/icons/placeholder.png';
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
-  styleUrls: ['./google-map.component.scss']
+  styleUrls: ['./google-map.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GoogleMapComponent implements OnInit, OnChanges {
+export class GoogleMapComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() fitBounds = true;
   @Input() options: google.maps.MapOptions;
   @Input() pins: Pin[];
@@ -38,24 +39,35 @@ export class GoogleMapComponent implements OnInit, OnChanges {
   ngOnInit() {
     GoogleMapsLoader.load(g => {
       this.google = g;
-      this.createMap();
+      this.create();
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.map) {
-      this.initMap();
+      this.render();
     }
   }
 
-  createMap() {
+  ngAfterViewChecked() {
+    if (this.map) {
+      setTimeout(() => {
+        this.google.maps.event.trigger(this.map, 'resize');
+        if (this.fitBounds) {
+          this.map.fitBounds(this.bounds);
+        }
+      }, 300);
+    }
+  }
+
+  create() {
     this.map = new this.google.maps.Map(this.el.nativeElement, extend({}, MAP_DEFAULT_OPTIONS, this.options));
     this.bounds = new google.maps.LatLngBounds();
     this.infoWindow = new google.maps.InfoWindow();
-    this.initMap();
+    this.render();
   }
 
-  initMap() {
+  render() {
     this.clearMap();
     this.markers = this.pins.map(pin => {
       const marker = this.createMarker(pin);

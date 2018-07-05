@@ -10,19 +10,18 @@
         </mat-form-field>
       </div>
       <div class="column  is-marginless is-paddingless has-text-right">
-        <mat-button-toggle-group #group="matButtonToggleGroup" color="primary">
-          <mat-button-toggle value="left">
+        <mat-button-toggle-group #group="matButtonToggleGroup" value="grid">
+          <mat-button-toggle value="grid">
             <mat-icon>grid_on</mat-icon>
           </mat-button-toggle>
-          <mat-button-toggle value="center">
+          <mat-button-toggle value="map">
             <mat-icon>location_on</mat-icon>
           </mat-button-toggle>
         </mat-button-toggle-group>
-        <!--<div class="example-selected-value">Selected value: {{group.value}}</div>-->
       </div>
     </div>
     <div class="columns is-marginless pm-map-list">
-      <div infinite-scroll
+      <div *ngIf="group.value === 'grid'" infinite-scroll
            infiniteScrollContainer="mat-sidenav-content"
            infiniteScrollDistance="2"
            infiniteScrollThrottle="300"
@@ -45,6 +44,9 @@
             <button mat-raised-button [disabled]="!canLoadMore" (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
           </div>
         </div>
+      </div>
+      <div *ngIf="group.value === 'map'" class="column">
+        <app-google-map [pins]="pins"></app-google-map>
       </div>
     </div>
   </div>
