@@ -10,7 +10,7 @@ import { reducers } from '@map/reducers';
 import { MapRoutingModule } from '@map/map-routing.module';
 import { MapService } from '@map/map.service';
 import { MapEffects } from '@map/effects/map.effects';
-import { ListPageComponent } from '@map/list-page/list-page.component';
+import { MapPageComponent } from '@map/map-page/map-page.component';
 
 @NgModule({
   imports: [
@@ -22,7 +22,7 @@ import { ListPageComponent } from '@map/list-page/list-page.component';
     SharedModule,
     MaterialModule
   ],
-  declarations: [ListPageComponent],
+  declarations: [MapPageComponent],
   providers: [MapService],
 })
 export class MapModule {

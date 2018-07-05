@@ -1,13 +1,13 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as fromListPage from '@map/reducers/list-page.reducer';
+import * as fromMapPage from '@map/reducers/map-page.reducer';
 
 export interface State {
-  listPage: fromListPage.State;
+  mapPage: fromMapPage.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  listPage: fromListPage.reducer
+  mapPage: fromMapPage.reducer
 };
 
 export const getMapState = createFeatureSelector<State>('map');
@@ -15,6 +15,6 @@ export const getMapState = createFeatureSelector<State>('map');
 /**
  * List Page
  */
-export const getListPageState = createSelector(getMapState, (state: State) => state.listPage);
-export const getListPageError = createSelector(getListPageState, fromListPage.getError);
-export const getListPagePending = createSelector(getListPageState, fromListPage.getPending);
+export const getMapPageState = createSelector(getMapState, (state: State) => state.mapPage);
+export const getMapPageError = createSelector(getMapPageState, fromMapPage.getError);
+export const getMapPagePending = createSelector(getMapPageState, fromMapPage.getPending);

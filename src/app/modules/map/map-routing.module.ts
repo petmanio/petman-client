@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ListPageComponent } from '@map/list-page/list-page.component';
+import { MapPageComponent } from '@map/map-page/map-page.component';
 
 export const routes: Routes = [
-  { path: '', component: ListPageComponent, pathMatch: 'full' },
+  { path: '', component: MapPageComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

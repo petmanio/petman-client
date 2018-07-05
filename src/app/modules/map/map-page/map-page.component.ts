@@ -15,12 +15,12 @@ import { MasonryComponent } from '@shared/components/masonry/masonry.component';
 import { List, More, Pins, PoiActionTypes } from '@poi/actions/poi.actions';
 
 @Component({
-  selector: 'app-map-list-page',
-  templateUrl: './list-page.component.html',
-  styleUrls: ['./list-page.component.scss'],
+  selector: 'app-map-page',
+  templateUrl: './map-page.component.html',
+  styleUrls: ['./map-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListPageComponent implements OnInit, OnDestroy {
+export class MapPageComponent implements OnInit, OnDestroy {
   @ViewChild(GoogleMapComponent) map: GoogleMapComponent;
   @ViewChild(MasonryComponent) masonry: MasonryComponent;
   list: PoiDto[];
@@ -47,8 +47,8 @@ export class ListPageComponent implements OnInit, OnDestroy {
   total$ = this.store.select(fromPoi.getTotal);
   pins$ = this.store.select(fromPoi.getPinAll);
   primaryCategories$ = this.store.select(fromPoi.getCategoryAll);
-  error$ = this.store.select(fromMap.getListPageError);
-  pending$ = this.store.select(fromMap.getListPagePending);
+  error$ = this.store.select(fromMap.getMapPageError);
+  pending$ = this.store.select(fromMap.getMapPagePending);
   private subscriptions: Subscription[] = [];
 
   constructor(private datePipe: DatePipe, private store: Store<fromMap.State>, private actions$: Actions) {
@@ -58,7 +58,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
     });
     const totalSubscription = this.total$.subscribe(total => this.total = total);
 
-    const pinsSubscription = this.pins$.subscribe(pins => this.pins = pins.map(pin => ListPageComponent.createMapPin(pin)));
+    const pinsSubscription = this.pins$.subscribe(pins => this.pins = pins.map(pin => MapPageComponent.createMapPin(pin)));
 
     this.subscriptions.push(...[listSubscription, totalSubscription, pinsSubscription]);
   }
@@ -90,7 +90,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
       title: entity.name,
       meta: entity,
       infoWindow: {
-        contentFn: ListPageComponent.pinInfoWindowContentFn
+        contentFn: MapPageComponent.pinInfoWindowContentFn
       }
     };
   }

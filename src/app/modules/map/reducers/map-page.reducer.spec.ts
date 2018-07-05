@@ -1,6 +1,6 @@
-import { reducer, initialState } from './list-page.reducer';
+import { reducer, initialState } from './map-page.reducer';
 
-describe('ListPage Reducer', () => {
+describe('MapPage Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

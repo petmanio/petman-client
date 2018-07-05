@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 
-import { ListPageComponent } from './list-page.component';
+import { MapPageComponent } from './map-page.component';
 
-describe('ListPageComponent', () => {
-  let component: ListPageComponent;
-  let fixture: ComponentFixture<ListPageComponent>;
+describe('MapPageComponent', () => {
+  let component: MapPageComponent;
+  let fixture: ComponentFixture<MapPageComponent>;
   let store: Store<any>;
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [ StoreModule.forRoot({}) ],
-      declarations: [ ListPageComponent ]
+      declarations: [ MapPageComponent ]
     });
 
     await TestBed.compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListPageComponent);
+    fixture = TestBed.createComponent(MapPageComponent);
     component = fixture.componentInstance;
     store = TestBed.get(Store);
 
