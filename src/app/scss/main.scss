@@ -252,17 +252,18 @@ mat-icon {
     width: 100%;
     display: block;
     overflow: hidden;
-    border-top: 10px solid $yellow;
+    border-left: 10px solid #BDCDE8;
     background-color: #fff;
     position: relative;
     p {
-      padding: 0.75rem;
+      padding: 1.5rem;
+      word-wrap: break-word;
     }
     &:before {
       width: 250px;
       height: 250px;
       display: block;
-      background-color: $yellow;
+      background-color: #BDCDE8;
       content: " ";
       position: absolute;
       bottom: 0;

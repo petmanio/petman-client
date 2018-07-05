@@ -1,0 +1,22 @@
+@import '../../../scss/mixins';
+
+.pm-map-list {
+  margin-top: -15px !important;
+  @include calc(height, '100vh - 118px');
+  @include desktop {
+    @include calc(height, '100vh - 125px');
+  }
+  overflow: auto;
+
+  > .column {
+    padding-top: 0;
+  }
+}
+
+.pm-map-filter {
+  padding: 0 0.75rem 0.75rem;
+}
+
+mat-button-toggle-group {
+  margin-left: auto;
+}

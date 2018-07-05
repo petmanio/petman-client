@@ -36,7 +36,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
     columns: 1,
     margin: 24,
     breakAt: {
-      940: 3,
+      940: 4,
       520: 2,
       400: 1
     }

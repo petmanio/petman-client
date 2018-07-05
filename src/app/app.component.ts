@@ -24,13 +24,14 @@ import { Categories } from '@poi/actions/poi.actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, OnDestroy {
+  hideFooter = false;
+  sideNavMode: 'side' | 'push' = 'side';
+  sideNavState: boolean;
+  currentLanguage: string;
   loggedIn$: Observable<boolean>;
   user$: Observable<UserDto>;
   selectedUser$: Observable<UserDto>;
   showSidenav$: Observable<boolean>;
-  sideNavMode: 'side' | 'push' = 'side';
-  sideNavState: boolean;
-  currentLanguage: string;
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -85,6 +86,8 @@ export class AppComponent implements OnInit, OnDestroy {
               this.store.dispatch(new CloseSidenav());
             }
           }
+
+          this.hideFooter = UtilService.getRouteDataByKey(this.activatedRoute, 'hideFooter');
         }
       });
 

@@ -2,6 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatChipsModule,
   MatDialogModule,
@@ -14,7 +15,7 @@ import {
   MatProgressBarModule,
   MatSelectModule,
   MatSidenavModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import {
@@ -45,6 +46,7 @@ const modules = [
   MatPaginatorModule,
   MatCardModule,
   MatListModule,
+  MatButtonToggleModule,
   LayoutModule,
 
   CovalentSearchModule,

@@ -1,7 +1,7 @@
 <div class="pm-full-loader">
   <div *tdLoading="let item until !(pending$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
-    <div class="columns is-marginless">
-      <div class="column">
+    <div class="columns is-marginless is-vcentered is-mobile pm-map-filter">
+      <div class="column is-marginless is-paddingless ">
         <mat-form-field>
           <mat-select [placeholder]="'CATEGORIES' | translate" multiple="true" [(ngModel)]="selectedPrimaryCategories"
                       (ngModelChange)="updateList()">
@@ -9,36 +9,42 @@
           </mat-select>
         </mat-form-field>
       </div>
+      <div class="column  is-marginless is-paddingless has-text-right">
+        <mat-button-toggle-group #group="matButtonToggleGroup" color="primary">
+          <mat-button-toggle value="left">
+            <mat-icon>grid_on</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="center">
+            <mat-icon>location_on</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <!--<div class="example-selected-value">Selected value: {{group.value}}</div>-->
+      </div>
     </div>
-    <div class="columns is-marginless">
-      <div class="column">
-        <div infinite-scroll
-             infiniteScrollContainer="mat-sidenav-content"
-             infiniteScrollDistance="2"
-             infiniteScrollThrottle="300"
-             fromRoot="true"
-             (scrolled)="onLoadMore()">
-          <div>
-            <app-masonry [options]="masonryOptions">
-              <ng-container *ngFor="let item of list$ | async">
-                <app-masonry-item>
-                  <app-card [config]="getCardConfig(item)" (click)="panTo(item)"></app-card>
-                </app-masonry-item>
-                <app-masonry-item *ngFor="let branch of item.branches">
-                  <app-card [config]="getCardConfig(branch)" (click)="panTo(branch)"></app-card>
-                </app-masonry-item>
-              </ng-container>
-            </app-masonry>
-          </div>
-          <div class="columns is-marginless" [hidden]="!(list$ | appAsyncDelay | async)?.length">
-            <div class="column has-text-centered">
-              <button mat-raised-button [disabled]="!canLoadMore" (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
-            </div>
+    <div class="columns is-marginless pm-map-list">
+      <div infinite-scroll
+           infiniteScrollContainer="mat-sidenav-content"
+           infiniteScrollDistance="2"
+           infiniteScrollThrottle="300"
+           fromRoot="true"
+           (scrolled)="onLoadMore()" class="column">
+        <div>
+          <app-masonry [options]="masonryOptions">
+            <ng-container *ngFor="let item of list$ | async">
+              <app-masonry-item>
+                <app-card [config]="getCardConfig(item)" (click)="panTo(item)"></app-card>
+              </app-masonry-item>
+              <app-masonry-item *ngFor="let branch of item.branches">
+                <app-card [config]="getCardConfig(branch)" (click)="panTo(branch)"></app-card>
+              </app-masonry-item>
+            </ng-container>
+          </app-masonry>
+        </div>
+        <div class="columns is-marginless" [hidden]="!(list$ | appAsyncDelay | async)?.length">
+          <div class="column has-text-centered">
+            <button mat-raised-button [disabled]="!canLoadMore" (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
           </div>
         </div>
-      </div>
-      <div class="column">
-        Abc
       </div>
     </div>
   </div>
