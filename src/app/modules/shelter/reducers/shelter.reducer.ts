@@ -2,6 +2,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { ShelterDto } from '@petman/common';
 
+import { AuthActions, AuthActionTypes } from '@auth/actions/auth.actions';
 import { ShelterActions, ShelterActionTypes } from '@shelter/actions/shelter.actions';
 
 export interface State extends EntityState<ShelterDto> {
@@ -21,7 +22,7 @@ export const initialState: State = adapter.getInitialState({
   isListLoaded: false
 });
 
-export function reducer(state = initialState, action: ShelterActions): State {
+export function reducer(state = initialState, action: ShelterActions | AuthActions): State {
   switch (action.type) {
     case ShelterActionTypes.CREATE_SUCCESS:
       return { ...state, ...adapter.addOne(action.payload, state), total: state.total + 1 };
@@ -43,6 +44,10 @@ export function reducer(state = initialState, action: ShelterActions): State {
 
     case ShelterActionTypes.SELECT:
       return { ...state, selectedId: action.payload };
+
+    case AuthActionTypes.FB_LOGIN:
+    case AuthActionTypes.LOGOUT:
+      return { ...initialState };
 
     default:
       return state;
