@@ -15,11 +15,11 @@ import { Select } from '@shelter/actions/shelter.actions';
 
 @Component({
   selector: 'app-shelter-details-page',
-  templateUrl: './details-page.component.html',
-  styleUrls: ['./details-page.component.scss'],
+  templateUrl: './shelter-details-page.component.html',
+  styleUrls: ['./shelter-details-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DetailsPageComponent implements OnInit, OnDestroy {
+export class ShelterDetailsPageComponent implements OnInit, OnDestroy {
   shelter: ShelterDto;
   shelter$ = this.store.pipe(select(fromShelter.getSelected));
   slides: SlideConfig[] = [];

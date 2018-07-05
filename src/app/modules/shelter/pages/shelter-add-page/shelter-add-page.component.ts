@@ -7,14 +7,14 @@ import { Create } from '@shelter/actions/shelter.actions';
 
 @Component({
   selector: 'app-shelter-add-page',
-  templateUrl: './add-page.component.html',
-  styleUrls: ['./add-page.component.scss'],
+  templateUrl: './shelter-add-page.component.html',
+  styleUrls: ['./shelter-add-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddPageComponent implements OnInit {
+export class ShelterAddPageComponent implements OnInit {
   form: FormGroup;
-  pending$ = this.store.select(fromShelter.getAddPagePending);
-  error$ = this.store.select(fromShelter.getAddPageError);
+  pending$ = this.store.select(fromShelter.getShelterAddPagePending);
+  error$ = this.store.select(fromShelter.getShelterAddPageError);
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder, private store: Store<fromShelter.State>) {
     this.form = formBuilder.group({

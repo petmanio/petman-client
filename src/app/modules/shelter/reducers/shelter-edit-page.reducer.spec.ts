@@ -1,6 +1,6 @@
-import { reducer, initialState } from './add-page.reducer';
+import { reducer, initialState } from './shelter-edit-page.reducer';
 
-describe('AddPage Reducer', () => {
+describe('ShelterEditPage Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

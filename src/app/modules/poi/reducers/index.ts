@@ -3,26 +3,26 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import * as fromPoi from '@poi/reducers/poi.reducer';
 import * as fromPin from '@poi/reducers/pin.reducer';
 import * as fromCategory from '@poi/reducers/category.reducer';
-import * as fromListPage from '@poi/reducers/list-page.reducer';
-import * as fromAddPage from '@poi/reducers/add-page.reducer';
-import * as fromEditPage from '@poi/reducers/edit-page.reducer';
+import * as fromPoiListPage from '@poi/reducers/poi-list-page.reducer';
+import * as fromPoiAddPage from '@poi/reducers/poi-add-page.reducer';
+import * as fromPoiEditPage from '@poi/reducers/poi-edit-page.reducer';
 
 export interface State {
   poi: fromPoi.State;
   pin: fromPin.State;
   category: fromCategory.State;
-  addPage: fromAddPage.State;
-  listPage: fromListPage.State;
-  editPage: fromEditPage.State;
+  poiAddPage: fromPoiAddPage.State;
+  poiListPage: fromPoiListPage.State;
+  poiEditPage: fromPoiEditPage.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
   poi: fromPoi.reducer,
   pin: fromPin.reducer,
   category: fromCategory.reducer,
-  addPage: fromAddPage.reducer,
-  editPage: fromEditPage.reducer,
-  listPage: fromListPage.reducer
+  poiAddPage: fromPoiAddPage.reducer,
+  poiEditPage: fromPoiEditPage.reducer,
+  poiListPage: fromPoiListPage.reducer
 };
 
 export const getPoiState = createFeatureSelector<State>('poi');
@@ -76,22 +76,22 @@ export const getCategorySelected = createSelector(getCategoryEntities, getCatego
 );
 
 /**
- * Add Page
+ * Poi add Page
  */
-export const getAddPageState = createSelector(getPoiState, (state: State) => state.addPage);
-export const getAddPageError = createSelector(getAddPageState, fromAddPage.getError);
-export const getAddPagePending = createSelector(getAddPageState, fromAddPage.getPending);
+export const getPoiAddPageState = createSelector(getPoiState, (state: State) => state.poiAddPage);
+export const getPoiAddPageError = createSelector(getPoiAddPageState, fromPoiAddPage.getError);
+export const getPoiAddPagePending = createSelector(getPoiAddPageState, fromPoiAddPage.getPending);
 
 /**
- * Edit Page
+ * Poi edit Page
  */
-export const getEditPageState = createSelector(getPoiState, (state: State) => state.editPage);
-export const getEditPageError = createSelector(getEditPageState, fromEditPage.getError);
-export const getEditPagePending = createSelector(getEditPageState, fromEditPage.getPending);
+export const getPoiEditPageState = createSelector(getPoiState, (state: State) => state.poiEditPage);
+export const getPoiEditPageError = createSelector(getPoiEditPageState, fromPoiEditPage.getError);
+export const getPoiEditPagePending = createSelector(getPoiEditPageState, fromPoiEditPage.getPending);
 
 /**
- * List Page
+ * Poi list Page
  */
-export const getListPageState = createSelector(getPoiState, (state: State) => state.listPage);
-export const getListPageError = createSelector(getListPageState, fromListPage.getError);
-export const getListPagePending = createSelector(getListPageState, fromListPage.getPending);
+export const getPoiListPageState = createSelector(getPoiState, (state: State) => state.poiListPage);
+export const getPoiListPageError = createSelector(getPoiListPageState, fromPoiListPage.getError);
+export const getPoiListPagePending = createSelector(getPoiListPageState, fromPoiListPage.getPending);

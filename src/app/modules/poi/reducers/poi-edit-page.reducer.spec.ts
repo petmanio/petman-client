@@ -1,6 +1,6 @@
-import { reducer, initialState } from './add-page.reducer';
+import { reducer, initialState } from './poi-edit-page.reducer';
 
-describe('AddPage Reducer', () => {
+describe('PoiEditPage Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

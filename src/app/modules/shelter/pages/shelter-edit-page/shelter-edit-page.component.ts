@@ -15,15 +15,15 @@ import { ConfirmationDialogComponent } from '@shared/components/confirmation-dia
 
 @Component({
   selector: 'app-shelter-edit-page',
-  templateUrl: './edit-page.component.html',
-  styleUrls: ['./edit-page.component.scss'],
+  templateUrl: './shelter-edit-page.component.html',
+  styleUrls: ['./shelter-edit-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditPageComponent implements OnDestroy {
+export class ShelterEditPageComponent implements OnDestroy {
   form: FormGroup;
   shelter: ShelterDto;
-  pending$ = this.store.select(fromShelter.getAddPagePending);
-  error$ = this.store.select(fromShelter.getAddPageError);
+  pending$ = this.store.select(fromShelter.getShelterAddPagePending);
+  error$ = this.store.select(fromShelter.getShelterAddPageError);
   shelter$ = this.store.pipe(select(fromShelter.getSelected));
   private subscriptions: Subscription[] = [];
 
@@ -36,8 +36,8 @@ export class EditPageComponent implements OnDestroy {
     @Inject(FormBuilder) private formBuilder: FormBuilder,
     @Inject(DOCUMENT) private document: Document
   ) {
-    this.error$ = this.store.select(fromShelter.getEditPageError);
-    this.pending$ = this.store.select(fromShelter.getEditPagePending);
+    this.error$ = this.store.select(fromShelter.getShelterEditPageError);
+    this.pending$ = this.store.select(fromShelter.getShelterEditPagePending);
 
     const paramsSubscription = route.params
       .pipe(map(params => new Select(params.id)))

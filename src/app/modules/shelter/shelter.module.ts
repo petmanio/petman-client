@@ -12,10 +12,10 @@ import { ShelterService } from '@shelter/shelter.service';
 import { ShelterEffects } from '@shelter/effects/shelter.effects';
 import { ShelterExistsGuard } from '@shelter/shelter-exists.guard';
 import { ShelterOwnerGuard } from '@shelter/shelter-owner.guard';
-import { ListPageComponent } from '@shelter/pages/list-page/list-page.component';
-import { AddPageComponent } from '@shelter/pages/add-page/add-page.component';
-import { DetailsPageComponent } from '@shelter/pages/details-page/details-page.component';
-import { EditPageComponent } from '@shelter/pages/edit-page/edit-page.component';
+import { ShelterListPageComponent } from '@shelter/pages/shelter-list-page/shelter-list-page.component';
+import { ShelterAddPageComponent } from '@shelter/pages/shelter-add-page/shelter-add-page.component';
+import { ShelterDetailsPageComponent } from '@shelter/pages/shelter-details-page/shelter-details-page.component';
+import { ShelterEditPageComponent } from '@shelter/pages/shelter-edit-page/shelter-edit-page.component';
 
 @NgModule({
   imports: [
@@ -28,10 +28,10 @@ import { EditPageComponent } from '@shelter/pages/edit-page/edit-page.component'
     MaterialModule
   ],
   declarations: [
-    ListPageComponent,
-    AddPageComponent,
-    DetailsPageComponent,
-    EditPageComponent,
+    ShelterListPageComponent,
+    ShelterAddPageComponent,
+    ShelterDetailsPageComponent,
+    ShelterEditPageComponent,
   ],
   providers: [ShelterService, ShelterExistsGuard, ShelterOwnerGuard],
 })

@@ -16,11 +16,11 @@ import { ShareDialogComponent } from '@shared/components/share-dialog/share-dial
 
 @Component({
   selector: 'app-shelter-list-page',
-  templateUrl: './list-page.component.html',
-  styleUrls: ['./list-page.component.scss'],
+  templateUrl: './shelter-list-page.component.html',
+  styleUrls: ['./shelter-list-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListPageComponent implements OnInit, OnDestroy {
+export class ShelterListPageComponent implements OnInit, OnDestroy {
   list: ShelterDto[];
   limit = 12;
   total: number;
@@ -41,8 +41,8 @@ export class ListPageComponent implements OnInit, OnDestroy {
   list$ = this.store.select(fromShelter.getAll);
   total$ = this.store.select(fromShelter.getTotal);
   isListLoaded$ = this.store.select(fromShelter.getIsListLoaded);
-  error$ = this.store.select(fromShelter.getListPageError);
-  pending$ = this.store.select(fromShelter.getListPagePending);
+  error$ = this.store.select(fromShelter.getShelterListPageError);
+  pending$ = this.store.select(fromShelter.getShelterListPagePending);
   selectedUser$ = this.store.select(fromAuth.getSelectedUser);
   private subscriptions: Subscription[] = [];
 

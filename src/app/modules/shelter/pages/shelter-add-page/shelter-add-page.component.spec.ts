@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailsPageComponent } from './details-page.component';
+import { ShelterAddPageComponent } from './shelter-add-page.component';
 import { Store, StoreModule } from '@ngrx/store';
 
-describe('DetailsPageComponent', () => {
-  let component: DetailsPageComponent;
-  let fixture: ComponentFixture<DetailsPageComponent>;
+describe('ShelterAddPageComponent', () => {
+  let component: ShelterAddPageComponent;
+  let fixture: ComponentFixture<ShelterAddPageComponent>;
   let store: Store<any>;
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [ StoreModule.forRoot({}) ],
-      declarations: [ DetailsPageComponent ]
+      declarations: [ ShelterAddPageComponent ]
     });
 
     await TestBed.compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DetailsPageComponent);
+    fixture = TestBed.createComponent(ShelterAddPageComponent);
     component = fixture.componentInstance;
     store = TestBed.get(Store);
 

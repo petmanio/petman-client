@@ -1,6 +1,6 @@
-import { reducer, initialState } from './edit-page.reducer';
+import { reducer, initialState } from './shelter-list-page.reducer';
 
-describe('EditPage Reducer', () => {
+describe('ShelterListPage Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;

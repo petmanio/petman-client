@@ -1,22 +1,22 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromShelter from '@shelter/reducers/shelter.reducer';
-import * as fromListPage from '@shelter/reducers/list-page.reducer';
-import * as fromAddPage from '@shelter/reducers/add-page.reducer';
-import * as fromEditPage from '@shelter/reducers/edit-page.reducer';
+import * as fromShelterListPage from '@shelter/reducers/shelter-list-page.reducer';
+import * as fromShelterAddPage from '@shelter/reducers/shelter-add-page.reducer';
+import * as fromShelterEditPage from '@shelter/reducers/shelter-edit-page.reducer';
 
 export interface State {
   shelter: fromShelter.State;
-  addPage: fromAddPage.State;
-  listPage: fromListPage.State;
-  editPage: fromEditPage.State;
+  shelterAddPage: fromShelterAddPage.State;
+  shelterListPage: fromShelterListPage.State;
+  shelterEditPage: fromShelterEditPage.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
   shelter: fromShelter.reducer,
-  addPage: fromAddPage.reducer,
-  editPage: fromEditPage.reducer,
-  listPage: fromListPage.reducer
+  shelterAddPage: fromShelterAddPage.reducer,
+  shelterListPage: fromShelterListPage.reducer,
+  shelterEditPage: fromShelterEditPage.reducer
 };
 
 export const getShelterState = createFeatureSelector<State>('shelter');
@@ -40,22 +40,22 @@ export const getSelected = createSelector(getEntities, getSelectedId, (entities,
 );
 
 /**
- * Add Page
+ * Shelter add Page
  */
-export const getAddPageState = createSelector(getShelterState, (state: State) => state.addPage);
-export const getAddPageError = createSelector(getAddPageState, fromAddPage.getError);
-export const getAddPagePending = createSelector(getAddPageState, fromAddPage.getPending);
+export const getShelterAddPageState = createSelector(getShelterState, (state: State) => state.shelterAddPage);
+export const getShelterAddPageError = createSelector(getShelterAddPageState, fromShelterAddPage.getError);
+export const getShelterAddPagePending = createSelector(getShelterAddPageState, fromShelterAddPage.getPending);
 
 /**
- * Edit Page
+ * Shelter edit Page
  */
-export const getEditPageState = createSelector(getShelterState, (state: State) => state.editPage);
-export const getEditPageError = createSelector(getEditPageState, fromEditPage.getError);
-export const getEditPagePending = createSelector(getEditPageState, fromEditPage.getPending);
+export const getShelterEditPageState = createSelector(getShelterState, (state: State) => state.shelterEditPage);
+export const getShelterEditPageError = createSelector(getShelterEditPageState, fromShelterEditPage.getError);
+export const getShelterEditPagePending = createSelector(getShelterEditPageState, fromShelterEditPage.getPending);
 
 /**
- * List Page
+ * Shelter list Page
  */
-export const getListPageState = createSelector(getShelterState, (state: State) => state.listPage);
-export const getListPageError = createSelector(getListPageState, fromListPage.getError);
-export const getListPagePending = createSelector(getListPageState, fromListPage.getPending);
+export const getShelterListPageState = createSelector(getShelterState, (state: State) => state.shelterListPage);
+export const getShelterListPageError = createSelector(getShelterListPageState, fromShelterListPage.getError);
+export const getShelterListPagePending = createSelector(getShelterListPageState, fromShelterListPage.getPending);

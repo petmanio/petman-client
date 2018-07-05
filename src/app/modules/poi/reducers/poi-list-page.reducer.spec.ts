@@ -1,6 +1,6 @@
-import { reducer, initialState } from './list-page.reducer';
+import { reducer, initialState } from './poi-list-page.reducer';
 
-describe('ListPage Reducer', () => {
+describe('PoiListPage Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;
