@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy } from '@angular/core';
 import { DOCUMENT, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -10,7 +11,7 @@ import { ModalSize, ShelterDto } from '@petman/common';
 
 import * as fromShelter from '@shelter/reducers';
 import { Delete, Select, Update } from '@shelter/actions/shelter.actions';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SharedService } from '@shared/services/shared/shared.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -22,6 +23,7 @@ import { ConfirmationDialogComponent } from '@shared/components/confirmation-dia
 export class ShelterEditPageComponent implements OnDestroy {
   form: FormGroup;
   shelter: ShelterDto;
+  quillModules = SharedService.quillModules;
   pending$ = this.store.select(fromShelter.getShelterAddPagePending);
   error$ = this.store.select(fromShelter.getShelterAddPageError);
   shelter$ = this.store.pipe(select(fromShelter.getSelected));

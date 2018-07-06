@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromShelter from '@shelter/reducers';
 import { Create } from '@shelter/actions/shelter.actions';
+import { SharedService } from '@shared/services/shared/shared.service';
 
 @Component({
   selector: 'app-shelter-add-page',
@@ -13,6 +14,7 @@ import { Create } from '@shelter/actions/shelter.actions';
 })
 export class ShelterAddPageComponent implements OnInit {
   form: FormGroup;
+  quillModules = SharedService.quillModules;
   pending$ = this.store.select(fromShelter.getShelterAddPagePending);
   error$ = this.store.select(fromShelter.getShelterAddPageError);
 

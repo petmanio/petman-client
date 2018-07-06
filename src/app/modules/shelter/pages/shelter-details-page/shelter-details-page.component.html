@@ -13,9 +13,8 @@
         </div>
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
-            <p>
-              {{shelter?.description}}
-            </p>
+            <p *ngIf="!(shelter?.description | appIsHtml)">{{shelter?.description}}</p>
+            <div *ngIf="shelter?.description | appIsHtml" class="ql-editor" [innerHTML]="shelter?.description | appSafeHtml"></div>
           </div>
         </blockquote>
         <div class="field is-grouped">

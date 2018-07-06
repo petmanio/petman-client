@@ -1,3 +1,0 @@
-describe('Pipe: SplicePipe', () => {
-
-});

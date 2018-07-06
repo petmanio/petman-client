@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  forwardRef,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, forwardRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as MediumEditor from 'medium-editor';
 
@@ -31,6 +21,7 @@ export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnCh
 
   propagateChange: any = () => {
   }
+
   validateFn: any = () => {
   }
 

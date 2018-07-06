@@ -55,6 +55,7 @@
     "class-validator": "^0.8.5",
     "core-js": "^2.5.4",
     "google-maps": "^3.3.0",
+    "is-html": "^1.1.0",
     "lodash": "^4.17.10",
     "macy": "^2.3.0",
     "materialize-css": "^1.0.0-rc.2",
@@ -63,6 +64,7 @@
     "ngx-infinite-scroll": "^6.0.1",
     "ngx-perfect-scrollbar": "^6.2.0",
     "ngx-pipes": "^2.2.0",
+    "ngx-quill": "^3.3.0",
     "normalize.css": "^8.0.0",
     "rxjs": "^6.2.1",
     "zone.js": "^0.8.26"

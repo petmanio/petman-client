@@ -9,6 +9,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { QuillModule } from 'ngx-quill';
 import { NgPipesModule } from 'ngx-pipes';
 
 import { MaterialModule } from '@material/material.module';
@@ -19,14 +20,10 @@ import { SharedEffects } from '@shared/effects/shared.effects';
 import { RxDelayPipe } from '@shared/pipes/rx-delay/rx-delay.pipe';
 import { RxDebouncePipe } from '@shared/pipes/rx-debounce/rx-debounce.pipe';
 import { SafeHtmlPipe } from '@shared/pipes/safe-html/safe-html.pipe';
-import { GalleryImagesPipe } from '@shared/pipes/gallery-images/gallery-images.pipe';
 import { KeysPipe } from '@shared/pipes/keys/keys.pipe';
-import { ChunkPipe } from '@shared/pipes/chunk/chunk.pipe';
 import { EllipsisPipe } from '@shared/pipes/ellipsis/ellipsis.pipe';
 import { FromNowPipe } from '@shared/pipes/from-now/from-now.pipe';
-import { SplicePipe } from '@shared/pipes/splice/splice.pipe';
-import { StripTagsPipe } from '@shared/pipes/strip-tags/strip-tags.pipe';
-import { UcFirstPipe } from '@shared/pipes/uc-first/uc-first.pipe';
+import { IsHtmlPipe } from '@shared/pipes/is-html/is-html.pipe';
 
 import { UtilService } from '@shared/services/util/util.service';
 import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
@@ -54,6 +51,7 @@ const modules = [
   ShareButtonsModule,
   InfiniteScrollModule,
   PerfectScrollbarModule,
+  QuillModule,
   NgPipesModule
 ];
 
@@ -61,15 +59,11 @@ const modules = [
 const declarations = [
   RxDelayPipe,
   RxDebouncePipe,
-  ChunkPipe,
   EllipsisPipe,
   FromNowPipe,
   SafeHtmlPipe,
-  GalleryImagesPipe,
   KeysPipe,
-  SplicePipe,
-  StripTagsPipe,
-  UcFirstPipe,
+  IsHtmlPipe,
   CardComponent,
   ShareDialogComponent,
   ConfirmationDialogComponent,

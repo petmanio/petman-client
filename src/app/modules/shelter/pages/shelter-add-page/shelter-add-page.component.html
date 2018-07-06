@@ -9,8 +9,22 @@
       <p class="pm-intro is-size-5">{{'BECAME_SHELTER_INTO' | translate}}</p>
       <form [formGroup]="form">
         <br>
+        <div class="has-text-right" style="margin-bottom: 10px">
+          <mat-button-toggle-group #group="matButtonToggleGroup" value="text">
+            <mat-button-toggle value="text">
+              <mat-icon>short_text</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="richText">
+              <mat-icon>format_list_numbered</mat-icon>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
         <mat-form-field>
-          <textarea formControlName='description' matInput [placeholder]="'DESCRIPTION' | translate"></textarea>
+          <textarea [hidden]="!(group.value === 'text')" formControlName='description' matInput
+                    [placeholder]="'DESCRIPTION' | translate"></textarea>
+          <quill-editor class="pm-quill" [hidden]="!(group.value === 'richText')" [style]="{height: '100px'}"
+                        [placeholder]="'DESCRIPTION' | translate" [modules]="quillModules"
+                        formControlName='description'></quill-editor>
           <mat-hint>{{'DESCRIPTION_HINT' | translate}}</mat-hint>
           <mat-error *ngIf="form.get('description').hasError('minlength') || form.get('description').hasError('maxlength')">
             {{'DESCRIPTION_ERROR' | translate}}
