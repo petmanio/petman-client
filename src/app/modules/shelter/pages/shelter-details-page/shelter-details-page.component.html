@@ -11,6 +11,10 @@
           {{'DAILY_PRICE' | translate}}<br>
           <h5>{{(shelter$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
         </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
             <p *ngIf="!(shelter?.description | appIsHtml)">{{shelter?.description}}</p>
@@ -26,8 +30,6 @@
           </p>
         </div>
       </div>
-    </div>
-    <div class="columns">
     </div>
   </div>
 </div>
