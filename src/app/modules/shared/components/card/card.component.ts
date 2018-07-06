@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export interface Config {
   avatar?: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   image?: string;
   content?: string;
   price?: number;

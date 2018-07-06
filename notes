@@ -4,3 +4,4 @@ ng generate reducer auth/reducers/LoginPage --reducers auth.reducer.ts -m module
 ng generate container auth/LoginPage --state reducers/login-page.reducer.ts -m modules/auth
 
 1. list page overflow-x
+2. Error:(22, 3) TSLint: In the class "CardComponent", the output property "onShare" should not be prefixed with on (no-output-on-prefix)

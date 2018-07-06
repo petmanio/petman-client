@@ -139,8 +139,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
   getMapGridCardConfig(pin: Pin): Config {
     return {
       title: pin.title,
-      subtitle: this.translateService.instant(pin.meta.primaryCategory.label),
-      contentHTML: `${pin.meta.description || ''} <br> ${pin.meta.address.fullAddress()}`
+      chips: [{ color: '', text: this.translateService.instant(pin.meta.primaryCategory.label) }],
+      contentHTML: `${pin.meta.description || ''} <br> ${pin.meta.address.fullAddress().replace(/\s+/g, ' ')}`
     };
   }
 
@@ -171,15 +171,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
       ).subscribe();
   }
 
-  panTo(pin: PoiDto) {
-    // const foundPin = find(this.pins, pin => {
-    //   const type = org instanceof BranchDto ? PoiPinType.BRANCH
-    //     : PoiPinType.ORGANIZATION;
-    //   return pin.meta.type === type && pin.meta.id === org.id;
-    // });
-    //
-    // if (foundPin) {
-    //   this.map.panToPin(foundPin);
-    // }
+  panTo(pin: Pin) {
+    this.map.panToPin(pin);
   }
 }

@@ -49,8 +49,11 @@
       </div>
       <div *ngIf="group.value === 'map'" class="pm-map">
         <div class="pm-map-grid">
-          <app-card *ngFor="let pin of pins"
-                    [config]="getMapGridCardConfig(pin)" (click)="panTo(pin)"></app-card>
+          <perfect-scrollbar>
+            <app-card class="pm-cursor-pointer"
+                      *ngFor="let pin of pins"
+                      [config]="getMapGridCardConfig(pin)" (click)="panTo(pin)"></app-card>
+          </perfect-scrollbar>
         </div>
         <div style="height: 100%;">
           <app-google-map [pins]="pins"></app-google-map>

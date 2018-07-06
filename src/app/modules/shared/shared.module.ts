@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { NgPipesModule } from 'ngx-pipes';
 
 import { MaterialModule } from '@material/material.module';
@@ -52,6 +53,7 @@ const modules = [
   FontAwesomeModule,
   ShareButtonsModule,
   InfiniteScrollModule,
+  PerfectScrollbarModule,
   NgPipesModule
 ];
 

@@ -62,7 +62,7 @@ import { HomePageComponent } from '@app/pages/home-page/home-page.component';
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: CustomHeadersInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHeadersInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
