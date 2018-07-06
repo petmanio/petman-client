@@ -1,7 +1,7 @@
 <div class="pm-full-loader">
   <div *tdLoading="let item until !(pending$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
     <div class="columns is-marginless is-vcentered is-mobile pm-map-filter">
-      <div class="column is-marginless is-paddingless ">
+      <div class="column is-marginless is-paddingless" [attr.style]="filterInlineStyle">
         <mat-form-field>
           <mat-select [placeholder]="'CATEGORIES' | translate" multiple="true" [(ngModel)]="selectedPrimaryCategories"
                       (ngModelChange)="updateList()">
@@ -20,13 +20,13 @@
         </mat-button-toggle-group>
       </div>
     </div>
-    <div class="columns is-marginless pm-map-list">
+    <div class="pm-map-list">
       <div *ngIf="group.value === 'grid'" infinite-scroll
            infiniteScrollContainer="mat-sidenav-content"
            infiniteScrollDistance="2"
            infiniteScrollThrottle="300"
            fromRoot="true"
-           (scrolled)="onLoadMore()" class="column">
+           (scrolled)="onLoadMore()">
         <div>
           <app-masonry [options]="masonryOptions">
             <ng-container *ngFor="let item of list$ | async">
@@ -45,8 +45,14 @@
           </div>
         </div>
       </div>
-      <div *ngIf="group.value === 'map'" class="column">
-        <app-google-map [pins]="pins"></app-google-map>
+      <div *ngIf="group.value === 'map'" class="pm-map">
+        <div class="pm-map-grid">
+          <app-card *ngFor="let pin of pins"
+                    [config]="getMapGridCardConfig(pin)" (click)="panTo(pin)"></app-card>
+        </div>
+        <div style="height: 100%;">
+          <app-google-map [pins]="pins"></app-google-map>
+        </div>
       </div>
     </div>
   </div>

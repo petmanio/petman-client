@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SafeStyle } from '@angular/platform-browser/src/security/dom_sanitization_service';
 import { Store } from '@ngrx/store';
 import { Actions } from '@ngrx/effects';
+import { TranslatePipe, TranslateService, TranslateStore } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { delay, take, tap } from 'rxjs/operators';
 
@@ -9,10 +12,10 @@ import { Pin, PinDto, PoiDto, PoiListQueryRequestDto, PoiPinsQueryRequestDto } f
 
 import * as fromMap from '@map/reducers';
 import * as fromPoi from '@poi/reducers';
+import { List, More, Pins, PoiActionTypes } from '@poi/actions/poi.actions';
 import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
 import { Config } from '@shared/components/card/card.component';
 import { MasonryComponent } from '@shared/components/masonry/masonry.component';
-import { List, More, Pins, PoiActionTypes } from '@poi/actions/poi.actions';
 
 @Component({
   selector: 'app-map-page',
@@ -32,7 +35,6 @@ export class MapPageComponent implements OnInit, OnDestroy {
     waitForImages: true,
     useOwnImageLoader: false,
     mobileFirst: true,
-    onInit: true,
     columns: 1,
     margin: 24,
     breakAt: {
@@ -41,7 +43,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
       400: 1
     }
   };
-  selectedPrimaryCategories: number[];
+  selectedPrimaryCategories: number[] = [];
   pins: Pin[];
   list$ = this.store.select(fromPoi.getAll);
   total$ = this.store.select(fromPoi.getTotal);
@@ -51,7 +53,13 @@ export class MapPageComponent implements OnInit, OnDestroy {
   pending$ = this.store.select(fromMap.getMapPagePending);
   private subscriptions: Subscription[] = [];
 
-  constructor(private datePipe: DatePipe, private store: Store<fromMap.State>, private actions$: Actions) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    private datePipe: DatePipe,
+    private translateService: TranslateService,
+    private store: Store<fromMap.State>,
+    private actions$: Actions
+  ) {
     const listSubscription = this.list$.subscribe(list => {
       this.list = list;
       this.offset = Math.max(0, this.list.length - this.limit);
@@ -65,6 +73,12 @@ export class MapPageComponent implements OnInit, OnDestroy {
 
   get canLoadMore(): boolean {
     return this.offset + this.limit < this.total;
+  }
+
+  get filterInlineStyle(): SafeStyle {
+    const css = this.selectedPrimaryCategories.length ? 'padding-top: 10px !important' : '';
+
+    return this.sanitizer.bypassSecurityTrustStyle(css);
   }
 
   private get listRequest(): PoiListQueryRequestDto {
@@ -84,6 +98,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
   }
 
   private static createMapPin(entity: PinDto): Pin {
+    console.log(entity)
     return {
       lat: entity.address.point.x,
       lng: entity.address.point.y,
@@ -117,8 +132,16 @@ export class MapPageComponent implements OnInit, OnDestroy {
       title: item.name,
       subtitle: this.datePipe.transform(item.created),
       image: item.images && item.images[0],
-      chips: [{ color: '', text: item.primaryCategory.name }],
+      chips: [{ color: '', text: this.translateService.instant(item.primaryCategory.label) }],
       content: item.description
+    };
+  }
+
+  getMapGridCardConfig(pin: Pin): Config {
+    return {
+      title: pin.title,
+      subtitle: this.translateService.instant(pin.meta.primaryCategory.label),
+      contentHTML: `${pin.meta.description || ''} <br> ${pin.meta.address.fullAddress()}`
     };
   }
 
@@ -140,8 +163,12 @@ export class MapPageComponent implements OnInit, OnDestroy {
       .ofType(PoiActionTypes.LIST_SUCCESS, PoiActionTypes.LIST_FAILURE)
       .pipe(
         take(1),
-        delay(300),
-        tap(() => this.masonry.instance.recalculate(true)),
+        delay(MasonryComponent.WAIT_TIMEOUT),
+        tap(() => {
+          if (this.masonry && this.masonry.instance) {
+            this.masonry.instance.recalculate(true);
+          }
+        }),
       ).subscribe();
   }
 

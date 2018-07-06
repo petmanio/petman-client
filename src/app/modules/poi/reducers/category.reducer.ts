@@ -10,7 +10,7 @@ export interface State extends EntityState<CategoryDto> {
 }
 
 export const adapter: EntityAdapter<CategoryDto> = createEntityAdapter<CategoryDto>({
-  selectId: (s: CategoryDto) => s.name,
+  selectId: (s: CategoryDto) => s.id,
   sortComparer: false,
 });
 

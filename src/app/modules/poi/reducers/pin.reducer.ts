@@ -10,7 +10,7 @@ export interface State extends EntityState<PinDto> {
 }
 
 export const adapter: EntityAdapter<PinDto> = createEntityAdapter<PinDto>({
-  selectId: (s: PinDto) => s.name,
+  selectId: (s: PinDto) => s.id,
   sortComparer: false,
 });
 

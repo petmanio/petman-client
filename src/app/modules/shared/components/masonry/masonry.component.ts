@@ -34,7 +34,7 @@ export interface MacyOptions {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MasonryComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
-  private static WAIT_TIMEOUT = 300;
+  static WAIT_TIMEOUT = 300;
 
   @Input() options: MacyOptions = {};
   id = UtilService.randomHtmlId();
@@ -45,7 +45,7 @@ export class MasonryComponent implements OnInit, AfterViewInit, AfterViewChecked
   }
 
   ngOnInit() {
-    setTimeout(() => this.renderer.setStyle(this.el.nativeElement, 'visibility', 'visible'), MasonryComponent.WAIT_TIMEOUT);
+    setTimeout(() => this.renderer.setStyle(this.el.nativeElement, 'visibility', 'visible'), MasonryComponent.WAIT_TIMEOUT * 2);
   }
 
   ngAfterViewInit() {
@@ -54,6 +54,7 @@ export class MasonryComponent implements OnInit, AfterViewInit, AfterViewChecked
       ...this.options
     });
 
+    setTimeout(() => this.instance.recalculate(true), MasonryComponent.WAIT_TIMEOUT / 2);
     this.recalculate = debounce(() => this.instance.recalculate(), MasonryComponent.WAIT_TIMEOUT);
   }
 
