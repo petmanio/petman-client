@@ -132,7 +132,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
       subtitle: this.datePipe.transform(item.created),
       image: item.images && item.images[0],
       chips: [{ color: '', text: this.translateService.instant(item.primaryCategory.label) }],
-      content: item.description
+      content: `${item.description || ''} <br> ${item.address.fullAddress().replace(/\s+/g, ' ')}`
     };
   }
 
