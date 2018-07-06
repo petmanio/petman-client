@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser/src/security/dom_sanitization_service';
 import { Store } from '@ngrx/store';
 import { Actions } from '@ngrx/effects';
-import { TranslatePipe, TranslateService, TranslateStore } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { delay, take, tap } from 'rxjs/operators';
 
@@ -98,7 +98,6 @@ export class MapPageComponent implements OnInit, OnDestroy {
   }
 
   private static createMapPin(entity: PinDto): Pin {
-    console.log(entity)
     return {
       lat: entity.address.point.x,
       lng: entity.address.point.y,

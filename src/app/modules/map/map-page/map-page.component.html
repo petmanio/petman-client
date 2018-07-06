@@ -1,5 +1,5 @@
 <div class="pm-full-loader">
-  <div *tdLoading="let item until !(pending$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
+  <div *tdLoading="let item until !(pending$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
     <div class="columns is-marginless is-vcentered is-mobile pm-map-filter">
       <div class="column is-marginless is-paddingless" [attr.style]="filterInlineStyle">
         <mat-form-field>
@@ -22,7 +22,7 @@
     </div>
     <div class="pm-map-list">
       <div *ngIf="group.value === 'grid'" infinite-scroll
-           infiniteScrollContainer="mat-sidenav-content"
+           infiniteScrollContainer=".pm-map-list"
            infiniteScrollDistance="2"
            infiniteScrollThrottle="300"
            fromRoot="true"
@@ -39,9 +39,11 @@
             </ng-container>
           </app-masonry>
         </div>
-        <div class="columns is-marginless" [hidden]="!(list$ | appAsyncDelay | async)?.length">
+        <div class="columns is-marginless" [hidden]="!(list$ | appRxDelay | async)?.length">
           <div class="column has-text-centered">
-            <button mat-raised-button [disabled]="!canLoadMore" (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
+            <app-progress-button [active]="pending$ | appRxDebounce | async" [disabled]="!canLoadMore" (click)="onLoadMore()">
+              {{ 'LOAD_MORE' | translate }}
+            </app-progress-button>
           </div>
         </div>
       </div>

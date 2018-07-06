@@ -1,5 +1,5 @@
 <div class="pm-full-loader">
-  <div *tdLoading="let item until (isListLoaded$ | appAsyncDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
+  <div *tdLoading="let item until (isListLoaded$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
     <div infinite-scroll
          infiniteScrollContainer="mat-sidenav-content"
          infiniteScrollDistance="2"
@@ -24,9 +24,11 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div class="columns is-marginless" [hidden]="!(list$ | appAsyncDelay | async)?.length">
+      <div class="columns is-marginless" [hidden]="!(list$ | appRxDelay | async)?.length">
         <div class="column has-text-centered">
-          <button mat-raised-button [disabled]="!canLoadMore" (click)="onLoadMore()">{{ 'LOAD_MORE' | translate }}</button>
+          <app-progress-button [active]="pending$ | appRxDebounce | async" [disabled]="!canLoadMore" (click)="onLoadMore()">
+            {{ 'LOAD_MORE' | translate }}
+          </app-progress-button>
         </div>
       </div>
     </div>

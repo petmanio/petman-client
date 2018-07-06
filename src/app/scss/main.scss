@@ -201,11 +201,12 @@ mat-icon {
 .pm-full-loader {
   .td-loading-wrapper {
     min-height: calc(100vh - 172px);
-  }
-
-  mat-progress-spinner {
-    position: fixed !important;
-    top: 40%;
+    .td-loading {
+      mat-progress-spinner {
+        position: fixed !important;
+        top: 40%;
+      }
+    }
   }
 }
 

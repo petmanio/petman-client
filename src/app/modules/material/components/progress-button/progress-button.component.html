@@ -1,0 +1,7 @@
+<button mat-raised-button [color]="color" [disabled]="disabled || active">
+  <span [ngStyle]="active && {'padding-right':'10px'}">
+    <ng-content></ng-content>
+  </span>
+  <mat-spinner [hidden]="!active" diameter="16" [color]="spinnerColor"></mat-spinner>
+</button>
+

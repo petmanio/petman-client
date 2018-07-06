@@ -15,7 +15,8 @@ import { MaterialModule } from '@material/material.module';
 import * as fromShared from '@shared/reducers';
 import { SharedEffects } from '@shared/effects/shared.effects';
 
-import { AsyncDelayPipe } from '@shared/pipes/async-delay/async-delay.pipe';
+import { RxDelayPipe } from '@shared/pipes/rx-delay/rx-delay.pipe';
+import { RxDebouncePipe } from '@shared/pipes/rx-debounce/rx-debounce.pipe';
 import { SafeHtmlPipe } from '@shared/pipes/safe-html/safe-html.pipe';
 import { GalleryImagesPipe } from '@shared/pipes/gallery-images/gallery-images.pipe';
 import { KeysPipe } from '@shared/pipes/keys/keys.pipe';
@@ -56,7 +57,8 @@ const modules = [
 
 
 const declarations = [
-  AsyncDelayPipe,
+  RxDelayPipe,
+  RxDebouncePipe,
   ChunkPipe,
   EllipsisPipe,
   FromNowPipe,

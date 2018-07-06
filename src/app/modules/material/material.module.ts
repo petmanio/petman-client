@@ -13,6 +13,7 @@ import {
   MatMenuModule,
   MatPaginatorModule,
   MatProgressBarModule,
+  MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
   MatToolbarModule,
@@ -30,6 +31,7 @@ import {
 
 import { MzSliderComponent } from '@material/components/mz-slider/mz-slider.component';
 import { MzCarouselComponent } from '@material/components/mz-carousel/mz-carousel.component';
+import { ProgressButtonComponent } from '@material/components/progress-button/progress-button.component';
 
 const modules = [
   MatIconModule,
@@ -39,6 +41,7 @@ const modules = [
   MatToolbarModule,
   MatButtonModule,
   MatProgressBarModule,
+  MatProgressSpinnerModule,
   MatSelectModule,
   MatMenuModule,
   MatSidenavModule,
@@ -60,7 +63,8 @@ const modules = [
 
 const declarations = [
   MzSliderComponent,
-  MzCarouselComponent
+  MzCarouselComponent,
+  ProgressButtonComponent
 ];
 
 @NgModule({
