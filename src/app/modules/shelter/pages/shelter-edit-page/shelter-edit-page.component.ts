@@ -74,6 +74,11 @@ export class ShelterEditPageComponent implements OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
+  onButtonToggleChange() {
+    const description = this.form.get('description');
+    description.reset(this.shelter.description);
+  }
+
   update() {
     this.store.dispatch(new Update(this.form.value));
   }

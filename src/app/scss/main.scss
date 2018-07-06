@@ -240,9 +240,23 @@ mat-icon {
   }
 }
 
-.pm-quill {
-  .ql-container {
-    border: none;
+mat-form-field {
+  .pm-quill {
+    margin-top: -24px;
+    display: block;
+    padding-top: -0.4375em;
+    .ql-toolbar {
+      border: none;
+      padding-right: 0;
+      padding-left: 0;
+    }
+    .ql-container {
+      border: none;
+    }
+    .ql-editor {
+      padding-right: 0;
+      padding-left: 0;
+    }
   }
 }
 

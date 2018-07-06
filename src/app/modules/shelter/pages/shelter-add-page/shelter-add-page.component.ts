@@ -32,6 +32,11 @@ export class ShelterAddPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  onButtonToggleChange() {
+    const description = this.form.get('description');
+    description.reset();
+  }
+
   create() {
     this.store.dispatch(new Create(this.form.value));
   }
