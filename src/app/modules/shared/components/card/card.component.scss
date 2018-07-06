@@ -4,8 +4,10 @@
   background-size: cover;
 }
 
-p {
-  @include word-wrap;
+mat-card-content {
+  .pm-card-content {
+    @include word-wrap;
+  }
 }
 
 /deep/ .pm-card .mat-chip-list-wrapper {

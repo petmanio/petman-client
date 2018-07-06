@@ -7,7 +7,6 @@ export interface Config {
   image?: string;
   content?: string;
   price?: number;
-  contentHTML?: string;
   chips?: { color: string, text: string }[];
   actions?: boolean;
 }

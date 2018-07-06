@@ -9,12 +9,19 @@
     <mat-card-subtitle *ngIf="config.subtitle">{{config.subtitle}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image *ngIf="config.image" [src]="config.image">
-  <mat-card-content *ngIf="config.contentHTML || config.content || config.price">
-    <p *ngIf="config.price"><i class="mdi mdi-cash"></i> {{config.price | number}} {{'AMD' | translate }}</p>
-    <p *ngIf="config.content">{{config.content | appEllipsis:100}}</p>
-    <p *ngIf="config.contentHTML" [innerHTML]="config.contentHTML | appSafeHtml"></p>
+  <mat-card-content *ngIf="config.content || config.price">
+    <!--TODO: ellipsis for html -->
+    <p *ngIf="config.price">
+      <fa-icon icon="money-bill-alt"></fa-icon>
+      {{config.price | number}} {{'AMD' | translate }}
+    </p>
+    <p class="pm-card-content" *ngIf="!(config?.content | appIsHtml)">{{config?.content}}</p>
+    <div class="ql-editor pm-card-content" *ngIf="config?.content | appIsHtml"
+         [innerHTML]="config?.content | appSafeHtml"></div>
   </mat-card-content>
   <mat-card-actions class="has-text-right" *ngIf="config.actions">
-    <button mat-raised-button (click)="onShareLocal($event)">{{ 'SHARE' | translate }}</button>
+    <button mat-icon-button color="accent" [matTooltip]="'SHARE' | translate" (click)="onShareLocal($event)">
+      <mat-icon>share</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>

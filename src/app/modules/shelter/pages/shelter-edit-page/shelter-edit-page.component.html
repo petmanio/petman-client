@@ -9,7 +9,9 @@
       <form [formGroup]="form">
         <br>
         <div class="has-text-right" style="margin-bottom: 10px">
-          <mat-button-toggle-group #group="matButtonToggleGroup" value="text" (change)="onButtonToggleChange()">
+          <mat-button-toggle-group #group="matButtonToggleGroup"
+                                   [value]="(shelter?.description | appIsHtml) ? 'richText' : 'text'"
+                                   (change)="onButtonToggleChange()">
             <mat-button-toggle value="text">
               <mat-icon>short_text</mat-icon>
             </mat-button-toggle>
