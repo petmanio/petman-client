@@ -10,14 +10,15 @@
   </mat-card-header>
   <img mat-card-image *ngIf="config.image" [src]="config.image">
   <mat-card-content *ngIf="config.content || config.price">
-    <!--TODO: ellipsis for html -->
     <p *ngIf="config.price">
       <fa-icon icon="money-bill-alt"></fa-icon>
       {{config.price | number}} {{'AMD' | translate }}
     </p>
-    <p class="pm-card-content" *ngIf="!(config?.content | appIsHtml)">{{config?.content}}</p>
-    <div class="ql-editor pm-card-content" *ngIf="config?.content | appIsHtml"
-         [innerHTML]="config?.content | appSafeHtml"></div>
+    <p class="pm-card-content">{{config?.content | stripTags | appEllipsis}}</p>
+    <!--TODO: ellipsis for html -->
+    <!--<p class="pm-card-content" *ngIf="!(config?.content | appIsHtml)">{{config?.content}}</p>-->
+    <!--<div class="ql-editor pm-card-content" *ngIf="config?.content | appIsHtml"-->
+         <!--[innerHTML]="config?.content | appSafeHtml"></div>-->
   </mat-card-content>
   <mat-card-actions class="has-text-right" *ngIf="config.actions">
     <button mat-icon-button color="accent" [matTooltip]="'SHARE' | translate" (click)="onShareLocal($event)">
