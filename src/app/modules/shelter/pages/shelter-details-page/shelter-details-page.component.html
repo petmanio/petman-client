@@ -1,16 +1,16 @@
 <div class="columns is-marginless">
   <div class="column is-10 is-offset-1">
-    <div class="columns">
+    <div class="columns is-vcentered">
       <div class="column is-3 has-text-centered">
         <app-user-details [user]="(shelter$ | async)?.user"></app-user-details>
-      </div>
-      <div class="column is-9">
-        <app-mz-slider [slides]="slides" [options]="{ height: 500 }"></app-mz-slider>
-        <div class="has-text-right">
+        <div>
           <fa-icon icon="money-bill-alt"></fa-icon>
           {{'DAILY_PRICE' | translate}}<br>
           <h5>{{(shelter$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
         </div>
+      </div>
+      <div class="column is-9">
+        <app-mz-slider [slides]="slides" [options]="{ height: 500 }"></app-mz-slider>
       </div>
     </div>
     <div class="columns">
