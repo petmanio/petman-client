@@ -65,9 +65,9 @@ export class GoogleMapComponent implements OnInit, OnChanges, AfterViewChecked {
     if (this.map) {
       setTimeout(() => {
         this.google.maps.event.trigger(this.map, 'resize');
-        if (this.fitBounds) {
-          this.map.fitBounds(this.bounds);
-        }
+        // if (this.fitBounds) {
+        //   this.map.fitBounds(this.bounds);
+        // }
       }, 300);
     }
   }

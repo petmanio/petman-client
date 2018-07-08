@@ -2,9 +2,9 @@
 
 .pm-map-list {
   margin-top: -25px !important;
-  @include calc(height, '100vh - 128px');
+  @include calc(height, '100vh - 133px');
   @include desktop {
-    @include calc(height, '100vh - 135px');
+    @include calc(height, '100vh - 140px');
   }
   overflow: auto;
   > .column {
