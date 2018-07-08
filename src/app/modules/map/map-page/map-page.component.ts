@@ -140,7 +140,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
     return {
       title: pin.title,
       chips: [{ color: '', text: this.translateService.instant(pin.meta.primaryCategory.label) }],
-      contentHTML: `${pin.meta.description || ''} <br> ${pin.meta.address.fullAddress().replace(/\s+/g, ' ')}`
+      content: `${pin.meta.description || ''} <br> ${pin.meta.address.fullAddress().replace(/\s+/g, ' ')}`
     };
   }
 
@@ -172,6 +172,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
   }
 
   panTo(pin: Pin) {
-    this.map.panToPin(pin);
+    if (this.map) {
+      this.map.panToPin(pin);
+    }
   }
 }

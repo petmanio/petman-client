@@ -45,11 +45,7 @@ export class AuthService {
   user(): Observable<UserDto> {
     return this.http
       .get<UserDto>(`${environment.api}/api/auth/user`, {}).pipe(
-        map(response => plainToClass(UserDto, response, { groups: ['petman-client'] })),
-        map(response => {
-          this.localStorageService.setItem('user', response);
-          return response;
-        })
+        map(response => plainToClass(UserDto, response, { groups: ['petman-client'] }))
       );
   }
 
@@ -63,7 +59,6 @@ export class AuthService {
     const storedSelectedId = this.localStorageService.getItem('selectedUserId');
     if (selectedUserId.toString() !== storedSelectedId) {
       this.localStorageService.setItem('selectedUserId', selectedUserId.toString());
-      // location.reload();
     }
   }
 }

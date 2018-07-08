@@ -19,12 +19,17 @@
       overflow: auto;
       white-space: nowrap;
       width: 100%;
+      margin-top: -6px;
+      padding: 0 12px;
       perfect-scrollbar {
         padding-bottom: 10px;
       }
       app-card {
         margin: 6px;
         display: inline-block;
+        /deep/ mat-card {
+          padding: 12px;
+        }
       }
     }
   }
