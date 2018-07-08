@@ -1,5 +1,6 @@
 <div class="pm-full-loader">
-  <div *tdLoading="let item until !(pending$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'primary'">
+  <div
+    *tdLoading="let item until !(pending$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
     <div class="columns is-marginless is-vcentered is-mobile pm-map-filter">
       <div class="column is-marginless is-paddingless" [attr.style]="filterInlineStyle">
         <mat-form-field>
@@ -31,7 +32,7 @@
           <app-masonry [options]="masonryOptions">
             <ng-container *ngFor="let item of list$ | async">
               <app-masonry-item>
-                <app-card [config]="getCardConfig(item)" (click)="panTo(item)"></app-card>
+                <app-card class="pm-cursor-pointer" [config]="getCardConfig(item)" (actionClick)="showOnMap(item)"></app-card>
               </app-masonry-item>
               <app-masonry-item *ngFor="let branch of item.branches">
                 <app-card [config]="getCardConfig(branch)" (click)="panTo(branch)"></app-card>
@@ -48,15 +49,14 @@
         </div>
       </div>
       <div *ngIf="group.value === 'map'" class="pm-map">
-        <div class="pm-map-grid">
-          <perfect-scrollbar>
-            <app-card class="pm-cursor-pointer"
-                      *ngFor="let pin of pins"
-                      [config]="getMapGridCardConfig(pin)" (click)="panTo(pin)"></app-card>
-          </perfect-scrollbar>
+        <div class="ps pm-map-grid" perfectScrollbar>
+          <app-card class="pm-cursor-pointer"
+                    *ngFor="let pin of pins"
+                    [id]="getMapGridId(pin)"
+                    [config]="getMapGridCardConfig(pin)" (click)="panTo(pin)"></app-card>
         </div>
         <div style="height: 100%;">
-          <app-google-map [pins]="pins"></app-google-map>
+          <app-google-map [pins]="pins" (clickOnPin)="scrollToCard($event)"></app-google-map>
         </div>
       </div>
     </div>

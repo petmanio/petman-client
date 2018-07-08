@@ -2,13 +2,15 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser/src/security/dom_sanitization_service';
+import { MatButtonToggleGroup } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { Actions } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { delay, take, tap } from 'rxjs/operators';
+import { PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 
-import { Pin, PinDto, PoiDto, PoiListQueryRequestDto, PoiPinsQueryRequestDto } from '@petman/common';
+import { Pin, PoiDto, PoiListQueryRequestDto, PoiPinsQueryRequestDto } from '@petman/common';
 
 import * as fromMap from '@map/reducers';
 import * as fromPoi from '@poi/reducers';
@@ -27,10 +29,13 @@ import { MasonryComponent } from '@shared/components/masonry/masonry.component';
 export class MapPageComponent implements OnInit, OnDestroy {
   @ViewChild(GoogleMapComponent) map: GoogleMapComponent;
   @ViewChild(MasonryComponent) masonry: MasonryComponent;
+  @ViewChild(PerfectScrollbarDirective) perfectScrollbar: PerfectScrollbarDirective;
+  @ViewChild('group') group: MatButtonToggleGroup;
   list: PoiDto[];
   limit = 12;
   total: number;
   offset = 0;
+  selectedPrimaryCategories: number[] = [];
   masonryOptions = {
     trueOrder: false,
     waitForImages: true,
@@ -44,7 +49,6 @@ export class MapPageComponent implements OnInit, OnDestroy {
       400: 1
     }
   };
-  selectedPrimaryCategories: number[] = [];
   pins: Pin[];
   list$ = this.store.select(fromPoi.getAll);
   total$ = this.store.select(fromPoi.getTotal);
@@ -127,8 +131,12 @@ export class MapPageComponent implements OnInit, OnDestroy {
       title: pin.title,
       avatar: pin.meta.avatar,
       subtitle: this.translateService.instant(pin.meta.primaryCategory.label),
-      content: `${pin.meta.description || ''} <br> ${pin.meta.address.fullAddress().replace(/\s+/g, ' ')}`
+      content: `${pin.meta.address.fullAddress().replace(/\s+/g, ' ')}`
     };
+  }
+
+  getMapGridId(pin: Pin): string {
+    return `map-grid-${pin.meta.id}`;
   }
 
   onLoadMore() {
@@ -161,6 +169,23 @@ export class MapPageComponent implements OnInit, OnDestroy {
   panTo(pin: Pin) {
     if (this.map) {
       this.map.panToPin(pin);
+    }
+  }
+
+  showOnMap(poi: PoiDto) {
+    if (this.group) {
+      this.group.value = 'map';
+      setTimeout(() => {
+        const pin = PoiService.createMapPin(poi);
+        this.panTo(pin);
+        this.scrollToCard(pin);
+      }, 500);
+    }
+  }
+
+  scrollToCard(pin: Pin) {
+    if (this.perfectScrollbar) {
+      this.perfectScrollbar.scrollToElement(`#${this.getMapGridId(pin)}`, null, 300);
     }
   }
 }

@@ -18,9 +18,13 @@
          <!--[innerHTML]="config?.content | appSafeHtml"></div>-->
   </mat-card-content>
   <mat-card-actions class="has-text-right" *ngIf="config.actions" (click)="$event.preventDefault(); $event.stopPropagation();">
-    <button mat-icon-button [color]="config.actions.color" [matTooltip]="config.actions.tooltipText"
+    <button *ngIf="config.actions.text" mat-raised-button [color]="config.actions.color" [matTooltip]="config.actions.tooltipText"
             (click)="actionClick.emit()">
       <span *ngIf="config.actions.text">{{config.actions.text}}</span>
+      <mat-icon *ngIf="config.actions.icon">{{config.actions.icon}}</mat-icon>
+    </button>
+    <button *ngIf="!config.actions.text" mat-icon-button [color]="config.actions.color" [matTooltip]="config.actions.tooltipText"
+            (click)="actionClick.emit()">
       <mat-icon *ngIf="config.actions.icon">{{config.actions.icon}}</mat-icon>
     </button>
   </mat-card-actions>

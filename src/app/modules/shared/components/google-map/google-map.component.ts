@@ -1,4 +1,15 @@
-import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { extend } from 'lodash';
 import { google } from 'google-maps';
 
@@ -27,6 +38,7 @@ export class GoogleMapComponent implements OnInit, OnChanges, AfterViewChecked {
   @Input() fitBounds = true;
   @Input() options: google.maps.MapOptions;
   @Input() pins: Pin[];
+  @Output() clickOnPin = new EventEmitter<Pin>();
   google: google;
   map: google.maps.Map;
   markers: google.maps.Marker[] = [];
@@ -107,6 +119,7 @@ export class GoogleMapComponent implements OnInit, OnChanges, AfterViewChecked {
         });
         this.infoWindow.open(this.map, marker);
         this.panToMarker(marker);
+        this.clickOnPin.emit(pin);
       });
     }
 
