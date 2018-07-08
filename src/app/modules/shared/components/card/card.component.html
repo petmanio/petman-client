@@ -20,7 +20,8 @@
   <mat-card-actions class="has-text-right" *ngIf="config.actions" (click)="$event.preventDefault(); $event.stopPropagation();">
     <button mat-icon-button [color]="config.actions.color" [matTooltip]="config.actions.tooltipText"
             (click)="actionClick.emit()">
-      <mat-icon>{{config.actions.icon}}</mat-icon>
+      <span *ngIf="config.actions.text">{{config.actions.text}}</span>
+      <mat-icon *ngIf="config.actions.icon">{{config.actions.icon}}</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
