@@ -16,7 +16,7 @@
 
           <app-masonry-item *ngFor="let item of list$ | async">
             <a [routerLink]="['/shelters', item.id]">
-              <app-card [config]="getCardConfig(item)" (onShare)="onShare(item)"></app-card>
+              <app-card [config]="getCardConfig(item)" (actionClick)="onShare(item)"></app-card>
             </a>
           </app-masonry-item>
         </app-masonry>

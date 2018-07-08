@@ -27,9 +27,6 @@
       app-card {
         margin: 6px;
         display: inline-block;
-        /deep/ mat-card {
-          padding: 12px;
-        }
       }
     }
   }

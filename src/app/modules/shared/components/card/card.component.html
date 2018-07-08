@@ -1,7 +1,4 @@
 <mat-card class="pm-card">
-  <mat-chip-list *ngIf="config.chips && config.chips.length">
-    <mat-chip *ngFor="let chip of config.chips" [color]="chip.color" selected="true">{{chip.text}}</mat-chip>
-  </mat-chip-list>
   <mat-card-header>
     <div mat-card-avatar class="avatar" *ngIf="config.avatar"
          [ngStyle]="{'background-image': 'url(' + config.avatar + ')'}"></div>
@@ -20,9 +17,10 @@
     <!--<div class="ql-editor pm-card-content" *ngIf="config?.content | appIsHtml"-->
          <!--[innerHTML]="config?.content | appSafeHtml"></div>-->
   </mat-card-content>
-  <mat-card-actions class="has-text-right" *ngIf="config.actions">
-    <button mat-icon-button color="accent" [matTooltip]="'SHARE' | translate" (click)="onShareLocal($event)">
-      <mat-icon>share</mat-icon>
+  <mat-card-actions class="has-text-right" *ngIf="config.actions" (click)="$event.preventDefault(); $event.stopPropagation();">
+    <button mat-icon-button [color]="config.actions.color" [matTooltip]="config.actions.tooltipText"
+            (click)="actionClick.emit()">
+      <mat-icon>{{config.actions.icon}}</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

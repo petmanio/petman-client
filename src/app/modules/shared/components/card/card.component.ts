@@ -7,8 +7,12 @@ export interface Config {
   image?: string;
   content?: string;
   price?: number;
-  chips?: { color: string, text: string }[];
-  actions?: boolean;
+  actions?: {
+    text?: string;
+    tooltipText?: string;
+    color?: 'primary' | 'accent' | 'warn';
+    icon?: string;
+  };
 }
 
 @Component({
@@ -18,18 +22,11 @@ export interface Config {
 })
 export class CardComponent implements OnInit {
   @Input() config: Config = <Config>{};
-  @Output() onShare = new EventEmitter();
+  @Output() actionClick = new EventEmitter();
 
   constructor() {
   }
 
   ngOnInit() {
   }
-
-  onShareLocal($event: Event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    this.onShare.emit();
-  }
-
 }

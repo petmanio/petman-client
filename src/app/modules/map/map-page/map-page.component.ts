@@ -107,20 +107,26 @@ export class MapPageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  getCardConfig(item: PoiDto): Config {
+  getCardConfig(poi: PoiDto): Config {
     return {
-      title: item.name,
-      subtitle: this.datePipe.transform(item.created),
-      image: item.images && item.images[0],
-      chips: [{ color: '', text: this.translateService.instant(item.primaryCategory.label) }],
-      content: `${item.description || ''} <br> ${item.address.fullAddress().replace(/\s+/g, ' ')}`
+      title: poi.name,
+      avatar: poi.avatar,
+      subtitle: this.translateService.instant(poi.primaryCategory.label),
+      image: poi.images && poi.images[0],
+      content: `${poi.description || ''} <br> ${poi.address.fullAddress().replace(/\s+/g, ' ')}`,
+      actions: {
+        tooltipText: this.translateService.instant('SHOW_ON_MAP'),
+        color: 'accent',
+        icon: 'location_on'
+      }
     };
   }
 
   getMapGridCardConfig(pin: Pin): Config {
     return {
       title: pin.title,
-      chips: [{ color: '', text: this.translateService.instant(pin.meta.primaryCategory.label) }],
+      avatar: pin.meta.avatar,
+      subtitle: this.translateService.instant(pin.meta.primaryCategory.label),
       content: `${pin.meta.description || ''} <br> ${pin.meta.address.fullAddress().replace(/\s+/g, ' ')}`
     };
   }

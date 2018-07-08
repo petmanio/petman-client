@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { takeWhile, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ListQueryRequestDto, ModalSize, ShelterDto } from '@petman/common';
 
@@ -51,6 +52,7 @@ export class ShelterListPageComponent implements OnInit, OnDestroy {
     private location: Location,
     private dialog: MatDialog,
     private store: Store<fromShelter.State>,
+    private translateService: TranslateService,
     private datePipe: DatePipe,
     @Inject(DOCUMENT) private document: Document
   ) {
@@ -95,7 +97,11 @@ export class ShelterListPageComponent implements OnInit, OnDestroy {
       image: item.images && item.images[0],
       price: item.price,
       content: item.description,
-      actions: true
+      actions: {
+        color: 'accent',
+        icon: 'share',
+        tooltipText: this.translateService.instant('SHARE')
+      }
     };
   }
 
