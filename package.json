@@ -1,5 +1,5 @@
 {
-  "name": "petman-client",
+  "name": "@petman/client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,13 +7,16 @@
     "start:out": "ng serve --aot --proxy-config proxy.conf.json",
     "build": "ng build",
     "build:prod": "ng build --prod",
+    "build:server": "ng run petman-client:server",
+    "build:server:prod": "ng run petman-client:server:production",
+    "build:client-and-server-bundles": "npm run build && npm run build:server",
+    "build:client-and-server-bundles:prod": "npm run build:prod && npm run build:server:prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compodoc": "./node_modules/.bin/compodoc -d docs -p src/tsconfig.app.json",
     "compodoc:serve": "./node_modules/.bin/compodoc -d docs -s"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^6.0.7",
     "@angular/cdk": "^6.3.1",
@@ -42,6 +45,7 @@
     "@ngrx/entity": "^6.0.1",
     "@ngrx/store": "^6.0.1",
     "@ngrx/store-devtools": "^6.0.1",
+    "@nguniversal/module-map-ngfactory-loader": "^6.0.0",
     "@ngx-progressbar/core": "^5.0.1",
     "@ngx-progressbar/http": "^5.0.1",
     "@ngx-share/button": "^6.0.1",
@@ -49,7 +53,7 @@
     "@ngx-share/core": "^6.0.1",
     "@ngx-translate/core": "^10.0.2",
     "@ngx-translate/http-loader": "^3.0.1",
-    "@petman/common": "git+ssh://git@bitbucket.org/petmanio/petman-common.git",
+    "@petman/common": "^1.0.0",
     "bulma": "^0.7.1",
     "class-transformer": "^0.1.9",
     "class-validator": "^0.8.5",
