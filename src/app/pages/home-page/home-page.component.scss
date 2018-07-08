@@ -11,8 +11,8 @@ a img {
   position: relative;
   height: 500px;
   width: auto;
-  background-color: #f3f3f3;
-  background: url('/assets/main-cover.jpg') center 30% no-repeat;
+  //noinspection CssUnknownTarget
+  background: #f3f3f3 url('/assets/main-cover.jpg') no-repeat center 30%;
   background-size: cover;
 }
 
