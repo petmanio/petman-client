@@ -12,6 +12,7 @@ import { Pin, PinDto, PoiDto, PoiListQueryRequestDto, PoiPinsQueryRequestDto } f
 
 import * as fromMap from '@map/reducers';
 import * as fromPoi from '@poi/reducers';
+import { PoiService } from '@poi/poi.service';
 import { List, More, Pins, PoiActionTypes } from '@poi/actions/poi.actions';
 import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
 import { Config } from '@shared/components/card/card.component';
@@ -66,7 +67,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
     });
     const totalSubscription = this.total$.subscribe(total => this.total = total);
 
-    const pinsSubscription = this.pins$.subscribe(pins => this.pins = pins.map(pin => MapPageComponent.createMapPin(pin)));
+    const pinsSubscription = this.pins$.subscribe(pins => this.pins = pins.map(pin => PoiService.createMapPin(pin)));
 
     this.subscriptions.push(...[listSubscription, totalSubscription, pinsSubscription]);
   }
@@ -95,26 +96,6 @@ export class MapPageComponent implements OnInit, OnDestroy {
       limit: 100,
       primaryCategories: this.selectedPrimaryCategories
     };
-  }
-
-  private static createMapPin(entity: PinDto): Pin {
-    return {
-      lat: entity.address.point.x,
-      lng: entity.address.point.y,
-      title: entity.name,
-      meta: entity,
-      infoWindow: {
-        contentFn: MapPageComponent.pinInfoWindowContentFn
-      }
-    };
-  }
-
-  private static pinInfoWindowContentFn(pin: Pin): string {
-    return `
-      ${pin.title} <br/>
-      ${pin.meta.description || ''} <br/>
-      ${pin.meta.address.fullAddress()}&nbsp;
-    `;
   }
 
   ngOnInit() {

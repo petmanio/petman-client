@@ -9,6 +9,7 @@ import { isArray } from 'lodash';
 import {
   CategoryListResponseDto,
   ListQueryRequestDto,
+  Pin,
   PinDto,
   PoiCreateRequestDto,
   PoiDto,
@@ -26,6 +27,26 @@ import { PoiModule } from '@poi/poi.module';
 export class PoiService {
 
   constructor(@Inject(PLATFORM_ID) protected platformId: Object, private http: HttpClient) {
+  }
+
+  static createMapPin(entity: PinDto): Pin {
+    return {
+      lat: entity.address.point.x,
+      lng: entity.address.point.y,
+      title: entity.name,
+      meta: entity,
+      infoWindow: {
+        contentFn: PoiService.pinInfoWindowContentFn
+      }
+    };
+  }
+
+  static pinInfoWindowContentFn(pin: Pin): string {
+    return `
+      ${pin.title} <br/>
+      ${pin.meta.description || ''} <br/>
+      ${pin.meta.address.fullAddress()}&nbsp;
+    `;
   }
 
   create(body: PoiCreateRequestDto): Observable<PoiDto> {

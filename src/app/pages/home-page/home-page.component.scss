@@ -35,8 +35,15 @@ a img {
 
 .pm-map-section {
   position: relative;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 0 0 80px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+
+  .pm-section-title {
+    margin-left: 12px;
+    margin-bottom: 24px;
+  }
 
   app-google-map {
     min-height: 400px;
