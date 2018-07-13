@@ -1,6 +1,9 @@
 {
   "name": "@petman/client",
   "version": "0.0.0",
+  "bin": {
+    "petman-client": "dist/server.js"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
