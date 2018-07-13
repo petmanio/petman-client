@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  api: '',
+  api: 'http://localhost:3000',
   gaId: '',
   fb: {
     appId: '782744788540027',

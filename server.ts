@@ -5,11 +5,8 @@ import * as express from 'express';
 import * as domino from 'domino';
 import { join } from 'path';
 import { readFileSync } from 'fs';
-import { renderModuleFactory } from '@angular/platform-server';
-import { enableProdMode } from '@angular/core';
-
-// Faster server renders w/ Prod mode (dev mode never needed)
-enableProdMode();
+import { ngExpressEngine } from '@nguniversal/express-engine';
+// import { renderModuleFactory } from '@angular/platform-server';
 
 // Express server
 const app = express();
@@ -56,19 +53,26 @@ const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/petman-cli
 
 const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
 
-app.engine('html', (_, options, callback) => {
-  renderModuleFactory(AppServerModuleNgFactory, {
-    // Our index.html
-    document: template,
-    url: options.req.url,
-    // DI so that we can get lazy-loading to work differently (since we need it to just instantly render it)
-    extraProviders: [
-      provideModuleMap(LAZY_MODULE_MAP)
-    ]
-  }).then(html => {
-    callback(null, html);
-  });
-});
+// app.engine('html', (_, options, callback) => {
+//   renderModuleFactory(AppServerModuleNgFactory, {
+//     // Our index.html
+//     document: template,
+//     url: options.req.url,
+//     // DI so that we can get lazy-loading to work differently (since we need it to just instantly render it)
+//     extraProviders: [
+//       provideModuleMap(LAZY_MODULE_MAP)
+//     ]
+//   }).then(html => {
+//     callback(null, html);
+//   });
+// });
+
+app.engine('html', ngExpressEngine({
+  bootstrap: AppServerModuleNgFactory,
+  providers: [
+    provideModuleMap(LAZY_MODULE_MAP)
+  ]
+}));
 
 app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'petman-client'));

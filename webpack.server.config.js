@@ -2,11 +2,19 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
+  // FIXME: TypeError: Right-hand side of 'instanceof' is not an object
   optimization: {
     minimize: false
   },
   entry: { server: './server.ts' },
-  resolve: { extensions: ['.js', '.ts'] },
+  resolve: {
+    extensions: ['.js', '.ts'],
+    alias: {
+      // FIXME: TypeError: decorator is not a function
+      // '@nestjs/swagger': '@petman/common/dist/mock/package',
+      'materialize-css': '@petman/common/dist/mock/package'
+    }
+  },
   target: 'node',
   // this makes sure we include node_modules and other 3rd party libraries
   externals: [/(node_modules|main\..*\.js)/],
