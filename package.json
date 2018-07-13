@@ -1,9 +1,6 @@
 {
   "name": "@petman/client",
   "version": "0.0.0",
-  "bin": {
-    "petman-client": "dist/server.js"
-  },
   "scripts": {
     "prepublish": "npm run build:ssr:prod",
     "ng": "ng",
