@@ -1,8 +1,8 @@
-import { RxDelayPipe } from './is-html.pipe';
+import { IsHtmlPipe } from './is-html.pipe';
 
-describe('IsHtml', () => {
+describe('IsHtmlPipe', () => {
   it('create an instance', () => {
-    const pipe = new RxDelayPipe();
+    const pipe = new IsHtmlPipe();
     expect(pipe).toBeTruthy();
   });
 });

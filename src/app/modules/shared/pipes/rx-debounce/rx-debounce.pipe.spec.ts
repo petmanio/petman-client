@@ -1,8 +1,8 @@
-import { RxDelayPipe } from './rx-debounce.pipe';
+import { RxDebouncePipe } from './rx-debounce.pipe';
 
-describe('RxDelayPipe', () => {
+describe('RxDebouncePipe', () => {
   it('create an instance', () => {
-    const pipe = new RxDelayPipe();
+    const pipe = new RxDebouncePipe();
     expect(pipe).toBeTruthy();
   });
 });

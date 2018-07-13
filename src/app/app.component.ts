@@ -124,10 +124,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private initLanguage() {
-    let languageKey = UtilService.getBrowserLanguageToEnumKey(
-      this.localStorageService.getItem('language') ||
-      this.translate.getBrowserLang()
-    );
+    let languageKey;
+
+    if (isPlatformBrowser(this.platformId)) {
+      languageKey = UtilService.getBrowserLanguageToEnumKey(
+        this.localStorageService.getItem('language') ||
+        this.translate.getBrowserLang()
+      );
+    }
 
     if (!languageKey || !Language[languageKey]) {
       languageKey = 'EN';

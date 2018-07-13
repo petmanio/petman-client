@@ -11,12 +11,12 @@ const routes: Routes = [ { path: 'app-shell-path', component: AppShellComponent 
 
 @NgModule({
   imports: [
-    ServerModule,
-    ServerTransferStateModule,
     ModuleMapLoaderModule,
+    ServerTransferStateModule,
     RouterModule.forRoot(routes),
 
-    AppModule
+    AppModule,
+    ServerModule
   ],
   bootstrap: [AppComponent],
   declarations: [AppShellComponent],
