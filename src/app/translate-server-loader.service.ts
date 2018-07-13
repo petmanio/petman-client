@@ -15,8 +15,7 @@ export class TranslateServerLoader implements TranslateLoader {
   public getTranslation(lang: string): Observable<Object> {
 
     return Observable.create(observer => {
-      // const assetsFolder = join(process.cwd(), 'dist', 'petman-client', this.prefix);
-      const assetsFolder = join(__dirname, 'petman-client', this.prefix);
+      const assetsFolder = join(process.cwd(), 'dist', 'petman-client', this.prefix);
 
       const jsonData = JSON.parse(readFileSync(`${assetsFolder}/${lang}${this.suffix}`, 'utf8'));
 

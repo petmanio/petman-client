@@ -12,8 +12,7 @@ import { ngExpressEngine } from '@nguniversal/express-engine';
 const app = express();
 
 const PORT = process.env.PORT || 4000;
-// const DIST_FOLDER = join(process.cwd(), 'dist');
-const DIST_FOLDER = join(__dirname);
+const DIST_FOLDER = join(process.cwd(), 'dist');
 
 // Our index.html we'll use as our template
 const template = readFileSync(join(DIST_FOLDER, 'petman-client', 'index.html')).toString();
