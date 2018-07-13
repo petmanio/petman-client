@@ -54,8 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initLanguage();
-
+    this.initNgxTranslate();
     // TODO: use effects init
     this.store.dispatch(new ChangeUser(+this.localStorageService.getItem('selectedUserId')));
     this.store.dispatch(new CloseSidenav());
@@ -123,7 +122,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.store.dispatch(new Logout());
   }
 
-  private initLanguage() {
+  private initNgxTranslate() {
     let languageKey;
 
     if (isPlatformBrowser(this.platformId)) {

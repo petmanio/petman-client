@@ -1,17 +1,18 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { MatIconRegistry } from '@angular/material';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ReplaySubject } from 'rxjs';
+
 import { environment } from '@environments/environment';
 
 @Injectable()
 export class UtilService {
-  constructor(@Inject(PLATFORM_ID) protected platformId: Object,
-              private matIconRegistry: MatIconRegistry,
-              private sanitizer: DomSanitizer) {
+  constructor(
+    @Inject(PLATFORM_ID) protected platformId: Object,
+    private matIconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer
+  ) {
   }
 
   get XHRListener(): ReplaySubject<boolean> {
@@ -63,10 +64,6 @@ export class UtilService {
     };
 
     return networks[network];
-  }
-
-  static createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
   }
 
   static getBrowserLanguageToEnumKey(lang: string): string {
