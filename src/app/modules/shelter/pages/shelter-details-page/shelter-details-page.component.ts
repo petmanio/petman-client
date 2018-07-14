@@ -5,10 +5,13 @@ import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
+import { MetaService } from '@ngx-meta/core';
+import { StripTagsPipe } from 'ngx-pipes';
 
 import { ModalSize, ShelterDto } from '@petman/common';
 
 import * as fromShelter from '@shelter/reducers';
+import { environment } from '@environments/environment';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
 import { SlideConfig } from '@material/components/mz-slider/mz-slider.component';
 import { Select } from '@shelter/actions/shelter.actions';
@@ -31,6 +34,8 @@ export class ShelterDetailsPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private location: Location,
     private dialog: MatDialog,
+    private meta: MetaService,
+    private stripTagsPipe: StripTagsPipe,
     @Inject(DOCUMENT) private document: Document
   ) {
     const paramsSubscription = route.params
@@ -40,6 +45,9 @@ export class ShelterDetailsPageComponent implements OnInit, OnDestroy {
     const shelterSubscription = this.shelter$.subscribe(shelter => {
       this.shelter = shelter;
       this.slides = this.shelter.images.map(img => ({ src: img }));
+
+      this.meta.setTag('og:description', this.stripTagsPipe.transform(this.shelter.description));
+      this.meta.setTag('og:image', environment.origin + this.shelter.images[0]);
     });
 
     this.subscriptions.push(...[paramsSubscription, shelterSubscription]);

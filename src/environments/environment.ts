@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api: 'http://localhost:3000',
+  origin: 'http://localhost:4200',
   gaId: '',
   fb: {
     appId: '614253672289323',
@@ -19,4 +20,4 @@ export const environment = {
  * import the following file, but please comment it out in production mode
  * because it will have performance impact when throw error
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error';  // Included with Angular CLI.

@@ -8,7 +8,8 @@ import { TransferHttpCacheModule } from '@nguniversal/common';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MetaLoader, MetaModule } from '@ngx-meta/core';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { ShareButtonsModule } from '@ngx-share/buttons';
@@ -20,6 +21,7 @@ import { CoreModule } from '@core/core.module';
 import { AuthModule } from '@auth/auth.module';
 import { PoiModule } from '@poi/poi.module';
 
+import { UtilService } from '@shared/services/util/util.service';
 import { TranslateBrowserLoader } from '@app/translate-browser-loader.service';
 import { metaReducers, reducers } from '@app/reducers';
 import { AppRoutingModule } from '@app/app-routing.module';
@@ -57,6 +59,11 @@ export function translateBrowserFactory(http: HttpClient, transferState: Transfe
         useFactory: translateBrowserFactory,
         deps: [HttpClient, TransferState]
       }
+    }),
+    MetaModule.forRoot({
+      provide: MetaLoader,
+      useFactory: (UtilService.metaFactory),
+      deps: [TranslateService]
     }),
     ShareButtonsModule.forRoot(),
 

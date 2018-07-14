@@ -4,6 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { MetaService } from '@ngx-meta/core';
 
 import { Language, UserDto } from '@petman/common';
 
@@ -40,6 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private breakpointObserver: BreakpointObserver,
     private translate: TranslateService,
+    private meta: MetaService,
     private store: Store<fromRoot.State>,
     private localStorageService: LocalStorageService,
     private utilService: UtilService,
@@ -141,6 +143,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.currentLanguage = languageKey;
     this.localStorageService.setItem('language', language);
     this.translate.setDefaultLang(language);
-    this.translate.use(language);
+    this.translate.use(language).subscribe(() => {
+      // TODO: this.meta.setTag('og:locale', 'en-US');
+      this.meta.update(this.router.url);
+    });
   }
 }

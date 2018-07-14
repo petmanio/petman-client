@@ -10,7 +10,7 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { QuillModule } from 'ngx-quill';
-import { NgPipesModule } from 'ngx-pipes';
+import { NgPipesModule, StripTagsPipe } from 'ngx-pipes';
 
 import { MaterialModule } from '@material/material.module';
 
@@ -88,7 +88,7 @@ const declarations = [
   declarations: [
     ...declarations
   ],
-  providers: [DatePipe, UtilService, LocalStorageService, SharedService, ValidationService],
+  providers: [DatePipe, StripTagsPipe, UtilService, LocalStorageService, SharedService, ValidationService],
   exports: [
     ...modules,
     ...declarations

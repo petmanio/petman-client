@@ -3,6 +3,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
 import { MatIconRegistry } from '@angular/material';
 import { ReplaySubject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@ngx-meta/core';
 
 import { environment } from '@environments/environment';
 
@@ -46,6 +48,28 @@ export class UtilService {
     }
 
     return text;
+  }
+
+  static metaFactory(translate: TranslateService): MetaLoader {
+    return new MetaStaticLoader({
+      callback: (key: string) => translate.get(key),
+      pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
+      pageTitleSeparator: ' - ',
+      applicationName: 'APP_NAME',
+      defaults: {
+        title: 'DEFAULT_TITLE',
+        description: 'DEFAULT_DESCRIPTION',
+        'og:title': 'DEFAULT_TITLE',
+        'og:description': 'DEFAULT_DESCRIPTION',
+        'og:url': 'https://petman.io',
+        'og:image': 'https://petman.io/assets/icons/icon-72x72.png',
+        'og:type': 'website',
+        'og:locale': 'en_US',
+        'og:locale:alternate': 'en_US,hy_AM',
+
+        'fb:app_id': environment.fb.appId
+      }
+    });
   }
 
   static getRouteDataByKey(activatedRoute, key: string): any {

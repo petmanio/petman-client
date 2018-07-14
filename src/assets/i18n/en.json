@@ -73,7 +73,6 @@
   "CHAT": "Chat",
   "SEND": "Send",
   "NO_MESSAGES_YET": "No messages yet",
-
   "NEW_TO_PETMAN": "New to Petman? Sign up!",
   "SIGN_UP_WITH_FACEBOOK": "Sign up with Facebook",
   "MAP": "Map",
@@ -109,5 +108,8 @@
   "SHOP": "Shop",
   "PARK": "Park",
   "HOME_MAP_HEADER": "HOME_MAP_HEADER",
-  "SHOW_ON_MAP": "SHOW_ON_MAP"
+  "SHOW_ON_MAP": "SHOW_ON_MAP",
+  "DEFAULT_TITLE": "Petman",
+  "DEFAULT_DESCRIPTION": "DEFAULT_DESCRIPTION",
+  "APP_NAME": "Petman"
 }
