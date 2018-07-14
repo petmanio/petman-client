@@ -2,12 +2,12 @@ import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { plainToClass } from 'class-transformer';
 
 import { LoginFacebookRequestDto, LoginFacebookResponseDto, UserDto } from '@petman/common';
 
-import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
 import { environment } from '@environments/environment';
-import { plainToClass } from 'class-transformer';
+import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
