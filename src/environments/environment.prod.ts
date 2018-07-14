@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   api: '',
-  origin: 'https://petman.io',
+  origin: 'https://acceptance.petman.io',
   gaId: '',
   fb: {
     appId: '424363951255305',
