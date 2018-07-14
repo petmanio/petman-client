@@ -1,6 +1,6 @@
 {
-  "name": "petman-client",
-  "short_name": "petman-client",
+  "name": "Petman",
+  "short_name": "Petman",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
