@@ -184,6 +184,12 @@ mat-icon {
     .td-loading {
       mat-progress-spinner {
         position: fixed !important;
+        width: 50px !important;
+        height: 50px !important;
+        svg {
+          width: 50px !important;
+          height: 50px !important;
+        }
         top: 40%;
       }
     }
