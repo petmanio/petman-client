@@ -3,10 +3,10 @@
     <mat-nav-list>
       <ng-container *ngIf="user?.businessUsers.length">
         <mat-list-item>
-          <mat-select (change)="onSelectedUserChange.emit($event)" [ngModel]="selectedUser.id">
-            <mat-option [value]="user.id">{{user.userData.firstName}}</mat-option>
+          <mat-select (ngModelChange)="onSelectedUserChange.emit($event)" [ngModel]="selectedUser.id">
+            <mat-option [value]="user.id">{{user?.userData?.firstName}}</mat-option>
             <mat-option *ngFor="let businessUser of user.businessUsers"
-                        [value]="businessUser.id">{{ businessUser.userData.firstName }}
+                        [value]="businessUser.id">{{ businessUser?.userData?.firstName }}
             </mat-option>
           </mat-select>
         </mat-list-item>

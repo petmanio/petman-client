@@ -2,18 +2,20 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestro
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatDialog } from '@angular/material';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { MetaService } from '@ngx-meta/core';
 
-import { Language, UserDto } from '@petman/common';
+import { Language, ModalSize, UserDto } from '@petman/common';
 
 import { UtilService } from '@shared/services/util/util.service';
 import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
 
 import * as fromRoot from '@app/reducers';
 import * as fromAuth from '@auth/reducers';
-import { combineLatest, Observable, Subscription } from 'rxjs';
+import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
 import { CloseSidenav, OpenSidenav } from '@app/actions/layout.actions';
 import { Categories } from '@poi/actions/poi.actions';
@@ -40,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef,
     private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog,
     private translate: TranslateService,
     private meta: MetaService,
     private store: Store<fromRoot.State>,
@@ -57,8 +60,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initNgxTranslate();
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.welcomeDialog();
+    }
+
     // TODO: use effects init
-    this.store.dispatch(new ChangeUser(+this.localStorageService.getItem('selectedUserId')));
+    const selectedUserId = this.localStorageService.getItem('selectedUserId');
+    if (selectedUserId) {
+      this.store.dispatch(new ChangeUser(parseInt(selectedUserId, 0)));
+    }
     this.store.dispatch(new CloseSidenav());
     this.store.dispatch(new Categories({ limit: 10, offset: 0 }));
 
@@ -101,7 +112,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onSelectedUserChange($event) {
-    this.store.dispatch(new ChangeUser($event.value));
+    this.store.dispatch(new ChangeUser($event));
   }
 
   toggleSidenav($event: Event) {
@@ -147,5 +158,19 @@ export class AppComponent implements OnInit, OnDestroy {
       // TODO: this.meta.setTag('og:locale', 'en-US');
       this.meta.update(this.router.url);
     });
+  }
+
+  private welcomeDialog() {
+    // TODO: use effect init and user$ observable
+    if (!this.localStorageService.getItem('welcome-dialog-showed') && !this.localStorageService.getItem('token')) {
+      setTimeout(() => {
+        const _dialogRef = this.dialog.open(WelcomeDialogComponent, {
+          width: ModalSize.LARGE
+        });
+        _dialogRef.afterClosed().subscribe(() => {
+          this.localStorageService.setItem('welcome-dialog-showed', true);
+        });
+      }, 3000);
+    }
   }
 }

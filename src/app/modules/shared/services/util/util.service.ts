@@ -62,7 +62,7 @@ export class UtilService {
         'og:title': 'DEFAULT_TITLE',
         'og:description': 'DEFAULT_DESCRIPTION',
         'og:url': 'https://petman.io',
-        'og:image': 'https://petman.io/assets/icons/icon-72x72.png',
+        'og:image': environment.origin + '/assets/icons/icon-72x72.png',
         'og:type': 'website',
         'og:locale': 'en_US',
         'og:locale:alternate': 'en_US,hy_AM',

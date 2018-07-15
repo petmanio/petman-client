@@ -1,10 +1,11 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-share-dialog',
   templateUrl: './share-dialog.component.html',
-  styleUrls: ['./share-dialog.component.scss']
+  styleUrls: ['./share-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShareDialogComponent implements OnInit {
   @Input() url: string;

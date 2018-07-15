@@ -47,6 +47,7 @@ export function reducer(state = initialState, action: ShelterActions | AuthActio
 
     case AuthActionTypes.FB_LOGIN:
     case AuthActionTypes.LOGOUT:
+    case AuthActionTypes.CHANGE_USER:
       return { ...initialState };
 
     default:

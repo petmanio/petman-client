@@ -111,5 +111,7 @@
   "SHOW_ON_MAP": "SHOW_ON_MAP",
   "DEFAULT_TITLE": "Petman",
   "DEFAULT_DESCRIPTION": "DEFAULT_DESCRIPTION",
-  "APP_NAME": "Petman"
+  "APP_NAME": "Petman",
+  "WELCOME_DIALOG_TITLE": "Lorem ipsum dolor sit amet, consectetur",
+  "WELCOME_DIALOG_CONTENT": "<b>Lorem ipsum</b> dolor sit amet, <br/> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/> <br/> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute "
 }

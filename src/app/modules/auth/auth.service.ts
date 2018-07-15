@@ -50,15 +50,14 @@ export class AuthService {
   }
 
   logOut() {
-    this.localStorageService.setItem('user', null);
     this.localStorageService.setItem('token', null);
     this.localStorageService.setItem('selectedUserId', null);
   }
 
   changeUser(selectedUserId: number) {
-    const storedSelectedId = this.localStorageService.getItem('selectedUserId');
-    if (selectedUserId.toString() !== storedSelectedId) {
-      this.localStorageService.setItem('selectedUserId', selectedUserId.toString());
+    const storedSelectedId = parseInt(this.localStorageService.getItem('selectedUserId'), 0);
+    if (selectedUserId !== storedSelectedId) {
+      this.localStorageService.setItem('selectedUserId', selectedUserId);
     }
   }
 }

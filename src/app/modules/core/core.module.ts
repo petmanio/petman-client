@@ -9,6 +9,15 @@ import { ToolbarComponent } from '@core/toolbar/toolbar.component';
 import { SidenavComponent } from '@core/sidenav/sidenav.component';
 import { FooterComponent } from '@core/footer/footer.component';
 import { NavItemComponent } from '@core/nav-item/nav-item.component';
+import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
+
+const declarations = [
+  ToolbarComponent,
+  SidenavComponent,
+  NavItemComponent,
+  FooterComponent,
+  WelcomeDialogComponent
+];
 
 @NgModule({
   imports: [
@@ -18,18 +27,13 @@ import { NavItemComponent } from '@core/nav-item/nav-item.component';
     SharedModule
   ],
   declarations: [
-    ToolbarComponent,
-    SidenavComponent,
-    NavItemComponent,
-    FooterComponent
+    ...declarations
   ],
   providers: [],
   exports: [
-    ToolbarComponent,
-    SidenavComponent,
-    NavItemComponent,
-    FooterComponent
-  ]
+    ...declarations
+  ],
+  entryComponents: [WelcomeDialogComponent]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

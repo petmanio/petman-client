@@ -44,10 +44,13 @@ export class ShelterDetailsPageComponent implements OnInit, OnDestroy {
 
     const shelterSubscription = this.shelter$.subscribe(shelter => {
       this.shelter = shelter;
-      this.slides = this.shelter.images.map(img => ({ src: img }));
 
-      this.meta.setTag('og:description', this.stripTagsPipe.transform(this.shelter.description));
-      this.meta.setTag('og:image', environment.origin + this.shelter.images[0]);
+      if (this.shelter) {
+        this.slides = this.shelter.images.map(img => ({ src: img }));
+
+        this.meta.setTag('og:description', this.stripTagsPipe.transform(this.shelter.description));
+        this.meta.setTag('og:image', environment.origin + this.shelter.images[0]);
+      }
     });
 
     this.subscriptions.push(...[paramsSubscription, shelterSubscription]);
