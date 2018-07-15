@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { ListQueryRequestDto, ShelterCreateRequestDto, ShelterDto, ShelterListResponseDto } from '@petman/common';
+import { ListQueryRequestDto, ShelterDto, ShelterListResponseDto, ShelterRequestDto } from '@petman/common';
 
 export enum ShelterActionTypes {
   CREATE = '[Shelter] Create',
@@ -38,7 +38,7 @@ export enum ShelterActionTypes {
 export class Create implements Action {
   readonly type = ShelterActionTypes.CREATE;
 
-  constructor(public payload: ShelterCreateRequestDto) {
+  constructor(public payload: ShelterRequestDto) {
   }
 }
 
@@ -62,7 +62,7 @@ export class CreateFailure implements Action {
 export class Update implements Action {
   readonly type = ShelterActionTypes.UPDATE;
 
-  constructor(public payload: ShelterDto) {
+  constructor(public payload: { id: number, body: ShelterDto }) {
   }
 }
 

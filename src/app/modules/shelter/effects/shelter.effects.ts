@@ -15,7 +15,8 @@ import {
   ListSuccess,
   Load,
   LoadFailure,
-  LoadSuccess, More,
+  LoadSuccess,
+  More,
   MoreFailure,
   MoreSuccess,
   ShelterActionTypes,
@@ -56,8 +57,8 @@ export class ShelterEffects {
     .ofType(ShelterActionTypes.UPDATE)
     .pipe(
       map((action: Update) => action.payload),
-      switchMap(shelter => {
-        return this.shelterService.update(shelter)
+      switchMap(({ id, body }) => {
+        return this.shelterService.update(id, body)
           .pipe(
             map(response => new UpdateSuccess(response)),
             catchError(error => of(new UpdateFailure(error)))

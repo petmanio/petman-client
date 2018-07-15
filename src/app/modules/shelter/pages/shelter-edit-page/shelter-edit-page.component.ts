@@ -57,7 +57,6 @@ export class ShelterEditPageComponent implements OnDestroy {
 
   private get formConfig(): FormGroup {
     return this.formBuilder.group({
-      id: this.shelter.id,
       price: [this.shelter.price, Validators.required],
       description: [
         this.shelter.description,
@@ -80,7 +79,7 @@ export class ShelterEditPageComponent implements OnDestroy {
   }
 
   update() {
-    this.store.dispatch(new Update(this.form.value));
+    this.store.dispatch(new Update({ id: this.shelter.id, body: this.form.value }));
   }
 
   onDelete() {

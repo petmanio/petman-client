@@ -77,9 +77,7 @@ export class AuthEffects {
   );
 
   @Effect()
-  init$: Observable<User> = defer(() => {
-    return of(new User());
-  });
+  init$: Observable<User> = defer(() => of(new User()));
 
   constructor(private router: Router, private route: ActivatedRoute, private actions$: Actions, private authService: AuthService) {
   }

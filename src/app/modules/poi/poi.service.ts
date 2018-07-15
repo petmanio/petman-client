@@ -11,11 +11,11 @@ import {
   ListQueryRequestDto,
   Pin,
   PinDto,
-  PoiCreateRequestDto,
   PoiDto,
   PoiListQueryRequestDto,
   PoiListResponseDto,
-  PoiPinsQueryRequestDto
+  PoiPinsQueryRequestDto,
+  PoiRequestDto
 } from '@petman/common';
 
 import { environment } from '@environments/environment';
@@ -49,7 +49,7 @@ export class PoiService {
     `;
   }
 
-  create(body: PoiCreateRequestDto): Observable<PoiDto> {
+  create(body: PoiRequestDto): Observable<PoiDto> {
     let formData: FormData;
     if (isPlatformBrowser(this.platformId)) {
       formData = new FormData();

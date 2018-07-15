@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { forEach } from 'lodash';
 
-import { ListQueryRequestDto, ShelterCreateRequestDto, ShelterDto, ShelterListResponseDto } from '@petman/common';
+import { ListQueryRequestDto, ShelterDto, ShelterListResponseDto, ShelterRequestDto } from '@petman/common';
 
 import { environment } from '@environments/environment';
 import { ShelterModule } from '@shelter/shelter.module';
@@ -19,7 +19,7 @@ export class ShelterService {
   constructor(@Inject(PLATFORM_ID) protected platformId: Object, private http: HttpClient) {
   }
 
-  create(body: ShelterCreateRequestDto): Observable<ShelterDto> {
+  create(body: ShelterRequestDto): Observable<ShelterDto> {
     let formData: FormData;
     if (isPlatformBrowser(this.platformId)) {
       formData = new FormData();
@@ -37,7 +37,7 @@ export class ShelterService {
     );
   }
 
-  update(body: ShelterDto): Observable<ShelterDto> {
+  update(id, body: ShelterRequestDto): Observable<ShelterDto> {
     let formData: FormData;
     if (isPlatformBrowser(this.platformId)) {
       formData = new FormData();
@@ -58,7 +58,7 @@ export class ShelterService {
         });
       }
     }
-    return this.http.put<ShelterDto>(`${environment.api}/api/shelters/${body.id}`, formData).pipe(
+    return this.http.put<ShelterDto>(`${environment.api}/api/shelters/${id}`, formData).pipe(
       map(response => plainToClass(ShelterDto, response, { groups: ['petman-client'] }))
     );
   }
