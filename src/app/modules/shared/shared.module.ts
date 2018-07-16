@@ -11,6 +11,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { QuillModule } from 'ngx-quill';
 import { NgPipesModule, StripTagsPipe } from 'ngx-pipes';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { MaterialModule } from '@material/material.module';
 
@@ -40,6 +41,7 @@ import { AddApplicationComponent } from '@shared/components/add-application/add-
 import { MediumEditorComponent } from '@shared/components/medium-editor/medium-editor.component';
 import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
 import { ControlMessagesComponent } from '@shared/components/control-messages/control-messages.component';
+import { UserDetailsUpdateDialogComponent } from './components/user-details-update-dialog/user-details-update-dialog.component';
 
 const modules = [
   CommonModule,
@@ -52,9 +54,9 @@ const modules = [
   InfiniteScrollModule,
   PerfectScrollbarModule,
   QuillModule,
-  NgPipesModule
+  NgPipesModule,
+  NgxMaskModule
 ];
-
 
 const declarations = [
   RxDelayPipe,
@@ -73,7 +75,8 @@ const declarations = [
   AddApplicationComponent,
   MediumEditorComponent,
   GoogleMapComponent,
-  ControlMessagesComponent
+  ControlMessagesComponent,
+  UserDetailsUpdateDialogComponent
 ];
 
 @NgModule({
@@ -83,23 +86,29 @@ const declarations = [
     StoreModule.forFeature('shared', fromShared.reducers),
     EffectsModule.forFeature([SharedEffects]),
 
-    MaterialModule,
+    MaterialModule
   ],
-  declarations: [
-    ...declarations
+  declarations: [...declarations],
+  providers: [
+    DatePipe,
+    StripTagsPipe,
+    UtilService,
+    LocalStorageService,
+    SharedService,
+    ValidationService
   ],
-  providers: [DatePipe, StripTagsPipe, UtilService, LocalStorageService, SharedService, ValidationService],
-  exports: [
-    ...modules,
-    ...declarations
-  ],
-  entryComponents: [ShareDialogComponent, ConfirmationDialogComponent]
+  exports: [...modules, ...declarations],
+  entryComponents: [
+    ShareDialogComponent,
+    ConfirmationDialogComponent,
+    UserDetailsUpdateDialogComponent
+  ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [],
+      providers: []
     };
   }
 }

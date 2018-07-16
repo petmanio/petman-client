@@ -13,6 +13,7 @@ import { MetaLoader, MetaModule } from '@ngx-meta/core';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { environment } from '@environments/environment';
 import { MaterialModule } from '@material/material.module';
@@ -65,6 +66,7 @@ export function translateBrowserFactory(http: HttpClient, transferState: Transfe
       useFactory: (UtilService.metaFactory),
       deps: [TranslateService]
     }),
+    NgxMaskModule.forRoot(),
     ShareButtonsModule.forRoot(),
 
     SharedModule.forRoot(),

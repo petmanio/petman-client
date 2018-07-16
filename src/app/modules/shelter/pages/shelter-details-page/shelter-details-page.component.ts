@@ -65,11 +65,11 @@ export class ShelterDetailsPageComponent implements OnInit, OnDestroy {
 
   onShare() {
     const url = this.document.location.origin + this.router.createUrlTree(['shelters', this.shelter.id]).toString();
-    const _dialogRef = this.dialog.open(ShareDialogComponent, {
+    const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,
       data: { url }
     });
-    _dialogRef.afterClosed().subscribe(shareOptions => {
+    dialogRef.afterClosed().subscribe(shareOptions => {
     });
   }
 }

@@ -3,12 +3,12 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material';
-import { combineLatest, Observable, Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { combineLatest, Subscription } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { MetaService } from '@ngx-meta/core';
 
-import { Language, ModalSize, UserDto } from '@petman/common';
+import { Language, ModalSize } from '@petman/common';
 
 import { UtilService } from '@shared/services/util/util.service';
 import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
@@ -31,10 +31,10 @@ export class AppComponent implements OnInit, OnDestroy {
   sideNavMode: 'side' | 'push' = 'side';
   sideNavState: boolean;
   currentLanguage: string;
-  loggedIn$: Observable<boolean>;
-  user$: Observable<UserDto>;
-  selectedUser$: Observable<UserDto>;
-  showSidenav$: Observable<boolean>;
+  showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav));
+  loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
+  user$ = this.store.pipe(select(fromAuth.getUser));
+  selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -52,10 +52,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {
     this.utilService.externalScripts();
     this.utilService.registerNewIcons();
-    this.showSidenav$ = this.store.select(fromRoot.getShowSidenav);
-    this.loggedIn$ = this.store.select(fromAuth.getLoggedIn);
-    this.user$ = this.store.select(fromAuth.getUser);
-    this.selectedUser$ = this.store.select(fromAuth.getSelectedUser);
   }
 
   ngOnInit() {
@@ -75,7 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     const sidenavSubscription = this.showSidenav$.subscribe(state => {
       this.sideNavState = state;
-      if (isPlatformBrowser(this.platformId)) {
+      if (this.sideNavMode === 'side' && isPlatformBrowser(this.platformId)) {
         setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
       }
     });
@@ -164,10 +160,10 @@ export class AppComponent implements OnInit, OnDestroy {
     // TODO: use effect init and user$ observable
     if (!this.localStorageService.getItem('welcome-dialog-showed') && !this.localStorageService.getItem('token')) {
       setTimeout(() => {
-        const _dialogRef = this.dialog.open(WelcomeDialogComponent, {
+        const dialogRef = this.dialog.open(WelcomeDialogComponent, {
           width: ModalSize.LARGE
         });
-        _dialogRef.afterClosed().subscribe(() => {
+        dialogRef.afterClosed().subscribe(() => {
           this.localStorageService.setItem('welcome-dialog-showed', true);
         });
       }, 3000);

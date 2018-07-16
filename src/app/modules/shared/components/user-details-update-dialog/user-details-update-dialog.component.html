@@ -1,0 +1,30 @@
+<h4 mat-dialog-title>{{'USER_PROFILE_UPDATE_DIALOG_TITLE' | translate}}</h4>
+<mat-dialog-content>
+  <p> {{'USER_PROFILE_UPDATE_DIALOG_CONTENT' | translate}} </p>
+  <form [formGroup]="form">
+    <div class="columns is-marginless">
+      <div class="column">
+        <mat-form-field>
+          <input matInput placeholder="https://facebook.com/username" formControlName="facebookUrl">
+          <mat-hint>{{'FACEBOOK_URL_HINT' | translate}}</mat-hint>
+          <mat-error *ngIf="form.get('facebookUrl').hasError('pattern')">
+            {{'FACEBOOK_URL_PATTERN_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field>
+          <input matInput [dropSpecialCharacters]="['(', ')', ' ', '-']"  mask="+(999) 000-000-000" placeholder="+(xxx) xxx-xxx-xxx" formControlName="phoneNumber">
+          <mat-hint>{{'PHONE_NUMBER_HINT' | translate}}</mat-hint>
+          <mat-error *ngIf="form.get('phoneNumber').hasError('pattern')">
+            {{'PHONE_NUMBER_PATTERN_ERROR' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" mat-dialog-close>{{'CLOSE' | translate}}</button>
+  <button mat-raised-button color="accent" [disabled]="!form.valid" [mat-dialog-close]="form.value">{{'UPDATE' | translate}}</button>
+</mat-dialog-actions>

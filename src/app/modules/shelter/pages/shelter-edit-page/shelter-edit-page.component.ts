@@ -1,18 +1,19 @@
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy } from '@angular/core';
-import { DOCUMENT, Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { map } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
-import { ModalSize, ShelterDto } from '@petman/common';
+import { ModalSize, ShelterDto, UserDto } from '@petman/common';
 
+import * as fromAuth from '@auth/reducers';
 import * as fromShelter from '@shelter/reducers';
 import { Delete, Select, Update } from '@shelter/actions/shelter.actions';
 import { SharedService } from '@shared/services/shared/shared.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
+import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
 
 @Component({
   selector: 'app-shelter-edit-page',
@@ -20,20 +21,19 @@ import { ConfirmationDialogComponent } from '@shared/components/confirmation-dia
   styleUrls: ['./shelter-edit-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShelterEditPageComponent implements OnDestroy {
+export class ShelterEditPageComponent {
   form: FormGroup;
   shelter: ShelterDto;
+  user: UserDto;
   quillModules = SharedService.quillModules;
+  user$ = this.store.pipe(select(fromAuth.getUser));
   pending$ = this.store.select(fromShelter.getShelterAddPagePending);
   error$ = this.store.select(fromShelter.getShelterAddPageError);
   shelter$ = this.store.pipe(select(fromShelter.getSelected));
-  private subscriptions: Subscription[] = [];
 
   constructor(
     private store: Store<fromShelter.State>,
     private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
     private dialog: MatDialog,
     @Inject(FormBuilder) private formBuilder: FormBuilder,
     @Inject(DOCUMENT) private document: Document
@@ -41,18 +41,29 @@ export class ShelterEditPageComponent implements OnDestroy {
     this.error$ = this.store.select(fromShelter.getShelterEditPageError);
     this.pending$ = this.store.select(fromShelter.getShelterEditPagePending);
 
-    const paramsSubscription = route.params
-      .pipe(map(params => new Select(params.id)))
-      .subscribe(store);
+    this.route.params
+      .pipe(
+        map(params => new Select(params.id)),
+        take(1)
+      )
+      .subscribe(this.store);
 
-    const shelterSubscription = this.shelter$.subscribe(shelter => {
-      if (shelter) {
-        this.shelter = shelter;
-        this.form = this.formConfig;
-      }
-    });
+    this.user$
+      .pipe(
+        map(user => (this.user = user)),
+        take(1)
+      )
+      .subscribe();
 
-    this.subscriptions.push(...[paramsSubscription, shelterSubscription]);
+    this.shelter$
+      .pipe(
+        map(shelter => {
+          this.shelter = shelter;
+          this.form = this.formConfig;
+        }),
+        take(1)
+      )
+      .subscribe();
   }
 
   private get formConfig(): FormGroup {
@@ -60,17 +71,21 @@ export class ShelterEditPageComponent implements OnDestroy {
       price: [this.shelter.price, Validators.required],
       description: [
         this.shelter.description,
-        Validators.compose([Validators.required, Validators.minLength(200), Validators.maxLength(2000)])
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(200),
+          Validators.maxLength(2000)
+        ])
       ],
       images: [
         this.shelter.images,
-        Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(4)])
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(4)
+        ])
       ]
     });
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   onButtonToggleChange() {
@@ -79,15 +94,27 @@ export class ShelterEditPageComponent implements OnDestroy {
   }
 
   update() {
-    this.store.dispatch(new Update({ id: this.shelter.id, body: this.form.value }));
+    if (!this.user.userData.phoneNumber || !this.user.userData.facebookUrl) {
+      const dialogRef = this.dialog.open(UserDetailsUpdateDialogComponent, {
+        width: ModalSize.LARGE,
+        data: { user: this.user }
+      });
+      dialogRef.afterClosed().subscribe(update => {
+        console.log(update);
+      });
+    } else {
+      this.store.dispatch(
+        new Update({ id: this.shelter.id, body: this.form.value })
+      );
+    }
   }
 
   onDelete() {
-    const _dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: ModalSize.MEDIUM,
       data: {}
     });
-    _dialogRef.afterClosed().subscribe(confirmed => {
+    dialogRef.afterClosed().subscribe(confirmed => {
       if (confirmed) {
         this.store.dispatch(new Delete(this.shelter.id));
       }
