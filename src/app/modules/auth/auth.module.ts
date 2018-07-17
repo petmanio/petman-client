@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -17,27 +16,26 @@ import { LoginFormSocialComponent } from '@auth/components/login-form-social/log
 
 @NgModule({
   imports: [
-    CommonModule,
-    AuthRoutingModule,
     StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([AuthEffects]),
-
-    SharedModule,
-    MaterialModule
+    EffectsModule.forFeature([AuthEffects])
   ],
+  providers: [AuthGuard, DenyAuthGuard]
+})
+export class AuthRootModule {}
+
+@NgModule({
+  imports: [SharedModule, MaterialModule, AuthRootModule, AuthRoutingModule],
   declarations: [
     LoginFormComponent,
     LoginFormSocialComponent,
     LoginPageComponent
-  ],
-  providers: [AuthGuard, DenyAuthGuard],
+  ]
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: AuthModule,
-      providers: [],
+      ngModule: AuthRootModule,
+      providers: []
     };
   }
 }
-

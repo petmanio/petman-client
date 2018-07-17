@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import { PoiService } from '@poi/poi.service';
 import {
+  Categories,
+  CategoriesFailure,
+  CategoriesSuccess,
   Create,
   CreateFailure,
   CreateSuccess,
@@ -19,16 +24,14 @@ import {
   More,
   MoreFailure,
   MoreSuccess,
-  PoiActionTypes,
   Pins,
   PinsFailure,
   PinsSuccess,
+  PoiActionTypes,
   Update,
   UpdateFailure,
-  UpdateSuccess, CategoriesFailure, CategoriesSuccess, Categories
+  UpdateSuccess
 } from '@poi/actions/poi.actions';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Injectable()
 export class PoiEffects {

@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -15,22 +14,26 @@ import { PoiOwnerGuard } from '@poi/poi-owner.guard';
 
 @NgModule({
   imports: [
-    CommonModule,
-    PoiRoutingModule,
     StoreModule.forFeature('poi', reducers),
     EffectsModule.forFeature([PoiEffects]),
+  ],
+  providers: [PoiService, PoiExistsGuard, PoiOwnerGuard]
+})
+export class PoiRootModule {}
 
+@NgModule({
+  imports: [
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    PoiModule,
+    PoiRoutingModule
   ],
-  declarations: [
-  ],
-  providers: [PoiService, PoiExistsGuard, PoiOwnerGuard],
+  declarations: []
 })
 export class PoiModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: PoiModule,
+      ngModule: PoiRootModule,
       providers: [],
     };
   }

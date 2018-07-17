@@ -21,6 +21,7 @@ import { SharedModule } from '@shared/shared.module';
 import { CoreModule } from '@core/core.module';
 import { AuthModule } from '@auth/auth.module';
 import { PoiModule } from '@poi/poi.module';
+import { UserModule } from '@user/user.module';
 
 import { UtilService } from '@shared/services/util/util.service';
 import { TranslateBrowserLoader } from '@app/translate-browser-loader.service';
@@ -74,6 +75,7 @@ export function translateBrowserFactory(http: HttpClient, transferState: Transfe
     CoreModule.forRoot(),
     AuthModule.forRoot(),
     PoiModule.forRoot(),
+    UserModule.forRoot(),
     AppRoutingModule
   ],
   providers: [

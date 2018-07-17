@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Action } from '@ngrx/store';
 
 import {
   CategoryListResponseDto,
@@ -15,7 +15,6 @@ export enum PoiActionTypes {
   CREATE = '[Poi] Create',
   CREATE_FAILURE = '[Poi] Create failure',
   CREATE_SUCCESS = '[Poi] Create success',
-
 
   UPDATE = '[Poi] Update',
   UPDATE_SUCCESS = '[Poi] Update success',
@@ -68,7 +67,7 @@ export class CreateSuccess implements Action {
 export class CreateFailure implements Action {
   readonly type = PoiActionTypes.CREATE_FAILURE;
 
-  constructor(public payload: any) {
+  constructor(public payload: HttpErrorResponse) {
   }
 }
 
@@ -92,7 +91,7 @@ export class UpdateSuccess implements Action {
 export class UpdateFailure implements Action {
   readonly type = PoiActionTypes.UPDATE_FAILURE;
 
-  constructor(public payload: any) {
+  constructor(public payload: HttpErrorResponse) {
   }
 }
 
@@ -251,8 +250,7 @@ export class Select implements Action {
   }
 }
 
-export type PoiActions =
-  | Create
+export type PoiActions = Create
   | CreateSuccess
   | CreateFailure
   | Update

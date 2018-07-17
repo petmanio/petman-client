@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Action } from '@ngrx/store';
 
 import { ListQueryRequestDto, ShelterDto, ShelterListResponseDto, ShelterRequestDto } from '@petman/common';
 
@@ -52,7 +52,7 @@ export class CreateSuccess implements Action {
 export class CreateFailure implements Action {
   readonly type = ShelterActionTypes.CREATE_FAILURE;
 
-  constructor(public payload: any) {
+  constructor(public payload: HttpErrorResponse) {
   }
 }
 
@@ -76,7 +76,7 @@ export class UpdateSuccess implements Action {
 export class UpdateFailure implements Action {
   readonly type = ShelterActionTypes.UPDATE_FAILURE;
 
-  constructor(public payload: any) {
+  constructor(public payload: HttpErrorResponse) {
   }
 }
 
@@ -186,8 +186,7 @@ export class Select implements Action {
   }
 }
 
-export type ShelterActions =
-  | Create
+export type ShelterActions = Create
   | CreateSuccess
   | CreateFailure
   | Update
