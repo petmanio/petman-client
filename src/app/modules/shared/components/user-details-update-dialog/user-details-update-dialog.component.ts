@@ -31,12 +31,14 @@ export class UserDetailsUpdateDialogComponent implements OnInit {
 
   private get formConfig(): FormGroup {
     return this.formBuilder.group({
+      firstName: [this.data.user.userData.firstName || null, Validators.required],
+      lastName: [this.data.user.userData.lastName || null, Validators.required],
       phoneNumber: [
-        this.data.user.userData.phoneNumber,
+        this.data.user.userData.phoneNumber || null,
         Validators.pattern(phoneNumberValidatorRegex)
       ],
       facebookUrl: [
-        this.data.user.userData.facebookUrl,
+        this.data.user.userData.facebookUrl || null,
         Validators.pattern(facebookUrlValidator)
       ]
     });

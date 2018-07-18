@@ -1,8 +1,10 @@
-import { AuthActions, AuthActionTypes } from '../actions/auth.actions';
 import { createSelector } from '@ngrx/store';
 import { find } from 'lodash';
 
 import { UserDto } from '@petman/common';
+
+import { AuthActions, AuthActionTypes } from '@auth/actions/auth.actions';
+import { UserActionTypes, UserActions } from '@user/actions/user.actions';
 
 export interface State {
   loggedIn: boolean;
@@ -16,8 +18,16 @@ export const initialState: State = {
   selectedUserId: null
 };
 
-export function reducer(state = initialState, action: AuthActions): State {
+export function reducer(state = initialState, action: AuthActions | UserActions): State {
   switch (action.type) {
+
+    case UserActionTypes.UPDATE_SUCCESS:
+      if (action.payload.id === state.user.id) {
+        return { ...state, user: action.payload };
+      } else {
+        // TODO: implement state update for business users
+        return { ...state };
+      }
 
     case AuthActionTypes.USER_SUCCESS:
       return { ...state, loggedIn: true, user: action.payload };

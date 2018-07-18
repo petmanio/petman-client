@@ -166,14 +166,7 @@ export class UtilService {
   }
 
   registerNewIcons() {
-    this.matIconRegistry
-      .addSvgIconInNamespace('app', 'pet_health', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/stethoscope.svg'))
-      .addSvgIconInNamespace('app', 'facebook', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/facebook.svg'))
-      .addSvgIconInNamespace('app', 'vkontakte', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/vkontakte.svg'))
-      .addSvgIconInNamespace('app', 'twitter', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/twitter.svg'))
-      .addSvgIconInNamespace('app', 'skype', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/skype.svg'))
-      .addSvgIconInNamespace('app', 'gplus', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/gplus.svg'))
-      .addSvgIconInNamespace('app', 'odnoklassniki', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/odnoklassniki.svg'))
-      .addSvgIconInNamespace('app', 'messenger', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/messenger.svg'));
+    // this.matIconRegistry
+    //   .addSvgIconInNamespace('app', 'pet_health', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/stethoscope.svg'));
   }
 }

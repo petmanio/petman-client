@@ -9,6 +9,7 @@ import { UserDto } from '@petman/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserDetailsComponent implements OnInit {
+  @Input() isOwner: boolean;
   @Input() user: UserDto;
 
   constructor() {

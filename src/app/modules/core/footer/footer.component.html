@@ -1,21 +1,20 @@
 <footer>
   <div class="columns is-marginless">
     <!--<div class="column">-->
-      <!--<p>{{'ABOUT_US_CONTENT' | translate}}</p>-->
+    <!--<p>{{'ABOUT_US_CONTENT' | translate}}</p>-->
     <!--</div>-->
     <div class="column has-text-centered">
       <!--<span class="is-size-4 has-text-weight-light">{{'AROUND_THE_WEB' | translate}}</span>-->
       <!--<br>-->
       <div class="button-row">
-        <a href="https://www.facebook.com/petman.io" target="_blank" mat-fab color=""
-           style="background-color: #3A5BA2">
-          <mat-icon svgIcon="app:facebook"></mat-icon>
+        <a href="https://www.facebook.com/petman.io" target="_blank" mat-fab color="" style="color: #fff; background-color: #3A5BA2">
+          <fa-icon [icon]="['fab','facebook-f']"></fa-icon>
         </a>
-        <a href="https://twitter.com/petmanio" target="_blank" mat-fab color="" style="margin: 0 5px; background-color: #1EBEF0">
-          <mat-icon svgIcon="app:twitter"></mat-icon>
+        <a href="https://twitter.com/petmanio" target="_blank" mat-fab color="" style="margin: 0 5px; color: #fff; background-color: #1EBEF0">
+          <fa-icon [icon]="['fab','twitter']"></fa-icon>
         </a>
         <a href="mailto:info@petman.io" target="_top" mat-fab color="">
-          <mat-icon>email</mat-icon>
+          <fa-icon icon="envelope"></fa-icon>
         </a>
       </div>
     </div>
@@ -25,10 +24,8 @@
       <p style="padding-left: 5px">© Petman | 2018</p>
     </div>
     <div class="column has-text-right is-paddingless">
-      <a class="button is-white font-12"
-         *ngFor="let language of Language | appKeys"
-         [class.is-active]="currentLanguage === language.key"
-         (click)="onLanguageChange.emit(language.key)">{{language.key | translate}}</a>
+      <a class="button is-white font-12" *ngFor="let language of Language | appKeys" [class.is-active]="currentLanguage === language.key"
+        (click)="onLanguageChange.emit(language.key)">{{language.key | translate}}</a>
     </div>
   </div>
 </footer>

@@ -119,5 +119,10 @@
   "FACEBOOK_URL_HINT": "Lorem ipsum dolor sit amet",
   "FACEBOOK_URL_PATTERN_ERROR": "Lorem ipsum dolor sit amet",
   "PHONE_NUMBER_HINT": "Lorem ipsum dolor sit amet",
-  "PHONE_NUMBER_PATTERN_ERROR": "Lorem ipsum dolor sit amet"
+  "PHONE_NUMBER_PATTERN_ERROR": "Lorem ipsum dolor sit amet",
+  "CALL": "Call",
+  "FACEBOOK": "Facebook",
+  "SETTINGS": "Settings",
+  "FIRSTNAME": "Firstname",
+  "LASTNAME": "Lastname"
 }

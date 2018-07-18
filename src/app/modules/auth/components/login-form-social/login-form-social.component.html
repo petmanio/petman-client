@@ -6,7 +6,7 @@
   <mat-card-content>
     <p>
       <button type="submit" mat-raised-button class="button-facebook" (click)="submitted.emit()" i18n>
-        <mat-icon svgIcon="app:facebook"></mat-icon>{{'SIGN_UP_WITH_FACEBOOK' | translate}}</button>
+        <fa-icon [icon]="['fab','facebook-f']"></fa-icon>&nbsp; {{'SIGN_UP_WITH_FACEBOOK' | translate}}</button>
     </p>
   </mat-card-content>
 </mat-card>

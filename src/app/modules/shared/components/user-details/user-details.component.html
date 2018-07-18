@@ -1,10 +1,29 @@
-<div mat-card-avatar class="pm-card-avatar pm-avatar-medium"
-     [ngStyle]="{'background-image': 'url(' + user.userData.avatar + ')'}"></div>
+<div mat-card-avatar class="pm-card-avatar pm-avatar-medium" [ngStyle]="{'background-image': 'url(' + user.userData.avatar + ')'}"></div>
 <div class="is-size-4 has-text-grey">{{user.userData.name}}</div>
+<div class="columns is-marginless" *ngIf="!isOwner">
+  <div *ngIf="user?.userData?.phoneNumber" class="column has-text-centered">
+    <a class="control" target="_blank" [href]="'tel:' + user.userData.phoneNumber" mat-stroked-button>
+      <fa-icon icon="phone"></fa-icon> {{'CALL' | translate}}
+    </a>
+  </div>
+  <!-- <div *ngIf="user?.userData?.facebookUrl" class="column has-text-left-desktop">
+    <a class="control" target="_blank" [href]="user.userData.facebookUrl" mat-stroked-button>
+      <fa-icon [icon]="['fab','facebook-f']"></fa-icon> {{'FACEBOOK' | translate}}
+    </a>
+  </div> -->
+</div>
+<div *ngIf="user?.userData?.facebookUrl" class="columns is-marginless">
+  <div class="column is-paddingless has-text-left-desktop">{{'FACEBOOK' | translate}}</div>
+  <div class="column is-paddingless has-text-left-desktop text-overflow">
+    <a class="control" target="_blank" [href]="user.userData.facebookUrl">
+      {{user.userData.facebookUrl}}
+    </a>
+  </div>
+</div>
+<div *ngIf="user?.userData?.phoneNumber" class="columns is-marginless">
+  <div class="column is-paddingless has-text-left-desktop">{{'PHONE_NUMBER' | translate}}</div>
+  <div class="column is-paddingless has-text-left-desktop">{{user.userData.phoneNumber}}</div>
+</div>
 <br>
-<!--<div>-->
-<!--<a target="_blank" [href]="user.userData.facebook" mat-button>-->
-<!--<mat-icon svgIcon="app:facebook"></mat-icon> Facebook</a>-->
-  <!--<a target="_blank" mat-button>-->
-    <!--<mat-icon svgIcon="app:messenger"></mat-icon> Messenger</a>-->
-<!--</div>-->
+<mat-divider></mat-divider>
+<br>

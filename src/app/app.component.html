@@ -1,7 +1,8 @@
 <ng-progress thick="true" color="#6fb5fc"></ng-progress>
 <app-toolbar [loggedIn]="(loggedIn$ | async)"
              [selectedUser]="(selectedUser$ | async)"
-             (onLogOut)="onLogOut()"
+             (logOut)="logOut()"
+             (openSettings)="openSettings()"
              (toggleMenu)="toggleSidenav($event)">
 </app-toolbar>
 <app-sidenav [open]="sideNavState"

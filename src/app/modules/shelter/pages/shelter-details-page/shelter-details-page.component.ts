@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { DOCUMENT, Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -32,13 +32,12 @@ export class ShelterDetailsPageComponent implements OnInit, OnDestroy {
     private store: Store<fromShelter.State>,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location,
     private dialog: MatDialog,
     private meta: MetaService,
     private stripTagsPipe: StripTagsPipe,
     @Inject(DOCUMENT) private document: Document
   ) {
-    const paramsSubscription = route.params
+    const paramsSubscription = this.route.params
       .pipe(map(params => new Select(params.id)))
       .subscribe(store);
 

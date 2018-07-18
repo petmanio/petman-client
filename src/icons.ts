@@ -27,13 +27,34 @@ import {
   faMoneyBillAlt,
   faPrint,
   faTimesCircle,
+  faPhone
 } from '@fortawesome/free-solid-svg-icons';
 
 const icons = [
-  faFacebookF, faTwitter, faLinkedinIn, faGooglePlusG, faPinterestP, faRedditAlien, faTumblr,
-  faWhatsapp, faVk, faFacebookMessenger, faTelegramPlane, faStumbleupon, faXing, faCommentAlt,
-  faEnvelope, faCheck, faPrint, faExclamation, faLink, faEllipsisH, faMinus, faMoneyBillAlt,
-  faTimesCircle
+  faFacebookF,
+  faTwitter,
+  faLinkedinIn,
+  faGooglePlusG,
+  faPinterestP,
+  faRedditAlien,
+  faTumblr,
+  faWhatsapp,
+  faVk,
+  faFacebookMessenger,
+  faTelegramPlane,
+  faStumbleupon,
+  faXing,
+  faCommentAlt,
+  faEnvelope,
+  faCheck,
+  faPrint,
+  faExclamation,
+  faLink,
+  faEllipsisH,
+  faMinus,
+  faMoneyBillAlt,
+  faTimesCircle,
+  faPhone,
 ];
 
 library.add(...icons);

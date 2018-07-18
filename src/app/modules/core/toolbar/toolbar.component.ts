@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
 
 import { Language, UserDto } from '@petman/common';
 
@@ -11,11 +17,11 @@ import { Language, UserDto } from '@petman/common';
 export class ToolbarComponent {
   @Input() loggedIn: boolean;
   @Input() selectedUser: UserDto;
-  @Output() onLogOut = new EventEmitter<void>();
-  @Output() toggleMenu = new EventEmitter<void>();
+  @Output() logOut = new EventEmitter();
+  @Output() openSettings = new EventEmitter();
+  @Output() toggleMenu = new EventEmitter();
 
   Language = Language;
 
-  constructor() {
-  }
+  constructor() {}
 }
