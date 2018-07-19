@@ -25,7 +25,7 @@ export class PoiRootModule {}
   imports: [
     SharedModule,
     MaterialModule,
-    PoiModule,
+    PoiRootModule,
     PoiRoutingModule
   ],
   declarations: []

@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser/src/security/dom_sanitization_service';
 import { MatButtonToggleGroup } from '@angular/material';
@@ -10,7 +15,12 @@ import { Subscription } from 'rxjs';
 import { delay, take, tap } from 'rxjs/operators';
 import { PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 
-import { Pin, PoiDto, PoiListQueryRequestDto, PoiPinsQueryRequestDto } from '@petman/common';
+import {
+  Pin,
+  PoiDto,
+  PoiListQueryRequestDto,
+  PoiPinsQueryRequestDto
+} from '@petman/common';
 
 import * as fromMap from '@map/reducers';
 import * as fromPoi from '@poi/reducers';
@@ -29,7 +39,8 @@ import { MasonryComponent } from '@shared/components/masonry/masonry.component';
 export class MapPageComponent implements OnInit, OnDestroy {
   @ViewChild(GoogleMapComponent) map: GoogleMapComponent;
   @ViewChild(MasonryComponent) masonry: MasonryComponent;
-  @ViewChild(PerfectScrollbarDirective) perfectScrollbar: PerfectScrollbarDirective;
+  @ViewChild(PerfectScrollbarDirective)
+  perfectScrollbar: PerfectScrollbarDirective;
   @ViewChild('group') group: MatButtonToggleGroup;
   list: PoiDto[];
   limit = 12;
@@ -38,8 +49,6 @@ export class MapPageComponent implements OnInit, OnDestroy {
   selectedPrimaryCategories: number[] = [];
   masonryOptions = {
     trueOrder: false,
-    waitForImages: true,
-    useOwnImageLoader: false,
     mobileFirst: true,
     columns: 1,
     margin: 24,
@@ -60,7 +69,6 @@ export class MapPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private datePipe: DatePipe,
     private translateService: TranslateService,
     private store: Store<fromMap.State>,
     private actions$: Actions
@@ -69,11 +77,17 @@ export class MapPageComponent implements OnInit, OnDestroy {
       this.list = list;
       this.offset = Math.max(0, this.list.length - this.limit);
     });
-    const totalSubscription = this.total$.subscribe(total => this.total = total);
+    const totalSubscription = this.total$.subscribe(
+      total => (this.total = total)
+    );
 
-    const pinsSubscription = this.pins$.subscribe(pins => this.pins = pins.map(pin => PoiService.createMapPin(pin)));
+    const pinsSubscription = this.pins$.subscribe(
+      pins => (this.pins = pins.map(pin => PoiService.createMapPin(pin)))
+    );
 
-    this.subscriptions.push(...[listSubscription, totalSubscription, pinsSubscription]);
+    this.subscriptions.push(
+      ...[listSubscription, totalSubscription, pinsSubscription]
+    );
   }
 
   get canLoadMore(): boolean {
@@ -81,7 +95,9 @@ export class MapPageComponent implements OnInit, OnDestroy {
   }
 
   get filterInlineStyle(): SafeStyle {
-    const css = this.selectedPrimaryCategories.length ? 'padding-top: 10px !important' : '';
+    const css = this.selectedPrimaryCategories.length
+      ? 'padding-top: 10px !important'
+      : '';
 
     return this.sanitizer.bypassSecurityTrustStyle(css);
   }
@@ -117,7 +133,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
       avatar: poi.avatar,
       subtitle: this.translateService.instant(poi.primaryCategory.label),
       image: poi.images && poi.images[0],
-      content: `${poi.description || ''} <br> ${poi.address.fullAddress().replace(/\s+/g, ' ')}`,
+      content: `${poi.description ||
+        ''} <br> ${poi.address.fullAddress().replace(/\s+/g, ' ')}`,
       actions: {
         tooltipText: this.translateService.instant('SHOW_ON_MAP'),
         color: 'accent',
@@ -152,7 +169,6 @@ export class MapPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new List(this.listRequest));
     this.store.dispatch(new Pins(this.pinsRequest));
 
-    // TODO: find better way for recalculating
     this.actions$
       .ofType(PoiActionTypes.LIST_SUCCESS, PoiActionTypes.LIST_FAILURE)
       .pipe(
@@ -185,7 +201,11 @@ export class MapPageComponent implements OnInit, OnDestroy {
 
   scrollToCard(pin: Pin) {
     if (this.perfectScrollbar) {
-      this.perfectScrollbar.scrollToElement(`#${this.getMapGridId(pin)}`, null, 300);
+      this.perfectScrollbar.scrollToElement(
+        `#${this.getMapGridId(pin)}`,
+        null,
+        300
+      );
     }
   }
 }

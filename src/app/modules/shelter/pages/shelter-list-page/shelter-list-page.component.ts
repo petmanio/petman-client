@@ -27,9 +27,6 @@ export class ShelterListPageComponent implements OnInit, OnDestroy {
   total: number;
   offset = 0;
   masonryOptions = {
-    trueOrder: false,
-    waitForImages: true,
-    useOwnImageLoader: false,
     mobileFirst: true,
     columns: 1,
     margin: 24,

@@ -50,7 +50,7 @@ export class ShelterAddPageComponent implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(200),
+          Validators.minLength(100),
           Validators.maxLength(1000)
         ])
       ],

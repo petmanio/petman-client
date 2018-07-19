@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
             const selectedUserIdFromStorage = this.localStorageService.getItem(
               'selectedUserId'
             );
-            if (selectedUserIdFromStorage !== this.selectedUser.id) {
+            if (selectedUserIdFromStorage && selectedUserIdFromStorage !== this.selectedUser.id) {
               this.store.dispatch(new ChangeUser(selectedUserIdFromStorage));
             }
           }

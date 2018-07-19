@@ -15,14 +15,14 @@ import { debounce } from 'lodash';
 import { UtilService } from '@shared/services/util/util.service';
 
 export interface MacyOptions {
-  trueOrder?: boolean;
-  waitForImages?: boolean;
-  useOwnImageLoader?: boolean;
-  debug?: boolean;
-  mobileFirst?: boolean;
-  columns?: number;
-  margin?: number;
-  breakAt?: {
+  trueOrder: boolean;
+  waitForImages: boolean;
+  useOwnImageLoader: boolean;
+  debug: boolean;
+  mobileFirst: boolean;
+  columns: number;
+  margin: number;
+  breakAt: {
     [width: number]: number;
   };
 }
@@ -33,19 +33,23 @@ export interface MacyOptions {
   styleUrls: ['./masonry.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MasonryComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
+export class MasonryComponent
+  implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
   static WAIT_TIMEOUT = 300;
 
-  @Input() options: MacyOptions = {};
+  @Input() options: Partial<MacyOptions> = {};
   id = UtilService.randomHtmlId();
   instance: Macy;
   recalculate: Function;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
-  }
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
-    setTimeout(() => this.renderer.setStyle(this.el.nativeElement, 'visibility', 'visible'), MasonryComponent.WAIT_TIMEOUT * 2);
+    setTimeout(
+      () =>
+        this.renderer.setStyle(this.el.nativeElement, 'visibility', 'visible'),
+      MasonryComponent.WAIT_TIMEOUT * 2
+    );
   }
 
   ngAfterViewInit() {
@@ -54,12 +58,19 @@ export class MasonryComponent implements OnInit, AfterViewInit, AfterViewChecked
       ...this.options
     });
 
-    setTimeout(() => this.instance.recalculate(true), MasonryComponent.WAIT_TIMEOUT / 2);
-    this.recalculate = debounce(() => this.instance.recalculate(), MasonryComponent.WAIT_TIMEOUT);
+    setTimeout(
+      () => this.instance.recalculate(true),
+      MasonryComponent.WAIT_TIMEOUT / 2
+    );
+    this.recalculate = debounce(
+      () => this.instance.recalculate(),
+      MasonryComponent.WAIT_TIMEOUT
+    );
   }
 
   ngAfterViewChecked() {
     this.recalculate();
+    // this.instance.recalculate(true);
   }
 
   ngOnDestroy() {

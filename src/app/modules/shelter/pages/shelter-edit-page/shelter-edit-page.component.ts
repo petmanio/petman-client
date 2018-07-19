@@ -8,7 +8,7 @@ import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
@@ -26,7 +26,7 @@ import { ConfirmationDialogComponent } from '@shared/components/confirmation-dia
   styleUrls: ['./shelter-edit-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShelterEditPageComponent implements OnDestroy {
+export class ShelterEditPageComponent {
   form: FormGroup;
   shelter: ShelterDto;
   quillModules = SharedService.quillModules;
@@ -34,7 +34,6 @@ export class ShelterEditPageComponent implements OnDestroy {
   pending$ = this.store.pipe(select(fromShelter.getShelterAddPagePending));
   error$ = this.store.pipe(select(fromShelter.getShelterAddPageError));
   shelter$ = this.store.pipe(select(fromShelter.getSelected));
-  private subscriptions: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -53,12 +52,15 @@ export class ShelterEditPageComponent implements OnDestroy {
       )
       .subscribe(this.store);
 
-    const shelterSubscription = this.shelter$.subscribe(shelter => {
-      this.shelter = shelter;
-      this.form = this.formConfig;
-    });
-
-    this.subscriptions.push(...[shelterSubscription]);
+    this.shelter$
+      .pipe(
+        map(shelter => {
+          this.shelter = shelter;
+          this.form = this.formConfig;
+        }),
+        take(1)
+      )
+      .subscribe();
   }
 
   private get formConfig(): FormGroup {
@@ -68,8 +70,8 @@ export class ShelterEditPageComponent implements OnDestroy {
         this.shelter.description,
         Validators.compose([
           Validators.required,
-          Validators.minLength(200),
-          Validators.maxLength(2000)
+          Validators.minLength(100),
+          Validators.maxLength(1000)
         ])
       ],
       images: [
@@ -83,10 +85,6 @@ export class ShelterEditPageComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
-  }
-
   onButtonToggleChange() {
     const description = this.form.get('description');
     description.reset(this.shelter.description);
@@ -98,7 +96,7 @@ export class ShelterEditPageComponent implements OnDestroy {
     );
   }
 
-  onDelete() {
+  delete() {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: ModalSize.MEDIUM,
       data: {}
