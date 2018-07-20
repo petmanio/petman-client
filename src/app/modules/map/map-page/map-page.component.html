@@ -1,62 +1,25 @@
 <div class="pm-full-loader">
-  <div
-    *tdLoading="let item until !(pending$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
+  <div *tdLoading="let item until !(pending$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
     <div class="columns is-marginless is-vcentered is-mobile pm-map-filter">
       <div class="column is-marginless is-paddingless" [attr.style]="filterInlineStyle">
         <mat-form-field>
-          <mat-select [placeholder]="'CATEGORIES' | translate" multiple="true" [(ngModel)]="selectedPrimaryCategories"
-                      (ngModelChange)="updateList()">
+          <mat-select [placeholder]="'CATEGORIES' | translate" multiple="true" [(ngModel)]="selectedPrimaryCategories" (ngModelChange)="updateList()">
             <mat-option *ngFor="let primaryCategory of primaryCategories$ | async" [value]="primaryCategory.id">{{primaryCategory.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="column  is-marginless is-paddingless has-text-right">
-        <mat-button-toggle-group #group="matButtonToggleGroup" value="map">
-          <mat-button-toggle value="map">
-            <mat-icon>location_on</mat-icon>
-          </mat-button-toggle>
-          <mat-button-toggle value="grid">
-            <mat-icon>grid_on</mat-icon>
-          </mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
     </div>
-    <div class="pm-map-list">
-      <div *ngIf="group.value === 'grid'" infinite-scroll
-           infiniteScrollContainer=".pm-map-list"
-           infiniteScrollDistance="2"
-           infiniteScrollThrottle="300"
-           fromRoot="true"
-           (scrolled)="onLoadMore()">
-        <div>
-          <app-masonry [options]="masonryOptions">
-            <ng-container *ngFor="let item of list$ | async">
-              <app-masonry-item>
-                <app-card class="pm-cursor-pointer" [config]="getCardConfig(item)" (actionClick)="showOnMap(item)"></app-card>
-              </app-masonry-item>
-              <app-masonry-item *ngFor="let branch of item.branches">
-                <app-card [config]="getCardConfig(branch)" (click)="panTo(branch)"></app-card>
-              </app-masonry-item>
-            </ng-container>
-          </app-masonry>
-        </div>
-        <div class="columns is-marginless" [hidden]="!(list$ | appRxDelay | async)?.length">
-          <div class="column has-text-centered">
-            <app-progress-button [active]="pending$ | appRxDebounce | async" [disabled]="!canLoadMore" (click)="onLoadMore()">
-              {{ 'LOAD_MORE' | translate }}
-            </app-progress-button>
-          </div>
-        </div>
+    <div class="columns is-marginless pm-map-list">
+      <div class="column is-paddingless is-hidden-touch" style="overflow-x: auto;">
+        <app-masonry [options]="masonryOptions">
+          <app-masonry-item *ngFor="let pin of pins">
+            <app-card class="pm-cursor-pointer" [config]="getMapGridCardConfig(pin)" (click)="panTo(pin)"></app-card>
+          </app-masonry-item>
+        </app-masonry>
       </div>
-      <div *ngIf="group.value === 'map'" class="pm-map">
-        <div class="ps pm-map-grid" perfectScrollbar>
-          <app-card class="pm-cursor-pointer"
-                    *ngFor="let pin of pins"
-                    [id]="getMapGridId(pin)"
-                    [config]="getMapGridCardConfig(pin)" (click)="panTo(pin)"></app-card>
-        </div>
+      <div class="column is-paddingless">
         <div style="height: 100%;">
-          <app-google-map [pins]="pins" (clickOnPin)="scrollToCard($event)"></app-google-map>
+          <app-google-map [pins]="pins"></app-google-map>
         </div>
       </div>
     </div>

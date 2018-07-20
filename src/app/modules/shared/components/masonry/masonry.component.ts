@@ -61,6 +61,8 @@ export class MasonryComponent
 
   ngAfterViewChecked() {
     this.instance.recalculateOnImageLoad();
+    this.instance.recalculate()
+    setTimeout(() => this.instance.recalculate(), MasonryComponent.WAIT_TIMEOUT)
   }
 
   ngOnDestroy() {

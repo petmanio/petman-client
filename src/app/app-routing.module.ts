@@ -8,9 +8,11 @@ import { NotFoundPageComponent } from '@app/pages/not-found-page/not-found-page.
 
 const routes: Routes = [
   {
-    path: '', component: HomePageComponent, pathMatch: 'full',
+    path: '',
+    component: HomePageComponent,
+    pathMatch: 'full',
     canActivate: [MetaGuard],
-    data: { showSidenav: false },
+    data: { showSidenav: false }
   },
   {
     path: 'auth',
@@ -24,14 +26,24 @@ const routes: Routes = [
     canActivate: [MetaGuard],
     data: { showSidenav: true }
   },
-  { path: 'pois', loadChildren: './modules/poi/poi.module#PoiModule', canActivate: [MetaGuard], data: { showSidenav: true } },
+  {
+    path: 'pois',
+    loadChildren: './modules/poi/poi.module#PoiModule',
+    canActivate: [MetaGuard],
+    data: { showSidenav: true }
+  },
   {
     path: 'map',
     loadChildren: './modules/map/map.module#MapModule',
     canActivate: [MetaGuard],
     data: { showSidenav: true, hideFooter: true }
   },
-  { path: '404', component: NotFoundPageComponent, canActivate: [MetaGuard], data: { showSidenav: false } },
+  {
+    path: '404',
+    component: NotFoundPageComponent,
+    canActivate: [MetaGuard],
+    data: { showSidenav: false }
+  },
   { path: '**', redirectTo: '404' }
 ];
 
@@ -39,4 +51,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled' })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

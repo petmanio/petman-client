@@ -7,25 +7,16 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser/src/security/dom_sanitization_service';
-import { MatButtonToggleGroup } from '@angular/material';
 import { Store } from '@ngrx/store';
-import { Actions } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { delay, take, tap } from 'rxjs/operators';
-import { PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 
-import {
-  Pin,
-  PoiDto,
-  PoiListQueryRequestDto,
-  PoiPinsQueryRequestDto
-} from '@petman/common';
+import { Pin, PoiPinsQueryRequestDto } from '@petman/common';
 
 import * as fromMap from '@map/reducers';
 import * as fromPoi from '@poi/reducers';
 import { PoiService } from '@poi/poi.service';
-import { List, More, Pins, PoiActionTypes } from '@poi/actions/poi.actions';
+import { Pins } from '@poi/actions/poi.actions';
 import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
 import { Config } from '@shared/components/card/card.component';
 import { MasonryComponent } from '@shared/components/masonry/masonry.component';
@@ -39,13 +30,6 @@ import { MasonryComponent } from '@shared/components/masonry/masonry.component';
 export class MapPageComponent implements OnInit, OnDestroy {
   @ViewChild(GoogleMapComponent) map: GoogleMapComponent;
   @ViewChild(MasonryComponent) masonry: MasonryComponent;
-  @ViewChild(PerfectScrollbarDirective)
-  perfectScrollbar: PerfectScrollbarDirective;
-  @ViewChild('group') group: MatButtonToggleGroup;
-  list: PoiDto[];
-  limit = 12;
-  total: number;
-  offset = 0;
   selectedPrimaryCategories: number[] = [];
   masonryOptions = {
     trueOrder: false,
@@ -53,14 +37,12 @@ export class MapPageComponent implements OnInit, OnDestroy {
     columns: 1,
     margin: 24,
     breakAt: {
-      940: 4,
+      940: 3,
       520: 2,
       400: 1
     }
   };
   pins: Pin[];
-  list$ = this.store.select(fromPoi.getAll);
-  total$ = this.store.select(fromPoi.getTotal);
   pins$ = this.store.select(fromPoi.getPinAll);
   primaryCategories$ = this.store.select(fromPoi.getCategoryAll);
   error$ = this.store.select(fromMap.getMapPageError);
@@ -70,28 +52,13 @@ export class MapPageComponent implements OnInit, OnDestroy {
   constructor(
     private sanitizer: DomSanitizer,
     private translateService: TranslateService,
-    private store: Store<fromMap.State>,
-    private actions$: Actions
+    private store: Store<fromMap.State>
   ) {
-    const listSubscription = this.list$.subscribe(list => {
-      this.list = list;
-      this.offset = Math.max(0, this.list.length - this.limit);
-    });
-    const totalSubscription = this.total$.subscribe(
-      total => (this.total = total)
-    );
-
     const pinsSubscription = this.pins$.subscribe(
       pins => (this.pins = pins.map(pin => PoiService.createMapPin(pin)))
     );
 
-    this.subscriptions.push(
-      ...[listSubscription, totalSubscription, pinsSubscription]
-    );
-  }
-
-  get canLoadMore(): boolean {
-    return this.offset + this.limit < this.total;
+    this.subscriptions.push(...[pinsSubscription]);
   }
 
   get filterInlineStyle(): SafeStyle {
@@ -100,14 +67,6 @@ export class MapPageComponent implements OnInit, OnDestroy {
       : '';
 
     return this.sanitizer.bypassSecurityTrustStyle(css);
-  }
-
-  private get listRequest(): PoiListQueryRequestDto {
-    return {
-      offset: this.offset,
-      limit: this.limit,
-      primaryCategories: this.selectedPrimaryCategories
-    };
   }
 
   private get pinsRequest(): PoiPinsQueryRequestDto {
@@ -119,28 +78,11 @@ export class MapPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(new List(this.listRequest));
     this.store.dispatch(new Pins(this.pinsRequest));
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
-  }
-
-  getCardConfig(poi: PoiDto): Config {
-    return {
-      title: poi.name,
-      avatar: poi.avatar,
-      subtitle: this.translateService.instant(poi.primaryCategory.label),
-      image: poi.images && poi.images[0],
-      content: `${poi.description ||
-        ''} <br> ${poi.address.fullAddress().replace(/\s+/g, ' ')}`,
-      actions: {
-        tooltipText: this.translateService.instant('SHOW_ON_MAP'),
-        color: 'accent',
-        icon: 'location_on'
-      }
-    };
   }
 
   getMapGridCardConfig(pin: Pin): Config {
@@ -152,60 +94,13 @@ export class MapPageComponent implements OnInit, OnDestroy {
     };
   }
 
-  getMapGridId(pin: Pin): string {
-    return `map-grid-${pin.meta.id}`;
-  }
-
-  onLoadMore() {
-    if (this.canLoadMore) {
-      this.offset += this.limit;
-      this.store.dispatch(new More(this.listRequest));
-    }
-  }
-
   updateList() {
-    this.offset = 0;
-    this.limit = 12;
-    this.store.dispatch(new List(this.listRequest));
     this.store.dispatch(new Pins(this.pinsRequest));
-
-    this.actions$
-      .ofType(PoiActionTypes.LIST_SUCCESS, PoiActionTypes.LIST_FAILURE)
-      .pipe(
-        take(1),
-        delay(MasonryComponent.WAIT_TIMEOUT),
-        tap(() => {
-          if (this.masonry && this.masonry.instance) {
-            this.masonry.instance.recalculateOnImageLoad();
-          }
-        }),
-      ).subscribe();
   }
 
   panTo(pin: Pin) {
     if (this.map) {
       this.map.panToPin(pin);
-    }
-  }
-
-  showOnMap(poi: PoiDto) {
-    if (this.group) {
-      this.group.value = 'map';
-      setTimeout(() => {
-        const pin = PoiService.createMapPin(poi);
-        this.panTo(pin);
-        this.scrollToCard(pin);
-      }, 500);
-    }
-  }
-
-  scrollToCard(pin: Pin) {
-    if (this.perfectScrollbar) {
-      this.perfectScrollbar.scrollToElement(
-        `#${this.getMapGridId(pin)}`,
-        null,
-        300
-      );
     }
   }
 }
