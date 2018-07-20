@@ -176,7 +176,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
         delay(MasonryComponent.WAIT_TIMEOUT),
         tap(() => {
           if (this.masonry && this.masonry.instance) {
-            this.masonry.instance.recalculate(true);
+            this.masonry.instance.recalculateOnImageLoad();
           }
         }),
       ).subscribe();

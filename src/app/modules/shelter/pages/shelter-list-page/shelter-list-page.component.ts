@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { DatePipe, DOCUMENT, Location } from '@angular/common';
+import { DatePipe, DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
@@ -46,14 +46,12 @@ export class ShelterListPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private location: Location,
     private dialog: MatDialog,
     private store: Store<fromShelter.State>,
     private translateService: TranslateService,
     private datePipe: DatePipe,
     @Inject(DOCUMENT) private document: Document
   ) {
-
     const listSubscription = this.list$.subscribe(list => {
       this.list = list;
       this.offset = Math.max(0, this.list.length - this.limit);

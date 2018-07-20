@@ -10,7 +10,6 @@ import {
   OnInit,
   Renderer2
 } from '@angular/core';
-import { debounce } from 'lodash';
 
 import { UtilService } from '@shared/services/util/util.service';
 
@@ -40,7 +39,6 @@ export class MasonryComponent
   @Input() options: Partial<MacyOptions> = {};
   id = UtilService.randomHtmlId();
   instance: Macy;
-  recalculate: Function;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
@@ -48,7 +46,7 @@ export class MasonryComponent
     setTimeout(
       () =>
         this.renderer.setStyle(this.el.nativeElement, 'visibility', 'visible'),
-      MasonryComponent.WAIT_TIMEOUT * 2
+      MasonryComponent.WAIT_TIMEOUT
     );
   }
 
@@ -58,19 +56,11 @@ export class MasonryComponent
       ...this.options
     });
 
-    setTimeout(
-      () => this.instance.recalculate(true),
-      MasonryComponent.WAIT_TIMEOUT / 2
-    );
-    this.recalculate = debounce(
-      () => this.instance.recalculate(),
-      MasonryComponent.WAIT_TIMEOUT
-    );
+    this.instance.recalculateOnImageLoad();
   }
 
   ngAfterViewChecked() {
-    this.recalculate();
-    // this.instance.recalculate(true);
+    this.instance.recalculateOnImageLoad();
   }
 
   ngOnDestroy() {

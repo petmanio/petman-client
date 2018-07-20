@@ -113,6 +113,7 @@
   "DEFAULT_DESCRIPTION": "Lorem ipsum dolor sit amet",
   "APP_NAME": "Petman",
   "WELCOME_DIALOG_TITLE": "Lorem ipsum dolor sit amet, consectetur",
+  "WELCOME_DIALOG_CONTENT": "Lorem ipsum dolor sit amet, consectetur",
   "PHONE_NUMBER": "Phone number",
   "USER_PROFILE_UPDATE_DIALOG_TITLE": "Lorem ipsum dolor sit amet",
   "USER_PROFILE_UPDATE_DIALOG_CONTENT": "Lorem ipsum dolor sit amet",
