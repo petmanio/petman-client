@@ -10,8 +10,8 @@
       </div>
     </div>
     <div class="columns is-marginless pm-map-list">
-      <div class="column is-paddingless is-hidden-touch" style="overflow-x: auto;">
-        <app-masonry [options]="masonryOptions">
+      <div class="column is-paddingless is-hidden-touch" style="overflow-x: auto; margin-left: 12px; margin-right: 12px;">
+        <app-masonry [options]="masonryOptions" style="padding-left: 12px; padding-right: 12px;">
           <app-masonry-item *ngFor="let pin of pins">
             <app-card class="pm-cursor-pointer" [config]="getMapGridCardConfig(pin)" (click)="panTo(pin)"></app-card>
           </app-masonry-item>
@@ -19,7 +19,7 @@
       </div>
       <div class="column is-paddingless">
         <div style="height: 100%;">
-          <app-google-map [pins]="pins"></app-google-map>
+          <app-google-map style="height: 100%;" [pins]="pins"></app-google-map>
         </div>
       </div>
     </div>
