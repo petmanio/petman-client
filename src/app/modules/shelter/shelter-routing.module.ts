@@ -5,16 +5,16 @@ import { AuthGuard } from '@auth/auth.guard';
 
 import { ShelterExistsGuard } from '@shelter/shelter-exists.guard';
 import { ShelterOwnerGuard } from '@shelter/shelter-owner.guard';
-import { ShelterAddPageComponent } from '@shelter/pages/shelter-add-page/shelter-add-page.component';
+import { ShelterCreatePageComponent } from '@shelter/pages/shelter-create-page/shelter-create-page.component';
 import { ShelterListPageComponent } from '@shelter/pages/shelter-list-page/shelter-list-page.component';
 import { ShelterDetailsPageComponent } from '@shelter/pages/shelter-details-page/shelter-details-page.component';
-import { ShelterEditPageComponent } from '@shelter/pages/shelter-edit-page/shelter-edit-page.component';
+import { ShelterUpdatePageComponent } from '@shelter/pages/shelter-update-page/shelter-update-page.component';
 
 export const routes: Routes = [
   { path: '', component: ShelterListPageComponent, pathMatch: 'full' },
-  { path: 'add', component: ShelterAddPageComponent, canActivate: [AuthGuard] },
+  { path: 'add', component: ShelterCreatePageComponent, canActivate: [AuthGuard] },
   { path: ':id', component: ShelterDetailsPageComponent, canActivate: [ShelterExistsGuard] },
-  { path: ':id/edit', component: ShelterEditPageComponent, canActivate: [AuthGuard, ShelterExistsGuard, ShelterOwnerGuard] }
+  { path: ':id/edit', component: ShelterUpdatePageComponent, canActivate: [AuthGuard, ShelterExistsGuard, ShelterOwnerGuard] }
 ];
 
 @NgModule({

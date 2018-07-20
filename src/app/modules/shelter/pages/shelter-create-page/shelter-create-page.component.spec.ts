@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShelterEditPageComponent } from './shelter-edit-page.component';
+import { ShelterCreatePageComponent } from './shelter-create-page.component';
 import { Store, StoreModule } from '@ngrx/store';
 
-describe('ShelterEditPageComponent', () => {
-  let component: ShelterEditPageComponent;
-  let fixture: ComponentFixture<ShelterEditPageComponent>;
+describe('ShelterCreatePageComponent', () => {
+  let component: ShelterCreatePageComponent;
+  let fixture: ComponentFixture<ShelterCreatePageComponent>;
   let store: Store<any>;
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [ StoreModule.forRoot({}) ],
-      declarations: [ ShelterEditPageComponent ]
+      declarations: [ ShelterCreatePageComponent ]
     });
 
     await TestBed.compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShelterEditPageComponent);
+    fixture = TestBed.createComponent(ShelterCreatePageComponent);
     component = fixture.componentInstance;
     store = TestBed.get(Store);
 

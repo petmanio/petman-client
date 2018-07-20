@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: './modules/auth/auth.module#AuthModule',
     canActivate: [DenyAuthGuard, MetaGuard],
-    data: { showSidenav: false }
+    data: { showSidenav: false, hideSignUpButton: true }
   },
   {
     path: 'shelters',

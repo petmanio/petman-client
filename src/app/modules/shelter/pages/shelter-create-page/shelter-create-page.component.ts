@@ -24,12 +24,12 @@ import { SharedService } from '@shared/services/shared/shared.service';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
 
 @Component({
-  selector: 'app-shelter-add-page',
-  templateUrl: './shelter-add-page.component.html',
-  styleUrls: ['./shelter-add-page.component.scss'],
+  selector: 'app-shelter-create-page',
+  templateUrl: './shelter-create-page.component.html',
+  styleUrls: ['./shelter-create-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShelterAddPageComponent implements OnInit {
+export class ShelterCreatePageComponent implements OnInit {
   form: FormGroup;
   selectedUser: UserDto;
   quillModules = SharedService.quillModules;

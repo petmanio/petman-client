@@ -49,6 +49,6 @@
     </mat-menu>
   </ng-container>
   <ng-template #unauthorized>
-    <button mat-raised-button color="accent" routerLink="/auth/login">{{'SIGN_UP' | translate}}</button>
+    <a *ngIf="!hideSignUpButton" mat-raised-button color="accent" [routerLink]="['/auth/login']" [queryParams]="{next: redirectAfterSignUp}">{{'SIGN_UP' | translate}}</a>
   </ng-template>
 </mat-toolbar>

@@ -42,6 +42,8 @@ export class AppComponent implements OnInit, OnDestroy {
   sideNavState: boolean;
   currentLanguage: string;
   selectedUser: UserDto;
+  redirectAfterSignUp: string = null;
+  hideSignUpButton = false;
   showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav));
   loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
   user$ = this.store.pipe(select(fromAuth.getUser));
@@ -77,7 +79,6 @@ export class AppComponent implements OnInit, OnDestroy {
         delay(300),
         tap((selectedUser: UserDto) => {
           this.selectedUser = selectedUser;
-
           if (this.selectedUser) {
             const selectedUserIdFromStorage = this.localStorageService.getItem(
               'selectedUserId'
@@ -106,14 +107,18 @@ export class AppComponent implements OnInit, OnDestroy {
       const [active, breakpoint] = event;
       this.sideNavMode = breakpoint.matches ? 'side' : 'push';
       if (active instanceof NavigationEnd) {
+        this.redirectAfterSignUp = ['/', '/404'].indexOf(active.urlAfterRedirects) === -1 ? active.urlAfterRedirects : null;
+
         if (!breakpoint.matches) {
           this.store.dispatch(new CloseSidenav());
         }
+
         // const showSidenav = this.activatedRoute.data['showSidenav'];
         const showSidenav = UtilService.getRouteDataByKey(
           this.activatedRoute,
           'showSidenav'
         );
+
         if (typeof showSidenav !== 'undefined') {
           if (showSidenav && breakpoint.matches) {
             this.store.dispatch(new OpenSidenav());
@@ -125,6 +130,11 @@ export class AppComponent implements OnInit, OnDestroy {
         this.hideFooter = UtilService.getRouteDataByKey(
           this.activatedRoute,
           'hideFooter'
+        );
+
+        this.hideSignUpButton = UtilService.getRouteDataByKey(
+          this.activatedRoute,
+          'hideSignUpButton'
         );
       }
     });

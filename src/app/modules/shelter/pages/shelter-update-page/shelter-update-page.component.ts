@@ -21,12 +21,12 @@ import { SharedService } from '@shared/services/shared/shared.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-shelter-edit-page',
-  templateUrl: './shelter-edit-page.component.html',
-  styleUrls: ['./shelter-edit-page.component.scss'],
+  selector: 'app-shelter-update-page',
+  templateUrl: './shelter-update-page.component.html',
+  styleUrls: ['./shelter-update-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShelterEditPageComponent {
+export class ShelterUpdatePageComponent {
   form: FormGroup;
   shelter: ShelterDto;
   quillModules = SharedService.quillModules;

@@ -17,6 +17,8 @@ import { Language, UserDto } from '@petman/common';
 export class ToolbarComponent {
   @Input() loggedIn: boolean;
   @Input() selectedUser: UserDto;
+  @Input() redirectAfterSignUp: string;
+  @Input() hideSignUpButton: string;
   @Output() logOut = new EventEmitter();
   @Output() openSettings = new EventEmitter();
   @Output() toggleMenu = new EventEmitter();
