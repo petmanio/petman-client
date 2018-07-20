@@ -10,6 +10,7 @@ import { UserDto } from '@petman/common';
 })
 export class UserDetailsComponent implements OnInit {
   @Input() isOwner: boolean;
+  @Input() loggedIn: boolean;
   @Input() user: UserDto;
 
   constructor() {

@@ -2,7 +2,7 @@
   <div class="column is-10 is-offset-1">
     <div class="columns is-vcentered">
       <div class="column is-3 has-text-centered">
-        <app-user-details [isOwner]="(shelter$ | async)?.isOwner" [user]="(shelter$ | async)?.user"></app-user-details>
+        <app-user-details [loggedIn]="loggedIn$ | async" [isOwner]="(shelter$ | async)?.isOwner" [user]="(shelter$ | async)?.user"></app-user-details>
         <div>
           <fa-icon icon="money-bill-alt"></fa-icon>
           {{'DAILY_PRICE' | translate}}<br>

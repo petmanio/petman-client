@@ -126,5 +126,6 @@
   "SETTINGS": "Settings",
   "PROFILE_SETTINGS": "Profile settings",
   "FIRSTNAME": "Firstname",
-  "LASTNAME": "Lastname"
+  "LASTNAME": "Lastname",
+  "PLEASE_LOGIN_FOR_CONTACTS_INFO": "Lorem ipsum dolor sit amet"
 }

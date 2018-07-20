@@ -10,6 +10,7 @@ import { StripTagsPipe } from 'ngx-pipes';
 
 import { ModalSize, ShelterDto } from '@petman/common';
 
+import * as fromAuth from '@auth/reducers';
 import * as fromShelter from '@shelter/reducers';
 import { environment } from '@environments/environment';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
@@ -23,9 +24,10 @@ import { Select } from '@shelter/actions/shelter.actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShelterDetailsPageComponent implements OnInit, OnDestroy {
+  slides: SlideConfig[] = [];
   shelter: ShelterDto;
   shelter$ = this.store.pipe(select(fromShelter.getSelected));
-  slides: SlideConfig[] = [];
+  loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
   private subscriptions: Subscription[] = [];
 
   constructor(
