@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -24,6 +30,7 @@ import { Select } from '@shelter/actions/shelter.actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShelterDetailsPageComponent implements OnInit, OnDestroy {
+  url: string;
   slides: SlideConfig[] = [];
   shelter: ShelterDto;
   shelter$ = this.store.pipe(select(fromShelter.getSelected));
@@ -43,34 +50,40 @@ export class ShelterDetailsPageComponent implements OnInit, OnDestroy {
       .pipe(map(params => new Select(params.id)))
       .subscribe(store);
 
+    this.url = this.router.url;
+
     const shelterSubscription = this.shelter$.subscribe(shelter => {
       this.shelter = shelter;
 
       if (this.shelter) {
         this.slides = this.shelter.images.map(img => ({ src: img }));
 
-        this.meta.setTag('og:description', this.stripTagsPipe.transform(this.shelter.description));
-        this.meta.setTag('og:image', environment.origin + this.shelter.images[0]);
+        this.meta.setTag(
+          'og:description',
+          this.stripTagsPipe.transform(this.shelter.description)
+        );
+        this.meta.setTag(
+          'og:image',
+          environment.origin + this.shelter.images[0]
+        );
       }
     });
 
     this.subscriptions.push(...[paramsSubscription, shelterSubscription]);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   onShare() {
-    const url = this.document.location.origin + this.router.createUrlTree(['shelters', this.shelter.id]).toString();
+    const url = this.document.location.origin + this.url;
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,
       data: { url }
     });
-    dialogRef.afterClosed().subscribe(shareOptions => {
-    });
+    dialogRef.afterClosed().subscribe(shareOptions => {});
   }
 }

@@ -22,7 +22,7 @@
   </div>
 </ng-container>
 <ng-template #loginNote>
-  <mat-hint class="has-text-info">{{"PLEASE_LOGIN_FOR_CONTACTS_INFO" | translate}}</mat-hint>
+  <a [routerLink]="['/auth/login']" [queryParams]="{next: redirectAfterSignUp}">{{"PLEASE_LOGIN_FOR_CONTACTS_INFO" | translate}}</a>
 </ng-template>
 <br>
 <mat-divider></mat-divider>

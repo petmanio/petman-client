@@ -11,6 +11,7 @@ import { UserDto } from '@petman/common';
 export class UserDetailsComponent implements OnInit {
   @Input() isOwner: boolean;
   @Input() loggedIn: boolean;
+  @Input() redirectAfterSignUp: string;
   @Input() user: UserDto;
 
   constructor() {
