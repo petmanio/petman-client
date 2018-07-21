@@ -26,7 +26,7 @@
       </div>
       <div class="columns is-marginless" [hidden]="!(list$ | appRxDelay | async)?.length">
         <div class="column has-text-centered">
-          <app-progress-button spinnerColor="accent" [active]="pending$ | appRxDebounce | async" [disabled]="!canLoadMore" (click)="onLoadMore()">
+          <app-progress-button spinnerColor="accent" [active]="pending$ | appRxDebounce | async" [hidden]="!canLoadMore" (click)="onLoadMore()">
             {{ 'LOAD_MORE' | translate }}
           </app-progress-button>
         </div>

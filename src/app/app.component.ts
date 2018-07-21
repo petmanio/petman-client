@@ -83,7 +83,10 @@ export class AppComponent implements OnInit, OnDestroy {
             const selectedUserIdFromStorage = this.localStorageService.getItem(
               'selectedUserId'
             );
-            if (selectedUserIdFromStorage && selectedUserIdFromStorage !== this.selectedUser.id) {
+            if (
+              selectedUserIdFromStorage &&
+              selectedUserIdFromStorage !== this.selectedUser.id
+            ) {
               this.store.dispatch(new ChangeUser(selectedUserIdFromStorage));
             }
           }
@@ -107,7 +110,19 @@ export class AppComponent implements OnInit, OnDestroy {
       const [active, breakpoint] = event;
       this.sideNavMode = breakpoint.matches ? 'side' : 'push';
       if (active instanceof NavigationEnd) {
-        this.redirectAfterSignUp = ['/', '/404'].indexOf(active.urlAfterRedirects) === -1 ? active.urlAfterRedirects : null;
+        this.redirectAfterSignUp =
+          ['/', '/404'].indexOf(active.urlAfterRedirects) === -1
+            ? active.urlAfterRedirects
+            : null;
+
+        if (isPlatformBrowser(this.platformId)) {
+          const matDrawerContent = document.querySelector(
+            '.mat-drawer-content'
+          );
+          if (matDrawerContent) {
+            matDrawerContent.scrollTo(0, 0);
+          }
+        }
 
         if (!breakpoint.matches) {
           this.store.dispatch(new CloseSidenav());
