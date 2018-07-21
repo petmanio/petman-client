@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
   sideNavState: boolean;
   currentLanguage: string;
   selectedUser: UserDto;
-  redirectAfterSignUp: string = null;
+  redirectAfterSignUp: string;
   hideSignUpButton = false;
   showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav));
   loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
