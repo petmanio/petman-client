@@ -1,11 +1,12 @@
 <div class="pm-content mdl-layout__content">
   <div class="pm-be-together-section has-text-centered">
-    <div class="logo-font pm-slogan">give a happiness.</div>
-    <div class="logo-font pm-sub-slogan">welcome to petman... one big family.
+    <div class="logo-font pm-slogan">{{'PETMAN_SLOGAN' | translate}}</div>
+    <div class="logo-font pm-sub-slogan">
+        {{'PETMAN_SUBSLOGAN' | translate}}
     </div>
   </div>
   <div class="pm-more-section">
-    <div class="pm-section-title mat-display-1">More from Petman</div>
+    <div class="pm-section-title is-size-4 is-size-6-touch">{{'MORE_FROM_PETMAN' | translate}}</div>
     <div class="columns pm-card-container">
       <div class="column is-3">
         <mat-card class="pm-cursor-pointer" routerLink="/shelters">
@@ -15,7 +16,7 @@
           <img mat-card-image src="/assets/shelter-cover.jpg">
           <mat-card-content>
             <span class="has-text-weight-light mdl-typography--subhead pm-vertical-align pm-preview-content">
-              {{'SITTERS_INTRO' | translate}}
+              {{'SHELTERS_INTRO' | translate}}
             </span>
           </mat-card-content>
           <mat-card-actions>
@@ -72,7 +73,7 @@
           <img mat-card-image src="/assets/lost-and-found-cover.jpg">
           <mat-card-content>
             <span class="has-text-weight-light mdl-typography--subhead pm-vertical-align pm-preview-content">
-              {{'LOST_OR_FOUND_INTRO' | translate}}
+              {{'LOST_AND_FOUND_INTRO' | translate}}
             </span>
           </mat-card-content>
           <mat-card-actions>
@@ -86,7 +87,7 @@
     </div>
   </div>
   <div class="pm-map-section">
-    <div class="pm-section-title mat-display-1">{{'HOME_MAP_HEADER' | translate}}</div>
+    <div class="pm-section-title is-size-4 is-size-6-touch">{{'MAP_INTRO' | translate}}</div>
     <div class="columns is-marginless">
       <div class="column is-paddingless">
         <mat-card>

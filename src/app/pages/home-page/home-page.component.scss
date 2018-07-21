@@ -2,7 +2,8 @@ a img {
   border: 0;
 }
 
-::-moz-selection, ::selection {
+::-moz-selection,
+::selection {
   background-color: #6ab344;
   color: #fff;
 }
@@ -26,11 +27,19 @@ a img {
 .pm-slogan {
   font-size: 60px;
   padding-top: 200px;
+  text-transform: lowercase;
 }
 
 .pm-sub-slogan {
   font-size: 21px;
   padding-top: 24px;
+  text-transform: lowercase;
+}
+
+.pm-section-title {
+  margin-left: 12px;
+  margin-bottom: 24px;
+  font-weight: 300;
 }
 
 .pm-map-section {
@@ -39,11 +48,6 @@ a img {
   max-width: 80%;
   margin-left: auto;
   margin-right: auto;
-
-  .pm-section-title {
-    margin-left: 12px;
-    margin-bottom: 24px;
-  }
 
   app-google-map {
     min-height: 400px;
@@ -73,10 +77,6 @@ a img {
   max-width: 80%;
   margin-left: auto;
   margin-right: auto;
-  .pm-section-title {
-    margin-left: 12px;
-    margin-bottom: 24px;
-  }
 }
 
 .pm-card-container {
