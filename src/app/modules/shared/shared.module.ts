@@ -38,7 +38,6 @@ import { UserDetailsComponent } from '@shared/components/user-details/user-detai
 import { MasonryComponent } from '@shared/components/masonry/masonry.component';
 import { MasonryItemComponent } from '@shared/components/masonry-item/masonry-item.component';
 import { AddApplicationComponent } from '@shared/components/add-application/add-application.component';
-import { MediumEditorComponent } from '@shared/components/medium-editor/medium-editor.component';
 import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
 import { ControlMessagesComponent } from '@shared/components/control-messages/control-messages.component';
 import { UserDetailsUpdateDialogComponent } from './components/user-details-update-dialog/user-details-update-dialog.component';
@@ -73,7 +72,6 @@ const declarations = [
   MasonryComponent,
   MasonryItemComponent,
   AddApplicationComponent,
-  MediumEditorComponent,
   GoogleMapComponent,
   ControlMessagesComponent,
   UserDetailsUpdateDialogComponent

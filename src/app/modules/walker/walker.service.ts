@@ -1,10 +1,8 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
-import { forEach } from 'lodash';
 
 import { ListQueryRequestDto, WalkerDto, WalkerListResponseDto, WalkerRequestDto } from '@petman/common';
 
