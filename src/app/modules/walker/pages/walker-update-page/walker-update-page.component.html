@@ -4,7 +4,6 @@
     <div class="column is-8 is-offset-2">
       <td-message [opened]="error$ | async" [label]="'INTERNAL_ERROR_TITLE' | translate" [sublabel]="'INTERNAL_ERROR' | translate"
         color="warn" icon="error"></td-message>
-      <p class="pm-intro is-size-5 is-size-6-touch">{{'BECAME_SHELTER_INTO' | translate}}</p>
       <form [formGroup]="form">
         <br>
         <mat-hint>{{'DESCRIPTION' | translate}}</mat-hint>
@@ -20,29 +19,6 @@
         <br>
         <div class="columns">
           <div class="column">
-            <div class="pm-image-upload">
-              <td-file-upload #fileMultipleUpload formControlName='images' accept="image/gif, image/jpeg, image/png" defaultColor="accent"
-                activeColor="warn" cancelColor="primary" multiple>
-                <mat-icon>file_upload</mat-icon>
-                <span>
-                  {{ fileMultipleUpload.value?.name }}
-                  <span *ngIf="fileMultipleUpload.value?.length" translate [translateParams]="{n: fileMultipleUpload.value.length}">N_FILES_SELECTED</span>
-                </span>
-                <ng-template td-file-input-label>
-                  <mat-icon>attach_file</mat-icon>
-                  <span>
-                    {{'SELECT_IMAGES' | translate}}
-                  </span>
-                </ng-template>
-              </td-file-upload>
-              <mat-hint *ngIf="!form.get('images').hasError('maxlength')">{{'IMAGE_HINT' | translate}}</mat-hint>
-              <mat-error *ngIf="form.get('images').hasError('maxlength')">{{'IMAGE_ERROR' | translate}}</mat-error>
-              <!--<div class="pm-image-preview" [hidden]="form.get('images').value">-->
-              <!--<div *ngFor="let image of shelter?.images" [style.background-image]="'url(' + image + ')'">-->
-              <!--<fa-icon icon="times-circle"></fa-icon>-->
-              <!--</div>-->
-              <!--</div>-->
-            </div>
           </div>
           <div class="column is-4">
             <mat-form-field>
@@ -55,11 +31,11 @@
         <br>
         <div class="columns">
           <div class="column has-text-right">
-            <button mat-raised-button [disabled]="!form.dirty" type="reset" color="warn">
-              {{ 'CLEAR' | translate }}
+            <button mat-raised-button color="warn" (click)="delete()">
+              {{ 'DELETE' | translate }}
             </button>&nbsp;
-            <button mat-raised-button [disabled]="!form.valid" type="submit" color="accent" (click)="create()">
-              {{ 'ADD' | translate }}
+            <button mat-raised-button [disabled]="!form.valid" type="submit" color="accent" (click)="update()">
+              {{ 'UPDATE' | translate }}
             </button>
           </div>
         </div>

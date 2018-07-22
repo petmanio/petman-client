@@ -255,7 +255,7 @@ export class AppComponent implements OnInit, OnDestroy {
         dialogRef.afterClosed().subscribe(() => {
           this.localStorageService.setItem('welcome-dialog-showed', true);
         });
-      }, 1000);
+      }, 3000);
     }
   }
 }

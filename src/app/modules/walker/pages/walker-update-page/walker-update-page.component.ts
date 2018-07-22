@@ -1,43 +1,41 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { map, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
-import { ModalSize, ShelterDto } from '@petman/common';
+import { ModalSize, WalkerDto } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
-import * as fromShelter from '@shelter/reducers';
-import { Delete, Select, Update } from '@shelter/actions/shelter.actions';
+import * as fromWalker from '@walker/reducers';
+import { Delete, Select, Update } from '@walker/actions/walker.actions';
 import { SharedService } from '@shared/services/shared/shared.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-shelter-update-page',
-  templateUrl: './shelter-update-page.component.html',
-  styleUrls: ['./shelter-update-page.component.scss'],
+  selector: 'app-walker-update-page',
+  templateUrl: './walker-update-page.component.html',
+  styleUrls: ['./walker-update-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShelterUpdatePageComponent {
+export class WalkerUpdatePageComponent {
   form: FormGroup;
-  shelter: ShelterDto;
+  walker: WalkerDto;
   quillModules = SharedService.quillModules;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
-  pending$ = this.store.pipe(select(fromShelter.getShelterCreatePagePending));
-  error$ = this.store.pipe(select(fromShelter.getShelterCreatePageError));
-  shelter$ = this.store.pipe(select(fromShelter.getSelected));
+  pending$ = this.store.pipe(select(fromWalker.getWalkerCreatePagePending));
+  error$ = this.store.pipe(select(fromWalker.getWalkerCreatePageError));
+  walker$ = this.store.pipe(select(fromWalker.getSelected));
 
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private store: Store<fromShelter.State>,
-    @Inject(FormBuilder) private formBuilder: FormBuilder,
-    @Inject(DOCUMENT) private document: Document
+    private store: Store<fromWalker.State>,
+    @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
-    this.error$ = this.store.select(fromShelter.getShelterUpdatePageError);
-    this.pending$ = this.store.select(fromShelter.getShelterUpdatePagePending);
+    this.error$ = this.store.select(fromWalker.getWalkerUpdatePageError);
+    this.pending$ = this.store.select(fromWalker.getWalkerUpdatePagePending);
 
     this.route.params
       .pipe(
@@ -46,10 +44,10 @@ export class ShelterUpdatePageComponent {
       )
       .subscribe(this.store);
 
-    this.shelter$
+    this.walker$
       .pipe(
-        map(shelter => {
-          this.shelter = shelter;
+        map(walker => {
+          this.walker = walker;
           this.form = this.formConfig;
         }),
         take(1)
@@ -59,21 +57,13 @@ export class ShelterUpdatePageComponent {
 
   private get formConfig(): FormGroup {
     return this.formBuilder.group({
-      price: [this.shelter.price, Validators.required],
+      price: [this.walker.price, Validators.required],
       description: [
-        this.shelter.description,
+        this.walker.description,
         Validators.compose([
           Validators.required,
           Validators.minLength(100),
           Validators.maxLength(1000)
-        ])
-      ],
-      images: [
-        this.shelter.images,
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(4)
         ])
       ]
     });
@@ -81,12 +71,12 @@ export class ShelterUpdatePageComponent {
 
   onButtonToggleChange() {
     const description = this.form.get('description');
-    description.reset(this.shelter.description);
+    description.reset(this.walker.description);
   }
 
   update() {
     this.store.dispatch(
-      new Update({ id: this.shelter.id, body: this.form.value })
+      new Update({ id: this.walker.id, body: this.form.value })
     );
   }
 
@@ -97,7 +87,7 @@ export class ShelterUpdatePageComponent {
     });
     dialogRef.afterClosed().subscribe(confirmed => {
       if (confirmed) {
-        this.store.dispatch(new Delete(this.shelter.id));
+        this.store.dispatch(new Delete(this.walker.id));
       }
     });
   }

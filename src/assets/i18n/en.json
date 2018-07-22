@@ -17,6 +17,8 @@
   "ARE_YOU_SURE": "Are you sure?",
   "BECAME_SHELTER_INTO":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ",
+  "BECAME_WALKER_INTO":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ",
   "BLOG": "Blog",
   "BLOG_INTRO": "Lot's of interesting articles from all over the world",
   "CALL": "Call",
@@ -130,7 +132,8 @@
   "WALKERS": "Walkers",
   "WALKERS_INTRO":
     "Let's walk together! We'll be happy to introduce your pet with all the secret petty places of our city",
-  "WELCOME_DIALOG_CONTENT": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut <b>labore</b> et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute",
+  "WELCOME_DIALOG_CONTENT":
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut <b>labore</b> et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute",
   "WET_CONSULTANT": "Vet consultant",
   "WRITE_A_REVIEW": "Write a review",
   "YES": "Yes"

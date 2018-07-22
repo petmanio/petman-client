@@ -2,21 +2,21 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 
 import * as fromShelter from '@shelter/reducers/shelter.reducer';
 import * as fromShelterListPage from '@shelter/reducers/shelter-list-page.reducer';
-import * as fromShelterAddPage from '@shelter/reducers/shelter-add-page.reducer';
-import * as fromShelterEditPage from '@shelter/reducers/shelter-edit-page.reducer';
+import * as fromShelterCreatePage from '@shelter/reducers/shelter-create-page.reducer';
+import * as fromShelterUpdatePage from '@shelter/reducers/shelter-update-page.reducer';
 
 export interface State {
   shelter: fromShelter.State;
-  shelterAddPage: fromShelterAddPage.State;
+  shelterCreatePage: fromShelterCreatePage.State;
   shelterListPage: fromShelterListPage.State;
-  shelterEditPage: fromShelterEditPage.State;
+  shelterUpdatePage: fromShelterUpdatePage.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
   shelter: fromShelter.reducer,
-  shelterAddPage: fromShelterAddPage.reducer,
+  shelterCreatePage: fromShelterCreatePage.reducer,
   shelterListPage: fromShelterListPage.reducer,
-  shelterEditPage: fromShelterEditPage.reducer
+  shelterUpdatePage: fromShelterUpdatePage.reducer
 };
 
 export const getShelterState = createFeatureSelector<State>('shelter');
@@ -42,16 +42,16 @@ export const getSelected = createSelector(getEntities, getSelectedId, (entities,
 /**
  * Shelter add Page
  */
-export const getShelterAddPageState = createSelector(getShelterState, (state: State) => state.shelterAddPage);
-export const getShelterAddPageError = createSelector(getShelterAddPageState, fromShelterAddPage.getError);
-export const getShelterAddPagePending = createSelector(getShelterAddPageState, fromShelterAddPage.getPending);
+export const getShelterCreatePageState = createSelector(getShelterState, (state: State) => state.shelterCreatePage);
+export const getShelterCreatePageError = createSelector(getShelterCreatePageState, fromShelterCreatePage.getError);
+export const getShelterCreatePagePending = createSelector(getShelterCreatePageState, fromShelterCreatePage.getPending);
 
 /**
  * Shelter edit Page
  */
-export const getShelterEditPageState = createSelector(getShelterState, (state: State) => state.shelterEditPage);
-export const getShelterEditPageError = createSelector(getShelterEditPageState, fromShelterEditPage.getError);
-export const getShelterEditPagePending = createSelector(getShelterEditPageState, fromShelterEditPage.getPending);
+export const getShelterUpdatePageState = createSelector(getShelterState, (state: State) => state.shelterUpdatePage);
+export const getShelterUpdatePageError = createSelector(getShelterUpdatePageState, fromShelterUpdatePage.getError);
+export const getShelterUpdatePagePending = createSelector(getShelterUpdatePageState, fromShelterUpdatePage.getPending);
 
 /**
  * Shelter list Page

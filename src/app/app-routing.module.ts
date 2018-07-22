@@ -27,6 +27,12 @@ const routes: Routes = [
     data: { showSidenav: true }
   },
   {
+    path: 'walkers',
+    loadChildren: './modules/walker/walker.module#WalkerModule',
+    canActivate: [MetaGuard],
+    data: { showSidenav: true }
+  },
+  {
     path: 'pois',
     loadChildren: './modules/poi/poi.module#PoiModule',
     canActivate: [MetaGuard],

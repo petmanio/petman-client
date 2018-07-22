@@ -14,34 +14,34 @@ import { Subscription } from 'rxjs';
 import { ModalSize, UserDto } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
-import * as fromShelter from '@shelter/reducers';
+import * as fromWalker from '@walker/reducers';
 import {
   Update as UserUpdate,
   UserActionTypes
 } from '@user/actions/user.actions';
-import { Create } from '@shelter/actions/shelter.actions';
+import { Create } from '@walker/actions/walker.actions';
 import { SharedService } from '@shared/services/shared/shared.service';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
 
 @Component({
-  selector: 'app-shelter-create-page',
-  templateUrl: './shelter-create-page.component.html',
-  styleUrls: ['./shelter-create-page.component.scss'],
+  selector: 'app-walker-create-page',
+  templateUrl: './walker-create-page.component.html',
+  styleUrls: ['./walker-create-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShelterCreatePageComponent implements OnInit {
+export class WalkerCreatePageComponent implements OnInit {
   form: FormGroup;
   selectedUser: UserDto;
   quillModules = SharedService.quillModules;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
-  pending$ = this.store.select(fromShelter.getShelterCreatePagePending);
-  error$ = this.store.select(fromShelter.getShelterCreatePageError);
+  pending$ = this.store.select(fromWalker.getWalkerCreatePagePending);
+  error$ = this.store.select(fromWalker.getWalkerCreatePageError);
   private subscriptions: Subscription[] = [];
 
   constructor(
     private actions$: Actions,
     private dialog: MatDialog,
-    private store: Store<fromShelter.State>,
+    private store: Store<fromWalker.State>,
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
     this.form = this.formBuilder.group({
@@ -52,14 +52,6 @@ export class ShelterCreatePageComponent implements OnInit {
           Validators.required,
           Validators.minLength(100),
           Validators.maxLength(1000)
-        ])
-      ],
-      images: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(4)
         ])
       ]
     });

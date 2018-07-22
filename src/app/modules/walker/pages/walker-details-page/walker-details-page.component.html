@@ -1,0 +1,32 @@
+<div class="columns is-marginless">
+  <div class="column is-10 is-offset-1">
+    <div class="columns is-vcentered">
+      <div class="column is-3 has-text-centered">
+        <app-user-details [redirectAfterSignUp]="url" [loggedIn]="loggedIn$ | async" [isOwner]="(walker$ | async)?.isOwner" [user]="(walker$ | async)?.user"></app-user-details>
+        <div>
+          <fa-icon icon="money-bill-alt"></fa-icon>
+          {{'DAILY_PRICE' | translate}}<br>
+          <h5>{{(walker$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <blockquote class="pm-blockquote">
+          <div class='pm-blockquote-content'>
+            <p *ngIf="!(walker?.description | appIsHtml)">{{walker?.description}}</p>
+            <div *ngIf="walker?.description | appIsHtml" class="ql-editor" [innerHTML]="walker?.description | appSafeHtml"></div>
+          </div>
+        </blockquote>
+        <div class="field is-grouped">
+          <p class="control pm-m-left-auto">
+            <button color="primary" mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>
+          </p>
+          <p class="control" *ngIf="(walker$ | async)?.isOwner">
+            <button [routerLink]="['/walkers', walker.id, 'edit']" mat-raised-button>{{ 'EDIT' | translate }}</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
