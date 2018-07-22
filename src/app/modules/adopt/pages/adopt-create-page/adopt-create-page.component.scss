@@ -1,0 +1,18 @@
+@import '../../../../scss/variables';
+
+:host {
+  min-height: 100%;
+  display: block;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.pm-intro {
+  padding: 0.75rem 0;
+}
+
+textarea {
+  min-height: 60px;
+}

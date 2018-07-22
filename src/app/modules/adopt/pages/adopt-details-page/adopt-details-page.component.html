@@ -1,0 +1,30 @@
+<div class="columns is-marginless">
+  <div class="column is-10 is-offset-1">
+    <div class="columns is-vcentered">
+      <div class="column is-3 has-text-centered">
+        <app-user-details [redirectAfterSignUp]="url" [loggedIn]="loggedIn$ | async" [isOwner]="(adopt$ | async)?.isOwner" [user]="(adopt$ | async)?.user"></app-user-details>
+      </div>
+      <div class="column is-9">
+        <app-mz-slider [slides]="slides" [options]="{ height: 500 }"></app-mz-slider>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <blockquote class="pm-blockquote">
+          <div class='pm-blockquote-content'>
+            <p *ngIf="!(adopt?.description | appIsHtml)">{{adopt?.description}}</p>
+            <div *ngIf="adopt?.description | appIsHtml" class="ql-editor" [innerHTML]="adopt?.description | appSafeHtml"></div>
+          </div>
+        </blockquote>
+        <div class="field is-grouped">
+          <p class="control pm-m-left-auto">
+            <button color="primary" mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>
+          </p>
+          <p class="control" *ngIf="(adopt$ | async)?.isOwner">
+            <button [routerLink]="['/adoption', adopt.id, 'edit']" mat-raised-button>{{ 'EDIT' | translate }}</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

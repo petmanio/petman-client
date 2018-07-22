@@ -33,6 +33,12 @@ const routes: Routes = [
     data: { showSidenav: true }
   },
   {
+    path: 'adoption',
+    loadChildren: './modules/adopt/adopt.module#AdoptModule',
+    canActivate: [MetaGuard],
+    data: { showSidenav: true }
+  },
+  {
     path: 'pois',
     loadChildren: './modules/poi/poi.module#PoiModule',
     canActivate: [MetaGuard],
