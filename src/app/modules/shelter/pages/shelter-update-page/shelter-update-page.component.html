@@ -24,7 +24,7 @@
                 activeColor="warn" cancelColor="primary" multiple>
                 <mat-icon>file_upload</mat-icon>
                 <span>
-                  {{ fileMultipleUpload.value?.name }}
+                  {{ fileMultipleUpload.value?.name | appEllipsis:20 }}
                   <span *ngIf="fileMultipleUpload.value?.length" translate [translateParams]="{n: fileMultipleUpload.value.length}">N_FILES_SELECTED</span>
                 </span>
                 <ng-template td-file-input-label>

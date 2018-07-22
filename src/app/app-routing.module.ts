@@ -39,6 +39,12 @@ const routes: Routes = [
     data: { showSidenav: true }
   },
   {
+    path: 'lost-found',
+    loadChildren: './modules/lost-found/lost-found.module#LostFoundModule',
+    canActivate: [MetaGuard],
+    data: { showSidenav: true }
+  },
+  {
     path: 'pois',
     loadChildren: './modules/poi/poi.module#PoiModule',
     canActivate: [MetaGuard],

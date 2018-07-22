@@ -5,37 +5,38 @@ import { MatDialog } from '@angular/material';
 import { map, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
-import { ModalSize, ShelterDto } from '@petman/common';
+import { ModalSize, LostFoundDto, LostFoundType } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
-import * as fromShelter from '@shelter/reducers';
-import { Delete, Select, Update } from '@shelter/actions/shelter.actions';
+import * as fromLostFound from '@lost-found/reducers';
+import { Delete, Select, Update } from '@lost-found/actions/lost-found.actions';
 import { SharedService } from '@shared/services/shared/shared.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-shelter-update-page',
-  templateUrl: './shelter-update-page.component.html',
-  styleUrls: ['./shelter-update-page.component.scss'],
+  selector: 'app-lost-found-update-page',
+  templateUrl: './lost-found-update-page.component.html',
+  styleUrls: ['./lost-found-update-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShelterUpdatePageComponent {
+export class LostFoundUpdatePageComponent {
   form: FormGroup;
-  shelter: ShelterDto;
+  lostFound: LostFoundDto;
   quillModules = SharedService.quillModules;
+  LostFoundType = LostFoundType;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
-  pending$ = this.store.pipe(select(fromShelter.getShelterCreatePagePending));
-  error$ = this.store.pipe(select(fromShelter.getShelterCreatePageError));
-  shelter$ = this.store.pipe(select(fromShelter.getSelected));
+  pending$ = this.store.pipe(select(fromLostFound.getLostFoundCreatePagePending));
+  error$ = this.store.pipe(select(fromLostFound.getLostFoundCreatePageError));
+  lostFound$ = this.store.pipe(select(fromLostFound.getSelected));
 
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private store: Store<fromShelter.State>,
+    private store: Store<fromLostFound.State>,
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
-    this.error$ = this.store.select(fromShelter.getShelterUpdatePageError);
-    this.pending$ = this.store.select(fromShelter.getShelterUpdatePagePending);
+    this.error$ = this.store.select(fromLostFound.getLostFoundUpdatePageError);
+    this.pending$ = this.store.select(fromLostFound.getLostFoundUpdatePagePending);
 
     this.route.params
       .pipe(
@@ -44,10 +45,10 @@ export class ShelterUpdatePageComponent {
       )
       .subscribe(this.store);
 
-    this.shelter$
+    this.lostFound$
       .pipe(
-        map(shelter => {
-          this.shelter = shelter;
+        map(lostFound => {
+          this.lostFound = lostFound;
           this.form = this.formConfig;
         }),
         take(1)
@@ -57,9 +58,9 @@ export class ShelterUpdatePageComponent {
 
   private get formConfig(): FormGroup {
     return this.formBuilder.group({
-      price: [this.shelter.price, Validators.required],
+      type: [this.lostFound.type, Validators.required],
       description: [
-        this.shelter.description,
+        this.lostFound.description,
         Validators.compose([
           Validators.required,
           Validators.minLength(100),
@@ -67,7 +68,7 @@ export class ShelterUpdatePageComponent {
         ])
       ],
       images: [
-        this.shelter.images,
+        this.lostFound.images,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
@@ -79,12 +80,12 @@ export class ShelterUpdatePageComponent {
 
   onButtonToggleChange() {
     const description = this.form.get('description');
-    description.reset(this.shelter.description);
+    description.reset(this.lostFound.description);
   }
 
   update() {
     this.store.dispatch(
-      new Update({ id: this.shelter.id, body: this.form.value })
+      new Update({ id: this.lostFound.id, body: this.form.value })
     );
   }
 
@@ -95,7 +96,7 @@ export class ShelterUpdatePageComponent {
     });
     dialogRef.afterClosed().subscribe(confirmed => {
       if (confirmed) {
-        this.store.dispatch(new Delete(this.shelter.id));
+        this.store.dispatch(new Delete(this.lostFound.id));
       }
     });
   }

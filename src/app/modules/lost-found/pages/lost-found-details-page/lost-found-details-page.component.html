@@ -1,0 +1,35 @@
+<div class="columns is-marginless">
+  <div class="column is-10 is-offset-1">
+    <div class="columns is-vcentered">
+      <div class="column is-3 has-text-centered">
+        <app-user-details [redirectAfterSignUp]="url" [loggedIn]="loggedIn$ | async" [isOwner]="(lostFound$ | async)?.isOwner" [user]="(lostFound$ | async)?.user"></app-user-details>
+        <div>
+          <mat-chip-list>
+            <mat-chip color="warn" selected>{{(lostFound$ | async)?.type | translate}}</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+      <div class="column is-9">
+        <app-mz-slider [slides]="slides" [options]="{ height: 500 }"></app-mz-slider>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <blockquote class="pm-blockquote">
+          <div class='pm-blockquote-content'>
+            <p *ngIf="!(lostFound?.description | appIsHtml)">{{lostFound?.description}}</p>
+            <div *ngIf="lostFound?.description | appIsHtml" class="ql-editor" [innerHTML]="lostFound?.description | appSafeHtml"></div>
+          </div>
+        </blockquote>
+        <div class="field is-grouped">
+          <p class="control pm-m-left-auto">
+            <button color="primary" mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>
+          </p>
+          <p class="control" *ngIf="(lostFound$ | async)?.isOwner">
+            <button [routerLink]="['/lost-found', lostFound.id, 'edit']" mat-raised-button>{{ 'EDIT' | translate }}</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

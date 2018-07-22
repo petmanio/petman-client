@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
@@ -33,8 +32,7 @@ export class AdoptUpdatePageComponent {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private store: Store<fromAdopt.State>,
-    @Inject(FormBuilder) private formBuilder: FormBuilder,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
     this.error$ = this.store.select(fromAdopt.getAdoptUpdatePageError);
     this.pending$ = this.store.select(fromAdopt.getAdoptUpdatePagePending);

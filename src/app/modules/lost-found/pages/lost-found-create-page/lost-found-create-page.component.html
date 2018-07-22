@@ -4,7 +4,7 @@
     <div class="column is-8 is-offset-2">
       <td-message [opened]="error$ | async" [label]="'INTERNAL_ERROR_TITLE' | translate" [sublabel]="'INTERNAL_ERROR' | translate"
         color="warn" icon="error"></td-message>
-      <p class="pm-intro is-size-5 is-size-6-touch">{{'FOR_ADOPTION_INTO' | translate}}</p>
+      <p class="pm-intro is-size-5 is-size-6-touch">{{'LOST_FOUND_CREATE_INTO' | translate}}</p>
       <form [formGroup]="form">
         <br>
         <mat-hint>{{'DESCRIPTION' | translate}}</mat-hint>
@@ -38,13 +38,21 @@
               <mat-hint *ngIf="!form.get('images').hasError('maxlength')">{{'IMAGE_HINT' | translate}}</mat-hint>
               <mat-error *ngIf="form.get('images').hasError('maxlength')">{{'IMAGE_ERROR' | translate}}</mat-error>
               <!--<div class="pm-image-preview" [hidden]="form.get('images').value">-->
-              <!--<div *ngFor="let image of adopt?.images" [style.background-image]="'url(' + image + ')'">-->
+              <!--<div *ngFor="let image of lostFound?.images" [style.background-image]="'url(' + image + ')'">-->
               <!--<fa-icon icon="times-circle"></fa-icon>-->
               <!--</div>-->
               <!--</div>-->
             </div>
           </div>
           <div class="column is-4">
+            <mat-form-field>
+              <mat-select formControlName='type' [placeholder]="'APPLICATON_TYPE' | translate">
+                <mat-option [value]="LostFoundType.LOST">{{ LostFoundType.LOST | translate }}</mat-option>
+                <mat-option [value]="LostFoundType.FOUND">{{ LostFoundType.FOUND | translate }}</mat-option>
+              </mat-select>
+              <mat-hint>{{'REQUIRED' | translate}}</mat-hint>
+              <mat-error *ngIf="form.get('type').hasError('required')">{{'REQUIRED' | translate}}</mat-error>
+            </mat-form-field>
           </div>
         </div>
         <br>
