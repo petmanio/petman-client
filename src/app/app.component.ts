@@ -250,12 +250,12 @@ export class AppComponent implements OnInit, OnDestroy {
     ) {
       setTimeout(() => {
         const dialogRef = this.dialog.open(WelcomeDialogComponent, {
-          width: ModalSize.LARGE
+          width: '90%'
         });
         dialogRef.afterClosed().subscribe(() => {
           this.localStorageService.setItem('welcome-dialog-showed', true);
         });
-      }, 3000);
+      }, 1000);
     }
   }
 }

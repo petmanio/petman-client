@@ -26,6 +26,7 @@
   "CHAT_HISTORY": "Նամակագրություն",
   "CLEAR": "Մաքրել",
   "CLOSE": "Փակել",
+  "COOL": "",
   "COMING_SOON": "Շուտով",
   "COMMENT_TOTAL": "{{total}} մեկնաբանություն",
   "CONFIRM": "Հաստատել",
@@ -130,7 +131,6 @@
   "WALKERS_INTRO":
     "Եկե՛ք զբոսնենք միասին: Մեր կենդանասերները կծանոթացնեն Ձեր փոքրիկ ընկերոջը քաղաքի ամենակենդանական տեղերի հետ։",
   "WELCOME_DIALOG_CONTENT": "",
-  "WELCOME_DIALOG_TITLE": "",
   "WET_CONSULTANT": "Վետ կոնսուլտանտ",
   "WRITE_A_REVIEW": "Write a review",
   "YES": "Այո"

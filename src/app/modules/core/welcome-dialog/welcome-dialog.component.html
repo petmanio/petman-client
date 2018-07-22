@@ -1,7 +1,7 @@
-<h3 mat-dialog-title>{{'WELCOME_DIALOG_TITLE' | translate}}</h3>
+<div mat-card-avatar class="pm-card-avatar pm-avatar-medium"></div>
 <mat-dialog-content>
-  <p [innerHTML]="'WELCOME_DIALOG_CONTENT' | translate | appSafeHtml"></p>
+  <p class="is-size-4 is-size-6-touch" [innerHTML]="'WELCOME_DIALOG_CONTENT' | translate | appSafeHtml"></p>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close>{{'CLOSE' | translate}}</button>
+<mat-dialog-actions class="has-text-centered">
+  <button mat-raised-button mat-dialog-close color="accent">{{'COOL' | translate}}</button>
 </mat-dialog-actions>

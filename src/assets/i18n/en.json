@@ -28,6 +28,7 @@
   "CHAT_HISTORY": "Chat history",
   "CLEAR": "Clear",
   "CLOSE": "Close",
+  "COOL": "Cool",
   "COMING_SOON": "Coming soon",
   "COMMENT_TOTAL": "{{total}} comments",
   "CONFIRM": "Confirm",
@@ -129,8 +130,7 @@
   "WALKERS": "Walkers",
   "WALKERS_INTRO":
     "Let's walk together! We'll be happy to introduce your pet with all the secret petty places of our city",
-  "WELCOME_DIALOG_CONTENT": "Lorem ipsum dolor sit amet, consectetur",
-  "WELCOME_DIALOG_TITLE": "Lorem ipsum dolor sit amet, consectetur",
+  "WELCOME_DIALOG_CONTENT": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut <b>labore</b> et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute",
   "WET_CONSULTANT": "Vet consultant",
   "WRITE_A_REVIEW": "Write a review",
   "YES": "Yes"
