@@ -1,6 +1,14 @@
+@import '../../../scss/mixins';
+
 .pm-card-avatar {
   background-image: url(/assets/dog-and-cat.png);
   margin:-15px auto 10px;
+  width: 100px;
+  height: 100px;
+  @include desktop {
+    width: 150px;
+    height: 150px;
+  }
 }
 
 button {
