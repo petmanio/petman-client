@@ -1,8 +1,7 @@
 <h4 mat-dialog-title>{{'SHARE' | translate}}</h4>
 <mat-dialog-content>
-  <share-buttons theme="material-dark" show="4" showText="true" size="-4"
-                 [exclude]="['linkedin', 'stumble', 'email', 'print', 'sms', 'xing']"
-    [url]="url"></share-buttons>
+  <share-buttons theme="material-dark" show="4" showText="true" size="-4" [exclude]="['linkedin', 'stumble', 'email', 'print', 'sms', 'xing']"
+    [url]="data.url"></share-buttons>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close>{{'CLOSE' | translate}}</button>

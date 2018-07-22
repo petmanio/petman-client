@@ -6,7 +6,7 @@
         <div>
           <fa-icon icon="money-bill-alt"></fa-icon>
           {{'DAILY_PRICE' | translate}}<br>
-          <h5>{{(walker$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
+          <h5 class="is-lowercase has-text-info">{{(walker$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
         </div>
       </div>
     </div>

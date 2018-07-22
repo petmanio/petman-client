@@ -6,7 +6,7 @@
         <div>
           <fa-icon icon="money-bill-alt"></fa-icon>
           {{'DAILY_PRICE' | translate}}<br>
-          <h5>{{(shelter$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
+          <h5 class="is-lowercase has-text-info">{{(shelter$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
         </div>
       </div>
       <div class="column is-9">
