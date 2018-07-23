@@ -180,6 +180,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   openedChange(state: boolean) {
+    if (this.sideNavState === state) {
+      return;
+    }
     if (state) {
       this.store.dispatch(new OpenSidenav());
     } else {
