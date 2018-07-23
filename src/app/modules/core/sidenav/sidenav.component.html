@@ -1,29 +1,22 @@
 <mat-sidenav-container>
-  <mat-sidenav [opened]="open" [mode]="mode" color="primary" (close)="onClose.emit()">
+  <mat-sidenav [opened]="open" [mode]="mode" color="primary" (close)="close.emit()" (openedChange)="openedChange.emit($event)">
     <mat-nav-list>
       <ng-container *ngIf="user?.businessUsers.length">
         <mat-list-item>
-          <mat-select (ngModelChange)="onSelectedUserChange.emit($event)" [ngModel]="selectedUser.id">
+          <mat-select (ngModelChange)="selectedUserChange.emit($event)" [ngModel]="selectedUser.id">
             <mat-option [value]="user.id">{{user?.userData?.firstName}}</mat-option>
-            <mat-option *ngFor="let businessUser of user.businessUsers"
-                        [value]="businessUser.id">{{ businessUser?.userData?.firstName }}
+            <mat-option *ngFor="let businessUser of user.businessUsers" [value]="businessUser.id">{{ businessUser?.userData?.firstName }}
             </mat-option>
           </mat-select>
         </mat-list-item>
         <mat-divider></mat-divider>
       </ng-container>
-      <app-nav-item (activate)="onItemActivate.emit()"
-                    icon="dashboard" routerLink="" [activeClass]="[isHomeActive]">{{'MAIN' | translate}}</app-nav-item>
-      <app-nav-item (activate)="onItemActivate.emit()" routerLink="/map" icon="place"
-                    routerLinkActive="pm-is-active">{{'MAP' | translate}}</app-nav-item>
-      <app-nav-item (activate)="onItemActivate.emit()" icon="favorite" routerLink="/shelters"
-                    routerLinkActive="pm-is-active">{{'SHELTERS' | translate}}</app-nav-item>
-      <app-nav-item (activate)="onItemActivate.emit()" icon="child_friendly" routerLink="/walkers"
-                    routerLinkActive="pm-is-active">{{'WALKERS' | translate}}</app-nav-item>
-      <app-nav-item (activate)="onItemActivate.emit()" icon="pets" routerLink="/adoption"
-                    routerLinkActive="pm-is-active">{{'ADOPTION' | translate}}</app-nav-item>
-      <app-nav-item (activate)="onItemActivate.emit()" icon="search" routerLink="/lost-found"
-                    routerLinkActive="pm-is-active">{{'LOST_AND_FOUND' | translate}}</app-nav-item>
+      <app-nav-item (activate)="itemActivate.emit()" icon="dashboard" routerLink="" [activeClass]="[isHomeActive]">{{'MAIN' | translate}}</app-nav-item>
+      <app-nav-item (activate)="itemActivate.emit()" routerLink="/map" icon="place" routerLinkActive="pm-is-active">{{'MAP' | translate}}</app-nav-item>
+      <app-nav-item (activate)="itemActivate.emit()" icon="favorite" routerLink="/shelters" routerLinkActive="pm-is-active">{{'SHELTERS' | translate}}</app-nav-item>
+      <app-nav-item (activate)="itemActivate.emit()" icon="child_friendly" routerLink="/walkers" routerLinkActive="pm-is-active">{{'WALKERS' | translate}}</app-nav-item>
+      <app-nav-item (activate)="itemActivate.emit()" icon="pets" routerLink="/adoption" routerLinkActive="pm-is-active">{{'ADOPTION' | translate}}</app-nav-item>
+      <app-nav-item (activate)="itemActivate.emit()" icon="search" routerLink="/lost-found" routerLinkActive="pm-is-active">{{'LOST_AND_FOUND' | translate}}</app-nav-item>
     </mat-nav-list>
   </mat-sidenav>
   <ng-content></ng-content>

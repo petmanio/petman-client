@@ -94,7 +94,6 @@ export class AppComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.store.dispatch(new CloseSidenav());
     this.store.dispatch(new Categories({ limit: 10, offset: 0 }));
 
     const sidenavSubscription = this.showSidenav$.subscribe(state => {
@@ -167,7 +166,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  onSelectedUserChange($event) {
+  selectedUserChange($event) {
     this.store.dispatch(new ChangeUser($event));
   }
 
@@ -177,6 +176,14 @@ export class AppComponent implements OnInit, OnDestroy {
       this.store.dispatch(new CloseSidenav());
     } else {
       this.store.dispatch(new OpenSidenav());
+    }
+  }
+
+  openedChange(state: boolean) {
+    if (state) {
+      this.store.dispatch(new OpenSidenav());
+    } else {
+      this.store.dispatch(new CloseSidenav());
     }
   }
 

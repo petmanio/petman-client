@@ -1,17 +1,9 @@
 <ng-progress thick="true" color="#6fb5fc"></ng-progress>
-<app-toolbar [loggedIn]="(loggedIn$ | async)"
-             [selectedUser]="(selectedUser$ | async)"
-             [redirectAfterSignUp]="redirectAfterSignUp"
-             [hideSignUpButton]="hideSignUpButton"
-             (logOut)="logOut()"
-             (openSettings)="openSettings()"
-             (toggleMenu)="toggleSidenav($event)">
+<app-toolbar [loggedIn]="(loggedIn$ | async)" [selectedUser]="(selectedUser$ | async)" [redirectAfterSignUp]="redirectAfterSignUp"
+  [hideSignUpButton]="hideSignUpButton" (logOut)="logOut()" (openSettings)="openSettings()" (toggleMenu)="toggleSidenav($event)">
 </app-toolbar>
-<app-sidenav [open]="sideNavState"
-             [mode]="sideNavMode"
-             [user]="user$ | async"
-             [selectedUser]="selectedUser$ | async"
-             (onSelectedUserChange)="onSelectedUserChange($event)">
+<app-sidenav [open]="sideNavState" [mode]="sideNavMode" [user]="user$ | async" [selectedUser]="selectedUser$ | async" (selectedUserChange)="selectedUserChange($event)"
+  (openedChange)="openedChange($event)">
   <div class="pm-page-container">
     <router-outlet></router-outlet>
   </div>
