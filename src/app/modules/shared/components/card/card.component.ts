@@ -6,6 +6,7 @@ export interface Config {
   subtitle?: string;
   image?: string;
   content?: string;
+  contentFooter?: string;
   price?: number;
   actions?: {
     text?: string;

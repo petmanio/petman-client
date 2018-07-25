@@ -28,7 +28,7 @@
   "CHAT_HISTORY": "Նամակագրություն",
   "CLEAR": "Մաքրել",
   "CLOSE": "Փակել",
-  "COOL": "",
+  "COOL": "Լավ",
   "COMING_SOON": "Շուտով",
   "COMMENT_TOTAL": "{{total}} մեկնաբանություն",
   "CONFIRM": "Հաստատել",
@@ -89,7 +89,7 @@
   "PAGE_NOT_FOUND": "Էջը չի գտնվել :(",
   "PAGE_NOT_FOUND_CONTENT":
     "Հավանաբար Ձեր փնտրած էջն այլևս գոյություն չունի կամ դուք սխալ հասցե եք մուտքագրել։",
-  "PARK": "Park",
+  "PARK": "Զբոսայգի",
   "PETMAN_SLOGAN": "",
   "PETMAN_SUBSLOGAN": "",
   "PHONE_NUMBER": "Հեռ.",
@@ -114,7 +114,7 @@
   "SHELTERS": "Խնամակալ",
   "SHELTERS_INTRO":
     "Մեկնում եք հանգստի՞: Վստահե՛ք Ձեր սիրելի կենդանուն մեր կենդանասերներին, ովքեր մեծ հոգատարությամբ կխնամեն նրանց։",
-  "SHOP": "Խանութներ",
+  "SHOP": "Խանութ",
   "SIGN_OUT": "Դուրս գալ",
   "SIGN_UP": "Մուտք գործել",
   "SIGN_UP_WITH_FACEBOOK": "Մուտք ֆեյսբուքով",
@@ -137,5 +137,8 @@
   "WELCOME_DIALOG_CONTENT": "",
   "WET_CONSULTANT": "Վետ կոնսուլտանտ",
   "WRITE_A_REVIEW": "Write a review",
-  "YES": "Այո"
+  "YES": "Այո",
+  "CLINIC": "Կլինիկա",
+  "PET_FRIENDLY_CAFE": "Սրճարան",
+  "PET_SALON": "Կենդանիների սրահ"
 }

@@ -141,5 +141,8 @@
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut <b>labore</b> et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute",
   "WET_CONSULTANT": "Vet consultant",
   "WRITE_A_REVIEW": "Write a review",
-  "YES": "Yes"
+  "YES": "Yes",
+  "CLINIC": "Clinic",
+  "PET_FRIENDLY_CAFE": "Pet friendly cafe",
+  "PET_SALON": "Pet salon"
 }

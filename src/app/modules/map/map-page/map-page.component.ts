@@ -90,7 +90,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
       title: pin.title,
       avatar: pin.meta.avatar,
       subtitle: this.translateService.instant(pin.meta.primaryCategory.label),
-      content: `${pin.meta.address.fullAddress().replace(/\s+/g, ' ')}`
+      content: `${pin.meta.description || ''}`,
+      contentFooter: pin.meta.address.fullAddress().trim().replace(/\s+/g, ' ')
     };
   }
 
