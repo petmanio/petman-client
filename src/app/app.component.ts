@@ -170,12 +170,20 @@ export class AppComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ChangeUser($event));
   }
 
+  closeSideNav() {
+    this.store.dispatch(new CloseSidenav());
+  }
+
+  openSideNav() {
+    this.store.dispatch(new OpenSidenav());
+  }
+
   toggleSidenav($event: Event) {
     $event.stopPropagation();
     if (this.sideNavState) {
-      this.store.dispatch(new CloseSidenav());
+      this.closeSideNav();
     } else {
-      this.store.dispatch(new OpenSidenav());
+      this.openSideNav();
     }
   }
 
@@ -225,6 +233,10 @@ export class AppComponent implements OnInit, OnDestroy {
         })
       );
     });
+  }
+
+  closeDialog() {
+    console.log(444);
   }
 
   private initNgxTranslate() {

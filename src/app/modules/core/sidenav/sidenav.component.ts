@@ -29,6 +29,8 @@ export class SidenavComponent implements ISidenavComponent, OnInit {
   @Output() close = new EventEmitter();
   @Output() selectedUserChange = new EventEmitter<number>();
   @Output() openedChange = new EventEmitter<boolean>();
+  @Output() swipeLeft = new EventEmitter();
+  @Output() swipeRight = new EventEmitter();
 
   isHomeActive;
 

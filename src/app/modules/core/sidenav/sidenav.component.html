@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container  (swipeleft)="swipeLeft.emit()">
   <mat-sidenav [opened]="open" [mode]="mode" color="primary" (close)="close.emit()" (openedChange)="openedChange.emit($event)">
     <mat-nav-list>
       <ng-container *ngIf="user?.businessUsers.length">
@@ -19,5 +19,7 @@
       <app-nav-item (activate)="itemActivate.emit()" icon="search" routerLink="/lost-found" routerLinkActive="pm-is-active">{{'LOST_AND_FOUND' | translate}}</app-nav-item>
     </mat-nav-list>
   </mat-sidenav>
-  <ng-content></ng-content>
+  <div (swiperight)="swipeRight.emit()">
+    <ng-content></ng-content>
+  </div>
 </mat-sidenav-container>

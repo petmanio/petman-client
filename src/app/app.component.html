@@ -3,7 +3,7 @@
   [hideSignUpButton]="hideSignUpButton" (logOut)="logOut()" (openSettings)="openSettings()" (toggleMenu)="toggleSidenav($event)">
 </app-toolbar>
 <app-sidenav [open]="sideNavState" [mode]="sideNavMode" [user]="user$ | async" [selectedUser]="selectedUser$ | async" (selectedUserChange)="selectedUserChange($event)"
-  (openedChange)="openedChange($event)">
+  (openedChange)="openedChange($event)" (swipeRight)="openSideNav()" (swipeLeft)="closeSideNav()">
   <div class="pm-page-container">
     <router-outlet></router-outlet>
   </div>
