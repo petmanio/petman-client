@@ -4,7 +4,7 @@
       <div class="column is-marginless is-paddingless" [attr.style]="filterInlineStyle">
         <mat-form-field>
           <mat-select [placeholder]="'CATEGORIES' | translate" multiple="true" [(ngModel)]="selectedPrimaryCategories" (ngModelChange)="updateList()">
-            <mat-option *ngFor="let primaryCategory of primaryCategories$ | async" [value]="primaryCategory.id">{{primaryCategory.name}}</mat-option>
+            <mat-option *ngFor="let primaryCategory of primaryCategories$ | async" [value]="primaryCategory.id">{{primaryCategory.label | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
