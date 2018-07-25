@@ -55,9 +55,11 @@ export class UtilService {
       callback: (key: string) => translate.get(key),
       pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
       pageTitleSeparator: ' - ',
-      applicationName: 'APP_NAME',
+      applicationName: 'Petman',
+      // applicationName: 'APP_NAME',
       defaults: {
-        title: 'DEFAULT_TITLE',
+        title: 'Petman',
+        // title: 'DEFAULT_TITLE',
         description: 'DEFAULT_DESCRIPTION',
         'og:title': 'DEFAULT_TITLE',
         'og:description': 'DEFAULT_DESCRIPTION',
