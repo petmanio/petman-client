@@ -78,7 +78,7 @@
   @include desktop {
     @include calc(height, '100vh - 64px');
   }
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .p-column-full-height {
