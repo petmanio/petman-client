@@ -4,8 +4,6 @@
 </app-toolbar>
 <app-sidenav [open]="sideNavState" [mode]="sideNavMode" [user]="user$ | async" [selectedUser]="selectedUser$ | async" (selectedUserChange)="selectedUserChange($event)"
   (openedChange)="openedChange($event)" (swipeRight)="openSideNav()" (swipeLeft)="closeSideNav()">
-  <div class="pm-page-container">
-    <router-outlet></router-outlet>
-  </div>
-  <app-footer *ngIf="!hideFooter" [currentLanguage]="currentLanguage" (onLanguageChange)="onLanguageChange($event)"></app-footer>
+  <router-outlet content></router-outlet>
+  <app-footer footer *ngIf="!hideFooter" [currentLanguage]="currentLanguage" (onLanguageChange)="onLanguageChange($event)"></app-footer>
 </app-sidenav>

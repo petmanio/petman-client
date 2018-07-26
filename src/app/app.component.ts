@@ -192,9 +192,9 @@ export class AppComponent implements OnInit, OnDestroy {
       return;
     }
     if (state) {
-      this.store.dispatch(new OpenSidenav());
+      this.openSideNav();
     } else {
-      this.store.dispatch(new CloseSidenav());
+      this.closeSideNav();
     }
   }
 

@@ -19,7 +19,8 @@
       <app-nav-item (activate)="itemActivate.emit()" icon="search" routerLink="/lost-found" routerLinkActive="pm-is-active">{{'LOST_AND_FOUND' | translate}}</app-nav-item>
     </mat-nav-list>
   </mat-sidenav>
-  <div (swiperight)="swipeRight.emit()">
-    <ng-content></ng-content>
+  <div class="pm-page-container" (swiperight)="swipeRight.emit()" data-mc-options='{"touchAction": "pan-y"}' >
+    <ng-content select="[content]"></ng-content>
   </div>
+  <ng-content select="[footer]"></ng-content>
 </mat-sidenav-container>

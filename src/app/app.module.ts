@@ -1,5 +1,13 @@
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import { BrowserModule, TransferState } from '@angular/platform-browser';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule
+} from '@angular/common/http';
+import {
+  BrowserModule,
+  TransferState,
+  HAMMER_GESTURE_CONFIG
+} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -8,7 +16,11 @@ import { TransferHttpCacheModule } from '@nguniversal/common';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService
+} from '@ngx-translate/core';
 import { MetaLoader, MetaModule } from '@ngx-meta/core';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
@@ -23,33 +35,40 @@ import { AuthModule } from '@auth/auth.module';
 import { PoiModule } from '@poi/poi.module';
 import { UserModule } from '@user/user.module';
 
-import { UtilService } from '@shared/services/util/util.service';
-import { TranslateBrowserLoader } from '@app/translate-browser-loader.service';
-import { metaReducers, reducers } from '@app/reducers';
+import { AppHammerConfig } from '@app/app-hammer-config';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { AppEffects } from '@app/app.effects';
+import { TranslateBrowserLoader } from '@app/translate-browser-loader.service';
 import { CustomHeadersInterceptor } from '@app/interseptors/custom-headers/custom-headers.interceptor';
+import { metaReducers, reducers } from '@app/reducers';
 import { NotFoundPageComponent } from '@app/pages/not-found-page/not-found-page.component';
 import { HomePageComponent } from '@app/pages/home-page/home-page.component';
+import { UtilService } from '@shared/services/util/util.service';
 
-export function translateBrowserFactory(http: HttpClient, transferState: TransferState) {
-  return new TranslateBrowserLoader('/assets/i18n/', '.json', transferState, http);
+export function translateBrowserFactory(
+  http: HttpClient,
+  transferState: TransferState
+) {
+  return new TranslateBrowserLoader(
+    '/assets/i18n/',
+    '.json',
+    transferState,
+    http
+  );
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomePageComponent,
-    NotFoundPageComponent
-  ],
+  declarations: [AppComponent, HomePageComponent, NotFoundPageComponent],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
     BrowserModule.withServerTransition({ appId: 'petman-universal' }),
     TransferHttpCacheModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production
+    }),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
@@ -64,7 +83,7 @@ export function translateBrowserFactory(http: HttpClient, transferState: Transfe
     }),
     MetaModule.forRoot({
       provide: MetaLoader,
-      useFactory: (UtilService.metaFactory),
+      useFactory: UtilService.metaFactory,
       deps: [TranslateService]
     }),
     NgxMaskModule.forRoot(),
@@ -79,8 +98,13 @@ export function translateBrowserFactory(http: HttpClient, transferState: Transfe
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: CustomHeadersInterceptor, multi: true }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHeadersInterceptor,
+      multi: true
+    },
+    { provide: HAMMER_GESTURE_CONFIG, useClass: AppHammerConfig }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

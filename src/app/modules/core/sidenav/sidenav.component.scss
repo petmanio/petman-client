@@ -4,8 +4,14 @@
 mat-sidenav {
   width: 250px;
 }
+
 mat-sidenav-container {
   @extend .pm-full-height;
+}
+
+.pm-page-container {
+  min-height: calc(100% - 115px);
+  display: block;
 }
 
 .disabled {
