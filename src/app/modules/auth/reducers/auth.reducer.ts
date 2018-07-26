@@ -1,5 +1,5 @@
+import find from 'lodash-es/find';
 import { createSelector } from '@ngrx/store';
-import { find } from 'lodash';
 
 import { UserDto } from '@petman/common';
 
@@ -18,9 +18,11 @@ export const initialState: State = {
   selectedUserId: null
 };
 
-export function reducer(state = initialState, action: AuthActions | UserActions): State {
+export function reducer(
+  state = initialState,
+  action: AuthActions | UserActions
+): State {
   switch (action.type) {
-
     case UserActionTypes.UPDATE_SUCCESS:
       if (action.payload.id === state.user.id) {
         return { ...state, user: action.payload };
@@ -46,7 +48,14 @@ export function reducer(state = initialState, action: AuthActions | UserActions)
 export const getLoggedIn = (state: State) => state.loggedIn;
 export const getUser = (state: State) => state.user;
 export const getSelectedUserId = (state: State) => state.selectedUserId;
-export const getSelectedUser = createSelector(getUser, getSelectedUserId, (user, userId) => {
-  const businessUser = find(user ? user.businessUsers : [], u => u.id === userId);
-  return businessUser || user;
-});
+export const getSelectedUser = createSelector(
+  getUser,
+  getSelectedUserId,
+  (user, userId) => {
+    const businessUser = find(
+      user ? user.businessUsers : [],
+      u => u.id === userId
+    );
+    return businessUser || user;
+  }
+);

@@ -1,3 +1,4 @@
+import extend from 'lodash-es/extend';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
@@ -10,7 +11,6 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { extend } from 'lodash';
 import { google } from 'google-maps';
 
 import { Pin } from '@petman/common';
@@ -45,8 +45,7 @@ export class GoogleMapComponent implements OnInit, OnChanges, AfterViewChecked {
   bounds: google.maps.LatLngBounds;
   infoWindow: google.maps.InfoWindow;
 
-  constructor(private el: ElementRef) {
-  }
+  constructor(private el: ElementRef) {}
 
   ngOnInit() {
     GoogleMapsLoader.load(g => {
@@ -73,7 +72,10 @@ export class GoogleMapComponent implements OnInit, OnChanges, AfterViewChecked {
   }
 
   create() {
-    this.map = new this.google.maps.Map(this.el.nativeElement, extend({}, MAP_DEFAULT_OPTIONS, this.options));
+    this.map = new this.google.maps.Map(
+      this.el.nativeElement,
+      extend({}, MAP_DEFAULT_OPTIONS, this.options)
+    );
     this.bounds = new google.maps.LatLngBounds();
     this.infoWindow = new google.maps.InfoWindow();
     this.render();
@@ -103,7 +105,7 @@ export class GoogleMapComponent implements OnInit, OnChanges, AfterViewChecked {
         url: (pin.icon && pin.icon.path) || MAP_DEFAULT_ICON,
         scaledSize: new google.maps.Size(
           (pin.icon && pin.icon.width) || 32,
-          (pin.icon && pin.icon.height) || 32,
+          (pin.icon && pin.icon.height) || 32
         )
       },
       pin

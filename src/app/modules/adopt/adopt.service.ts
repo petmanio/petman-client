@@ -1,12 +1,17 @@
+import forEach from 'lodash-es/forEach';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
-import { forEach } from 'lodash';
 
-import { ListQueryRequestDto, AdoptDto, AdoptListResponseDto, AdoptRequestDto } from '@petman/common';
+import {
+  ListQueryRequestDto,
+  AdoptDto,
+  AdoptListResponseDto,
+  AdoptRequestDto
+} from '@petman/common';
 
 import { environment } from '@environments/environment';
 import { AdoptModule } from '@adopt/adopt.module';
@@ -15,9 +20,10 @@ import { AdoptModule } from '@adopt/adopt.module';
   providedIn: AdoptModule
 })
 export class AdoptService {
-
-  constructor(@Inject(PLATFORM_ID) protected platformId: Object, private http: HttpClient) {
-  }
+  constructor(
+    @Inject(PLATFORM_ID) protected platformId: Object,
+    private http: HttpClient
+  ) {}
 
   create(body: AdoptRequestDto): Observable<AdoptDto> {
     let formData: FormData;
@@ -26,14 +32,20 @@ export class AdoptService {
       formData.append('description', body.description);
 
       if (body.images instanceof FileList) {
-        forEach(body.images, file => formData.append('images', file, file.name));
+        forEach(body.images, file =>
+          formData.append('images', file, file.name)
+        );
       } else if (body.images instanceof File) {
         formData.append('images', body.images, body.images.name);
       }
     }
-    return this.http.post<AdoptDto>(`${environment.api}/api/adoption`, formData).pipe(
-      map(response => plainToClass(AdoptDto, response, { groups: ['petman-client'] }))
-    );
+    return this.http
+      .post<AdoptDto>(`${environment.api}/api/adoption`, formData)
+      .pipe(
+        map(response =>
+          plainToClass(AdoptDto, response, { groups: ['petman-client'] })
+        )
+      );
   }
 
   update(id, body: AdoptRequestDto): Observable<AdoptDto> {
@@ -43,7 +55,9 @@ export class AdoptService {
       formData.append('description', body.description);
 
       if (body.images instanceof FileList) {
-        forEach(body.images as any, file => formData.append('images', file, file.name));
+        forEach(body.images as any, file =>
+          formData.append('images', file, file.name)
+        );
       } else if (body.images instanceof File) {
         formData.append('images', body.images, body.images.name);
       } else {
@@ -56,9 +70,13 @@ export class AdoptService {
         });
       }
     }
-    return this.http.put<AdoptDto>(`${environment.api}/api/adoption/${id}`, formData).pipe(
-      map(response => plainToClass(AdoptDto, response, { groups: ['petman-client'] }))
-    );
+    return this.http
+      .put<AdoptDto>(`${environment.api}/api/adoption/${id}`, formData)
+      .pipe(
+        map(response =>
+          plainToClass(AdoptDto, response, { groups: ['petman-client'] })
+        )
+      );
   }
 
   delete(id: number): Observable<Object> {
@@ -67,15 +85,25 @@ export class AdoptService {
 
   getById(id: number): Observable<AdoptDto> {
     return this.http
-      .get<AdoptDto>(`${environment.api}/api/adoption/${id}`).pipe(
-        map(response => plainToClass(AdoptDto, response, { groups: ['petman-client'] }))
+      .get<AdoptDto>(`${environment.api}/api/adoption/${id}`)
+      .pipe(
+        map(response =>
+          plainToClass(AdoptDto, response, { groups: ['petman-client'] })
+        )
       );
   }
 
   list(query: ListQueryRequestDto): Observable<AdoptListResponseDto> {
     return this.http
-      .get<AdoptListResponseDto>(`${environment.api}/api/adoption`, { params: <any>query }).pipe(
-        map(response => plainToClass(AdoptListResponseDto, response, { groups: ['petman-client'] }))
+      .get<AdoptListResponseDto>(`${environment.api}/api/adoption`, {
+        params: <any>query
+      })
+      .pipe(
+        map(response =>
+          plainToClass(AdoptListResponseDto, response, {
+            groups: ['petman-client']
+          })
+        )
       );
   }
 }

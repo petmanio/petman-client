@@ -1,10 +1,10 @@
+import isArray from 'lodash-es/isArray';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
-import { isArray } from 'lodash';
 
 import {
   CategoryListResponseDto,
@@ -25,9 +25,10 @@ import { PoiModule } from '@poi/poi.module';
   providedIn: PoiModule
 })
 export class PoiService {
-
-  constructor(@Inject(PLATFORM_ID) protected platformId: Object, private http: HttpClient) {
-  }
+  constructor(
+    @Inject(PLATFORM_ID) protected platformId: Object,
+    private http: HttpClient
+  ) {}
 
   static createMapPin(entity: PinDto): Pin {
     return {
@@ -54,9 +55,13 @@ export class PoiService {
     if (isPlatformBrowser(this.platformId)) {
       formData = new FormData();
     }
-    return this.http.post<PoiDto>(`${environment.api}/api/pois`, formData).pipe(
-      map(response => plainToClass(PoiDto, response, { groups: ['petman-client'] }))
-    );
+    return this.http
+      .post<PoiDto>(`${environment.api}/api/pois`, formData)
+      .pipe(
+        map(response =>
+          plainToClass(PoiDto, response, { groups: ['petman-client'] })
+        )
+      );
   }
 
   update(body: PoiDto): Observable<PoiDto> {
@@ -64,9 +69,13 @@ export class PoiService {
     if (isPlatformBrowser(this.platformId)) {
       formData = new FormData();
     }
-    return this.http.put<PoiDto>(`${environment.api}/api/pois/${body.id}`, formData).pipe(
-      map(response => plainToClass(PoiDto, response, { groups: ['petman-client'] }))
-    );
+    return this.http
+      .put<PoiDto>(`${environment.api}/api/pois/${body.id}`, formData)
+      .pipe(
+        map(response =>
+          plainToClass(PoiDto, response, { groups: ['petman-client'] })
+        )
+      );
   }
 
   delete(id: number): Observable<Object> {
@@ -75,8 +84,11 @@ export class PoiService {
 
   getById(id: number): Observable<PoiDto> {
     return this.http
-      .get<PoiDto>(`${environment.api}/api/pois/${id}`).pipe(
-        map(response => plainToClass(PoiDto, response, { groups: ['petman-client'] }))
+      .get<PoiDto>(`${environment.api}/api/pois/${id}`)
+      .pipe(
+        map(response =>
+          plainToClass(PoiDto, response, { groups: ['petman-client'] })
+        )
       );
   }
 
@@ -86,12 +98,25 @@ export class PoiService {
       .set('limit', query.limit.toString());
 
     if (query.primaryCategories) {
-      (isArray(query.primaryCategories) ? query.primaryCategories : [query.primaryCategories])
-        .forEach(primaryCategory => params = params.append('primaryCategories', primaryCategory.toString()));
+      (isArray(query.primaryCategories)
+        ? query.primaryCategories
+        : [query.primaryCategories]
+      ).forEach(
+        primaryCategory =>
+          (params = params.append(
+            'primaryCategories',
+            primaryCategory.toString()
+          ))
+      );
     }
     return this.http
-      .get<PoiListResponseDto>(`${environment.api}/api/pois`, { params }).pipe(
-        map(response => plainToClass(PoiListResponseDto, response, { groups: ['petman-client'] }))
+      .get<PoiListResponseDto>(`${environment.api}/api/pois`, { params })
+      .pipe(
+        map(response =>
+          plainToClass(PoiListResponseDto, response, {
+            groups: ['petman-client']
+          })
+        )
       );
   }
 
@@ -101,19 +126,37 @@ export class PoiService {
       .set('limit', query.limit.toString());
 
     if (query.primaryCategories) {
-      (isArray(query.primaryCategories) ? query.primaryCategories : [query.primaryCategories])
-        .forEach(primaryCategory => params = params.append('primaryCategories', primaryCategory.toString()));
+      (isArray(query.primaryCategories)
+        ? query.primaryCategories
+        : [query.primaryCategories]
+      ).forEach(
+        primaryCategory =>
+          (params = params.append(
+            'primaryCategories',
+            primaryCategory.toString()
+          ))
+      );
     }
     return this.http
-      .get<PinDto[]>(`${environment.api}/api/pois/pins`, { params }).pipe(
-        map(response => plainToClass(PinDto, response, { groups: ['petman-client'] }))
+      .get<PinDto[]>(`${environment.api}/api/pois/pins`, { params })
+      .pipe(
+        map(response =>
+          plainToClass(PinDto, response, { groups: ['petman-client'] })
+        )
       );
   }
 
   categories(query: ListQueryRequestDto): Observable<CategoryListResponseDto> {
     return this.http
-      .get<CategoryListResponseDto>(`${environment.api}/api/pois/categories`, {  params: <any>query  }).pipe(
-        map(response => plainToClass(CategoryListResponseDto, response, { groups: ['petman-client'] }))
+      .get<CategoryListResponseDto>(`${environment.api}/api/pois/categories`, {
+        params: <any>query
+      })
+      .pipe(
+        map(response =>
+          plainToClass(CategoryListResponseDto, response, {
+            groups: ['petman-client']
+          })
+        )
       );
   }
 }

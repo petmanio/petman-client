@@ -25,7 +25,9 @@
       "@lost-found/*": ["app/modules/lost-found/*"],
       "@user/*": ["app/modules/user/*"],
       "@app/*": ["app/*"],
-      "@nestjs/swagger": ["../node_modules/@petman/common/dist/mock/package"]
+      "@nestjs/swagger": ["../node_modules/@petman/common/dist/mock/package"],
+      "moment": ["../node_modules/moment/min/moment.min.js"],
+      "lodash": ["../node_modules/lodash-es"]
     }
   }
 }
