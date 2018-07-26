@@ -12,6 +12,7 @@ export class AppHammerConfig extends HammerGestureConfig {
           element.attributes['data-mc-options'].nodeValue
         );
 
+        // TODO: find better way for inputClass option
         if (typeof parseOptions.inputClass !== 'undefined') {
           parseOptions.inputClass = Hammer[parseOptions.inputClass];
         }
