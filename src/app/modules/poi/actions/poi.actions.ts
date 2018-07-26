@@ -53,22 +53,19 @@ export enum PoiActionTypes {
 export class Create implements Action {
   readonly type = PoiActionTypes.CREATE;
 
-  constructor(public payload: any) {
-  }
+  constructor(public payload: any) {}
 }
 
 export class CreateSuccess implements Action {
   readonly type = PoiActionTypes.CREATE_SUCCESS;
 
-  constructor(public payload: PoiDto) {
-  }
+  constructor(public payload: PoiDto) {}
 }
 
 export class CreateFailure implements Action {
   readonly type = PoiActionTypes.CREATE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -77,22 +74,19 @@ export class CreateFailure implements Action {
 export class Update implements Action {
   readonly type = PoiActionTypes.UPDATE;
 
-  constructor(public payload: PoiDto) {
-  }
+  constructor(public payload: PoiDto) {}
 }
 
 export class UpdateSuccess implements Action {
   readonly type = PoiActionTypes.UPDATE_SUCCESS;
 
-  constructor(public payload: PoiDto) {
-  }
+  constructor(public payload: PoiDto) {}
 }
 
 export class UpdateFailure implements Action {
   readonly type = PoiActionTypes.UPDATE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -101,22 +95,19 @@ export class UpdateFailure implements Action {
 export class Delete implements Action {
   readonly type = PoiActionTypes.DELETE;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
 export class DeleteSuccess implements Action {
   readonly type = PoiActionTypes.DELETE_SUCCESS;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
 export class DeleteFailure implements Action {
   readonly type = PoiActionTypes.DELETE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -125,22 +116,19 @@ export class DeleteFailure implements Action {
 export class Load implements Action {
   readonly type = PoiActionTypes.LOAD;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
 export class LoadSuccess implements Action {
   readonly type = PoiActionTypes.LOAD_SUCCESS;
 
-  constructor(public payload: PoiDto) {
-  }
+  constructor(public payload: PoiDto) {}
 }
 
 export class LoadFailure implements Action {
   readonly type = PoiActionTypes.LOAD_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -149,22 +137,19 @@ export class LoadFailure implements Action {
 export class List implements Action {
   readonly type = PoiActionTypes.LIST;
 
-  constructor(public payload: PoiListQueryRequestDto) {
-  }
+  constructor(public payload: PoiListQueryRequestDto) {}
 }
 
 export class ListSuccess implements Action {
   readonly type = PoiActionTypes.LIST_SUCCESS;
 
-  constructor(public payload: PoiListResponseDto) {
-  }
+  constructor(public payload: PoiListResponseDto) {}
 }
 
 export class ListFailure implements Action {
   readonly type = PoiActionTypes.LIST_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -173,24 +158,20 @@ export class ListFailure implements Action {
 export class More implements Action {
   readonly type = PoiActionTypes.MORE;
 
-  constructor(public payload: PoiListQueryRequestDto) {
-  }
+  constructor(public payload: PoiListQueryRequestDto) {}
 }
 
 export class MoreSuccess implements Action {
   readonly type = PoiActionTypes.MORE_SUCCESS;
 
-  constructor(public payload: PoiListResponseDto) {
-  }
+  constructor(public payload: PoiListResponseDto) {}
 }
 
 export class MoreFailure implements Action {
   readonly type = PoiActionTypes.MORE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
-
 
 /**
  * Pins
@@ -198,22 +179,19 @@ export class MoreFailure implements Action {
 export class Pins implements Action {
   readonly type = PoiActionTypes.PINS;
 
-  constructor(public payload: PoiPinsQueryRequestDto) {
-  }
+  constructor(public payload: PoiPinsQueryRequestDto) {}
 }
 
 export class PinsSuccess implements Action {
   readonly type = PoiActionTypes.PINS_SUCCESS;
 
-  constructor(public payload: PinDto[]) {
-  }
+  constructor(public payload: PinDto[]) {}
 }
 
 export class PinsFailure implements Action {
   readonly type = PoiActionTypes.PINS_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -222,22 +200,19 @@ export class PinsFailure implements Action {
 export class Categories implements Action {
   readonly type = PoiActionTypes.CATEGORIES;
 
-  constructor(public payload: ListQueryRequestDto) {
-  }
+  constructor(public payload: ListQueryRequestDto) {}
 }
 
 export class CategoriesSuccess implements Action {
   readonly type = PoiActionTypes.CATEGORIES_SUCCESS;
 
-  constructor(public payload: CategoryListResponseDto) {
-  }
+  constructor(public payload: CategoryListResponseDto) {}
 }
 
 export class CategoriesFailure implements Action {
   readonly type = PoiActionTypes.CATEGORIES_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -246,11 +221,11 @@ export class CategoriesFailure implements Action {
 export class Select implements Action {
   readonly type = PoiActionTypes.SELECT;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
-export type PoiActions = Create
+export type PoiActions =
+  | Create
   | CreateSuccess
   | CreateFailure
   | Update

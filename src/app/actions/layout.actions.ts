@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export enum LayoutActionTypes {
   OPEN_SIDENAV = '[Layout] Open sidenav',
-  CLOSE_SIDENAV = '[Layout] Close sidenav',
+  CLOSE_SIDENAV = '[Layout] Close sidenav'
 }
 
 export class OpenSidenav implements Action {

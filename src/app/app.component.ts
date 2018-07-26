@@ -25,6 +25,7 @@ import * as fromRoot from '@app/reducers';
 import * as fromAuth from '@auth/reducers';
 import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
+import { CleanError } from '@shared/actions/shared.actions';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
 import { Update as UserUpdate } from '@user/actions/user.actions';
 import { Categories } from '@poi/actions/poi.actions';
@@ -109,6 +110,8 @@ export class AppComponent implements OnInit, OnDestroy {
       const [active, breakpoint] = event;
       this.sideNavMode = breakpoint.matches ? 'side' : 'push';
       if (active instanceof NavigationEnd) {
+        this.store.dispatch(new CleanError());
+
         this.redirectAfterSignUp =
           ['/', '/404'].indexOf(active.urlAfterRedirects) === -1
             ? active.urlAfterRedirects
@@ -124,7 +127,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }
 
         if (!breakpoint.matches) {
-          this.store.dispatch(new CloseSidenav());
+          this.closeSideNav();
         }
 
         // const showSidenav = this.activatedRoute.data['showSidenav'];
@@ -135,9 +138,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (typeof showSidenav !== 'undefined') {
           if (showSidenav && breakpoint.matches) {
-            this.store.dispatch(new OpenSidenav());
+            this.openSideNav();
           } else {
-            this.store.dispatch(new CloseSidenav());
+            this.closeSideNav();
           }
         }
 

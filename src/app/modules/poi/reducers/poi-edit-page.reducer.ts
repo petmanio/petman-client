@@ -1,5 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
+import {
+  SharedActionTypes,
+  SharedActions
+} from '@shared/actions/shared.actions';
 import { PoiActions, PoiActionTypes } from '@poi/actions/poi.actions';
 
 export interface State {
@@ -9,10 +13,13 @@ export interface State {
 
 export const initialState: State = {
   error: null,
-  pending: false,
+  pending: false
 };
 
-export function reducer(state = initialState, action: PoiActions): State {
+export function reducer(
+  state = initialState,
+  action: PoiActions | SharedActions
+): State {
   switch (action.type) {
     case PoiActionTypes.UPDATE:
     case PoiActionTypes.DELETE:
@@ -25,6 +32,9 @@ export function reducer(state = initialState, action: PoiActions): State {
     case PoiActionTypes.UPDATE_FAILURE:
     case PoiActionTypes.DELETE_FAILURE:
       return { ...state, error: action.payload, pending: false };
+
+    case SharedActionTypes.CLEAN_ERROR:
+      return initialState;
 
     default:
       return state;

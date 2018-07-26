@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 export enum MapActionTypes {
-  SAMPLE = '[Map] Sample',
+  SAMPLE = '[Map] Sample'
 }
 
 export class Sample implements Action {

@@ -1,5 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
+import {
+  SharedActionTypes,
+  SharedActions
+} from '@shared/actions/shared.actions';
 import { AdoptActions, AdoptActionTypes } from '@adopt/actions/adopt.actions';
 
 export interface State {
@@ -9,10 +13,13 @@ export interface State {
 
 export const initialState: State = {
   error: null,
-  pending: false,
+  pending: false
 };
 
-export function reducer(state = initialState, action: AdoptActions): State {
+export function reducer(
+  state = initialState,
+  action: AdoptActions | SharedActions
+): State {
   switch (action.type) {
     case AdoptActionTypes.CREATE:
       return { ...state, error: null, pending: true };
@@ -22,6 +29,9 @@ export function reducer(state = initialState, action: AdoptActions): State {
 
     case AdoptActionTypes.CREATE_FAILURE:
       return { ...state, error: action.payload, pending: false };
+
+    case SharedActionTypes.CLEAN_ERROR:
+      return initialState;
 
     default:
       return state;

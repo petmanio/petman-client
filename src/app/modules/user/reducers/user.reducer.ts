@@ -6,7 +6,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  sample: null,
+  sample: null
 };
 
 export function reducer(state = initialState, action: AuthActions): State {

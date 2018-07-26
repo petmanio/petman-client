@@ -1,13 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
-import { ListQueryRequestDto, WalkerDto, WalkerListResponseDto, WalkerRequestDto } from '@petman/common';
+import {
+  ListQueryRequestDto,
+  WalkerDto,
+  WalkerListResponseDto,
+  WalkerRequestDto
+} from '@petman/common';
 
 export enum WalkerActionTypes {
   CREATE = '[Walker] Create',
   CREATE_FAILURE = '[Walker] Create failure',
   CREATE_SUCCESS = '[Walker] Create success',
-
 
   UPDATE = '[Walker] Update',
   UPDATE_SUCCESS = '[Walker] Update success',
@@ -38,22 +42,19 @@ export enum WalkerActionTypes {
 export class Create implements Action {
   readonly type = WalkerActionTypes.CREATE;
 
-  constructor(public payload: WalkerRequestDto) {
-  }
+  constructor(public payload: WalkerRequestDto) {}
 }
 
 export class CreateSuccess implements Action {
   readonly type = WalkerActionTypes.CREATE_SUCCESS;
 
-  constructor(public payload: WalkerDto) {
-  }
+  constructor(public payload: WalkerDto) {}
 }
 
 export class CreateFailure implements Action {
   readonly type = WalkerActionTypes.CREATE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -62,22 +63,19 @@ export class CreateFailure implements Action {
 export class Update implements Action {
   readonly type = WalkerActionTypes.UPDATE;
 
-  constructor(public payload: { id: number, body: WalkerDto }) {
-  }
+  constructor(public payload: { id: number; body: WalkerDto }) {}
 }
 
 export class UpdateSuccess implements Action {
   readonly type = WalkerActionTypes.UPDATE_SUCCESS;
 
-  constructor(public payload: WalkerDto) {
-  }
+  constructor(public payload: WalkerDto) {}
 }
 
 export class UpdateFailure implements Action {
   readonly type = WalkerActionTypes.UPDATE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -86,22 +84,19 @@ export class UpdateFailure implements Action {
 export class Delete implements Action {
   readonly type = WalkerActionTypes.DELETE;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
 export class DeleteSuccess implements Action {
   readonly type = WalkerActionTypes.DELETE_SUCCESS;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
 export class DeleteFailure implements Action {
   readonly type = WalkerActionTypes.DELETE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -110,22 +105,19 @@ export class DeleteFailure implements Action {
 export class Load implements Action {
   readonly type = WalkerActionTypes.LOAD;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
 export class LoadSuccess implements Action {
   readonly type = WalkerActionTypes.LOAD_SUCCESS;
 
-  constructor(public payload: WalkerDto) {
-  }
+  constructor(public payload: WalkerDto) {}
 }
 
 export class LoadFailure implements Action {
   readonly type = WalkerActionTypes.LOAD_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -134,22 +126,19 @@ export class LoadFailure implements Action {
 export class List implements Action {
   readonly type = WalkerActionTypes.LIST;
 
-  constructor(public payload: ListQueryRequestDto) {
-  }
+  constructor(public payload: ListQueryRequestDto) {}
 }
 
 export class ListSuccess implements Action {
   readonly type = WalkerActionTypes.LIST_SUCCESS;
 
-  constructor(public payload: WalkerListResponseDto) {
-  }
+  constructor(public payload: WalkerListResponseDto) {}
 }
 
 export class ListFailure implements Action {
   readonly type = WalkerActionTypes.LIST_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -158,22 +147,19 @@ export class ListFailure implements Action {
 export class More implements Action {
   readonly type = WalkerActionTypes.MORE;
 
-  constructor(public payload: ListQueryRequestDto) {
-  }
+  constructor(public payload: ListQueryRequestDto) {}
 }
 
 export class MoreSuccess implements Action {
   readonly type = WalkerActionTypes.MORE_SUCCESS;
 
-  constructor(public payload: WalkerListResponseDto) {
-  }
+  constructor(public payload: WalkerListResponseDto) {}
 }
 
 export class MoreFailure implements Action {
   readonly type = WalkerActionTypes.MORE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -182,11 +168,11 @@ export class MoreFailure implements Action {
 export class Select implements Action {
   readonly type = WalkerActionTypes.SELECT;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
-export type WalkerActions = Create
+export type WalkerActions =
+  | Create
   | CreateSuccess
   | CreateFailure
   | Update

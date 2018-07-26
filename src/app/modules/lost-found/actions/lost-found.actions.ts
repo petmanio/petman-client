@@ -1,13 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
-import { ListQueryRequestDto, LostFoundDto, LostFoundListResponseDto, LostFoundRequestDto } from '@petman/common';
+import {
+  ListQueryRequestDto,
+  LostFoundDto,
+  LostFoundListResponseDto,
+  LostFoundRequestDto
+} from '@petman/common';
 
 export enum LostFoundActionTypes {
   CREATE = '[LostFound] Create',
   CREATE_FAILURE = '[LostFound] Create failure',
   CREATE_SUCCESS = '[LostFound] Create success',
-
 
   UPDATE = '[LostFound] Update',
   UPDATE_SUCCESS = '[LostFound] Update success',
@@ -38,22 +42,19 @@ export enum LostFoundActionTypes {
 export class Create implements Action {
   readonly type = LostFoundActionTypes.CREATE;
 
-  constructor(public payload: LostFoundRequestDto) {
-  }
+  constructor(public payload: LostFoundRequestDto) {}
 }
 
 export class CreateSuccess implements Action {
   readonly type = LostFoundActionTypes.CREATE_SUCCESS;
 
-  constructor(public payload: LostFoundDto) {
-  }
+  constructor(public payload: LostFoundDto) {}
 }
 
 export class CreateFailure implements Action {
   readonly type = LostFoundActionTypes.CREATE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -62,22 +63,19 @@ export class CreateFailure implements Action {
 export class Update implements Action {
   readonly type = LostFoundActionTypes.UPDATE;
 
-  constructor(public payload: { id: number, body: LostFoundDto }) {
-  }
+  constructor(public payload: { id: number; body: LostFoundDto }) {}
 }
 
 export class UpdateSuccess implements Action {
   readonly type = LostFoundActionTypes.UPDATE_SUCCESS;
 
-  constructor(public payload: LostFoundDto) {
-  }
+  constructor(public payload: LostFoundDto) {}
 }
 
 export class UpdateFailure implements Action {
   readonly type = LostFoundActionTypes.UPDATE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -86,22 +84,19 @@ export class UpdateFailure implements Action {
 export class Delete implements Action {
   readonly type = LostFoundActionTypes.DELETE;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
 export class DeleteSuccess implements Action {
   readonly type = LostFoundActionTypes.DELETE_SUCCESS;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
 export class DeleteFailure implements Action {
   readonly type = LostFoundActionTypes.DELETE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -110,22 +105,19 @@ export class DeleteFailure implements Action {
 export class Load implements Action {
   readonly type = LostFoundActionTypes.LOAD;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
 export class LoadSuccess implements Action {
   readonly type = LostFoundActionTypes.LOAD_SUCCESS;
 
-  constructor(public payload: LostFoundDto) {
-  }
+  constructor(public payload: LostFoundDto) {}
 }
 
 export class LoadFailure implements Action {
   readonly type = LostFoundActionTypes.LOAD_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -134,22 +126,19 @@ export class LoadFailure implements Action {
 export class List implements Action {
   readonly type = LostFoundActionTypes.LIST;
 
-  constructor(public payload: ListQueryRequestDto) {
-  }
+  constructor(public payload: ListQueryRequestDto) {}
 }
 
 export class ListSuccess implements Action {
   readonly type = LostFoundActionTypes.LIST_SUCCESS;
 
-  constructor(public payload: LostFoundListResponseDto) {
-  }
+  constructor(public payload: LostFoundListResponseDto) {}
 }
 
 export class ListFailure implements Action {
   readonly type = LostFoundActionTypes.LIST_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -158,22 +147,19 @@ export class ListFailure implements Action {
 export class More implements Action {
   readonly type = LostFoundActionTypes.MORE;
 
-  constructor(public payload: ListQueryRequestDto) {
-  }
+  constructor(public payload: ListQueryRequestDto) {}
 }
 
 export class MoreSuccess implements Action {
   readonly type = LostFoundActionTypes.MORE_SUCCESS;
 
-  constructor(public payload: LostFoundListResponseDto) {
-  }
+  constructor(public payload: LostFoundListResponseDto) {}
 }
 
 export class MoreFailure implements Action {
   readonly type = LostFoundActionTypes.MORE_FAILURE;
 
-  constructor(public payload: HttpErrorResponse) {
-  }
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -182,11 +168,11 @@ export class MoreFailure implements Action {
 export class Select implements Action {
   readonly type = LostFoundActionTypes.SELECT;
 
-  constructor(public payload: number) {
-  }
+  constructor(public payload: number) {}
 }
 
-export type LostFoundActions = Create
+export type LostFoundActions =
+  | Create
   | CreateSuccess
   | CreateFailure
   | Update

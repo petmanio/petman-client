@@ -1,14 +1,14 @@
 import { Action } from '@ngrx/store';
 
 export enum SharedActionTypes {
-  SAMPLE = '[Shared] Sample'
+  CLEAN_ERROR = '[Shared] Clean Error'
 }
 
 /**
- * Sample
+ * Clean Error
  */
-export class Sample implements Action {
-  readonly type = SharedActionTypes.SAMPLE;
+export class CleanError implements Action {
+  readonly type = SharedActionTypes.CLEAN_ERROR;
 }
 
-export type SharedActions = Sample;
+export type SharedActions = CleanError;

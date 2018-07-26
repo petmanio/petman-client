@@ -1,6 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { LostFoundActions, LostFoundActionTypes } from '@lost-found/actions/lost-found.actions';
+import {
+  SharedActionTypes,
+  SharedActions
+} from '@shared/actions/shared.actions';
+import {
+  LostFoundActions,
+  LostFoundActionTypes
+} from '@lost-found/actions/lost-found.actions';
 
 export interface State {
   error: HttpErrorResponse;
@@ -9,10 +16,13 @@ export interface State {
 
 export const initialState: State = {
   error: null,
-  pending: false,
+  pending: false
 };
 
-export function reducer(state = initialState, action: LostFoundActions): State {
+export function reducer(
+  state = initialState,
+  action: LostFoundActions | SharedActions
+): State {
   switch (action.type) {
     case LostFoundActionTypes.CREATE:
       return { ...state, error: null, pending: true };
@@ -22,6 +32,9 @@ export function reducer(state = initialState, action: LostFoundActions): State {
 
     case LostFoundActionTypes.CREATE_FAILURE:
       return { ...state, error: action.payload, pending: false };
+
+    case SharedActionTypes.CLEAN_ERROR:
+      return initialState;
 
     default:
       return state;

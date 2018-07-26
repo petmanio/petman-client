@@ -1,5 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
+import {
+  SharedActionTypes,
+  SharedActions
+} from '@shared/actions/shared.actions';
 import { PoiActions, PoiActionTypes } from '@poi/actions/poi.actions';
 import { MapActions } from '@map/actions/map.actions';
 
@@ -10,10 +14,13 @@ export interface State {
 
 export const initialState: State = {
   error: null,
-  pending: false,
+  pending: false
 };
 
-export function reducer(state = initialState, action: MapActions | PoiActions): State {
+export function reducer(
+  state = initialState,
+  action: MapActions | PoiActions | SharedActions
+): State {
   switch (action.type) {
     case PoiActionTypes.LIST:
     case PoiActionTypes.MORE:
@@ -29,6 +36,9 @@ export function reducer(state = initialState, action: MapActions | PoiActions): 
     case PoiActionTypes.MORE_FAILURE:
     case PoiActionTypes.PINS_FAILURE:
       return { ...state, error: action.payload, pending: false };
+
+    case SharedActionTypes.CLEAN_ERROR:
+      return initialState;
 
     default:
       return state;
