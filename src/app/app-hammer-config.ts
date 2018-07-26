@@ -3,24 +3,33 @@ import { HammerGestureConfig } from '@angular/platform-browser';
 declare var Hammer: any;
 
 export class AppHammerConfig extends HammerGestureConfig {
-
   buildHammer(element: HTMLElement) {
     let options = {};
 
     if (element.attributes['data-mc-options']) {
       try {
-        const parseOptions = JSON.parse(element.attributes['data-mc-options'].nodeValue);
+        const parseOptions = JSON.parse(
+          element.attributes['data-mc-options'].nodeValue
+        );
+
+        if (typeof parseOptions.inputClass !== 'undefined') {
+          parseOptions.inputClass = Hammer[parseOptions.inputClass];
+        }
+
         options = parseOptions;
-      } catch(err) {
-        console.error('An error occurred when attempting to parse Hammer.js options: ', err);
+      } catch (err) {
+        console.error(
+          'An error occurred when attempting to parse Hammer.js options: ',
+          err
+        );
       }
     }
 
     const mc = new Hammer(element, options);
 
     // keep default angular config
-    mc.get('pinch').set({enable: true});
-    mc.get('rotate').set({enable: true});
+    mc.get('pinch').set({ enable: true });
+    mc.get('rotate').set({ enable: true });
 
     // retain support for angular overrides object
     // tslint:disable-next-line:forin

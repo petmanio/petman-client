@@ -21,16 +21,15 @@ interface ISidenavComponent {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavComponent implements ISidenavComponent, OnInit {
-  @Input() open = false;
+  @Input() opened = false;
   @Input() mode: string;
   @Input() user: UserDto;
   @Input() selectedUser: UserDto;
   @Output() itemActivate = new EventEmitter();
-  @Output() close = new EventEmitter();
   @Output() selectedUserChange = new EventEmitter<number>();
   @Output() openedChange = new EventEmitter<boolean>();
-  @Output() swipeLeft = new EventEmitter();
-  @Output() swipeRight = new EventEmitter();
+  @Output() close = new EventEmitter();
+  @Output() open = new EventEmitter();
 
   isHomeActive;
 

@@ -2,8 +2,8 @@
 <app-toolbar [loggedIn]="(loggedIn$ | async)" [selectedUser]="(selectedUser$ | async)" [redirectAfterSignUp]="redirectAfterSignUp"
   [hideSignUpButton]="hideSignUpButton" (logOut)="logOut()" (openSettings)="openSettings()" (toggleMenu)="toggleSidenav($event)">
 </app-toolbar>
-<app-sidenav [open]="sideNavState" [mode]="sideNavMode" [user]="user$ | async" [selectedUser]="selectedUser$ | async" (selectedUserChange)="selectedUserChange($event)"
-  (openedChange)="openedChange($event)" (swipeRight)="openSideNav()" (swipeLeft)="closeSideNav()">
+<app-sidenav [opened]="sideNavState" [mode]="sideNavMode" [user]="user$ | async" [selectedUser]="selectedUser$ | async" (selectedUserChange)="selectedUserChange($event)"
+  (openedChange)="openedChange($event)" (open)="openSideNav()" (close)="closeSideNav()">
   <router-outlet content></router-outlet>
   <app-footer footer *ngIf="!hideFooter" [currentLanguage]="currentLanguage" (onLanguageChange)="onLanguageChange($event)"></app-footer>
 </app-sidenav>
