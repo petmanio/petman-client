@@ -1,42 +1,39 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
-import { MatIconRegistry } from '@angular/material';
-import { ReplaySubject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@ngx-meta/core';
+import {
+  MetaLoader,
+  MetaStaticLoader,
+  PageTitlePositioning
+} from '@ngx-meta/core';
 
 import { environment } from '@environments/environment';
 
 @Injectable()
 export class UtilService {
-  constructor(
-    @Inject(PLATFORM_ID) protected platformId: Object,
-    private matIconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer
-  ) {
-  }
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object) {}
 
-  get XHRListener(): ReplaySubject<boolean> {
-    if (isPlatformBrowser(this.platformId)) {
-      const subject = new ReplaySubject<boolean>(1);
-      const proxied = window['XMLHttpRequest'].prototype.send;
-      window['XMLHttpRequest'].prototype.send = function () {
-        subject.next(true);
-        const pointer = this;
-        const intervalId = setInterval(() => {
-          if (pointer.readyState !== 4) {
-            // if (pointer.readyState === 1) {
-            return;
-          }
-          subject.next(false);
-          clearInterval(intervalId);
-        }, 1);
-        return proxied.apply(this, [].slice.call(arguments));
-      };
+  static metaFactory(translate: TranslateService): MetaLoader {
+    // TODO: load translation before meta
+    return new MetaStaticLoader({
+      callback: (key: string) => translate.get(key),
+      pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
+      pageTitleSeparator: ' - ',
+      applicationName: 'Petman',
+      defaults: {
+        title: 'Petman',
+        description: 'DEFAULT_DESCRIPTION',
+        'og:title': 'Petman',
+        'og:description': 'DEFAULT_DESCRIPTION',
+        'og:url': 'https://petman.io',
+        'og:image': environment.origin + '/assets/icons/icon-72x72.png',
+        'og:type': 'website',
+        'og:locale': 'en_US',
+        'og:locale:alternate': 'en_US,hy_AM',
 
-      return subject;
-    }
+        'fb:app_id': environment.fb.appId
+      }
+    });
   }
 
   static randomHtmlId(len: number = 5): string {
@@ -50,46 +47,15 @@ export class UtilService {
     return text;
   }
 
-  static metaFactory(translate: TranslateService): MetaLoader {
-    return new MetaStaticLoader({
-      callback: (key: string) => translate.get(key),
-      pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
-      pageTitleSeparator: ' - ',
-      applicationName: 'Petman',
-      // applicationName: 'APP_NAME',
-      defaults: {
-        title: 'Petman',
-        // title: 'DEFAULT_TITLE',
-        description: 'DEFAULT_DESCRIPTION',
-        'og:title': 'DEFAULT_TITLE',
-        'og:description': 'DEFAULT_DESCRIPTION',
-        'og:url': 'https://petman.io',
-        'og:image': environment.origin + '/assets/icons/icon-72x72.png',
-        'og:type': 'website',
-        'og:locale': 'en_US',
-        'og:locale:alternate': 'en_US,hy_AM',
-
-        'fb:app_id': environment.fb.appId
-      }
-    });
-  }
-
   static getRouteDataByKey(activatedRoute, key: string): any {
     // TODO: Find better way to get data from activated route
-    return activatedRoute.snapshot.data[key] ||
-      (activatedRoute.snapshot.children.length && activatedRoute.snapshot.children[0].data[key]) ||
-      (activatedRoute.snapshot.children[0].children.length && activatedRoute.snapshot.children[0].children[0].data[key]);
-  }
-
-  static getShareUrl(network: string, url: string, redirectUrl?: string, appId?: string | number): string {
-    const networks = {
-      facebook: `https://www.facebook.com/dialog/share?app_id=${appId}&href=${url}&display=popup&redirect_uri=${redirectUrl}`,
-      vkontakte: `http://vkontakte.ru/share.php?url=${url}`,
-      twitter: `https://twitter.com/intent/tweet?url=${url}&via=Petman&related=Petman,Pets`,
-      odnoklassniki: ``
-    };
-
-    return networks[network];
+    return (
+      activatedRoute.snapshot.data[key] ||
+      (activatedRoute.snapshot.children.length &&
+        activatedRoute.snapshot.children[0].data[key]) ||
+      (activatedRoute.snapshot.children[0].children.length &&
+        activatedRoute.snapshot.children[0].children[0].data[key])
+    );
   }
 
   static getBrowserLanguageToEnumKey(lang: string): string {
@@ -99,7 +65,7 @@ export class UtilService {
     return lang.toLocaleUpperCase();
   }
 
-  static stripHtml = (html: string): string => {
+  static stripHtml(html: string): string {
     const tmp = document.createElement('div');
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || '';
@@ -132,9 +98,10 @@ export class UtilService {
         });
       };
 
-      (function (d, s, id) {
+      (function(d, s, id) {
         //noinspection TsLint
-        let js, fjs = d.getElementsByTagName(s)[0];
+        let js,
+          fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {
           return;
         }
@@ -142,24 +109,34 @@ export class UtilService {
         js.id = id;
         js.src = '//connect.facebook.net/en_US/sdk.js';
         fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+      })(document, 'script', 'facebook-jssdk');
 
       if (environment.gaId) {
         const currdate: any = new Date();
         const gaNewElem: any = {};
         const gaElems: any = {};
 
-        (function (i: any, s, o, g, r, a, m) {
+        (function(i: any, s, o, g, r, a, m) {
           i['GoogleAnalyticsObject'] = r;
-          i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments);
-          }, i[r].l = 1 * currdate;
-          a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
+          (i[r] =
+            i[r] ||
+            function() {
+              (i[r].q = i[r].q || []).push(arguments);
+            }),
+            (i[r].l = 1 * currdate);
+          (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
           a.async = 1;
           a.src = g;
           m.parentNode.insertBefore(a, m);
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga', gaNewElem, gaElems);
+        })(
+          window,
+          document,
+          'script',
+          '//www.google-analytics.com/analytics.js',
+          'ga',
+          gaNewElem,
+          gaElems
+        );
 
         ga('create', environment.gaId, 'auto');
         ga('send', 'pageview');

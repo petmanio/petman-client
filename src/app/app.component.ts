@@ -238,10 +238,6 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  closeDialog() {
-    console.log(444);
-  }
-
   private initNgxTranslate() {
     let languageKey;
 
@@ -260,10 +256,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.currentLanguage = languageKey;
     this.localStorageService.setItem('language', language);
-    this.translate.setDefaultLang(language);
+
+    this.translate.addLangs(['en', 'hy']);
+    this.translate.setDefaultLang('en');
     this.translate.use(language).subscribe(() => {
       // TODO: this.meta.setTag('og:locale', 'en-US');
-      this.meta.update(this.router.url);
     });
   }
 

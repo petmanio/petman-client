@@ -11,15 +11,31 @@ import { ShelterDetailsPageComponent } from '@shelter/pages/shelter-details-page
 import { ShelterUpdatePageComponent } from '@shelter/pages/shelter-update-page/shelter-update-page.component';
 
 export const routes: Routes = [
-  { path: '', component: ShelterListPageComponent, pathMatch: 'full' },
-  { path: 'add', component: ShelterCreatePageComponent, canActivate: [AuthGuard] },
-  { path: ':id', component: ShelterDetailsPageComponent, canActivate: [ShelterExistsGuard] },
-  { path: ':id/edit', component: ShelterUpdatePageComponent, canActivate: [AuthGuard, ShelterExistsGuard, ShelterOwnerGuard] }
+  {
+    path: '',
+    component: ShelterListPageComponent,
+    pathMatch: 'full',
+    data: {}
+  },
+  {
+    path: 'add',
+    component: ShelterCreatePageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ':id',
+    component: ShelterDetailsPageComponent,
+    canActivate: [ShelterExistsGuard]
+  },
+  {
+    path: ':id/edit',
+    component: ShelterUpdatePageComponent,
+    canActivate: [AuthGuard, ShelterExistsGuard, ShelterOwnerGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ShelterRoutingModule {
-}
+export class ShelterRoutingModule {}

@@ -77,7 +77,7 @@ export function translateBrowserFactory(
       loader: {
         provide: TranslateLoader,
         useFactory: translateBrowserFactory,
-        deps: [HttpClient, TransferState]
+        deps: [HttpClient, TransferState],
       }
     }),
     MetaModule.forRoot({
