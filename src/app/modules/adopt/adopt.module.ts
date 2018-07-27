@@ -4,7 +4,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '@shared/shared.module';
-import { MaterialModule } from '@material/material.module';
 
 import { reducers } from '@adopt/reducers';
 import { AdoptRoutingModule } from '@adopt/adopt-routing.module';
@@ -24,23 +23,21 @@ import { AdoptUpdatePageComponent } from '@adopt/pages/adopt-update-page/adopt-u
     StoreModule.forFeature('adopt', reducers),
     EffectsModule.forFeature([AdoptEffects]),
 
-    SharedModule,
-    MaterialModule
+    SharedModule
   ],
   declarations: [
     AdoptListPageComponent,
     AdoptCreatePageComponent,
     AdoptDetailsPageComponent,
-    AdoptUpdatePageComponent,
+    AdoptUpdatePageComponent
   ],
-  providers: [AdoptService, AdoptExistsGuard, AdoptOwnerGuard],
+  providers: [AdoptService, AdoptExistsGuard, AdoptOwnerGuard]
 })
 export class AdoptModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: AdoptModule,
-      providers: [],
+      providers: []
     };
   }
 }
-

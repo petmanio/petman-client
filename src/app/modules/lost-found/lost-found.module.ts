@@ -4,7 +4,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '@shared/shared.module';
-import { MaterialModule } from '@material/material.module';
 
 import { reducers } from '@lost-found/reducers';
 import { LostFoundRoutingModule } from '@lost-found/lost-found-routing.module';
@@ -24,23 +23,21 @@ import { LostFoundUpdatePageComponent } from '@lost-found/pages/lost-found-updat
     StoreModule.forFeature('lost-found', reducers),
     EffectsModule.forFeature([LostFoundEffects]),
 
-    SharedModule,
-    MaterialModule
+    SharedModule
   ],
   declarations: [
     LostFoundListPageComponent,
     LostFoundCreatePageComponent,
     LostFoundDetailsPageComponent,
-    LostFoundUpdatePageComponent,
+    LostFoundUpdatePageComponent
   ],
-  providers: [LostFoundService, LostFoundExistsGuard, LostFoundOwnerGuard],
+  providers: [LostFoundService, LostFoundExistsGuard, LostFoundOwnerGuard]
 })
 export class LostFoundModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: LostFoundModule,
-      providers: [],
+      providers: []
     };
   }
 }
-

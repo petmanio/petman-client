@@ -28,7 +28,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { NgxMaskModule } from 'ngx-mask';
 
 import { environment } from '@environments/environment';
-import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
 import { CoreModule } from '@core/core.module';
 import { AuthModule } from '@auth/auth.module';
@@ -90,7 +89,6 @@ export function translateBrowserFactory(
     ShareButtonsModule.forRoot(),
 
     SharedModule.forRoot(),
-    MaterialModule.forRoot(),
     CoreModule.forRoot(),
     AuthModule.forRoot(),
     PoiModule.forRoot(),

@@ -3,7 +3,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '@shared/shared.module';
-import { MaterialModule } from '@material/material.module';
 
 import { reducers } from '@map/reducers';
 import { MapRoutingModule } from '@map/map-routing.module';
@@ -17,8 +16,7 @@ import { MapPageComponent } from '@map/map-page/map-page.component';
     StoreModule.forFeature('map', reducers),
     EffectsModule.forFeature([MapEffects]),
 
-    SharedModule,
-    MaterialModule
+    SharedModule
   ],
   declarations: [MapPageComponent],
   providers: [MapService],

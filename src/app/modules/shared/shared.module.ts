@@ -54,7 +54,9 @@ const modules = [
   PerfectScrollbarModule,
   QuillModule,
   NgPipesModule,
-  NgxMaskModule
+  NgxMaskModule,
+
+  MaterialModule
 ];
 
 const declarations = [
@@ -82,9 +84,7 @@ const declarations = [
     ...modules,
 
     StoreModule.forFeature('shared', fromShared.reducers),
-    EffectsModule.forFeature([SharedEffects]),
-
-    MaterialModule
+    EffectsModule.forFeature([SharedEffects])
   ],
   declarations: [...declarations],
   providers: [

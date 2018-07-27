@@ -3,7 +3,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '@shared/shared.module';
-import { MaterialModule } from '@material/material.module';
 
 import { reducers } from '@auth/reducers';
 import { AuthRoutingModule } from '@auth/auth-routing.module';
@@ -24,7 +23,7 @@ import { LoginFormSocialComponent } from '@auth/components/login-form-social/log
 export class AuthRootModule {}
 
 @NgModule({
-  imports: [SharedModule, MaterialModule, AuthRootModule, AuthRoutingModule],
+  imports: [SharedModule, AuthRootModule, AuthRoutingModule],
   declarations: [
     LoginFormComponent,
     LoginFormSocialComponent,

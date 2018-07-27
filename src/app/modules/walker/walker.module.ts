@@ -4,7 +4,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '@shared/shared.module';
-import { MaterialModule } from '@material/material.module';
 
 import { reducers } from '@walker/reducers';
 import { WalkerRoutingModule } from '@walker/walker-routing.module';
@@ -24,23 +23,21 @@ import { WalkerUpdatePageComponent } from '@walker/pages/walker-update-page/walk
     StoreModule.forFeature('walker', reducers),
     EffectsModule.forFeature([WalkerEffects]),
 
-    SharedModule,
-    MaterialModule
+    SharedModule
   ],
   declarations: [
     WalkerListPageComponent,
     WalkerCreatePageComponent,
     WalkerDetailsPageComponent,
-    WalkerUpdatePageComponent,
+    WalkerUpdatePageComponent
   ],
-  providers: [WalkerService, WalkerExistsGuard, WalkerOwnerGuard],
+  providers: [WalkerService, WalkerExistsGuard, WalkerOwnerGuard]
 })
 export class WalkerModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: WalkerModule,
-      providers: [],
+      providers: []
     };
   }
 }
-

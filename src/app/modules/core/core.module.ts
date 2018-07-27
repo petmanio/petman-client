@@ -1,7 +1,11 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import {
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+  SkipSelf
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
 
 import { throwIfAlreadyLoaded } from '@core/module-import-guard';
@@ -20,23 +24,18 @@ const declarations = [
 ];
 
 @NgModule({
-  imports: [
-    MaterialModule,
-    RouterModule,
-
-    SharedModule
-  ],
-  declarations: [
-    ...declarations
-  ],
+  imports: [RouterModule, SharedModule],
+  declarations: [...declarations],
   providers: [],
-  exports: [
-    ...declarations
-  ],
+  exports: [...declarations],
   entryComponents: [WelcomeDialogComponent]
 })
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+  constructor(
+    @Optional()
+    @SkipSelf()
+    parentModule: CoreModule
+  ) {
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 
@@ -47,4 +46,3 @@ export class CoreModule {
     };
   }
 }
-

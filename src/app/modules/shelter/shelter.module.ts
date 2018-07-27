@@ -4,7 +4,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '@shared/shared.module';
-import { MaterialModule } from '@material/material.module';
 
 import { reducers } from '@shelter/reducers';
 import { ShelterRoutingModule } from '@shelter/shelter-routing.module';
@@ -24,23 +23,21 @@ import { ShelterUpdatePageComponent } from '@shelter/pages/shelter-update-page/s
     StoreModule.forFeature('shelter', reducers),
     EffectsModule.forFeature([ShelterEffects]),
 
-    SharedModule,
-    MaterialModule
+    SharedModule
   ],
   declarations: [
     ShelterListPageComponent,
     ShelterCreatePageComponent,
     ShelterDetailsPageComponent,
-    ShelterUpdatePageComponent,
+    ShelterUpdatePageComponent
   ],
-  providers: [ShelterService, ShelterExistsGuard, ShelterOwnerGuard],
+  providers: [ShelterService, ShelterExistsGuard, ShelterOwnerGuard]
 })
 export class ShelterModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: ShelterModule,
-      providers: [],
+      providers: []
     };
   }
 }
-

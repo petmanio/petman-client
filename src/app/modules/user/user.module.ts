@@ -3,7 +3,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '@shared/shared.module';
-import { MaterialModule } from '@material/material.module';
 
 import { reducers } from '@user/reducers';
 import { UserRoutingModule } from '@user/user-routing.module';
@@ -20,7 +19,7 @@ import { UserEffects } from '@user/effects/user.effects';
 export class UserRootModule {}
 
 @NgModule({
-  imports: [SharedModule, MaterialModule, UserRootModule, UserRoutingModule]
+  imports: [SharedModule, UserRootModule, UserRoutingModule]
 })
 export class UserModule {
   static forRoot(): ModuleWithProviders {
