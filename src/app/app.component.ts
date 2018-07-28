@@ -70,7 +70,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.currentLanguage = this.translateService.currentLang.toUpperCase();
 
     if (isPlatformBrowser(this.platformId)) {
-      this.welcomeDialog();
+      // this.welcomeDialog();
     }
 
     // TODO: use effects init
