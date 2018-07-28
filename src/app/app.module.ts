@@ -10,7 +10,7 @@ import {
 } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { StoreModule } from '@ngrx/store';
@@ -57,6 +57,10 @@ export function translateBrowserFactory(
   );
 }
 
+export function initLanguage(utilService: UtilService): Function {
+  return (): Promise<any> => utilService.initLanguage();
+}
+
 @NgModule({
   declarations: [AppComponent, HomePageComponent, NotFoundPageComponent],
   imports: [
@@ -77,7 +81,7 @@ export function translateBrowserFactory(
       loader: {
         provide: TranslateLoader,
         useFactory: translateBrowserFactory,
-        deps: [HttpClient, TransferState],
+        deps: [HttpClient, TransferState]
       }
     }),
     MetaModule.forRoot({
@@ -96,6 +100,13 @@ export function translateBrowserFactory(
     AppRoutingModule
   ],
   providers: [
+    // TODO: find way to load translations before metaLoader, investigate solution from @ng-seed/universal
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initLanguage,
+      multi: true,
+      deps: [UtilService]
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CustomHeadersInterceptor,

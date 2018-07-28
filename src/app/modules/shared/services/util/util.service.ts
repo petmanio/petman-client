@@ -8,20 +8,26 @@ import {
 } from '@ngx-meta/core';
 
 import { environment } from '@environments/environment';
+import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
+import { Language } from '@petman/common';
 
 @Injectable()
 export class UtilService {
-  constructor(@Inject(PLATFORM_ID) protected platformId: Object) {}
+  constructor(
+    private translateService: TranslateService,
+    private localStorageService: LocalStorageService,
+    @Inject(PLATFORM_ID) protected platformId: Object
+  ) {}
 
-  static metaFactory(translate: TranslateService): MetaLoader {
+  static metaFactory(translateService: TranslateService): MetaLoader {
     // TODO: load translation before meta
     return new MetaStaticLoader({
-      callback: (key: string) => translate.get(key),
+      callback: (key: string) => translateService.get(key),
       pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
       pageTitleSeparator: ' - ',
-      applicationName: 'Petman',
+      applicationName: 'APP_NAME',
       defaults: {
-        title: 'Petman',
+        title: 'DEFAULT_TITLE',
         description: 'DEFAULT_DESCRIPTION',
         'og:title': 'Petman',
         'og:description': 'DEFAULT_DESCRIPTION',
@@ -77,6 +83,34 @@ export class UtilService {
       img.src = src;
 
       img.onload = () => resolve(img.height);
+    });
+  }
+
+  initLanguage(): Promise<any> {
+    return new Promise((resolve: Function) => {
+      let languageKey;
+
+      if (isPlatformBrowser(this.platformId)) {
+        languageKey = UtilService.getBrowserLanguageToEnumKey(
+          this.localStorageService.getItem('language') ||
+            this.translateService.getBrowserLang()
+        );
+      }
+
+      if (!languageKey || !Language[languageKey]) {
+        languageKey = 'EN';
+      }
+
+      const language = Language[languageKey];
+
+      this.localStorageService.setItem('language', language);
+
+      this.translateService.addLangs(['en', 'hy']);
+      this.translateService.setDefaultLang('en');
+      this.translateService.use(language).subscribe(() => {
+        // TODO: this.metaService.setTag('og:locale', 'en-US');
+        resolve();
+      });
     });
   }
 

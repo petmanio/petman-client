@@ -14,7 +14,6 @@ import { combineLatest, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { MetaService } from '@ngx-meta/core';
 
 import { Language, ModalSize, UserDto } from '@petman/common';
 
@@ -56,8 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
     private dialog: MatDialog,
-    private translate: TranslateService,
-    private meta: MetaService,
+    private translateService: TranslateService,
     private store: Store<fromRoot.State>,
     private localStorageService: LocalStorageService,
     private utilService: UtilService,
@@ -68,7 +66,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initNgxTranslate();
+    // TODO: get language key from Language enum
+    this.currentLanguage = this.translateService.currentLang.toUpperCase();
 
     if (isPlatformBrowser(this.platformId)) {
       this.welcomeDialog();
@@ -205,7 +204,12 @@ export class AppComponent implements OnInit, OnDestroy {
     const language = Language[key];
     this.currentLanguage = key;
     this.localStorageService.setItem('language', language);
-    this.translate.use(language);
+    this.translateService.use(language).subscribe(() => {
+      // TODO: this.metaService.setTag('og:locale', 'en-US');
+      // this.metaService.update(this.router.url);
+      // TODO: update metas withoud naviage
+      this.router.navigate(['/']);
+    });
   }
 
   logOut() {
@@ -235,32 +239,6 @@ export class AppComponent implements OnInit, OnDestroy {
           }
         })
       );
-    });
-  }
-
-  private initNgxTranslate() {
-    let languageKey;
-
-    if (isPlatformBrowser(this.platformId)) {
-      languageKey = UtilService.getBrowserLanguageToEnumKey(
-        this.localStorageService.getItem('language') ||
-          this.translate.getBrowserLang()
-      );
-    }
-
-    if (!languageKey || !Language[languageKey]) {
-      languageKey = 'EN';
-    }
-
-    const language = Language[languageKey];
-
-    this.currentLanguage = languageKey;
-    this.localStorageService.setItem('language', language);
-
-    this.translate.addLangs(['en', 'hy']);
-    this.translate.setDefaultLang('en');
-    this.translate.use(language).subscribe(() => {
-      // TODO: this.meta.setTag('og:locale', 'en-US');
     });
   }
 

@@ -23,26 +23,26 @@ const routes: Routes = [
   {
     path: 'shelters',
     loadChildren: './modules/shelter/shelter.module#ShelterModule',
-    canActivate: [MetaGuard],
-    data: { showSidenav: true }
+    canActivateChild: [MetaGuard],
+    data: { showSidenav: true, meta: { title: 'SHELTERS' } }
   },
   {
     path: 'walkers',
     loadChildren: './modules/walker/walker.module#WalkerModule',
-    canActivate: [MetaGuard],
-    data: { showSidenav: true }
+    canActivateChild: [MetaGuard],
+    data: { showSidenav: true, meta: { title: 'WALKERS' } }
   },
   {
     path: 'adoption',
     loadChildren: './modules/adopt/adopt.module#AdoptModule',
     canActivate: [MetaGuard],
-    data: { showSidenav: true }
+    data: { showSidenav: true, meta: { title: 'ADOPTION' } }
   },
   {
     path: 'lost-found',
     loadChildren: './modules/lost-found/lost-found.module#LostFoundModule',
     canActivate: [MetaGuard],
-    data: { showSidenav: true }
+    data: { showSidenav: true, meta: { title: 'LOST_AND_FOUND' } }
   },
   {
     path: 'pois',
@@ -54,13 +54,13 @@ const routes: Routes = [
     path: 'map',
     loadChildren: './modules/map/map.module#MapModule',
     canActivate: [MetaGuard],
-    data: { showSidenav: true, hideFooter: true }
+    data: { showSidenav: true, hideFooter: true, meta: { title: 'MAP' } }
   },
   {
     path: '404',
     component: NotFoundPageComponent,
     canActivate: [MetaGuard],
-    data: { showSidenav: false }
+    data: { showSidenav: false, meta: { title: 'PAGE_NOT_FOUND' } }
   },
   { path: '**', redirectTo: '404' }
 ];
