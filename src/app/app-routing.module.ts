@@ -21,10 +21,10 @@ const routes: Routes = [
     data: { showSidenav: false, hideSignUpButton: true }
   },
   {
-    path: 'shelters',
-    loadChildren: './modules/shelter/shelter.module#ShelterModule',
+    path: 'sitters',
+    loadChildren: './modules/sitter/sitter.module#SitterModule',
     canActivateChild: [MetaGuard],
-    data: { showSidenav: true, meta: { title: 'SHELTERS' } }
+    data: { showSidenav: true, meta: { title: 'SITTERS' } }
   },
   {
     path: 'walkers',

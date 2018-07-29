@@ -13,7 +13,7 @@
       </ng-container>
       <app-nav-item (activate)="itemActivate.emit()" icon="dashboard" routerLink="" [activeClass]="[isHomeActive]">{{'MAIN' | translate}}</app-nav-item>
       <app-nav-item (activate)="itemActivate.emit()" routerLink="/map" icon="place" routerLinkActive="pm-is-active">{{'MAP' | translate}}</app-nav-item>
-      <app-nav-item (activate)="itemActivate.emit()" icon="favorite" routerLink="/shelters" routerLinkActive="pm-is-active">{{'SHELTERS' | translate}}</app-nav-item>
+      <app-nav-item (activate)="itemActivate.emit()" icon="favorite" routerLink="/sitters" routerLinkActive="pm-is-active">{{'SITTERS' | translate}}</app-nav-item>
       <app-nav-item (activate)="itemActivate.emit()" icon="child_friendly" routerLink="/walkers" routerLinkActive="pm-is-active">{{'WALKERS' | translate}}</app-nav-item>
       <app-nav-item (activate)="itemActivate.emit()" icon="pets" routerLink="/adoption" routerLinkActive="pm-is-active">{{'ADOPTION' | translate}}</app-nav-item>
       <app-nav-item (activate)="itemActivate.emit()" icon="search" routerLink="/lost-found" routerLinkActive="pm-is-active">{{'LOST_AND_FOUND' | translate}}</app-nav-item>

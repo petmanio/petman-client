@@ -20,7 +20,7 @@
       "@material/*": ["app/modules/material/*"],
       "@poi/*": ["app/modules/poi/*"],
       "@shared/*": ["app/modules/shared/*"],
-      "@shelter/*": ["app/modules/shelter/*"],
+      "@sitter/*": ["app/modules/sitter/*"],
       "@walker/*": ["app/modules/walker/*"],
       "@lost-found/*": ["app/modules/lost-found/*"],
       "@user/*": ["app/modules/user/*"],

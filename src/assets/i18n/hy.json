@@ -15,7 +15,7 @@
   "APPLY": "Դիմել",
   "APP_NAME": "Petman",
   "ARE_YOU_SURE": "Վստա՞հ եք",
-  "BECAME_SHELTER_INTO": "",
+  "BECAME_SITTER_INTO": "",
   "BECAME_WALKER_INTO": "",
   "BLOG": "Բլոգ",
   "BLOG_INTRO": "Հետաքրքիր նորություններ ամբողջ աշխարհից",
@@ -111,8 +111,8 @@
   "SEND": "Ուղարկել",
   "SETTINGS": "Կարգավորումներ",
   "SHARE": "Կիսվել",
-  "SHELTERS": "Խնամակալ",
-  "SHELTERS_INTRO":
+  "SITTERS": "Խնամակալ",
+  "SITTERS_INTRO":
     "Մեկնում եք հանգստի՞: Վստահե՛ք Ձեր սիրելի կենդանուն մեր կենդանասերներին, ովքեր մեծ հոգատարությամբ կխնամեն նրանց։",
   "SHOP": "Խանութ",
   "SIGN_OUT": "Դուրս գալ",

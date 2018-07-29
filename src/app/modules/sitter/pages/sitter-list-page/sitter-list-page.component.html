@@ -1,0 +1,36 @@
+<div class="pm-full-loader">
+  <div *tdLoading="let item until (isListLoaded$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
+    <div infinite-scroll
+         infiniteScrollContainer="mat-sidenav-content"
+         infiniteScrollDistance="2"
+         infiniteScrollThrottle="300"
+         fromRoot="true"
+         (scrolled)="onLoadMore()">
+      <div>
+        <app-masonry [options]="masonryOptions">
+          <app-masonry-item>
+            <a [routerLink]="['/sitters', 'add']">
+              <app-add-application [user]="selectedUser$ | async"></app-add-application>
+            </a>
+          </app-masonry-item>
+
+          <app-masonry-item *ngFor="let item of list$ | async">
+            <a [routerLink]="['/sitters', item.id]">
+              <app-card [config]="getCardConfig(item)" (actionClick)="onShare(item)"></app-card>
+            </a>
+          </app-masonry-item>
+        </app-masonry>
+        <button mat-fab color="accent" class="pm-fab" routerLink="add">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div class="columns is-marginless" [hidden]="!(list$ | appRxDelay | async)?.length">
+        <div class="column has-text-centered">
+          <app-progress-button spinnerColor="accent" [active]="pending$ | appRxDebounce | async" [hidden]="!canLoadMore" (click)="onLoadMore()">
+            {{ 'LOAD_MORE' | translate }}
+          </app-progress-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
