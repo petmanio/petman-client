@@ -83,7 +83,7 @@ export class TranslateService {
       return;
     }
     this.appStorage.setItem(STORAGE_LANG_NAME, lang.code);
-    window.location.reload();
+    this.setLanguage({ code: lang.code } as ILang);
   }
 
   public getLangList(): Observable<ILang[]> {

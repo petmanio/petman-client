@@ -16,10 +16,9 @@
   </div>
   <div class="columns is-marginless is-vcentered is-mobile">
     <div class="column is-paddingless font-12">
-      <p style="padding-left: 5px">© Petman | 2018</p>
-    </div>
-    <div class="column has-text-right is-paddingless">
-      <a class="button is-white font-12" *ngFor="let lang of languages" [class.is-active]="currentLanguage === lang.code" (click)="changeLanguage.emit(lang.code)">{{ lang.name }}</a>
+      <p style="padding-left: 5px">© Petman | 2018 &nbsp;&nbsp;
+        <a class="has-text-grey" *ngFor="let lang of languages" [class.pm-current-language]="currentLanguage === lang.code" (click)="changeLanguage.emit(lang.code)">{{ lang.name }}&nbsp;&nbsp;</a>
+      </p>
     </div>
   </div>
 </footer>

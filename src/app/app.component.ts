@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material';
 import { combineLatest, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
+import { MetaService } from '@ngx-meta/core';
 
 import { ModalSize, UserDto } from '@petman/common';
 
@@ -60,7 +61,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private store: Store<fromRoot.State>,
     private localStorageService: LocalStorageService,
     private utilService: UtilService,
-    @Inject(PLATFORM_ID) protected platformId: Object
+    @Inject(PLATFORM_ID) protected platformId: Object,
+    @Inject(MetaService) private meta: MetaService
   ) {
     this.utilService.externalScripts();
     this.utilService.registerNewIcons();
@@ -203,6 +205,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   changeLanguage(langCode: string) {
     this.translateService.changeLang(langCode);
+    this.currentLanguage = this.translateService.getCurrentLang();
+
+    const metaSettings = UtilService.getRouteDataByKey(
+      this.activatedRoute,
+      'meta'
+    );
+    this.meta.update(this.router.url, metaSettings);
   }
 
   logOut() {
