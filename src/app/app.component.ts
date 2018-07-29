@@ -29,7 +29,7 @@ import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.comp
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
 import { CleanError } from '@shared/actions/shared.actions';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
-import { Update as UserUpdate } from '@user/actions/user.actions';
+import { Update as UserUpdate, Geolocation } from '@user/actions/user.actions';
 import { Categories } from '@poi/actions/poi.actions';
 import { CloseSidenav, OpenSidenav } from '@app/actions/layout.actions';
 
@@ -74,11 +74,16 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // TODO: find way for for using UserEffect init
+    if (isPlatformBrowser(this.platformId)) {
+      this.store.dispatch(new Geolocation());
+    }
+
     // TODO: get language key from Language enum
     this.currentLanguage = this.translateService.getCurrentLang();
 
     this.languageChangeSnackBar();
-    this.welcomeDialog();
+    // this.welcomeDialog();
 
     // TODO: use effects init
     const selectedUserSubscription = this.selectedUser$

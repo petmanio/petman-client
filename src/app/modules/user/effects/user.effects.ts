@@ -8,7 +8,6 @@ import {
   Update,
   UpdateFailure,
   UpdateSuccess,
-  Geolocation,
   UserActionTypes,
   GeolocationSuccess,
   GeolocationFailure
@@ -37,7 +36,8 @@ export class UserEffects {
     })
   );
 
-  @Effect() init$: Observable<Geolocation> = defer(() => of(new Geolocation()));
+  // TODO: init$ must be called only from client side;
+  // @Effect() init$: Observable<Geolocation> = defer(() => of(new Geolocation()));
 
   constructor(private actions$: Actions, private userService: UserService) {}
 }
