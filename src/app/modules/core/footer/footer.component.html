@@ -16,8 +16,8 @@
   </div>
   <div class="columns is-marginless is-vcentered is-mobile">
     <div class="column is-paddingless font-12">
-      <p style="padding-left: 5px">© Petman | 2018 &nbsp;&nbsp;
-        <a class="has-text-grey" *ngFor="let lang of languages" [class.pm-current-language]="currentLanguage === lang.code" (click)="changeLanguage.emit(lang.code)">{{ lang.name }}&nbsp;&nbsp;</a>
+      <p style="padding-left: 10px; padding-bottom: 10px;">© Petman | 2018 &nbsp;&nbsp;
+        <a class="has-text-grey" *ngFor="let lang of languages" [class.pm-current-language]="currentLanguage !== lang.code" (click)="changeLanguage.emit(lang.code)">{{ lang.name }}&nbsp;&nbsp;</a>
       </p>
     </div>
   </div>

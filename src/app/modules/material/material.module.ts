@@ -5,6 +5,7 @@ import {
   MatButtonToggleModule,
   MatCardModule,
   MatChipsModule,
+  MatSnackBarModule,
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
@@ -37,6 +38,7 @@ import { ProgressButtonComponent } from '@material/components/progress-button/pr
 const modules = [
   MatIconModule,
   MatInputModule,
+  MatSnackBarModule,
   MatDialogModule,
   MatFormFieldModule,
   MatToolbarModule,
@@ -60,7 +62,7 @@ const modules = [
   CovalentLayoutModule,
   CovalentFileModule,
   CovalentLoadingModule,
-  CovalentMessageModule,
+  CovalentMessageModule
 ];
 
 const declarations = [
@@ -78,7 +80,7 @@ export class MaterialModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: MaterialModule,
-      providers: [],
+      providers: []
     };
   }
 }

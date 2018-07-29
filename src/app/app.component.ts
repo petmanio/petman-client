@@ -4,14 +4,15 @@ import {
   Inject,
   OnDestroy,
   OnInit,
-  PLATFORM_ID
+  PLATFORM_ID,
+  ApplicationRef
 } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { combineLatest, Subscription } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { delay, tap, filter, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { MetaService } from '@ngx-meta/core';
 
@@ -19,6 +20,7 @@ import { ModalSize, UserDto } from '@petman/common';
 
 import * as fromRoot from '@app/reducers';
 import * as fromAuth from '@auth/reducers';
+import * as fromUser from '@user/reducers';
 import { UtilService } from '@shared/services/util/util.service';
 import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
 
@@ -50,13 +52,16 @@ export class AppComponent implements OnInit, OnDestroy {
   loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
   user$ = this.store.pipe(select(fromAuth.getUser));
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
+  geolocationCountry$ = this.store.pipe(select(fromUser.getGeolocationCountry));
   private subscriptions: Subscription[] = [];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
+    private applicationRef: ApplicationRef,
     private dialog: MatDialog,
+    private snackBar: MatSnackBar,
     private translateService: TranslateService,
     private store: Store<fromRoot.State>,
     private localStorageService: LocalStorageService,
@@ -72,9 +77,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // TODO: get language key from Language enum
     this.currentLanguage = this.translateService.getCurrentLang();
 
-    if (isPlatformBrowser(this.platformId)) {
-      // this.welcomeDialog();
-    }
+    this.languageChangeSnackBar();
+    this.welcomeDialog();
 
     // TODO: use effects init
     const selectedUserSubscription = this.selectedUser$
@@ -205,13 +209,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   changeLanguage(langCode: string) {
     this.translateService.changeLang(langCode);
-    this.currentLanguage = this.translateService.getCurrentLang();
 
     const metaSettings = UtilService.getRouteDataByKey(
       this.activatedRoute,
       'meta'
     );
     this.meta.update(this.router.url, metaSettings);
+
+    this.currentLanguage = this.translateService.getCurrentLang();
+    this.applicationRef.tick();
   }
 
   logOut() {
@@ -245,19 +251,60 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private welcomeDialog() {
-    // TODO: use effect init and user$ observable
-    if (
-      !this.localStorageService.getItem('welcome-dialog-showed') &&
-      !this.localStorageService.getItem('token')
-    ) {
-      setTimeout(() => {
-        const dialogRef = this.dialog.open(WelcomeDialogComponent, {
-          width: '90%'
-        });
-        dialogRef.afterClosed().subscribe(() => {
-          this.localStorageService.setItem('welcome-dialog-showed', true);
-        });
-      }, 3000);
+    if (isPlatformBrowser(this.platformId)) {
+      // TODO: use effect init and user$ observable
+      if (
+        !this.localStorageService.getItem('welcomeDialogShowed') &&
+        !this.localStorageService.getItem('token')
+      ) {
+        setTimeout(() => {
+          const dialogRef = this.dialog.open(WelcomeDialogComponent, {
+            width: '90%'
+          });
+          dialogRef.afterClosed().subscribe(() => {
+            this.localStorageService.setItem('welcomeDialogShowed', true);
+          });
+        }, 3000);
+      }
+    }
+  }
+
+  private languageChangeSnackBar() {
+    const languageChangeAsked = this.localStorageService.getItem(
+      'languageChangeSnackBarShowed'
+    );
+    if (isPlatformBrowser(this.platformId) && !languageChangeAsked) {
+      this.geolocationCountry$
+        .pipe(
+          filter(country => !!country),
+          delay(5000),
+          tap(country => {
+            if (country === 'AM' && this.currentLanguage !== 'hy') {
+              this.snackBar
+                .open(
+                  'Ողջույն, ցանկանում ե՞ք կայքի լեզուն փոխել հայերեն',
+                  'Այո',
+                  {
+                    duration: 10000,
+                    horizontalPosition: 'right',
+                    verticalPosition: 'top'
+                  }
+                )
+                .afterDismissed()
+                .subscribe(action => {
+                  if (action.dismissedByAction) {
+                    this.changeLanguage('hy');
+                  }
+                  this.localStorageService.setItem(
+                    'languageChangeSnackBarShowed',
+                    true
+                  );
+                });
+            }
+          }),
+          take(1)
+        )
+        .subscribe();
     }
   }
 }
