@@ -1,12 +1,35 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
-import { UserDto, UserUpdateRequestDto } from '@petman/common';
+import { UserDto, UserUpdateRequestDto, UserGeoDto } from '@petman/common';
 
 export enum UserActionTypes {
+  GEOLOCATION = '[User] Geolocation',
+  GEOLOCATION_SUCCESS = '[User] Geolocation success',
+  GEOLOCATION_FAILURE = '[User] Geolocation failure',
+
   UPDATE = '[User] Update',
   UPDATE_SUCCESS = '[User] Update success',
   UPDATE_FAILURE = '[User] Update failure'
+}
+
+/**
+ * Geolocation
+ */
+export class Geolocation implements Action {
+  readonly type = UserActionTypes.GEOLOCATION;
+}
+
+export class GeolocationSuccess implements Action {
+  readonly type = UserActionTypes.GEOLOCATION_SUCCESS;
+
+  constructor(public payload: UserGeoDto) {}
+}
+
+export class GeolocationFailure implements Action {
+  readonly type = UserActionTypes.GEOLOCATION_FAILURE;
+
+  constructor(public payload: HttpErrorResponse) {}
 }
 
 /**
@@ -30,4 +53,10 @@ export class UpdateFailure implements Action {
   constructor(public payload: HttpErrorResponse) {}
 }
 
-export type UserActions = Update | UpdateSuccess | UpdateFailure;
+export type UserActions =
+  | Update
+  | UpdateSuccess
+  | UpdateFailure
+  | Geolocation
+  | GeolocationSuccess
+  | GeolocationFailure;
