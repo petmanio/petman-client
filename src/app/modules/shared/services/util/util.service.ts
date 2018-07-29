@@ -93,9 +93,9 @@ export class UtilService {
 
       if (isPlatformBrowser(this.platformId)) {
         languageKey = UtilService.getBrowserLanguageToEnumKey(
-          this.localStorageService.getItem('language') ||
-            this.translateService.getBrowserLang()
+          this.localStorageService.getItem('language')
         );
+        // TODO: get browser language or from geo this.translateService.getBrowserLang()
       }
 
       if (!languageKey || !Language[languageKey]) {
