@@ -8,17 +8,14 @@ import {
 import { TranslateLoader } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
-/**
- * @deprecated moved to TranslateModule
- */
-export class TranslateServerLoader implements TranslateLoader {
+export class TranslateServerLoaderService implements TranslateLoader {
   constructor(
     private prefix: string = 'i18n',
     private suffix: string = '.json',
     private transferState: TransferState
   ) {}
 
-  public getTranslation(lang: string): Observable<Object> {
+  public getTranslation(lang: string): Observable<any> {
     return Observable.create(observer => {
       const assetsFolder = join(
         process.cwd(),
@@ -31,12 +28,10 @@ export class TranslateServerLoader implements TranslateLoader {
         readFileSync(`${assetsFolder}/${lang}${this.suffix}`, 'utf8')
       );
 
-      // Here we save the translations in the transfer-state
       const key: StateKey<number> = makeStateKey<number>(
-        'transfer-translate-' + lang
+        `transfer-translate-${lang}`
       );
       this.transferState.set(key, jsonData);
-
       observer.next(jsonData);
       observer.complete();
     });

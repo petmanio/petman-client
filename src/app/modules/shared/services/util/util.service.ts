@@ -8,9 +8,10 @@ import {
   PageTitlePositioning
 } from '@ngx-meta/core';
 
+import { Language } from '@petman/common';
+
 import { environment } from '@environments/environment';
 import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
-import { Language } from '@petman/common';
 
 @Injectable()
 export class UtilService {
@@ -20,6 +21,9 @@ export class UtilService {
     @Inject(PLATFORM_ID) protected platformId: Object
   ) {}
 
+  /**
+   * @deprecated moved to MetaModule
+   */
   static metaFactory(translateService: TranslateService): MetaLoader {
     // TODO: load translation before meta
     return new MetaStaticLoader({
@@ -87,6 +91,9 @@ export class UtilService {
     });
   }
 
+  /**
+   * @deprecated moved to TranslateModule
+   */
   initLanguage(): Promise<void> {
     return new Promise((resolve: Function) => {
       let languageKey;

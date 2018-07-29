@@ -19,8 +19,7 @@
       <p style="padding-left: 5px">© Petman | 2018</p>
     </div>
     <div class="column has-text-right is-paddingless">
-      <a class="button is-white font-12" *ngFor="let language of Language | appKeys" [class.is-active]="currentLanguage === language.key"
-        (click)="onLanguageChange.emit(language.key)">{{language.key | translate}}</a>
+      <a class="button is-white font-12" *ngFor="let lang of languages" [class.is-active]="currentLanguage === lang.code" (click)="changeLanguage.emit(lang.code)">{{ lang.name }}</a>
     </div>
   </div>
 </footer>

@@ -13,15 +13,15 @@ import { MatDialog } from '@angular/material';
 import { combineLatest, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
 
-import { Language, ModalSize, UserDto } from '@petman/common';
-
-import { UtilService } from '@shared/services/util/util.service';
-import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
+import { ModalSize, UserDto } from '@petman/common';
 
 import * as fromRoot from '@app/reducers';
 import * as fromAuth from '@auth/reducers';
+import { UtilService } from '@shared/services/util/util.service';
+import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
+
+import { TranslateService } from '@translate/translate.service';
 import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
 import { CleanError } from '@shared/actions/shared.actions';
@@ -44,6 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
   selectedUser: UserDto;
   redirectAfterSignUp: string;
   hideSignUpButton = false;
+  languages$ = this.translateService.getLangList();
   showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav));
   loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
   user$ = this.store.pipe(select(fromAuth.getUser));
@@ -67,7 +68,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // TODO: get language key from Language enum
-    this.currentLanguage = this.translateService.currentLang.toUpperCase();
+    this.currentLanguage = this.translateService.getCurrentLang();
 
     if (isPlatformBrowser(this.platformId)) {
       // this.welcomeDialog();
@@ -200,16 +201,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  onLanguageChange(key: string) {
-    const language = Language[key];
-    this.currentLanguage = key;
-    this.localStorageService.setItem('language', language);
-    this.translateService.use(language).subscribe(() => {
-      // TODO: this.metaService.setTag('og:locale', 'en-US');
-      // this.metaService.update(this.router.url);
-      // TODO: update metas withoud naviage
-      this.router.navigate(['/']);
-    });
+  changeLanguage(langCode: string) {
+    this.translateService.changeLang(langCode);
   }
 
   logOut() {

@@ -5,5 +5,5 @@
 <app-sidenav [opened]="sideNavState" [mode]="sideNavMode" [user]="user$ | async" [selectedUser]="selectedUser$ | async" (selectedUserChange)="selectedUserChange($event)"
   (openedChange)="openedChange($event)" (open)="openSideNav()" (close)="closeSideNav()">
   <router-outlet content></router-outlet>
-  <app-footer footer *ngIf="!hideFooter" [currentLanguage]="currentLanguage" (onLanguageChange)="onLanguageChange($event)"></app-footer>
+  <app-footer footer *ngIf="!hideFooter" [languages]="languages$ | async" [currentLanguage]="currentLanguage" (changeLanguage)="changeLanguage($event)"></app-footer>
 </app-sidenav>

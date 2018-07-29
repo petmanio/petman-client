@@ -1,27 +1,15 @@
-import {
-  HTTP_INTERCEPTORS,
-  HttpClient,
-  HttpClientModule
-} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
   BrowserModule,
-  TransferState,
   HAMMER_GESTURE_CONFIG
 } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import {
-  TranslateLoader,
-  TranslateModule,
-  TranslateService
-} from '@ngx-translate/core';
-import { MetaLoader, MetaModule } from '@ngx-meta/core';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { ShareButtonsModule } from '@ngx-share/buttons';
@@ -34,31 +22,20 @@ import { AuthModule } from '@auth/auth.module';
 import { PoiModule } from '@poi/poi.module';
 import { UserModule } from '@user/user.module';
 
+import { TranslateService as AppTranslateService } from '@translate/translate.service';
 import { AppHammerConfig } from '@app/app-hammer-config';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { AppEffects } from '@app/app.effects';
-import { TranslateBrowserLoader } from '@app/translate-browser-loader.service';
 import { CustomHeadersInterceptor } from '@app/interseptors/custom-headers/custom-headers.interceptor';
 import { metaReducers, reducers } from '@app/reducers';
 import { NotFoundPageComponent } from '@app/pages/not-found-page/not-found-page.component';
 import { HomePageComponent } from '@app/pages/home-page/home-page.component';
-import { UtilService } from '@shared/services/util/util.service';
+import { CookieService } from 'ngx-cookie-service';
+import { MetaModule } from '@meta/meta.module';
 
-export function translateBrowserFactory(
-  http: HttpClient,
-  transferState: TransferState
-) {
-  return new TranslateBrowserLoader(
-    '/assets/i18n/',
-    '.json',
-    transferState,
-    http
-  );
-}
-
-export function initLanguage(utilService: UtilService): Function {
-  return () => utilService.initLanguage();
+export function initLanguage(translateService: AppTranslateService): Function {
+  return (): Promise<any> => translateService.initLanguage();
 }
 
 @NgModule({
@@ -69,29 +46,15 @@ export function initLanguage(utilService: UtilService): Function {
     RouterModule,
     BrowserModule.withServerTransition({ appId: 'petman-universal' }),
     TransferHttpCacheModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {
-      enabled: environment.production
-    }),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
     NgProgressModule.forRoot(),
     NgProgressHttpModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: translateBrowserFactory,
-        deps: [HttpClient, TransferState]
-      }
-    }),
-    MetaModule.forRoot({
-      provide: MetaLoader,
-      useFactory: UtilService.metaFactory,
-      deps: [TranslateService]
-    }),
     NgxMaskModule.forRoot(),
     ShareButtonsModule.forRoot(),
 
+    MetaModule,
     SharedModule.forRoot(),
     CoreModule.forRoot(),
     AuthModule.forRoot(),
@@ -100,19 +63,14 @@ export function initLanguage(utilService: UtilService): Function {
     AppRoutingModule
   ],
   providers: [
-    // TODO: find way to load translations before metaLoader, investigate solution from @ng-seed/universal
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initLanguage,
-      multi: true,
-      deps: [UtilService]
-    },
+    CookieService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CustomHeadersInterceptor,
       multi: true
     },
-    { provide: HAMMER_GESTURE_CONFIG, useClass: AppHammerConfig }
+    { provide: HAMMER_GESTURE_CONFIG, useClass: AppHammerConfig },
+    { provide: APP_INITIALIZER, useFactory: initLanguage, multi: true, deps: [AppTranslateService] },
   ],
   bootstrap: [AppComponent]
 })

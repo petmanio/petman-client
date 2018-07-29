@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Language } from '@petman/common';
+import { ILang } from '@translate/translate.interface';
 
 @Component({
   selector: 'app-footer',
@@ -10,9 +10,8 @@ import { Language } from '@petman/common';
 })
 export class FooterComponent implements OnInit {
   @Input() currentLanguage: string;
-  @Output() onLanguageChange = new EventEmitter<string>();
-
-  Language = Language;
+  @Input() languages: ILang;
+  @Output() changeLanguage = new EventEmitter<string>();
 
   constructor() { }
 

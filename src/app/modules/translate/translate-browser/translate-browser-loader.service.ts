@@ -1,17 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import {
   makeStateKey,
   StateKey,
   TransferState
 } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { Observable } from 'rxjs';
 
-/**
- * @deprecated moved to TranslateModule
- */
-export class TranslateBrowserLoader implements TranslateLoader {
+export class TranslateBrowserLoaderService implements TranslateLoader {
   constructor(
     private prefix: string = 'i18n',
     private suffix: string = '.json',
@@ -19,13 +16,11 @@ export class TranslateBrowserLoader implements TranslateLoader {
     private http: HttpClient
   ) {}
 
-  public getTranslation(lang: string): Observable<Object> {
+  public getTranslation(lang: string): Observable<any> {
     const key: StateKey<number> = makeStateKey<number>(
-      'transfer-translate-' + lang
+      `transfer-translate-${lang}`
     );
-    const data = this.transferState.get(key, null);
-
-    // First we are looking for the translations in transfer-state, if none found, http load as fallback
+    const data: any = this.transferState.get(key, null);
     if (data) {
       return Observable.create(observer => {
         observer.next(data);
