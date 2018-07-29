@@ -10,7 +10,9 @@
         <app-masonry [options]="masonryOptions">
           <app-masonry-item>
             <a [routerLink]="['/walkers', 'add']">
-              <app-add-application [user]="selectedUser$ | async"></app-add-application>
+              <app-add-application [user]="selectedUser$ | async">
+                {{'BECOME_WALKER' | translate}}
+              </app-add-application>
             </a>
           </app-masonry-item>
 
