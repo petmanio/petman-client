@@ -1,7 +1,11 @@
 @import 'mixins';
 @import 'variables';
-:focus { outline:none; }
-::-moz-focus-inner { border:0; }
+:focus {
+  outline: none;
+}
+::-moz-focus-inner {
+  border: 0;
+}
 
 * {
   box-sizing: border-box;
@@ -23,8 +27,6 @@ html {
   }
 }
 
-
-
 .pm-fab {
   position: fixed !important;
   right: 20px;
@@ -45,6 +47,15 @@ mat-icon {
     @include mat-icon-size(40px);
   }
 }
+
+mat-hint,
+mat-error {
+  &.pm-custom {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+  }
+}
+
 .font-8 {
   font-size: 8px;
 }
@@ -157,14 +168,15 @@ mat-icon {
   }
 }
 
-.pm-cursor-pointer, .cp {
+.pm-cursor-pointer,
+.cp {
   cursor: pointer;
-};
+}
 
 .clearfix {
   &:before,
   &:after {
-    content: " ";
+    content: ' ';
     display: table;
   }
   &:after {
@@ -273,8 +285,8 @@ mat-form-field {
       width: 250px;
       height: 250px;
       display: block;
-      background-color: #BDCDE8;
-      content: " ";
+      background-color: #bdcde8;
+      content: ' ';
       position: absolute;
       bottom: 0;
       right: 0;

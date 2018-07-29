@@ -1,3 +1,4 @@
+import values from 'lodash-es/values';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
@@ -29,7 +30,7 @@ export class UtilService {
       defaults: {
         title: 'DEFAULT_TITLE',
         description: 'DEFAULT_DESCRIPTION',
-        'og:title': 'Petman',
+        'og:title': 'DEFAULT_TITLE',
         'og:description': 'DEFAULT_DESCRIPTION',
         'og:url': 'https://petman.io',
         'og:image': environment.origin + '/assets/icons/icon-72x72.png',
@@ -86,7 +87,7 @@ export class UtilService {
     });
   }
 
-  initLanguage(): Promise<any> {
+  initLanguage(): Promise<void> {
     return new Promise((resolve: Function) => {
       let languageKey;
 
@@ -98,15 +99,16 @@ export class UtilService {
       }
 
       if (!languageKey || !Language[languageKey]) {
-        languageKey = 'EN';
+        languageKey = 'HY';
       }
 
       const language = Language[languageKey];
 
       this.localStorageService.setItem('language', language);
 
-      this.translateService.addLangs(['en', 'hy']);
-      this.translateService.setDefaultLang('en');
+      this.translateService.addLangs(values(Language));
+      this.translateService.setDefaultLang(Language.EN);
+
       this.translateService.use(language).subscribe(() => {
         // TODO: this.metaService.setTag('og:locale', 'en-US');
         resolve();
@@ -134,8 +136,8 @@ export class UtilService {
 
       (function(d, s, id) {
         //noinspection TsLint
-        let js,
-          fjs = d.getElementsByTagName(s)[0];
+        let js;
+        const fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {
           return;
         }

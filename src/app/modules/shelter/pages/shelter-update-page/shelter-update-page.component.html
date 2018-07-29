@@ -20,8 +20,8 @@
         <div class="columns">
           <div class="column">
             <div class="pm-image-upload">
-              <td-file-upload #fileMultipleUpload formControlName='images' accept="image/gif, image/jpeg, image/png" defaultColor="accent"
-                activeColor="warn" cancelColor="primary" multiple>
+              <td-file-upload #fileMultipleUpload formControlName='images' accept="image/jpeg, image/png" defaultColor="accent" activeColor="warn"
+                cancelColor="primary" multiple>
                 <mat-icon>file_upload</mat-icon>
                 <span>
                   {{ fileMultipleUpload.value?.name | appEllipsis:20 }}
@@ -34,8 +34,8 @@
                   </span>
                 </ng-template>
               </td-file-upload>
-              <mat-hint *ngIf="!form.get('images').hasError('maxlength')">{{'IMAGE_HINT' | translate}}</mat-hint>
-              <mat-error *ngIf="form.get('images').hasError('maxlength')">{{'IMAGE_ERROR' | translate}}</mat-error>
+              <mat-hint class="pm-custom" *ngIf="!form.get('images').hasError('maxlength')">{{'IMAGE_HINT' | translate}}</mat-hint>
+              <mat-error class="pm-custom" *ngIf="form.get('images').hasError('maxlength')">{{'IMAGE_ERROR' | translate}}</mat-error>
               <!--<div class="pm-image-preview" [hidden]="form.get('images').value">-->
               <!--<div *ngFor="let image of shelter?.images" [style.background-image]="'url(' + image + ')'">-->
               <!--<fa-icon icon="times-circle"></fa-icon>-->

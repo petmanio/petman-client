@@ -58,7 +58,7 @@ export function translateBrowserFactory(
 }
 
 export function initLanguage(utilService: UtilService): Function {
-  return (): Promise<any> => utilService.initLanguage();
+  return () => utilService.initLanguage();
 }
 
 @NgModule({
