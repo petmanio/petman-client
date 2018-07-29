@@ -37,7 +37,8 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
     columns: 1,
     margin: 24,
     breakAt: {
-      940: 4,
+      1680: 4,
+      940: 3,
       520: 2,
       400: 1
     }
