@@ -16,9 +16,11 @@
   "APP_NAME": "Petman",
   "ARE_YOU_SURE": "Վստա՞հ եք",
   "BECOME_SITTER": "Դառնալ խնամակալ",
-  "BECOME_SITTER_INTO": "",
+  "BECOME_SITTER_INTO":
+    "<p class=\"is-size-5 is-size-6-touch\">Խաղացեք կենդանիների հետ և վաստակեք գումար :)</p> <p class=\"is-size-6 is-size-7-touch\"></p>",
   "BECOME_WALKER": "Դառնալ զբոսընկեր",
-  "BECOME_WALKER_INTO": "",
+  "BECOME_WALKER_INTO":
+  "<p class=\"is-size-5 is-size-6-touch\">Զբոսնեք ձեր սիրելի քաղաքում կենդանու հետ և վաստակեք գումար :)</p> <p class=\"is-size-6 is-size-7-touch\"></p>",
   "BLOG": "Բլոգ",
   "BLOG_INTRO": "Հետաքրքիր նորություններ ամբողջ աշխարհից",
   "CALL": "Զանգահարել",
@@ -56,8 +58,10 @@
   "FOR_ADOPTION_INTO": "",
   "HISTORY": "Պատմություն",
   "HY": "Հայերեն",
-  "IMAGE_ERROR": "Նկարները պետք է լինեն jpeg կամ png ֆորմատի և առավելագույը 4 հատ",
-  "IMAGE_HINT": "Նկարները պետք է լինեն jpeg կամ png ֆորմատի և առավելագույը 4 հատ",
+  "IMAGE_ERROR":
+    "Նկարները պետք է լինեն jpeg կամ png ֆորմատի և առավելագույնը 4 հատ",
+  "IMAGE_HINT":
+    "Նկարները պետք է լինեն jpeg կամ png ֆորմատի և առավելագույնը 4 հատ",
   "INTERNAL_ERROR": "Խնդրում եմ փորձեք մի փոքր ուշ",
   "INTERNAL_ERROR_TITLE": "Տեխնիկական խնդիր",
   "IN_PROGRESS": "Ընթացքում",
@@ -98,7 +102,8 @@
   "PHONE_NUMBER_HINT": "",
   "PHONE_NUMBER_PATTERN_ERROR": "Անվավեր հեռախոսահամար",
   "PLEASE_LOGIN": "Խնդրում ենք մուտք գործել համակարգ",
-  "PLEASE_LOGIN_FOR_MORE_INFO": "Լրացուցիչ տեղեկությունների համար խնդրում ենք մուտք գործել",
+  "PLEASE_LOGIN_FOR_MORE_INFO":
+    "Լրացուցիչ տեղեկությունների համար խնդրում ենք մուտք գործել համակարգ",
   "PLEASE_LOGIN_TO_SHARE": "Խնդրում ենք մուտք գործել համակարգ",
   "PRICE_PER_DAY": "{{price}} դր. օր․",
   "PROFILE_SETTINGS": "Կարգավորումներ",

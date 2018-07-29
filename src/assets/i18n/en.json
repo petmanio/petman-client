@@ -17,9 +17,11 @@
   "APP_NAME": "Petman",
   "ARE_YOU_SURE": "Are you sure?",
   "BECOME_SITTER": "Become a sitter",
-  "BECOME_SITTER_INTO": "",
+  "BECOME_SITTER_INTO":
+    "<p class=\"is-size-5 is-size-6-touch\">Get paid to play with pets :)</p> <p class=\"is-size-6 is-size-7-touch\">Petman makes it easy and promotes you to the nation’s largest network of pet parents.</p>",
   "BECOME_WALKER": "Become a walker",
-  "BECOME_WALKER_INTO": "",
+  "BECOME_WALKER_INTO":
+    "<p class=\"is-size-5 is-size-6-touch\">Get paid to walk with pets :)</p> <p class=\"is-size-6 is-size-7-touch\">Petman makes it easy and promotes you to the nation’s largest network of pet parents.</p>",
   "BLOG": "Blog",
   "BLOG_INTRO": "Lot's of interesting articles from all over the world",
   "CALL": "Call",
