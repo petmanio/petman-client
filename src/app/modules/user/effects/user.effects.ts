@@ -30,11 +30,11 @@ export class UserEffects {
     })
   );
 
-  @Effect({ dispatch: false })
-  updateSuccess$ = this.actions$.ofType(UserActionTypes.UPDATE_SUCCESS).pipe(
-    map((action: UpdateSuccess) => action.payload),
-    tap(user => this.router.navigate(['users', user.id]))
-  );
+  // @Effect({ dispatch: false })
+  // updateSuccess$ = this.actions$.ofType(UserActionTypes.UPDATE_SUCCESS).pipe(
+  //   map((action: UpdateSuccess) => action.payload),
+  //   tap(user => this.router.navigate(['users', user.id]))
+  // );
 
   @Effect()
   load$ = this.actions$.ofType(UserActionTypes.LOAD).pipe(
