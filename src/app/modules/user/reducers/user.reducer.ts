@@ -3,6 +3,7 @@ import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 
 import { UserGeoDto, UserDto } from '@petman/common';
 
+import { AuthActions, AuthActionTypes } from '@auth/actions/auth.actions';
 import { UserActionTypes, UserActions } from '@user/actions/user.actions';
 
 export interface State {
@@ -24,7 +25,7 @@ export const initialState: State = {
   userEntities: userAdapter.getInitialState({})
 };
 
-export function reducer(state = initialState, action: UserActions): State {
+export function reducer(state = initialState, action: UserActions | AuthActions): State {
   switch (action.type) {
     case UserActionTypes.GEOLOCATION_SUCCESS:
       return { ...state, geolocation: action.payload };
@@ -55,6 +56,11 @@ export function reducer(state = initialState, action: UserActions): State {
 
     case UserActionTypes.SELECT:
       return { ...state, selectedId: action.payload };
+
+    case AuthActionTypes.FB_LOGIN:
+    case AuthActionTypes.LOGOUT:
+    case AuthActionTypes.CHANGE_USER:
+      return { ...initialState };
 
     default:
       return state;
