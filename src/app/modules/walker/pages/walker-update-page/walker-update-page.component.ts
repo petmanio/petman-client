@@ -24,8 +24,8 @@ export class WalkerUpdatePageComponent {
   walker: WalkerDto;
   quillModules = SharedService.quillModules;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
-  pending$ = this.store.pipe(select(fromWalker.getWalkerCreatePagePending));
-  error$ = this.store.pipe(select(fromWalker.getWalkerCreatePageError));
+  pending$ = this.store.pipe(select(fromWalker.getWalkerUpdatePagePending));
+  error$ = this.store.pipe(select(fromWalker.getWalkerUpdatePageError));
   walker$ = this.store.pipe(select(fromWalker.getSelected));
 
   constructor(
@@ -34,9 +34,6 @@ export class WalkerUpdatePageComponent {
     private store: Store<fromWalker.State>,
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
-    this.error$ = this.store.select(fromWalker.getWalkerUpdatePageError);
-    this.pending$ = this.store.select(fromWalker.getWalkerUpdatePagePending);
-
     this.route.params
       .pipe(
         map(params => new Select(params.id)),

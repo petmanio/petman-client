@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of, Observable, defer } from 'rxjs';
 
 import { UserService } from '@user/user.service';
@@ -8,9 +9,12 @@ import {
   Update,
   UpdateFailure,
   UpdateSuccess,
-  UserActionTypes,
+  Load,
+  LoadFailure,
+  LoadSuccess,
   GeolocationSuccess,
-  GeolocationFailure
+  GeolocationFailure,
+  UserActionTypes
 } from '@user/actions/user.actions';
 
 @Injectable()
@@ -22,6 +26,23 @@ export class UserEffects {
       return this.userService.update(id, body).pipe(
         map(response => new UpdateSuccess(response)),
         catchError(error => of(new UpdateFailure(error)))
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  updateSuccess$ = this.actions$.ofType(UserActionTypes.UPDATE_SUCCESS).pipe(
+    map((action: UpdateSuccess) => action.payload),
+    tap(user => this.router.navigate(['users', user.id]))
+  );
+
+  @Effect()
+  load$ = this.actions$.ofType(UserActionTypes.LOAD).pipe(
+    map((action: Load) => action.payload),
+    switchMap(id => {
+      return this.userService.getById(id).pipe(
+        map(response => new LoadSuccess(response)),
+        catchError(error => of(new LoadFailure(error)))
       );
     })
   );
@@ -39,5 +60,9 @@ export class UserEffects {
   // TODO: init$ must be called only from client side;
   // @Effect() init$: Observable<Geolocation> = defer(() => of(new Geolocation()));
 
-  constructor(private actions$: Actions, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private actions$: Actions,
+    private userService: UserService
+  ) {}
 }

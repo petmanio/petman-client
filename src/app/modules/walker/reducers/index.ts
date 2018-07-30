@@ -40,14 +40,14 @@ export const getSelected = createSelector(getEntities, getSelectedId, (entities,
 );
 
 /**
- * Walker add Page
+ * Walker create page
  */
 export const getWalkerCreatePageState = createSelector(getWalkerState, (state: State) => state.walkerCreatePage);
 export const getWalkerCreatePageError = createSelector(getWalkerCreatePageState, fromWalkerCreatePage.getError);
 export const getWalkerCreatePagePending = createSelector(getWalkerCreatePageState, fromWalkerCreatePage.getPending);
 
 /**
- * Walker edit Page
+ * Walker update page
  */
 export const getWalkerUpdatePageState = createSelector(getWalkerState, (state: State) => state.walkerUpdatePage);
 export const getWalkerUpdatePageError = createSelector(getWalkerUpdatePageState, fromWalkerUpdatePage.getError);

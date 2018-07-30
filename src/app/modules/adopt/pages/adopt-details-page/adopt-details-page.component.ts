@@ -1,11 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
@@ -43,8 +41,7 @@ export class AdoptDetailsPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     private meta: MetaService,
-    private stripTagsPipe: StripTagsPipe,
-    @Inject(DOCUMENT) private document: Document
+    private stripTagsPipe: StripTagsPipe
   ) {
     const paramsSubscription = this.route.params
       .pipe(map(params => new Select(params.id)))
@@ -62,10 +59,7 @@ export class AdoptDetailsPageComponent implements OnInit, OnDestroy {
           'og:description',
           this.stripTagsPipe.transform(this.adopt.description)
         );
-        this.meta.setTag(
-          'og:image',
-          environment.origin + this.adopt.images[0]
-        );
+        this.meta.setTag('og:image', environment.origin + this.adopt.images[0]);
       }
     });
 
@@ -79,7 +73,7 @@ export class AdoptDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   onShare() {
-    const url = this.document.location.origin + this.url;
+    const url = environment.origin + this.url;
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,
       data: { url }

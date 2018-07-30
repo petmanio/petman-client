@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { DatePipe, DOCUMENT } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
@@ -17,6 +16,7 @@ import { ListQueryRequestDto, ModalSize, LostFoundDto } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromLostFound from '@lost-found/reducers';
+import { environment } from '@environments/environment';
 import { Config } from '@shared/components/card/card.component';
 import { List, More } from '@lost-found/actions/lost-found.actions';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
@@ -56,8 +56,7 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private store: Store<fromLostFound.State>,
     private translateService: TranslateService,
-    private datePipe: DatePipe,
-    @Inject(DOCUMENT) private document: Document
+    private datePipe: DatePipe
   ) {
     const listSubscription = this.list$.subscribe(list => {
       this.list = list;
@@ -120,7 +119,7 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
 
   onShare(lostFound: LostFoundDto) {
     const url =
-      this.document.location.origin +
+      environment.origin +
       this.router.createUrlTree(['lost-found', lostFound.id]).toString();
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,

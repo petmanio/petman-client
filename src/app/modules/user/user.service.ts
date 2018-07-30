@@ -34,4 +34,14 @@ export class UserService {
         )
       );
   }
+
+  getById(id: number): Observable<UserDto> {
+    return this.http
+      .get<UserDto>(`${environment.api}/api/users/${id}`)
+      .pipe(
+        map(response =>
+          plainToClass(UserDto, response, { groups: ['petman-client'] })
+        )
+      );
+  }
 }

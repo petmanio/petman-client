@@ -10,7 +10,13 @@ export enum UserActionTypes {
 
   UPDATE = '[User] Update',
   UPDATE_SUCCESS = '[User] Update success',
-  UPDATE_FAILURE = '[User] Update failure'
+  UPDATE_FAILURE = '[User] Update failure',
+
+  LOAD = '[User] Load',
+  LOAD_SUCCESS = '[User] Load success',
+  LOAD_FAILURE = '[User] Load failure',
+
+  SELECT = '[User] Select'
 }
 
 /**
@@ -53,10 +59,44 @@ export class UpdateFailure implements Action {
   constructor(public payload: HttpErrorResponse) {}
 }
 
+/**
+ * Load
+ */
+export class Load implements Action {
+  readonly type = UserActionTypes.LOAD;
+
+  constructor(public payload: number) {}
+}
+
+export class LoadSuccess implements Action {
+  readonly type = UserActionTypes.LOAD_SUCCESS;
+
+  constructor(public payload: UserDto) {}
+}
+
+export class LoadFailure implements Action {
+  readonly type = UserActionTypes.LOAD_FAILURE;
+
+  constructor(public payload: HttpErrorResponse) {}
+}
+
+/**
+ * Shared
+ */
+export class Select implements Action {
+  readonly type = UserActionTypes.SELECT;
+
+  constructor(public payload: number) {}
+}
+
 export type UserActions =
   | Update
   | UpdateSuccess
   | UpdateFailure
   | Geolocation
   | GeolocationSuccess
-  | GeolocationFailure;
+  | GeolocationFailure
+  | Load
+  | LoadSuccess
+  | LoadFailure
+  | Select;

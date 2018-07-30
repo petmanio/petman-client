@@ -10,38 +10,36 @@ import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { MetaService } from '@ngx-meta/core';
-import { StripTagsPipe } from 'ngx-pipes';
 
-import { ModalSize, LostFoundDto } from '@petman/common';
+import { ModalSize, UserDto } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
-import * as fromLostFound from '@lost-found/reducers';
+import * as fromUser from '@user/reducers';
 import { environment } from '@environments/environment';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
 import { SlideConfig } from '@material/components/mz-slider/mz-slider.component';
-import { Select } from '@lost-found/actions/lost-found.actions';
+import { Select } from '@user/actions/user.actions';
 
 @Component({
-  selector: 'app-lost-found-details-page',
-  templateUrl: './lost-found-details-page.component.html',
-  styleUrls: ['./lost-found-details-page.component.scss'],
+  selector: 'app-user-details-page',
+  templateUrl: './user-details-page.component.html',
+  styleUrls: ['./user-details-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LostFoundDetailsPageComponent implements OnInit, OnDestroy {
+export class UserDetailsPageComponent implements OnInit, OnDestroy {
   url: string;
   slides: SlideConfig[] = [];
-  lostFound: LostFoundDto;
-  lostFound$ = this.store.pipe(select(fromLostFound.getSelected));
+  user: UserDto;
+  user$ = this.store.pipe(select(fromUser.getSelectedUser));
   loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private store: Store<fromLostFound.State>,
+    private store: Store<fromUser.State>,
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private meta: MetaService,
-    private stripTagsPipe: StripTagsPipe
+    private meta: MetaService
   ) {
     const paramsSubscription = this.route.params
       .pipe(map(params => new Select(params.id)))
@@ -49,24 +47,19 @@ export class LostFoundDetailsPageComponent implements OnInit, OnDestroy {
 
     this.url = this.router.url;
 
-    const lostFoundSubscription = this.lostFound$.subscribe(lostFound => {
-      this.lostFound = lostFound;
+    const userSubscription = this.user$.subscribe(user => {
+      this.user = user;
 
-      if (this.lostFound) {
-        this.slides = this.lostFound.images.map(img => ({ src: img }));
-
-        this.meta.setTag(
-          'og:description',
-          this.stripTagsPipe.transform(this.lostFound.description)
-        );
+      if (this.user) {
+        this.meta.setTag('og:description', this.user.userData.name);
         this.meta.setTag(
           'og:image',
-          environment.origin + this.lostFound.images[0]
+          environment.origin + this.user.userData.avatar
         );
       }
     });
 
-    this.subscriptions.push(...[paramsSubscription, lostFoundSubscription]);
+    this.subscriptions.push(...[paramsSubscription, userSubscription]);
   }
 
   ngOnInit() {}

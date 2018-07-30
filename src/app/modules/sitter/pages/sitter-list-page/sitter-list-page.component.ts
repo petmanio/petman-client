@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { DatePipe, DOCUMENT } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
@@ -11,6 +16,7 @@ import { ListQueryRequestDto, ModalSize, SitterDto } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromSitter from '@sitter/reducers';
+import { environment } from '@environments/environment';
 import { Config } from '@shared/components/card/card.component';
 import { List, More } from '@sitter/actions/sitter.actions';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
@@ -50,19 +56,22 @@ export class SitterListPageComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private store: Store<fromSitter.State>,
     private translateService: TranslateService,
-    private datePipe: DatePipe,
-    @Inject(DOCUMENT) private document: Document
+    private datePipe: DatePipe
   ) {
     const listSubscription = this.list$.subscribe(list => {
       this.list = list;
       this.offset = Math.max(0, this.list.length - this.limit);
     });
-    const totalSubscription = this.total$.subscribe(total => this.total = total);
+    const totalSubscription = this.total$.subscribe(
+      total => (this.total = total)
+    );
 
-    this.isListLoaded$.pipe(
-      takeWhile(loaded => !loaded),
-      tap(() => this.store.dispatch(new List(this.listRequest)))
-    ).subscribe();
+    this.isListLoaded$
+      .pipe(
+        takeWhile(loaded => !loaded),
+        tap(() => this.store.dispatch(new List(this.listRequest)))
+      )
+      .subscribe();
 
     this.subscriptions.push(...[listSubscription, totalSubscription]);
   }
@@ -78,8 +87,7 @@ export class SitterListPageComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
@@ -109,7 +117,9 @@ export class SitterListPageComponent implements OnInit, OnDestroy {
   }
 
   onShare(sitter: SitterDto) {
-    const url = this.document.location.origin + this.router.createUrlTree(['sitters', sitter.id]).toString();
+    const url =
+      environment.origin +
+      this.router.createUrlTree(['sitters', sitter.id]).toString();
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,
       data: { url }

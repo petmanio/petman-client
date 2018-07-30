@@ -24,8 +24,8 @@ export class SitterUpdatePageComponent {
   sitter: SitterDto;
   quillModules = SharedService.quillModules;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
-  pending$ = this.store.pipe(select(fromSitter.getSitterCreatePagePending));
-  error$ = this.store.pipe(select(fromSitter.getSitterCreatePageError));
+  pending$ = this.store.pipe(select(fromSitter.getSitterUpdatePagePending));
+  error$ = this.store.pipe(select(fromSitter.getSitterUpdatePageError));
   sitter$ = this.store.pipe(select(fromSitter.getSelected));
 
   constructor(
@@ -34,9 +34,6 @@ export class SitterUpdatePageComponent {
     private store: Store<fromSitter.State>,
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
-    this.error$ = this.store.select(fromSitter.getSitterUpdatePageError);
-    this.pending$ = this.store.select(fromSitter.getSitterUpdatePagePending);
-
     this.route.params
       .pipe(
         map(params => new Select(params.id)),

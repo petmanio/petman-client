@@ -1,11 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
@@ -18,6 +16,7 @@ import { ModalSize, WalkerDto } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromWalker from '@walker/reducers';
+import { environment } from '@environments/environment';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
 import { SlideConfig } from '@material/components/mz-slider/mz-slider.component';
 import { Select } from '@walker/actions/walker.actions';
@@ -43,7 +42,6 @@ export class WalkerDetailsPageComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private meta: MetaService,
     private stripTagsPipe: StripTagsPipe,
-    @Inject(DOCUMENT) private document: Document
   ) {
     const paramsSubscription = this.route.params
       .pipe(map(params => new Select(params.id)))
@@ -72,7 +70,7 @@ export class WalkerDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   onShare() {
-    const url = this.document.location.origin + this.url;
+    const url = environment.origin + this.url;
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,
       data: { url }

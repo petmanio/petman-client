@@ -21,6 +21,12 @@ const routes: Routes = [
     data: { showSidenav: false, hideSignUpButton: true }
   },
   {
+    path: 'users',
+    loadChildren: './modules/user/user.module#UserModule',
+    canActivateChild: [MetaGuard],
+    data: { showSidenav: true }
+  },
+  {
     path: 'sitters',
     loadChildren: './modules/sitter/sitter.module#SitterModule',
     canActivateChild: [MetaGuard],

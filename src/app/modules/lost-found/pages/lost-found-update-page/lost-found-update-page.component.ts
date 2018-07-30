@@ -25,8 +25,10 @@ export class LostFoundUpdatePageComponent {
   quillModules = SharedService.quillModules;
   LostFoundType = LostFoundType;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
-  pending$ = this.store.pipe(select(fromLostFound.getLostFoundCreatePagePending));
-  error$ = this.store.pipe(select(fromLostFound.getLostFoundCreatePageError));
+  pending$ = this.store.pipe(
+    select(fromLostFound.getLostFoundUpdatePagePending)
+  );
+  error$ = this.store.pipe(select(fromLostFound.getLostFoundUpdatePageError));
   lostFound$ = this.store.pipe(select(fromLostFound.getSelected));
 
   constructor(
@@ -35,9 +37,6 @@ export class LostFoundUpdatePageComponent {
     private store: Store<fromLostFound.State>,
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
-    this.error$ = this.store.select(fromLostFound.getLostFoundUpdatePageError);
-    this.pending$ = this.store.select(fromLostFound.getLostFoundUpdatePagePending);
-
     this.route.params
       .pipe(
         map(params => new Select(params.id)),

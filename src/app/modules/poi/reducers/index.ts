@@ -1,4 +1,8 @@
-import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
+import {
+  ActionReducerMap,
+  createFeatureSelector,
+  createSelector
+} from '@ngrx/store';
 
 import * as fromPoi from '@poi/reducers/poi.reducer';
 import * as fromPin from '@poi/reducers/pin.reducer';
@@ -31,16 +35,25 @@ export const getPoiState = createFeatureSelector<State>('poi');
  * Entities
  */
 export const getEntitiesState = createSelector(getPoiState, state => state.poi);
-export const getSelectedId = createSelector(getEntitiesState, fromPoi.getSelectedId);
+export const getSelectedId = createSelector(
+  getEntitiesState,
+  fromPoi.getSelectedId
+);
 export const getTotal = createSelector(getEntitiesState, fromPoi.getTotal);
-export const getIsListLoaded = createSelector(getEntitiesState, fromPoi.getIsListLoaded);
+export const getIsListLoaded = createSelector(
+  getEntitiesState,
+  fromPoi.getIsListLoaded
+);
 export const {
   selectIds: getIds,
   selectEntities: getEntities,
   selectAll: getAll,
-  selectTotal: getTotalInStore,
+  selectTotal: getTotalInStore
 } = fromPoi.adapter.getSelectors(getEntitiesState);
-export const getSelected = createSelector(getEntities, getSelectedId, (entities, selectedId) => {
+export const getSelected = createSelector(
+  getEntities,
+  getSelectedId,
+  (entities, selectedId) => {
     return selectedId && entities[selectedId];
   }
 );
@@ -48,14 +61,26 @@ export const getSelected = createSelector(getEntities, getSelectedId, (entities,
 /**
  * Pin entities
  */
-export const getPinEntitiesState = createSelector(getPoiState, state => state.pin);
-export const getPinSelectedId = createSelector(getPinEntitiesState, fromPin.getSelectedId);
-export const getPinTotal = createSelector(getPinEntitiesState, fromPin.getTotal);
+export const getPinEntitiesState = createSelector(
+  getPoiState,
+  state => state.pin
+);
+export const getPinSelectedId = createSelector(
+  getPinEntitiesState,
+  fromPin.getSelectedId
+);
+export const getPinTotal = createSelector(
+  getPinEntitiesState,
+  fromPin.getTotal
+);
 export const {
   selectEntities: getPinEntities,
-  selectAll: getPinAll,
+  selectAll: getPinAll
 } = fromPin.adapter.getSelectors(getPinEntitiesState);
-export const getPinSelected = createSelector(getPinEntities, getPinSelectedId, (entities, selectedId) => {
+export const getPinSelected = createSelector(
+  getPinEntities,
+  getPinSelectedId,
+  (entities, selectedId) => {
     return selectedId && entities[selectedId];
   }
 );
@@ -63,35 +88,74 @@ export const getPinSelected = createSelector(getPinEntities, getPinSelectedId, (
 /**
  * Category entities
  */
-export const getCategoryEntitiesState = createSelector(getPoiState, state => state.category);
-export const getCategorySelectedId = createSelector(getCategoryEntitiesState, fromCategory.getSelectedId);
-export const getCategoryTotal = createSelector(getCategoryEntitiesState, fromCategory.getTotal);
+export const getCategoryEntitiesState = createSelector(
+  getPoiState,
+  state => state.category
+);
+export const getCategorySelectedId = createSelector(
+  getCategoryEntitiesState,
+  fromCategory.getSelectedId
+);
+export const getCategoryTotal = createSelector(
+  getCategoryEntitiesState,
+  fromCategory.getTotal
+);
 export const {
   selectEntities: getCategoryEntities,
-  selectAll: getCategoryAll,
+  selectAll: getCategoryAll
 } = fromCategory.adapter.getSelectors(getCategoryEntitiesState);
-export const getCategorySelected = createSelector(getCategoryEntities, getCategorySelectedId, (entities, selectedId) => {
+export const getCategorySelected = createSelector(
+  getCategoryEntities,
+  getCategorySelectedId,
+  (entities, selectedId) => {
     return selectedId && entities[selectedId];
   }
 );
 
 /**
- * Poi add Page
+ * Poi create page
  */
-export const getPoiAddPageState = createSelector(getPoiState, (state: State) => state.poiAddPage);
-export const getPoiAddPageError = createSelector(getPoiAddPageState, fromPoiAddPage.getError);
-export const getPoiAddPagePending = createSelector(getPoiAddPageState, fromPoiAddPage.getPending);
+export const getPoiAddPageState = createSelector(
+  getPoiState,
+  (state: State) => state.poiAddPage
+);
+export const getPoiAddPageError = createSelector(
+  getPoiAddPageState,
+  fromPoiAddPage.getError
+);
+export const getPoiAddPagePending = createSelector(
+  getPoiAddPageState,
+  fromPoiAddPage.getPending
+);
 
 /**
- * Poi edit Page
+ * Poi update page
  */
-export const getPoiEditPageState = createSelector(getPoiState, (state: State) => state.poiEditPage);
-export const getPoiEditPageError = createSelector(getPoiEditPageState, fromPoiEditPage.getError);
-export const getPoiEditPagePending = createSelector(getPoiEditPageState, fromPoiEditPage.getPending);
+export const getPoiEditPageState = createSelector(
+  getPoiState,
+  (state: State) => state.poiEditPage
+);
+export const getPoiEditPageError = createSelector(
+  getPoiEditPageState,
+  fromPoiEditPage.getError
+);
+export const getPoiEditPagePending = createSelector(
+  getPoiEditPageState,
+  fromPoiEditPage.getPending
+);
 
 /**
  * Poi list Page
  */
-export const getPoiListPageState = createSelector(getPoiState, (state: State) => state.poiListPage);
-export const getPoiListPageError = createSelector(getPoiListPageState, fromPoiListPage.getError);
-export const getPoiListPagePending = createSelector(getPoiListPageState, fromPoiListPage.getPending);
+export const getPoiListPageState = createSelector(
+  getPoiState,
+  (state: State) => state.poiListPage
+);
+export const getPoiListPageError = createSelector(
+  getPoiListPageState,
+  fromPoiListPage.getError
+);
+export const getPoiListPagePending = createSelector(
+  getPoiListPageState,
+  fromPoiListPage.getPending
+);

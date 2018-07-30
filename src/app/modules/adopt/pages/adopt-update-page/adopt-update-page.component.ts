@@ -24,8 +24,8 @@ export class AdoptUpdatePageComponent {
   adopt: AdoptDto;
   quillModules = SharedService.quillModules;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
-  pending$ = this.store.pipe(select(fromAdopt.getAdoptCreatePagePending));
-  error$ = this.store.pipe(select(fromAdopt.getAdoptCreatePageError));
+  pending$ = this.store.pipe(select(fromAdopt.getAdoptUpdatePagePending));
+  error$ = this.store.pipe(select(fromAdopt.getAdoptUpdatePageError));
   adopt$ = this.store.pipe(select(fromAdopt.getSelected));
 
   constructor(
@@ -34,9 +34,6 @@ export class AdoptUpdatePageComponent {
     private store: Store<fromAdopt.State>,
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
-    this.error$ = this.store.select(fromAdopt.getAdoptUpdatePageError);
-    this.pending$ = this.store.select(fromAdopt.getAdoptUpdatePagePending);
-
     this.route.params
       .pipe(
         map(params => new Select(params.id)),
