@@ -4,7 +4,12 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 
-import { UserDto, UserUpdateRequestDto, UserGeoDto } from '@petman/common';
+import {
+  UserDto,
+  UserUpdateRequestDto,
+  UserGeoDto,
+  UserApplicationDto
+} from '@petman/common';
 
 import { environment } from '@environments/environment';
 import { UserModule } from '@user/user.module';
@@ -41,6 +46,18 @@ export class UserService {
       .pipe(
         map(response =>
           plainToClass(UserDto, response, { groups: ['petman-client'] })
+        )
+      );
+  }
+
+  applicatoions(id: number): Observable<UserApplicationDto[]> {
+    return this.http
+      .get<UserDto[]>(`${environment.api}/api/users/${id}/applications`)
+      .pipe(
+        map(response =>
+          plainToClass(UserApplicationDto, response, {
+            groups: ['petman-client']
+          })
         )
       );
   }

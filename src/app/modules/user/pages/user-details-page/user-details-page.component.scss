@@ -1,0 +1,63 @@
+@import '../../../../scss/mixins';
+.pm-user-profile-cover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-color: #fff;
+  position: relative;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  height: 200px;
+
+  @include tablet {
+    height: 300px;
+  }
+
+  .pm-user-info {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    display: flex;
+
+    @include tablet {
+      bottom: 24px;
+      left: 24px;
+    }
+
+    .pm-card-avatar {
+      width: 75px;
+      height: 75px;
+      border-radius: 0;
+      box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+        0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      background-color: #fff;
+
+      @include tablet {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  }
+
+  .pm-user-settings {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+
+    @include tablet {
+      top: auto;
+      bottom: 10px;
+    }
+  }
+}
+
+app-masonry {
+  padding: 0 12px 12px;
+}
+
+.pm-application-info {
+  mat-divider {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+  }
+}

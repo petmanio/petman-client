@@ -1,7 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
-import { UserDto, UserUpdateRequestDto, UserGeoDto } from '@petman/common';
+import {
+  UserDto,
+  UserUpdateRequestDto,
+  UserGeoDto,
+  UserApplicationDto
+} from '@petman/common';
 
 export enum UserActionTypes {
   GEOLOCATION = '[User] Geolocation',
@@ -15,6 +20,10 @@ export enum UserActionTypes {
   LOAD = '[User] Load',
   LOAD_SUCCESS = '[User] Load success',
   LOAD_FAILURE = '[User] Load failure',
+
+  APPLICATIONS = '[User] Applications',
+  APPLICATIONS_SUCCESS = '[User] Applications success',
+  APPLICATIONS_FAILURE = '[User] Applications failure',
 
   SELECT = '[User] Select'
 }
@@ -81,6 +90,27 @@ export class LoadFailure implements Action {
 }
 
 /**
+ * Applications
+ */
+export class Applications implements Action {
+  readonly type = UserActionTypes.APPLICATIONS;
+
+  constructor(public payload: number) {}
+}
+
+export class ApplicationsSuccess implements Action {
+  readonly type = UserActionTypes.APPLICATIONS_SUCCESS;
+
+  constructor(public payload: { userId: number; list: UserApplicationDto[] }) {}
+}
+
+export class ApplicationsFailure implements Action {
+  readonly type = UserActionTypes.APPLICATIONS_FAILURE;
+
+  constructor(public payload: HttpErrorResponse) {}
+}
+
+/**
  * Shared
  */
 export class Select implements Action {
@@ -99,4 +129,7 @@ export type UserActions =
   | Load
   | LoadSuccess
   | LoadFailure
+  | Applications
+  | ApplicationsSuccess
+  | ApplicationsFailure
   | Select;

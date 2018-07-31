@@ -1,4 +1,5 @@
 {
+  "ABOUT": "About",
   "ABOUT_US": "About us",
   "ABOUT_US_CONTENT":
     "We are a couple of crazy petlovers, who is eager to transform the love and passion for pets into highly rewarding, loving and fun experiences. Our dream is to become super-helpful for all the petlovers and super-friends for all the pets!",
@@ -12,7 +13,11 @@
   "APPLICATION_RATE": "{{name}} has rated your service",
   "APPLICATION_REQUESTS": "Applications requests",
   "APPLICATION_STATUS_UPDATE": "{{name}} has updated application status",
-  "APPLICATON_TYPE": "Application type",
+  "APPLICATION_TYPE": "Application type",
+  "APPLICATION_TYPE_SITTER": "Sitter",
+  "APPLICATION_TYPE_WALKER": "Walker",
+  "APPLICATION_TYPE_LOST_FOUND": "",
+  "APPLICATION_TYPE_ADOPT": "Adopt",
   "APPLY": "Apply",
   "APP_NAME": "Petman",
   "ARE_YOU_SURE": "Are you sure?",
@@ -78,7 +83,9 @@
   "MAP_INTRO":
     "Find the pettiest places of our city. Pet shops, parks, clinics and much more",
   "MORE_FROM_PETMAN": "More from Petman",
-  "MY_APPLICATIONS": "My Applications",
+  "MY_APPLICATIONS": "My applications",
+  "MY_ACCOUNT": "My account",
+  "USER_X_APPLICATIONS": "Applications of {{name}}",
   "NEW_COMMENT_FROM": "New comment from {{name}}",
   "NEW_MESSAGE_FROM": "New message from {{name}}",
   "NEW_REQUEST_FROM": "New request from {{name}}",
@@ -86,6 +93,7 @@
   "NO": "No",
   "NO_MESSAGES_YET": "No messages yet",
   "NO_NOTIFICATIONS_YET": "No notifications yet",
+  "NO_APPLICATIONS_YET": "No applications yet",
   "NO_REVIEWS_YET": "No reviews yet",
   "N_FILES_SELECTED": "{{n}} files selected",
   "OPEN_CONVERSATION": "Open conversation",

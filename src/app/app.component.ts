@@ -16,7 +16,7 @@ import { delay, tap, filter, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { MetaService } from '@ngx-meta/core';
 
-import { ModalSize, UserDto } from '@petman/common';
+import { UserDto } from '@petman/common';
 
 import * as fromRoot from '@app/reducers';
 import * as fromAuth from '@auth/reducers';
@@ -26,10 +26,9 @@ import { LocalStorageService } from '@shared/services/local-storage/local-storag
 
 import { TranslateService } from '@translate/translate.service';
 import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
-import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
 import { CleanError } from '@shared/actions/shared.actions';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
-import { Update as UserUpdate, Geolocation } from '@user/actions/user.actions';
+import { Geolocation } from '@user/actions/user.actions';
 import { Categories } from '@poi/actions/poi.actions';
 import { CloseSidenav, OpenSidenav } from '@app/actions/layout.actions';
 
@@ -227,32 +226,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logOut() {
     this.store.dispatch(new Logout());
-  }
-
-  openSettings() {
-    const dialogRef = this.dialog.open(UserDetailsUpdateDialogComponent, {
-      width: ModalSize.LARGE,
-      data: { user: this.selectedUser }
-    });
-
-    dialogRef.afterClosed().subscribe(update => {
-      if (!update) {
-        return;
-      }
-      this.store.dispatch(
-        new UserUpdate({
-          id: this.selectedUser.id,
-          body: {
-            userData: {
-              firstName: update.firstName,
-              lastName: update.lastName,
-              phoneNumber: update.phoneNumber || null,
-              facebookUrl: update.facebookUrl || null
-            }
-          }
-        })
-      );
-    });
   }
 
   private welcomeDialog() {

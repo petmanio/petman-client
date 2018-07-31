@@ -1,30 +1,58 @@
-<!-- <div class="columns is-marginless">
-  <div class="column is-10 is-offset-1">
-    <div class="columns is-vcentered">
-      <div class="column is-3 has-text-centered">
-        <app-user-details [redirectAfterSignUp]="url" [loggedIn]="loggedIn$ | async" [isOwner]="(user$ | async)?.isOwner" [user]="(user$ | async)?.user"></app-user-details>
-      </div>
-      <div class="column is-9">
-        <app-mz-slider [slides]="slides" [options]="{ height: 500 }"></app-mz-slider>
+<div class="pm-full-loader">
+  <div *tdLoading="let item until (applications$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
+    <div class="columns is-marginless">
+      <div class="column is-10 is-offset-1">
+        <div class="columns">
+          <div class="column">
+            <div class="pm-user-profile-cover" [ngStyle]="{'background-image': 'url(/assets/' + randomCoverPhoto + ')'}">
+              <div class="pm-user-info">
+                <div mat-card-avatar class="pm-card-avatar" [ngStyle]="{'background-image': 'url(' + (userEntity$ | async)?.userData?.avatar + ')'}"></div>
+                <p class="has-text-grey is-size-2 is-size-5-touch" style="margin-left: 15px; margin-top: auto;">{{(userEntity$ | async)?.userData.name}}</p>
+              </div>
+              <div *ngIf="(userEntity$ | async)?.isOwner" class="pm-user-settings">
+                <button class="is-hidden-desktop" mat-mini-fab color="" (click)="openSettings()">
+                  <mat-icon>settings</mat-icon>
+                </button>
+                <button class="is-hidden-touch" mat-raised-button (click)="openSettings()">
+                  {{'PROFILE_SETTINGS' | translate}}
+                  <mat-icon>settings</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="columns">
-      <div class="column">
-        <blockquote class="pm-blockquote">
-          <div class='pm-blockquote-content'>
-            <p *ngIf="!(user?.description | appIsHtml)">{{user?.description}}</p>
-            <div *ngIf="user?.description | appIsHtml" class="ql-editor" [innerHTML]="user?.description | appSafeHtml"></div>
+    <div class="columns is-marginless">
+      <div class="column is-10 is-offset-1 pm-application-info">
+        <div *ngIf="(applications$ | async)?.length; else noApplications">
+          <p class="has-text-centered has-text-grey is-size-4 is-size-6-touch">
+            <ng-container *ngIf="(userEntity$ | async)?.isOwner else guest">{{'MY_APPLICATIONS' | translate}}</ng-container>
+            <ng-template #guest>
+              <span translate [translateParams]="{name: (userEntity$ | async)?.userData?.firstName}">USER_X_APPLICATIONS</span>
+            </ng-template>
+          </p>
+          <mat-divider></mat-divider>
+        </div>
+        <ng-template #noApplications>
+          <p class="has-text-centered has-text-grey is-size-4 is-size-6-touch">{{ 'NO_APPLICATIONS_YET' | translate}}</p>
+        </ng-template>
+      </div>
+    </div>
+    <div class="columns is-marginless">
+      <div class="column is-10 is-offset-1 is-paddingless">
+        <div class="columns is-marginless">
+          <div class="column is-paddingless">
+            <app-masonry [options]="masonryOptions">
+              <app-masonry-item *ngFor="let item of applications$ | async">
+                <a [routerLink]="getApplicationLink(item)">
+                  <app-card [config]="getCardConfig(item)" (actionClick)="shareApplication(item)"></app-card>
+                </a>
+              </app-masonry-item>
+            </app-masonry>
           </div>
-        </blockquote>
-        <div class="field is-grouped">
-          <p class="control pm-m-left-auto">
-            <button color="primary" mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>
-          </p>
-          <p class="control" *ngIf="(user$ | async)?.isOwner">
-            <button [routerLink]="['/users', user.id, 'edit']" mat-raised-button>{{ 'EDIT' | translate }}</button>
-          </p>
         </div>
       </div>
     </div>
   </div>
-</div> -->
+</div>

@@ -38,9 +38,9 @@
     <span class="is-hidden-mobile cp" [matMenuTriggerFor]="menu">{{selectedUser?.userData.firstName}}&nbsp;</span>
     <div class="pm-card-avatar pm-cursor-pointer" [matMenuTriggerFor]="menu" [ngStyle]="{'background-image': 'url(' + selectedUser?.userData.avatar + ')'}"></div>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
-      <button mat-menu-item (click)="openSettings.emit()">
-        <mat-icon>settings</mat-icon>
-        <span>{{'PROFILE_SETTINGS' | translate}}</span>
+      <button mat-menu-item [routerLink]="['/users', selectedUser?.id]">
+        <mat-icon>account_box</mat-icon>
+        <span>{{'MY_ACCOUNT' | translate}}</span>
       </button>
       <button mat-menu-item (click)="logOut.emit()">
         <mat-icon>exit_to_app</mat-icon>

@@ -15,6 +15,7 @@ import { UserUpdatePageComponent } from '@user/pages/user-update-page/user-updat
 
 @NgModule({
   imports: [
+    SharedModule,
     StoreModule.forFeature('user', reducers),
     EffectsModule.forFeature([UserEffects])
   ],
@@ -24,7 +25,7 @@ import { UserUpdatePageComponent } from '@user/pages/user-update-page/user-updat
 export class UserRootModule {}
 
 @NgModule({
-  imports: [SharedModule, UserRootModule, UserRoutingModule]
+  imports: [UserRootModule, UserRoutingModule]
 })
 export class UserModule {
   static forRoot(): ModuleWithProviders {

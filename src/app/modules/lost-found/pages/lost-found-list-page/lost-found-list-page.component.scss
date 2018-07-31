@@ -1,8 +1,12 @@
+@import '../../../../scss/mixins';
 :host {
   min-height: 100%;
   display: block;
 }
 
 app-masonry {
-  padding: 24px;
+  padding: 12px;
+  @include tablet {
+    padding: 24px;
+  }
 }

@@ -1,4 +1,4 @@
-<mat-sidenav-container (swipeLeft)="close.emit()" data-mc-options='{"inputClass": "TouchInput", "cssProps": { "userSelect": "auto" } }'>
+<mat-sidenav-container>
   <mat-sidenav [opened]="opened" [mode]="mode" color="primary" (openedChange)="openedChange.emit($event)">
     <mat-nav-list>
       <ng-container *ngIf="user?.businessUsers.length">
@@ -16,10 +16,10 @@
       <app-nav-item (activate)="itemActivate.emit()" icon="favorite" routerLink="/sitters" routerLinkActive="pm-is-active">{{'SITTERS' | translate}}</app-nav-item>
       <app-nav-item (activate)="itemActivate.emit()" icon="child_friendly" routerLink="/walkers" routerLinkActive="pm-is-active">{{'WALKERS' | translate}}</app-nav-item>
       <app-nav-item (activate)="itemActivate.emit()" icon="pets" routerLink="/adoption" routerLinkActive="pm-is-active">{{'ADOPTION' | translate}}</app-nav-item>
-      <app-nav-item (activate)="itemActivate.emit()" icon="search" routerLink="/lost-found" routerLinkActive="pm-is-active">{{'LOST_AND_FOUND' | translate}}</app-nav-item>
+      <app-nav-item (activate)="itemActivate.emit()" icon="warning" routerLink="/lost-found" routerLinkActive="pm-is-active">{{'LOST_AND_FOUND' | translate}}</app-nav-item>
     </mat-nav-list>
   </mat-sidenav>
-  <div class="pm-page-container" (swipeRight)="open.emit()" data-mc-options='{"inputClass": "TouchInput", "touchAction": "pan-y", "cssProps": { "userSelect": "auto" } }'>
+  <div class="pm-page-container">
     <ng-content select="[content]"></ng-content>
   </div>
   <ng-content select="[footer]"></ng-content>

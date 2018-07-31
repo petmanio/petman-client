@@ -14,7 +14,9 @@ import {
   LoadSuccess,
   GeolocationSuccess,
   GeolocationFailure,
-  UserActionTypes
+  UserActionTypes,
+  ApplicationsSuccess,
+  ApplicationsFailure
 } from '@user/actions/user.actions';
 
 @Injectable()
@@ -43,6 +45,19 @@ export class UserEffects {
       return this.userService.getById(id).pipe(
         map(response => new LoadSuccess(response)),
         catchError(error => of(new LoadFailure(error)))
+      );
+    })
+  );
+
+  @Effect()
+  applications$ = this.actions$.ofType(UserActionTypes.APPLICATIONS).pipe(
+    map((action: Load) => action.payload),
+    switchMap(id => {
+      return this.userService.applicatoions(id).pipe(
+        map(
+          response => new ApplicationsSuccess({ userId: id, list: response })
+        ),
+        catchError(error => of(new ApplicationsFailure(error)))
       );
     })
   );

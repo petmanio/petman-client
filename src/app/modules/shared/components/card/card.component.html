@@ -1,7 +1,7 @@
 <mat-card class="pm-card">
   <mat-card-header>
     <div mat-card-avatar class="avatar" *ngIf="config.avatar" [ngStyle]="{'background-image': 'url(' + config.avatar + ')'}"></div>
-    <mat-card-title>{{config.title}}</mat-card-title>
+    <mat-card-title [innerHTML]="config.title | appSafeHtml"></mat-card-title>
     <mat-card-subtitle *ngIf="config.subtitle" [innerHTML]="config.subtitle | appSafeHtml"></mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image *ngIf="config.image" [src]="config.image">

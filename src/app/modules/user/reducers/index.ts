@@ -37,14 +37,29 @@ export const getUserEntitiesState = createSelector(
   getUserState,
   state => state.userEntities
 );
+export const getApplicationEntitiesState = createSelector(
+  getUserState,
+  state => state.applicationEntities
+);
 export const {
   selectEntities: getUserEntities
 } = fromUser.userAdapter.getSelectors(getUserEntitiesState);
 export const getSelectedUser = createSelector(
-  getUserEntitiesState,
+  getUserEntities,
   getSelectedId,
   (entities, selectedId) => {
     return selectedId && entities[selectedId];
+  }
+);
+export const {
+  selectEntities: getApplicationEntities
+} = fromUser.applicationAdapter.getSelectors(getApplicationEntitiesState);
+export const getSelectedUserApplications = createSelector(
+  getApplicationEntities,
+  getSelectedId,
+  (entities, selectedId) => {
+    console.log(entities[selectedId]);
+    return selectedId && entities[selectedId] && entities[selectedId].list;
   }
 );
 

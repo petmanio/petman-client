@@ -1,4 +1,5 @@
 {
+  "ABOUT": "Տվյալներ",
   "ABOUT_US": "Մեր մասին",
   "ABOUT_US_CONTENT":
     "Մենք երիտասարդների խումբ ենք, ովքեր ցանկանում են միավորել կենդանասերներին, զարգացնել կենդանասիրության, կենդանիների խնամքի մշակույթը Հայաստանում: Մեր նպատակն է հնարավորինս օգտակար լինել բոլոր կենդանասերներին ու օգնելով միմյանց՝ հրճվանք պարգևել մեր կողմից այդքան սիրված կենդանիներին:",
@@ -11,7 +12,11 @@
   "APPLICATION_RATE": "{{name}}֊ը գնահատել ես Ձեր ծառայությունը",
   "APPLICATION_REQUESTS": "Դիմումներ",
   "APPLICATION_STATUS_UPDATE": "{{name}}֊ը փոխել է հայտի կարգավիճակը",
-  "APPLICATON_TYPE": "Հայտարարության տեսակ",
+  "APPLICATION_TYPE": "Հայտարարության տեսակ",
+  "APPLICATION_TYPE_SITTER": "Խնամակալ",
+  "APPLICATION_TYPE_WALKER": "Զբոսընկեր",
+  "APPLICATION_TYPE_LOST_FOUND": "",
+  "APPLICATION_TYPE_ADOPT": "Որդեգրում",
   "APPLY": "Դիմել",
   "APP_NAME": "Petman",
   "ARE_YOU_SURE": "Վստա՞հ եք",
@@ -81,7 +86,9 @@
   "MAP_INTRO":
     "Ծանոթացե՛ք քաղաքի ամենակենդանական վայրերին՝ խանութներ, զբոսայգիներ, կլինիկաներ և այլն",
   "MORE_FROM_PETMAN": "Ավելին փեթմենից",
-  "MY_APPLICATIONS": "Դիմումներ",
+  "MY_APPLICATIONS": "Իմ հայտարարությունները",
+  "MY_ACCOUNT": "Իմ հաշիվը",
+  "USER_X_APPLICATIONS": "{{name}}֊ի հայտարարությունները",
   "NEW_COMMENT_FROM": "Նոր մեկնաբանություն {{name}}֊ից",
   "NEW_MESSAGE_FROM": "Նոր նամակ {{name}}֊ից",
   "NEW_REQUEST_FROM": "{{name}}֊ը նոր հայտ է ուղարկել",
@@ -89,6 +96,7 @@
   "NO": "Ոչ",
   "NO_MESSAGES_YET": "Դեռևս հաղորդագրություններ չկան",
   "NO_NOTIFICATIONS_YET": "Ոչ ծանուցումներ չկան",
+  "NO_APPLICATIONS_YET": "Դեռևս հայտարարություններ չկան",
   "NO_REVIEWS_YET": "Կարծիքներ դեռ չկան",
   "N_FILES_SELECTED": "{{n}} ընտրված ֆայլ",
   "OPEN_CONVERSATION": "Բացել նամակագրությունը",
