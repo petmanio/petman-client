@@ -5,6 +5,7 @@ import { AuthGuard } from '@auth/auth.guard';
 
 import { WalkerExistsGuard } from '@walker/walker-exists.guard';
 import { WalkerOwnerGuard } from '@walker/walker-owner.guard';
+import { WalkerCanCreateGuard } from '@walker/walker-can-create.guard';
 import { WalkerCreatePageComponent } from '@walker/pages/walker-create-page/walker-create-page.component';
 import { WalkerListPageComponent } from '@walker/pages/walker-list-page/walker-list-page.component';
 import { WalkerDetailsPageComponent } from '@walker/pages/walker-details-page/walker-details-page.component';
@@ -12,14 +13,25 @@ import { WalkerUpdatePageComponent } from '@walker/pages/walker-update-page/walk
 
 export const routes: Routes = [
   { path: '', component: WalkerListPageComponent, pathMatch: 'full' },
-  { path: 'add', component: WalkerCreatePageComponent, canActivate: [AuthGuard] },
-  { path: ':id', component: WalkerDetailsPageComponent, canActivate: [WalkerExistsGuard] },
-  { path: ':id/edit', component: WalkerUpdatePageComponent, canActivate: [AuthGuard, WalkerExistsGuard, WalkerOwnerGuard] }
+  {
+    path: 'add',
+    component: WalkerCreatePageComponent,
+    canActivate: [AuthGuard, WalkerCanCreateGuard]
+  },
+  {
+    path: ':id',
+    component: WalkerDetailsPageComponent,
+    canActivate: [WalkerExistsGuard]
+  },
+  {
+    path: ':id/edit',
+    component: WalkerUpdatePageComponent,
+    canActivate: [AuthGuard, WalkerExistsGuard, WalkerOwnerGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class WalkerRoutingModule {
-}
+export class WalkerRoutingModule {}

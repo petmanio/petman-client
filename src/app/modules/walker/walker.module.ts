@@ -11,6 +11,7 @@ import { WalkerService } from '@walker/walker.service';
 import { WalkerEffects } from '@walker/effects/walker.effects';
 import { WalkerExistsGuard } from '@walker/walker-exists.guard';
 import { WalkerOwnerGuard } from '@walker/walker-owner.guard';
+import { WalkerCanCreateGuard } from '@walker/walker-can-create.guard';
 import { WalkerListPageComponent } from '@walker/pages/walker-list-page/walker-list-page.component';
 import { WalkerCreatePageComponent } from '@walker/pages/walker-create-page/walker-create-page.component';
 import { WalkerDetailsPageComponent } from '@walker/pages/walker-details-page/walker-details-page.component';
@@ -31,7 +32,12 @@ import { WalkerUpdatePageComponent } from '@walker/pages/walker-update-page/walk
     WalkerDetailsPageComponent,
     WalkerUpdatePageComponent
   ],
-  providers: [WalkerService, WalkerExistsGuard, WalkerOwnerGuard]
+  providers: [
+    WalkerService,
+    WalkerExistsGuard,
+    WalkerOwnerGuard,
+    WalkerCanCreateGuard
+  ]
 })
 export class WalkerModule {
   static forRoot(): ModuleWithProviders {

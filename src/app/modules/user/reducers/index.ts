@@ -58,7 +58,6 @@ export const getSelectedUserApplications = createSelector(
   getApplicationEntities,
   getSelectedId,
   (entities, selectedId) => {
-    console.log(entities[selectedId]);
     return selectedId && entities[selectedId] && entities[selectedId].list;
   }
 );

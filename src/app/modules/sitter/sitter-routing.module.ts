@@ -5,6 +5,7 @@ import { AuthGuard } from '@auth/auth.guard';
 
 import { SitterExistsGuard } from '@sitter/sitter-exists.guard';
 import { SitterOwnerGuard } from '@sitter/sitter-owner.guard';
+import { SitterCanCreateGuard } from '@sitter/sitter-can-create.guard';
 import { SitterCreatePageComponent } from '@sitter/pages/sitter-create-page/sitter-create-page.component';
 import { SitterListPageComponent } from '@sitter/pages/sitter-list-page/sitter-list-page.component';
 import { SitterDetailsPageComponent } from '@sitter/pages/sitter-details-page/sitter-details-page.component';
@@ -20,7 +21,7 @@ export const routes: Routes = [
   {
     path: 'add',
     component: SitterCreatePageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, SitterCanCreateGuard]
   },
   {
     path: ':id',
