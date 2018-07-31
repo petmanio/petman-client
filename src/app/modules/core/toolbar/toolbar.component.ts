@@ -20,7 +20,6 @@ export class ToolbarComponent {
   @Input() redirectAfterSignUp: string;
   @Input() hideSignUpButton: string;
   @Output() logOut = new EventEmitter();
-  @Output() openSettings = new EventEmitter();
   @Output() toggleMenu = new EventEmitter();
 
   Language = Language;
