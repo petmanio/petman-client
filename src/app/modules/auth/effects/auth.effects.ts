@@ -5,6 +5,8 @@ import { defer, Observable } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 
+import { SitterActionTypes } from '@sitter/actions/sitter.actions';
+import { WalkerActionTypes } from '@walker/actions/walker.actions';
 import {
   AuthActionTypes,
   ChangeUser,
@@ -19,7 +21,6 @@ import { AuthService } from '@auth/auth.service';
 
 @Injectable()
 export class AuthEffects {
-
   @Effect()
   fbLogin$ = this.actions$.pipe(
     ofType(AuthActionTypes.FB_LOGIN),
@@ -36,7 +37,9 @@ export class AuthEffects {
   fbLoginSuccess$ = this.actions$.pipe(
     ofType(AuthActionTypes.FB_LOGIN_SUCCESS),
     map(() => new User()),
-    tap(() => this.router.navigate([this.route.snapshot.queryParams.next || '/']))
+    tap(() =>
+      this.router.navigate([this.route.snapshot.queryParams.next || '/'])
+    )
   );
 
   @Effect()
@@ -54,7 +57,7 @@ export class AuthEffects {
   userChange$ = this.actions$.pipe(
     ofType(AuthActionTypes.CHANGE_USER),
     map((action: ChangeUser) => action.payload),
-    tap((selectedUserId) => {
+    tap(selectedUserId => {
       this.authService.changeUser(selectedUserId);
       this.router.navigate(['/']);
     })
@@ -64,7 +67,9 @@ export class AuthEffects {
   loginRedirect = this.actions$.pipe(
     ofType(AuthActionTypes.LOGIN_REDIRECT),
     map((action: LoginRedirect) => action.payload),
-    tap(({ next }) => this.router.navigate(['/auth/login'], { queryParams: { next } }))
+    tap(({ next }) =>
+      this.router.navigate(['/auth/login'], { queryParams: { next } })
+    )
   );
 
   @Effect({ dispatch: false })
@@ -76,9 +81,23 @@ export class AuthEffects {
     })
   );
 
+  // TODO: handle with user role/permission system
   @Effect()
-  init$: Observable<User> = defer(() => of(new User()));
+  updateIsSitterFlag$ = this.actions$
+    .ofType(
+      SitterActionTypes.CREATE_SUCCESS,
+      SitterActionTypes.DELETE_SUCCESS,
+      WalkerActionTypes.CREATE_SUCCESS,
+      WalkerActionTypes.DELETE_SUCCESS
+    )
+    .pipe(map(() => new User()));
 
-  constructor(private router: Router, private route: ActivatedRoute, private actions$: Actions, private authService: AuthService) {
-  }
+  @Effect() init$: Observable<User> = defer(() => of(new User()));
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private actions$: Actions,
+    private authService: AuthService
+  ) {}
 }

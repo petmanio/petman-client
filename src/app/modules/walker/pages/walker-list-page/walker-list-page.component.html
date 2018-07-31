@@ -1,19 +1,24 @@
 <div class="pm-full-loader">
   <div *tdLoading="let item until (isListLoaded$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
-    <div infinite-scroll
-         infiniteScrollContainer="mat-sidenav-content"
-         infiniteScrollDistance="2"
-         infiniteScrollThrottle="300"
-         fromRoot="true"
-         (scrolled)="onLoadMore()">
+    <div infinite-scroll infiniteScrollContainer="mat-sidenav-content" infiniteScrollDistance="2" infiniteScrollThrottle="300"
+      fromRoot="true" (scrolled)="onLoadMore()">
       <div>
         <app-masonry [options]="masonryOptions">
           <app-masonry-item>
-            <a [routerLink]="['/walkers', 'add']">
-              <app-add-application [user]="selectedUser$ | async">
-                {{'BECOME_WALKER' | translate}}
-              </app-add-application>
-            </a>
+            <ng-container *ngIf="(selectedUser$ | async)?.isWalker; else notWalker">
+              <a [routerLink]="['/users', (selectedUser$ | async)?.id]">
+                <app-add-application [user]="selectedUser$ | async">
+                  {{'MY_APPLICATIONS' | translate}}
+                </app-add-application>
+              </a>
+            </ng-container>
+            <ng-template #notWalker>
+              <a [routerLink]="['/walkers', 'add']">
+                <app-add-application [user]="selectedUser$ | async">
+                  {{'BECOME_SITTER' | translate}}
+                </app-add-application>
+              </a>
+            </ng-template>
           </app-masonry-item>
 
           <app-masonry-item *ngFor="let item of list$ | async">
