@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
@@ -29,7 +30,7 @@ import { UserDetailsUpdateDialogComponent } from '@shared/components/user-detail
   styleUrls: ['./sitter-create-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SitterCreatePageComponent implements OnInit {
+export class SitterCreatePageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   selectedUser: UserDto;
   quillModules = SharedService.quillModules;
@@ -73,6 +74,10 @@ export class SitterCreatePageComponent implements OnInit {
 
   ngOnInit() {}
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   onButtonToggleChange() {
     const description = this.form.get('description');
     description.reset();
@@ -87,7 +92,7 @@ export class SitterCreatePageComponent implements OnInit {
     } else {
       const dialogRef = this.dialog.open(UserDetailsUpdateDialogComponent, {
         width: ModalSize.LARGE,
-        data: { user: this.selectedUser }
+        data: { user: this.selectedUser, askForUpdate: true }
       });
       dialogRef.afterClosed().subscribe(update => {
         if (!update) {

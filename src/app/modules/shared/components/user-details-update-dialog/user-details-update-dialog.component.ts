@@ -23,7 +23,7 @@ export class UserDetailsUpdateDialogComponent implements OnInit {
   form: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<UserDetailsUpdateDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { user: UserDto },
+    @Inject(MAT_DIALOG_DATA) public data: { user: UserDto, askForUpdate?: boolean },
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
     this.form = this.formConfig;

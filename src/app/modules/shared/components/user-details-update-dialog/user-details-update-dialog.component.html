@@ -1,6 +1,6 @@
 <h4 mat-dialog-title>{{'USER_PROFILE_UPDATE_DIALOG_TITLE' | translate}}</h4>
 <mat-dialog-content>
-  <p> {{'USER_PROFILE_UPDATE_DIALOG_CONTENT' | translate}} </p>
+  <p *ngIf="data.askForUpdate"> {{'USER_PROFILE_ASK_UPDATE_DIALOG_CONTENT' | translate}} </p>
   <form [formGroup]="form">
     <div class="columns is-marginless">
       <div class="column">

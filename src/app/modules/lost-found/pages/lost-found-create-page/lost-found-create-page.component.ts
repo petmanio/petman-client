@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   Inject,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
@@ -29,7 +30,7 @@ import { UserDetailsUpdateDialogComponent } from '@shared/components/user-detail
   styleUrls: ['./lost-found-create-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LostFoundCreatePageComponent implements OnInit {
+export class LostFoundCreatePageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   selectedUser: UserDto;
   quillModules = SharedService.quillModules;
@@ -66,14 +67,18 @@ export class LostFoundCreatePageComponent implements OnInit {
       ]
     });
 
-    const selectedSubscription = this.selectedUser$.subscribe(
+    const selectedUserSubscription = this.selectedUser$.subscribe(
       selectedUser => (this.selectedUser = selectedUser)
     );
 
-    this.subscriptions.push(selectedSubscription);
+    this.subscriptions.push(selectedUserSubscription);
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
 
   onButtonToggleChange() {
     const description = this.form.get('description');
@@ -89,7 +94,7 @@ export class LostFoundCreatePageComponent implements OnInit {
     } else {
       const dialogRef = this.dialog.open(UserDetailsUpdateDialogComponent, {
         width: ModalSize.LARGE,
-        data: { user: this.selectedUser }
+        data: { user: this.selectedUser, askForUpdate: true }
       });
       dialogRef.afterClosed().subscribe(update => {
         if (!update) {
