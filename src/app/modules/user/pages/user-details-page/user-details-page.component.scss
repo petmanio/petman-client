@@ -9,6 +9,12 @@
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   height: 200px;
 
+  .pm-user-name {
+    color: #fff;
+    text-rendering: optimizelegibility;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  }
+
   @include tablet {
     height: 300px;
   }
@@ -31,10 +37,14 @@
       box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
         0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
       background-color: #fff;
+      border: solid #fff 2px;
+      border-radius: 1px;
 
       @include tablet {
         width: 150px;
         height: 150px;
+        border: solid #fff 4px;
+        border-radius: 2px;
       }
     }
   }

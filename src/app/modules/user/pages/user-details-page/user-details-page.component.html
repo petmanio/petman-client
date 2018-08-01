@@ -7,7 +7,7 @@
             <div class="pm-user-profile-cover" [ngStyle]="{'background-image': 'url(/assets/' + randomCoverPhoto + ')'}">
               <div class="pm-user-info">
                 <div mat-card-avatar class="pm-card-avatar" [ngStyle]="{'background-image': 'url(' + (userEntity$ | async)?.userData?.avatar + ')'}"></div>
-                <p class="has-text-grey is-size-2 is-size-5-touch" style="margin-left: 15px; margin-top: auto;">{{(userEntity$ | async)?.userData.name}}</p>
+                <p class="is-size-2 is-size-5-touch pm-user-name" style="margin-left: 15px; margin-top: auto;">{{(userEntity$ | async)?.userData.name}}</p>
               </div>
               <div *ngIf="(userEntity$ | async)?.isOwner" class="pm-user-settings">
                 <button class="is-hidden-desktop" mat-mini-fab color="" (click)="openSettings()">

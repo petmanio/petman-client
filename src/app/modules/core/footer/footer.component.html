@@ -1,7 +1,7 @@
 <footer>
   <div class="columns is-marginless">
     <div class="column has-text-centered">
-      <div class="button-row">
+      <div class="button-row is-hidden-mobile">
         <a href="https://www.facebook.com/petman.io" target="_blank" mat-fab color="" style="color: #fff; background-color: #3A5BA2">
           <fa-icon [icon]="['fab','facebook-f']"></fa-icon>
         </a>
@@ -12,12 +12,24 @@
           <fa-icon icon="envelope"></fa-icon>
         </a>
       </div>
+      <div class="button-row is-hidden-tablet">
+        <a href="https://www.facebook.com/petman.io" target="_blank" mat-mini-fab color="" style="color: #fff; background-color: #3A5BA2">
+          <fa-icon [icon]="['fab','facebook-f']"></fa-icon>
+        </a>
+        <a href="https://twitter.com/petmanio" target="_blank" mat-mini-fab color="" style="margin: 0 5px; color: #fff; background-color: #1EBEF0">
+          <fa-icon [icon]="['fab','twitter']"></fa-icon>
+        </a>
+        <a href="mailto:contact@petman.io" target="_top" mat-mini-fab color="">
+          <fa-icon icon="envelope"></fa-icon>
+        </a>
+      </div>
     </div>
   </div>
   <div class="columns is-marginless is-vcentered is-mobile">
     <div class="column is-paddingless font-12">
-      <p style="padding-left: 10px; padding-bottom: 10px;">© Petman | 2018 &nbsp;&nbsp;
-        <a class="has-text-grey" *ngFor="let lang of languages" [class.pm-current-language]="currentLanguage !== lang.code" (click)="changeLanguage.emit(lang.code)">{{ lang.name }}&nbsp;&nbsp;</a>
+      <p style="padding-left: 5px; padding-bottom: 5px;">© Petman | 2018 &nbsp;&nbsp;
+        <a class="has-text-grey is-size-6" *ngFor="let lang of languages" [class.pm-current-language]="currentLanguage !== lang.code"
+          (click)="changeLanguage.emit(lang.code)">{{ lang.name }}&nbsp;&nbsp;</a>
       </p>
     </div>
   </div>
