@@ -14,13 +14,15 @@ import { SidenavComponent } from '@core/sidenav/sidenav.component';
 import { FooterComponent } from '@core/footer/footer.component';
 import { NavItemComponent } from '@core/nav-item/nav-item.component';
 import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
+import { LanguageChangeSnackbarComponent } from '@core/language-change-snackbar/language-change-snackbar.component';
 
 const declarations = [
   ToolbarComponent,
   SidenavComponent,
   NavItemComponent,
   FooterComponent,
-  WelcomeDialogComponent
+  WelcomeDialogComponent,
+  LanguageChangeSnackbarComponent
 ];
 
 @NgModule({
@@ -28,7 +30,7 @@ const declarations = [
   declarations: [...declarations],
   providers: [],
   exports: [...declarations],
-  entryComponents: [WelcomeDialogComponent]
+  entryComponents: [WelcomeDialogComponent, LanguageChangeSnackbarComponent]
 })
 export class CoreModule {
   constructor(

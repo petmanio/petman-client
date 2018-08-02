@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+
+  mat-icon {
+    cursor: pointer;
+    margin-left: 20px;
+  }
+}

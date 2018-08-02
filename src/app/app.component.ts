@@ -26,6 +26,7 @@ import { LocalStorageService } from '@shared/services/local-storage/local-storag
 
 import { TranslateService } from '@translate/translate.service';
 import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
+import { LanguageChangeSnackbarComponent } from '@core/language-change-snackbar/language-change-snackbar.component';
 import { CleanError } from '@shared/actions/shared.actions';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
 import { Geolocation } from '@user/actions/user.actions';
@@ -251,6 +252,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const languageChangeAsked = this.localStorageService.getItem(
       'languageChangeSnackBarShowed'
     );
+
     if (isPlatformBrowser(this.platformId) && !languageChangeAsked) {
       this.geolocationCountry$
         .pipe(
@@ -259,15 +261,14 @@ export class AppComponent implements OnInit, OnDestroy {
           tap(country => {
             if (country === 'AM' && this.currentLanguage !== 'hy') {
               this.snackBar
-                .open(
-                  'Ողջույն, ցանկանում ե՞ք կայքի լեզուն փոխել հայերեն',
-                  'Այո',
-                  {
-                    duration: 10000,
-                    horizontalPosition: 'right',
-                    verticalPosition: 'top'
-                  }
-                )
+                .openFromComponent(LanguageChangeSnackbarComponent, {
+                  data: {
+                    text: 'Ողջույն, ցանկանում ե՞ք կայքի լեզուն փոխել հայերեն'
+                  },
+                  duration: 10000,
+                  horizontalPosition: 'right',
+                  verticalPosition: 'top'
+                })
                 .afterDismissed()
                 .subscribe(action => {
                   if (action.dismissedByAction) {
