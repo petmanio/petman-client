@@ -1,18 +1,31 @@
+import omitBy from 'lodash-es/omitBy';
+import isNil from 'lodash-es/isNil';
 import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
+  Inject,
+  ViewChild,
+  TemplateRef
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { takeWhile, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 
-import { ListQueryRequestDto, ModalSize, AdoptDto } from '@petman/common';
+import {
+  AdoptListQueryRequestDto,
+  ModalSize,
+  AdoptDto,
+  Gender,
+  PetType,
+  PetSize,
+  PetAge
+} from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
@@ -20,6 +33,9 @@ import { environment } from '@environments/environment';
 import { Config } from '@shared/components/card/card.component';
 import { List, More } from '@adopt/actions/adopt.actions';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Actions } from '@ngrx/effects';
+import { LayoutActionTypes } from '@app/actions/layout.actions';
 
 @Component({
   selector: 'app-adopt-list-page',
@@ -32,6 +48,11 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
   limit = 12;
   total: number;
   offset = 0;
+  filter: FormGroup;
+  PetType = PetType;
+  Gender = Gender;
+  PetAge = PetAge;
+  PetSize = PetSize;
   masonryOptions = {
     mobileFirst: true,
     columns: 1,
@@ -43,6 +64,7 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
       400: 1
     }
   };
+  @ViewChild('mobileFilters') mobileFilters: TemplateRef<any>;
   list$ = this.store.select(fromAdopt.getAll);
   total$ = this.store.select(fromAdopt.getTotal);
   isListLoaded$ = this.store.select(fromAdopt.getIsListLoaded);
@@ -55,35 +77,64 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     private store: Store<fromAdopt.State>,
+    private actions$: Actions,
     private translateService: TranslateService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
-    const listSubscription = this.list$.subscribe(list => {
-      this.list = list;
-      this.offset = Math.max(0, this.list.length - this.limit);
-    });
+    // const listSubscription = this.list$.subscribe(list => {
+    //   this.list = list;
+    //   this.offset = Math.max(0, this.list.length - this.limit);
+    // });
+
     const totalSubscription = this.total$.subscribe(
       total => (this.total = total)
     );
 
-    this.isListLoaded$
+    this.filter = this.formBuilder.group({
+      type: [''],
+      gender: [''],
+      age: [''],
+      size: ['']
+    });
+
+    const filterSubscription = this.filter.valueChanges.subscribe(value => {
+      this.limit = 12;
+      this.offset = 0;
+      this.store.dispatch(new List(this.listRequest));
+    });
+
+    this.store.dispatch(new List(this.listRequest));
+    // this.isListLoaded$
+    //   .pipe(
+    //     takeWhile(loaded => !loaded),
+    //     tap(() => this.store.dispatch(new List(this.listRequest)))
+    //   )
+    //   .subscribe();
+
+    const openMobileFiltersSubscription = this.actions$
+      .ofType(LayoutActionTypes.OPEN_MOBILE_FILTERS)
       .pipe(
-        takeWhile(loaded => !loaded),
-        tap(() => this.store.dispatch(new List(this.listRequest)))
+        tap(() => {
+          this.dialog.open(this.mobileFilters);
+        })
       )
       .subscribe();
 
-    this.subscriptions.push(...[listSubscription, totalSubscription]);
+    this.subscriptions.push(
+      ...[totalSubscription, openMobileFiltersSubscription, filterSubscription]
+    );
   }
 
   get canLoadMore(): boolean {
     return this.offset + this.limit < this.total;
   }
 
-  private get listRequest(): ListQueryRequestDto {
+  private get listRequest(): AdoptListQueryRequestDto {
     return {
       offset: this.offset,
-      limit: this.limit
+      limit: this.limit,
+      ...omitBy<AdoptListQueryRequestDto>(this.filter.value, isNil)
     };
   }
 

@@ -12,6 +12,18 @@
       <div class="column">
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
+            <p class="has-text-right">
+              <span *ngIf="adopt.type">{{'TYPE' | translate}} - {{adopt.type | translate}}
+                <br>
+              </span>
+              <span *ngIf="adopt.gender">{{'GENDER' | translate}} - {{adopt.gender | translate}}
+                <br>
+              </span>
+              <span *ngIf="adopt.age">{{'AGE' | translate}} - {{adopt.age | translate}}
+                <br>
+              </span>
+              <span *ngIf="adopt.size">{{'SIZE' | translate}} - {{adopt.size | translate}}</span>
+            </p>
             <p *ngIf="!(adopt?.description | appIsHtml)">{{adopt?.description}}</p>
             <div *ngIf="adopt?.description | appIsHtml" class="ql-editor" [innerHTML]="adopt?.description | appSafeHtml"></div>
           </div>

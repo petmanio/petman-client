@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
 import {
-  ListQueryRequestDto,
+  AdoptListQueryRequestDto,
   AdoptDto,
   AdoptListResponseDto,
   AdoptRequestDto
@@ -33,7 +33,9 @@ export enum AdoptActionTypes {
   MORE_SUCCESS = '[Adopt] More success',
   MORE_FAILURE = '[Adopt] More failure',
 
-  SELECT = '[Adopt] Select'
+  SELECT = '[Adopt] Select',
+
+  SET_FILTERS = '[Adopt] Set filters'
 }
 
 /**
@@ -126,7 +128,7 @@ export class LoadFailure implements Action {
 export class List implements Action {
   readonly type = AdoptActionTypes.LIST;
 
-  constructor(public payload: ListQueryRequestDto) {}
+  constructor(public payload: AdoptListQueryRequestDto) {}
 }
 
 export class ListSuccess implements Action {
@@ -147,7 +149,7 @@ export class ListFailure implements Action {
 export class More implements Action {
   readonly type = AdoptActionTypes.MORE;
 
-  constructor(public payload: ListQueryRequestDto) {}
+  constructor(public payload: AdoptListQueryRequestDto) {}
 }
 
 export class MoreSuccess implements Action {
@@ -171,6 +173,12 @@ export class Select implements Action {
   constructor(public payload: number) {}
 }
 
+export class SetFilters implements Action {
+  readonly type = AdoptActionTypes.SET_FILTERS;
+
+  constructor(public payload: AdoptListQueryRequestDto) {}
+}
+
 export type AdoptActions =
   | Create
   | CreateSuccess
@@ -190,4 +198,5 @@ export type AdoptActions =
   | More
   | MoreSuccess
   | MoreFailure
-  | Select;
+  | Select
+  | SetFilters;

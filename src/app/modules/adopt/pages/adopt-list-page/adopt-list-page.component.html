@@ -1,12 +1,76 @@
 <div class="pm-full-loader">
   <div *tdLoading="let item until (isListLoaded$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
-    <div infinite-scroll
-         infiniteScrollContainer="mat-sidenav-content"
-         infiniteScrollDistance="2"
-         infiniteScrollThrottle="300"
-         fromRoot="true"
-         (scrolled)="onLoadMore()">
+    <div infinite-scroll infiniteScrollContainer="mat-sidenav-content" infiniteScrollDistance="2" infiniteScrollThrottle="300"
+      fromRoot="true" (scrolled)="onLoadMore()">
       <div>
+        <ng-template #mobileFilters>
+          <!-- <h2 matDialogTitle>{{'ADOPT_FILTER_MOBILE_HEADER' | translate}}</h2> -->
+          <mat-dialog-content>
+            <div class="pm-filters">
+              <form [formGroup]="filter">
+                <mat-form-field class="pm-filter-options">
+                  <mat-select formControlName='type' multiple="true" [placeholder]="'TYPE' | translate">
+                    <mat-option [value]="item.value" *ngFor="let item of PetType | appKeys">{{ item.value | translate }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="pm-filter-options">
+                  <mat-select formControlName='gender' multiple="true" [placeholder]="'GENDER' | translate">
+                    <mat-option [value]="item.value" *ngFor="let item of Gender | appKeys">{{ item.value | translate }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="pm-filter-options">
+                  <mat-select formControlName='age' multiple="true" [placeholder]="'AGE' | translate">
+                    <mat-option [value]="item.value" *ngFor="let item of PetAge | appKeys">{{ item.value | translate }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="pm-filter-options">
+                  <mat-select formControlName='size' multiple="true" [placeholder]="'SIZE' | translate">
+                    <mat-option [value]="item.value" *ngFor="let item of PetSize | appKeys">{{ item.value | translate }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </form>
+            </div>
+          </mat-dialog-content>
+          <mat-dialog-actions align="end">
+            <button mat-raised-button (click)="filter.reset()">{{'RESET' | translate}}</button>
+            <button mat-raised-button matDialogClose>{{'CLOSE' | translate}}</button>
+          </mat-dialog-actions>
+        </ng-template>
+
+        <div class="is-hidden-touch pm-filters">
+          <form [formGroup]="filter">
+            <mat-form-field class="pm-filter-options">
+              <mat-select formControlName='type' multiple="true" [placeholder]="'TYPE' | translate">
+                <mat-option [value]="item.value" *ngFor="let item of PetType | appKeys">{{ item.value | translate }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="pm-filter-options">
+              <mat-select formControlName='gender' multiple="true" [placeholder]="'GENDER' | translate">
+                <mat-option [value]="item.value" *ngFor="let item of Gender | appKeys">{{ item.value | translate }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="pm-filter-options">
+              <mat-select formControlName='age' multiple="true" [placeholder]="'AGE' | translate">
+                <mat-option [value]="item.value" *ngFor="let item of PetAge | appKeys">{{ item.value | translate }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="pm-filter-options">
+              <mat-select formControlName='size' multiple="true" [placeholder]="'SIZE' | translate">
+                <mat-option [value]="item.value" *ngFor="let item of PetSize | appKeys">{{ item.value | translate }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-icon-button (click)="filter.reset()">
+              <mat-icon>clear_all</mat-icon>
+            </button>
+          </form>
+        </div>
         <app-masonry [options]="masonryOptions">
           <app-masonry-item>
             <a [routerLink]="['/adoption', 'add']">

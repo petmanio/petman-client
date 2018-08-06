@@ -8,6 +8,9 @@
   <div flex></div>
   <!--<td-search-box placeholder="Search" [alwaysVisible]="false" flex></td-search-box>-->
   <span class="pm-spacer" flex></span>
+  <button *ngIf="showMobileFilterIcon" class="is-hidden-desktop" mat-icon-button (click)="openMobileFilters.emit()">
+    <mat-icon>filter_list</mat-icon>
+  </button>
   <ng-container *ngIf="loggedIn; else unauthorized">
     <!--<td-notification-count color="warn">-->
     <!--<mat-icon>messages</mat-icon>-->
@@ -35,7 +38,7 @@
     <!--</button>-->
     <!--</td-menu>-->
     <!--</mat-menu>-->
-    <span class="is-hidden-mobile cp" [matMenuTriggerFor]="menu">{{selectedUser?.userData.firstName}}&nbsp;</span>
+    <span class="is-hidden-touch cp" [matMenuTriggerFor]="menu">{{selectedUser?.userData.firstName}}&nbsp;</span>
     <div class="pm-card-avatar pm-cursor-pointer" [matMenuTriggerFor]="menu" [ngStyle]="{'background-image': 'url(' + selectedUser?.userData.avatar + ')'}"></div>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
       <button mat-menu-item [routerLink]="['/users', selectedUser?.id]">

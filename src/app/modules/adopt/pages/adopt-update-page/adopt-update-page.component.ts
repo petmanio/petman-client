@@ -5,7 +5,14 @@ import { MatDialog } from '@angular/material';
 import { map, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
-import { ModalSize, AdoptDto } from '@petman/common';
+import {
+  ModalSize,
+  AdoptDto,
+  Gender,
+  PetType,
+  PetSize,
+  PetAge
+} from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
@@ -23,6 +30,10 @@ export class AdoptUpdatePageComponent {
   form: FormGroup;
   adopt: AdoptDto;
   quillModules = SharedService.quillModules;
+  PetType = PetType;
+  Gender = Gender;
+  PetAge = PetAge;
+  PetSize = PetSize;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.pipe(select(fromAdopt.getAdoptUpdatePagePending));
   error$ = this.store.pipe(select(fromAdopt.getAdoptUpdatePageError));
@@ -54,6 +65,10 @@ export class AdoptUpdatePageComponent {
 
   private get formConfig(): FormGroup {
     return this.formBuilder.group({
+      type: [this.adopt.type, Validators.required],
+      gender: [this.adopt.gender],
+      age: [this.adopt.age],
+      size: [this.adopt.size],
       description: [
         this.adopt.description,
         Validators.compose([

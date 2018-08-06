@@ -148,5 +148,29 @@
   "YES": "Yes",
   "CLINIC": "Clinic",
   "PET_FRIENDLY_CAFE": "Pet friendly cafe",
-  "PET_SALON": "Pet salon"
+  "PET_SALON": "Pet salon",
+  "DOG": "Dog",
+  "CAT": "Cat",
+  "OTHER": "Other",
+  "PLURAL": {
+    "DOG": "Dogs",
+    "CAT": "Cats",
+    "OTHER": "Other"
+  },
+  "SMALL": "Small",
+  "MEDIUM": "Medium",
+  "LARGE": "Large",
+  "XL": "XL",
+  "BABY": "Baby",
+  "YOUNG": "Young",
+  "ADULT": "Adult",
+  "SENIOR": "Senior",
+  "TYPE": "Type",
+  "GENDER": "Gender",
+  "AGE": "Age",
+  "SIZE": "Size",
+  "RESET": "Reset",
+  "PLEASE_FILL_FOR_BETTER_SEARCH": "",
+  "MALE": "Male",
+  "FEMALE": "Female"
 }

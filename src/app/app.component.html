@@ -1,6 +1,7 @@
 <ng-progress thick="true" color="#6fb5fc"></ng-progress>
 <app-toolbar [loggedIn]="(loggedIn$ | async)" [selectedUser]="(selectedUser$ | async)" [redirectAfterSignUp]="redirectAfterSignUp"
-  [hideSignUpButton]="hideSignUpButton" (logOut)="logOut()" (toggleMenu)="toggleSidenav($event)">
+  [hideSignUpButton]="hideSignUpButton" [showMobileFilterIcon]="showMobileFilterIcon" (logOut)="logOut()" (toggleMenu)="toggleSidenav($event)"
+  (openMobileFilters)="openMobileFilters()">
 </app-toolbar>
 <app-sidenav [opened]="sideNavState" [mode]="sideNavMode" [user]="user$ | async" [selectedUser]="selectedUser$ | async" (selectedUserChange)="selectedUserChange($event)"
   (openedChange)="openedChange($event)" (open)="openSideNav()" (close)="closeSideNav()">

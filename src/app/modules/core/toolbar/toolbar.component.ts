@@ -19,8 +19,10 @@ export class ToolbarComponent {
   @Input() selectedUser: UserDto;
   @Input() redirectAfterSignUp: string;
   @Input() hideSignUpButton: string;
+  @Input() showMobileFilterIcon: boolean;
   @Output() logOut = new EventEmitter();
   @Output() toggleMenu = new EventEmitter();
+  @Output() openMobileFilters = new EventEmitter();
 
   Language = Language;
 

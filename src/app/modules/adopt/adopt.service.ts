@@ -1,4 +1,5 @@
 import forEach from 'lodash-es/forEach';
+import omit from 'lodash-es/omit';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
@@ -7,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 
 import {
-  ListQueryRequestDto,
+  AdoptListQueryRequestDto,
   AdoptDto,
   AdoptListResponseDto,
   AdoptRequestDto
@@ -29,7 +30,12 @@ export class AdoptService {
     let formData: FormData;
     if (isPlatformBrowser(this.platformId)) {
       formData = new FormData();
-      formData.append('description', body.description);
+
+      forEach(omit(body, 'images'), (value, key) => {
+        if (value) {
+          formData.append(key, value);
+        }
+      });
 
       if (body.images instanceof FileList) {
         forEach(body.images, file =>
@@ -52,7 +58,12 @@ export class AdoptService {
     let formData: FormData;
     if (isPlatformBrowser(this.platformId)) {
       formData = new FormData();
-      formData.append('description', body.description);
+
+      forEach(omit(body, 'images'), (value, key) => {
+        if (value) {
+          formData.append(key, value);
+        }
+      });
 
       if (body.images instanceof FileList) {
         forEach(body.images as any, file =>
@@ -93,7 +104,7 @@ export class AdoptService {
       );
   }
 
-  list(query: ListQueryRequestDto): Observable<AdoptListResponseDto> {
+  list(query: AdoptListQueryRequestDto): Observable<AdoptListResponseDto> {
     return this.http
       .get<AdoptListResponseDto>(`${environment.api}/api/adoption`, {
         params: <any>query

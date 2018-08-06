@@ -11,15 +11,31 @@ import { AdoptDetailsPageComponent } from '@adopt/pages/adopt-details-page/adopt
 import { AdoptUpdatePageComponent } from '@adopt/pages/adopt-update-page/adopt-update-page.component';
 
 export const routes: Routes = [
-  { path: '', component: AdoptListPageComponent, pathMatch: 'full' },
-  { path: 'add', component: AdoptCreatePageComponent, canActivate: [AuthGuard] },
-  { path: ':id', component: AdoptDetailsPageComponent, canActivate: [AdoptExistsGuard] },
-  { path: ':id/edit', component: AdoptUpdatePageComponent, canActivate: [AuthGuard, AdoptExistsGuard, AdoptOwnerGuard] }
+  {
+    path: '',
+    component: AdoptListPageComponent,
+    pathMatch: 'full',
+    data: { showMobileFilterIcon: true }
+  },
+  {
+    path: 'add',
+    component: AdoptCreatePageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ':id',
+    component: AdoptDetailsPageComponent,
+    canActivate: [AdoptExistsGuard]
+  },
+  {
+    path: ':id/edit',
+    component: AdoptUpdatePageComponent,
+    canActivate: [AuthGuard, AdoptExistsGuard, AdoptOwnerGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdoptRoutingModule {
-}
+export class AdoptRoutingModule {}

@@ -31,7 +31,11 @@ import { CleanError } from '@shared/actions/shared.actions';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
 import { Geolocation } from '@user/actions/user.actions';
 import { Categories } from '@poi/actions/poi.actions';
-import { CloseSidenav, OpenSidenav } from '@app/actions/layout.actions';
+import {
+  CloseSidenav,
+  OpenSidenav,
+  OpenMobileFilters
+} from '@app/actions/layout.actions';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +45,8 @@ import { CloseSidenav, OpenSidenav } from '@app/actions/layout.actions';
 })
 export class AppComponent implements OnInit, OnDestroy {
   hideFooter = false;
-  sideNavMode: 'side' | 'push' = 'side';
+  showMobileFilterIcon = false;
+  sideNavMode: 'side' | 'over' = 'side';
   sideNavState: boolean;
   currentLanguage: string;
   selectedUser: UserDto;
@@ -119,7 +124,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.breakpointObserver.observe([Breakpoints.Web])
     ).subscribe(event => {
       const [active, breakpoint] = event;
-      this.sideNavMode = breakpoint.matches ? 'side' : 'push';
+      this.sideNavMode = breakpoint.matches ? 'side' : 'over';
       if (active instanceof NavigationEnd) {
         this.store.dispatch(new CleanError());
 
@@ -158,6 +163,11 @@ export class AppComponent implements OnInit, OnDestroy {
         this.hideFooter = UtilService.getRouteDataByKey(
           this.activatedRoute,
           'hideFooter'
+        );
+
+        this.showMobileFilterIcon = UtilService.getRouteDataByKey(
+          this.activatedRoute,
+          'showMobileFilterIcon'
         );
 
         this.hideSignUpButton = UtilService.getRouteDataByKey(
@@ -210,6 +220,10 @@ export class AppComponent implements OnInit, OnDestroy {
     } else {
       this.closeSideNav();
     }
+  }
+
+  openMobileFilters() {
+    this.store.dispatch(new OpenMobileFilters());
   }
 
   changeLanguage(langCode: string) {

@@ -12,7 +12,14 @@ import { Actions } from '@ngrx/effects';
 import { take, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
-import { ModalSize, UserDto } from '@petman/common';
+import {
+  ModalSize,
+  UserDto,
+  Gender,
+  PetType,
+  PetSize,
+  PetAge
+} from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
@@ -34,6 +41,10 @@ export class AdoptCreatePageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   selectedUser: UserDto;
   quillModules = SharedService.quillModules;
+  PetType = PetType;
+  Gender = Gender;
+  PetAge = PetAge;
+  PetSize = PetSize;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.select(fromAdopt.getAdoptCreatePagePending);
   error$ = this.store.select(fromAdopt.getAdoptCreatePageError);
@@ -46,6 +57,10 @@ export class AdoptCreatePageComponent implements OnInit, OnDestroy {
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
     this.form = this.formBuilder.group({
+      type: ['', Validators.required],
+      gender: [''],
+      age: [''],
+      size: [''],
       description: [
         '',
         Validators.compose([
