@@ -11,6 +11,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatDialog, MatSnackBar } from '@angular/material';
+// TODO: change inport, rxjs is blacklisted
 import { combineLatest, Subscription } from 'rxjs';
 import { delay, tap, filter, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
@@ -31,11 +32,7 @@ import { CleanError } from '@shared/actions/shared.actions';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
 import { Geolocation } from '@user/actions/user.actions';
 import { Categories } from '@poi/actions/poi.actions';
-import {
-  CloseSidenav,
-  OpenSidenav,
-  OpenMobileFilters
-} from '@app/actions/layout.actions';
+import { CloseSidenav, OpenSidenav, OpenMobileFilters } from '@app/actions/layout.actions';
 
 @Component({
   selector: 'app-root',
@@ -97,13 +94,8 @@ export class AppComponent implements OnInit, OnDestroy {
         tap((selectedUser: UserDto) => {
           this.selectedUser = selectedUser;
           if (this.selectedUser) {
-            const selectedUserIdFromStorage = this.localStorageService.getItem(
-              'selectedUserId'
-            );
-            if (
-              selectedUserIdFromStorage &&
-              selectedUserIdFromStorage !== this.selectedUser.id
-            ) {
+            const selectedUserIdFromStorage = this.localStorageService.getItem('selectedUserId');
+            if (selectedUserIdFromStorage && selectedUserIdFromStorage !== this.selectedUser.id) {
               this.store.dispatch(new ChangeUser(selectedUserIdFromStorage));
             }
           }
@@ -129,14 +121,10 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.dispatch(new CleanError());
 
         this.redirectAfterSignUp =
-          ['/', '/404'].indexOf(active.urlAfterRedirects) === -1
-            ? active.urlAfterRedirects
-            : null;
+          ['/', '/404'].indexOf(active.urlAfterRedirects) === -1 ? active.urlAfterRedirects : null;
 
         if (isPlatformBrowser(this.platformId)) {
-          const matDrawerContent = document.querySelector(
-            '.mat-drawer-content'
-          );
+          const matDrawerContent = document.querySelector('.mat-drawer-content');
           if (matDrawerContent) {
             matDrawerContent.scrollTo(0, 0);
           }
@@ -147,10 +135,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }
 
         // const showSidenav = this.activatedRoute.data['showSidenav'];
-        const showSidenav = UtilService.getRouteDataByKey(
-          this.activatedRoute,
-          'showSidenav'
-        );
+        const showSidenav = UtilService.getRouteDataByKey(this.activatedRoute, 'showSidenav');
 
         if (typeof showSidenav !== 'undefined') {
           if (showSidenav && breakpoint.matches) {
@@ -160,30 +145,15 @@ export class AppComponent implements OnInit, OnDestroy {
           }
         }
 
-        this.hideFooter = UtilService.getRouteDataByKey(
-          this.activatedRoute,
-          'hideFooter'
-        );
+        this.hideFooter = UtilService.getRouteDataByKey(this.activatedRoute, 'hideFooter');
 
-        this.showMobileFilterIcon = UtilService.getRouteDataByKey(
-          this.activatedRoute,
-          'showMobileFilterIcon'
-        );
+        this.showMobileFilterIcon = UtilService.getRouteDataByKey(this.activatedRoute, 'showMobileFilterIcon');
 
-        this.hideSignUpButton = UtilService.getRouteDataByKey(
-          this.activatedRoute,
-          'hideSignUpButton'
-        );
+        this.hideSignUpButton = UtilService.getRouteDataByKey(this.activatedRoute, 'hideSignUpButton');
       }
     });
 
-    this.subscriptions.push(
-      ...[
-        selectedUserSubscription,
-        sidenavSubscription,
-        routerBreakpointSubscription
-      ]
-    );
+    this.subscriptions.push(...[selectedUserSubscription, sidenavSubscription, routerBreakpointSubscription]);
   }
 
   ngOnDestroy() {
@@ -229,10 +199,7 @@ export class AppComponent implements OnInit, OnDestroy {
   changeLanguage(langCode: string) {
     this.translateService.changeLang(langCode);
 
-    const metaSettings = UtilService.getRouteDataByKey(
-      this.activatedRoute,
-      'meta'
-    );
+    const metaSettings = UtilService.getRouteDataByKey(this.activatedRoute, 'meta');
     this.meta.update(this.router.url, metaSettings);
 
     this.currentLanguage = this.translateService.getCurrentLang();
@@ -246,10 +213,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private welcomeDialog() {
     if (isPlatformBrowser(this.platformId)) {
       // TODO: use effect init and user$ observable
-      if (
-        !this.localStorageService.getItem('welcomeDialogShowed') &&
-        !this.localStorageService.getItem('token')
-      ) {
+      if (!this.localStorageService.getItem('welcomeDialogShowed') && !this.localStorageService.getItem('token')) {
         setTimeout(() => {
           const dialogRef = this.dialog.open(WelcomeDialogComponent, {
             width: '90%'
@@ -263,9 +227,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private languageChangeSnackBar() {
-    const languageChangeAsked = this.localStorageService.getItem(
-      'languageChangeSnackBarShowed'
-    );
+    const languageChangeAsked = this.localStorageService.getItem('languageChangeSnackBarShowed');
 
     if (isPlatformBrowser(this.platformId) && !languageChangeAsked) {
       this.geolocationCountry$
@@ -288,10 +250,7 @@ export class AppComponent implements OnInit, OnDestroy {
                   if (action.dismissedByAction) {
                     this.changeLanguage('hy');
                   }
-                  this.localStorageService.setItem(
-                    'languageChangeSnackBarShowed',
-                    true
-                  );
+                  this.localStorageService.setItem('languageChangeSnackBarShowed', true);
                 });
             }
           }),
