@@ -15,12 +15,15 @@
     </div>
     <div class="columns">
       <div class="column">
+        <p class="has-text-centered has-text-grey is-size-4 is-size-6-touch">{{'DESCRIPTION' | translate}}</p>
+        <br>
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
             <p *ngIf="!(sitter?.description | appIsHtml)">{{sitter?.description}}</p>
             <div *ngIf="sitter?.description | appIsHtml" class="ql-editor" [innerHTML]="sitter?.description | appSafeHtml"></div>
           </div>
         </blockquote>
+        <br>
         <div class="field is-grouped">
           <p class="control pm-m-left-auto">
             <button color="primary" mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>

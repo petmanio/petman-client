@@ -10,24 +10,24 @@
     </div>
     <div class="columns">
       <div class="column">
+        <p class="has-text-centered has-text-grey is-size-4 is-size-6-touch">{{'DESCRIPTION' | translate}}</p>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <p class="has-text-left" *ngIf="adopt.type || adopt.gender || adopt.age || adopt.size">
+          <span *ngIf="adopt.type">{{'TYPE' | translate}} - {{adopt.type | translate}}<br></span>
+          <span *ngIf="adopt.gender">{{'GENDER' | translate}} - {{adopt.gender | translate}}<br></span>
+          <span *ngIf="adopt.age">{{'AGE' | translate}} - {{adopt.age | translate}}<br></span>
+          <span *ngIf="adopt.size">{{'SIZE' | translate}} - {{adopt.size | translate}}</span>
+          <br>
+        </p>
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
-            <p class="has-text-right">
-              <span *ngIf="adopt.type">{{'TYPE' | translate}} - {{adopt.type | translate}}
-                <br>
-              </span>
-              <span *ngIf="adopt.gender">{{'GENDER' | translate}} - {{adopt.gender | translate}}
-                <br>
-              </span>
-              <span *ngIf="adopt.age">{{'AGE' | translate}} - {{adopt.age | translate}}
-                <br>
-              </span>
-              <span *ngIf="adopt.size">{{'SIZE' | translate}} - {{adopt.size | translate}}</span>
-            </p>
             <p *ngIf="!(adopt?.description | appIsHtml)">{{adopt?.description}}</p>
             <div *ngIf="adopt?.description | appIsHtml" class="ql-editor" [innerHTML]="adopt?.description | appSafeHtml"></div>
           </div>
         </blockquote>
+        <br>
         <div class="field is-grouped">
           <p class="control pm-m-left-auto">
             <button color="primary" mat-raised-button (click)="onShare()">{{ 'SHARE' | translate }}</button>

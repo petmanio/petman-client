@@ -8,7 +8,6 @@ import { AdoptActions, AdoptActionTypes } from '@adopt/actions/adopt.actions';
 export interface State extends EntityState<AdoptDto> {
   selectedId: number;
   total: number;
-  isListLoaded: boolean;
 }
 
 export const adapter: EntityAdapter<AdoptDto> = createEntityAdapter<AdoptDto>({
@@ -19,7 +18,6 @@ export const adapter: EntityAdapter<AdoptDto> = createEntityAdapter<AdoptDto>({
 export const initialState: State = adapter.getInitialState({
   selectedId: null,
   total: null,
-  isListLoaded: false
 });
 
 export function reducer(state = initialState, action: AdoptActions | AuthActions): State {
@@ -37,7 +35,7 @@ export function reducer(state = initialState, action: AdoptActions | AuthActions
       return { ...state, ...adapter.addOne(action.payload, state) };
 
     case AdoptActionTypes.LIST_SUCCESS:
-      return { ...state, ...adapter.addAll(action.payload.list, state), total: action.payload.total, isListLoaded: true };
+      return { ...state, ...adapter.addAll(action.payload.list, state), total: action.payload.total };
 
     case AdoptActionTypes.MORE_SUCCESS:
       return { ...state, ...adapter.addMany(action.payload.list, state), total: action.payload.total };
@@ -57,4 +55,3 @@ export function reducer(state = initialState, action: AdoptActions | AuthActions
 
 export const getSelectedId = (state: State) => state.selectedId;
 export const getTotal = (state: State) => state.total;
-export const getIsListLoaded = (state: State) => state.isListLoaded;

@@ -1,14 +1,6 @@
 import omitBy from 'lodash-es/omitBy';
 import isNil from 'lodash-es/isNil';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  Inject,
-  ViewChild,
-  TemplateRef
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -17,15 +9,7 @@ import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 
-import {
-  AdoptListQueryRequestDto,
-  ModalSize,
-  AdoptDto,
-  Gender,
-  PetType,
-  PetSize,
-  PetAge
-} from '@petman/common';
+import { AdoptListQueryRequestDto, ModalSize, AdoptDto, Gender, PetType, PetSize, PetAge } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
@@ -64,7 +48,8 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
       400: 1
     }
   };
-  @ViewChild('mobileFilters') mobileFilters: TemplateRef<any>;
+  @ViewChild('mobileFilters')
+  mobileFilters: TemplateRef<any>;
   list$ = this.store.select(fromAdopt.getAll);
   total$ = this.store.select(fromAdopt.getTotal);
   isListLoaded$ = this.store.select(fromAdopt.getIsListLoaded);
@@ -82,14 +67,7 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
     private datePipe: DatePipe,
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
-    // const listSubscription = this.list$.subscribe(list => {
-    //   this.list = list;
-    //   this.offset = Math.max(0, this.list.length - this.limit);
-    // });
-
-    const totalSubscription = this.total$.subscribe(
-      total => (this.total = total)
-    );
+    const totalSubscription = this.total$.subscribe(total => (this.total = total));
 
     this.filter = this.formBuilder.group({
       type: [''],
@@ -105,12 +83,6 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
     });
 
     this.store.dispatch(new List(this.listRequest));
-    // this.isListLoaded$
-    //   .pipe(
-    //     takeWhile(loaded => !loaded),
-    //     tap(() => this.store.dispatch(new List(this.listRequest)))
-    //   )
-    //   .subscribe();
 
     const openMobileFiltersSubscription = this.actions$
       .ofType(LayoutActionTypes.OPEN_MOBILE_FILTERS)
@@ -121,9 +93,7 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.subscriptions.push(
-      ...[totalSubscription, openMobileFiltersSubscription, filterSubscription]
-    );
+    this.subscriptions.push(...[totalSubscription, openMobileFiltersSubscription, filterSubscription]);
   }
 
   get canLoadMore(): boolean {
@@ -167,9 +137,7 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
   }
 
   onShare(adopt: AdoptDto) {
-    const url =
-      environment.origin +
-      this.router.createUrlTree(['adoption', adopt.id]).toString();
+    const url = environment.origin + this.router.createUrlTree(['adoption', adopt.id]).toString();
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,
       data: { url }
