@@ -10,8 +10,8 @@
           <mat-hint>{{'PLEASE_FILL_FOR_BETTER_SEARCH' | translate}}</mat-hint>
           <br>
           <mat-form-field class="pm-filter-options">
-            <mat-select formControlName='type' [placeholder]="'TYPE' | translate">
-              <mat-option (click)="form.get('type').reset()">{{'TYPE' | translate}}</mat-option>
+            <mat-select formControlName='type' [placeholder]="'PET_TYPE' | translate">
+              <mat-option (click)="form.get('type').reset()">{{'PET_TYPE' | translate}}</mat-option>
               <mat-option [value]="item.value" *ngFor="let item of PetType | appKeys">{{ item.value | translate }}</mat-option>
             </mat-select>
             <mat-hint>{{'REQUIRED' | translate}}</mat-hint>

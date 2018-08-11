@@ -5,14 +5,7 @@ import { MatDialog } from '@angular/material';
 import { map, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
-import {
-  ModalSize,
-  AdoptDto,
-  Gender,
-  PetType,
-  PetSize,
-  PetAge
-} from '@petman/common';
+import { ModalSize, AdoptDto, Gender, PetType, PetSize, PetAge } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
@@ -71,32 +64,17 @@ export class AdoptUpdatePageComponent {
       size: [this.adopt.size],
       description: [
         this.adopt.description,
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(100),
-          Validators.maxLength(1000)
-        ])
+        Validators.compose([Validators.required, Validators.minLength(100), Validators.maxLength(1000)])
       ],
       images: [
         this.adopt.images,
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(4)
-        ])
+        Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(4)])
       ]
     });
   }
 
-  onButtonToggleChange() {
-    const description = this.form.get('description');
-    description.reset(this.adopt.description);
-  }
-
   update() {
-    this.store.dispatch(
-      new Update({ id: this.adopt.id, body: this.form.value })
-    );
+    this.store.dispatch(new Update({ id: this.adopt.id, body: this.form.value }));
   }
 
   delete() {

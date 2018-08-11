@@ -1,5 +1,5 @@
-import omitBy from 'lodash-es/omitBy';
-import isNil from 'lodash-es/isNil';
+import pickBy from 'lodash-es/pickBy';
+import identity from 'lodash-es/identity';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -104,7 +104,7 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
     return {
       offset: this.offset,
       limit: this.limit,
-      ...omitBy<AdoptListQueryRequestDto>(this.filter.value, isNil)
+      ...pickBy<AdoptListQueryRequestDto>(this.filter.value, identity)
     };
   }
 

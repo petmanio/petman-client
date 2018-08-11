@@ -8,22 +8,18 @@
       </a>
     </div>
   </div>
-  <div *ngIf="user?.userData?.facebookUrl" class="columns is-marginless">
-    <div class="column is-paddingless has-text-left-desktop">{{'FACEBOOK' | translate}}</div>
-    <div class="column is-paddingless has-text-left-desktop text-overflow">
+  <div *ngIf="user?.userData?.facebookUrl">
+    <p>
+      <span class="has-text-grey is-lowercase">{{'FACEBOOK' | translate}}</span>
       <a class="control" target="_blank" [href]="user.userData.facebookUrl">
         {{user.userData.facebookUrl}}
       </a>
-    </div>
+    </p>
   </div>
-  <div *ngIf="user?.userData?.phoneNumber" class="columns is-marginless">
-    <div class="column is-paddingless has-text-left-desktop">{{'PHONE_NUMBER' | translate}}</div>
-    <div class="column is-paddingless has-text-left-desktop">{{user.userData.phoneNumber}}</div>
+  <div *ngIf="user?.userData?.phoneNumber">
+    <p class="has-text-centered"><span class="has-text-grey is-lowercase">{{'PHONE_NUMBER' | translate}}</span> {{user.userData.phoneNumber}}</p>
   </div>
 </ng-container>
 <ng-template #loginNote>
   <a class="has-text-grey-light" [routerLink]="['/auth/login']" [queryParams]="{next: redirectAfterSignUp}">{{"PLEASE_LOGIN_FOR_MORE_INFO" | translate}}</a>
 </ng-template>
-<br>
-<mat-divider></mat-divider>
-<br>

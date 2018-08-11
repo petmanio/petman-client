@@ -74,11 +74,6 @@ export class SitterUpdatePageComponent {
     });
   }
 
-  onButtonToggleChange() {
-    const description = this.form.get('description');
-    description.reset(this.sitter.description);
-  }
-
   update() {
     this.store.dispatch(
       new Update({ id: this.sitter.id, body: this.form.value })

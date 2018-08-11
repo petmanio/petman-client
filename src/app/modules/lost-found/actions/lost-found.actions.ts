@@ -1,12 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
-import {
-  ListQueryRequestDto,
-  LostFoundDto,
-  LostFoundListResponseDto,
-  LostFoundRequestDto
-} from '@petman/common';
+import { LostFoundListQueryRequestDto, LostFoundDto, LostFoundListResponseDto, LostFoundRequestDto } from '@petman/common';
 
 export enum LostFoundActionTypes {
   CREATE = '[LostFound] Create',
@@ -63,7 +58,7 @@ export class CreateFailure implements Action {
 export class Update implements Action {
   readonly type = LostFoundActionTypes.UPDATE;
 
-  constructor(public payload: { id: number; body: LostFoundDto }) {}
+  constructor(public payload: { id: number; body: LostFoundRequestDto }) {}
 }
 
 export class UpdateSuccess implements Action {
@@ -126,7 +121,7 @@ export class LoadFailure implements Action {
 export class List implements Action {
   readonly type = LostFoundActionTypes.LIST;
 
-  constructor(public payload: ListQueryRequestDto) {}
+  constructor(public payload: LostFoundListQueryRequestDto) {}
 }
 
 export class ListSuccess implements Action {
@@ -147,7 +142,7 @@ export class ListFailure implements Action {
 export class More implements Action {
   readonly type = LostFoundActionTypes.MORE;
 
-  constructor(public payload: ListQueryRequestDto) {}
+  constructor(public payload: LostFoundListQueryRequestDto) {}
 }
 
 export class MoreSuccess implements Action {

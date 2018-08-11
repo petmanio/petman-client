@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  OnInit,
-  OnDestroy
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { select, Store } from '@ngrx/store';
@@ -12,14 +6,11 @@ import { Actions } from '@ngrx/effects';
 import { take, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
-import { ModalSize, UserDto, LostFoundType } from '@petman/common';
+import { ModalSize, UserDto, LostFoundType, PetType, Gender, PetAge, PetSize } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromLostFound from '@lost-found/reducers';
-import {
-  Update as UserUpdate,
-  UserActionTypes
-} from '@user/actions/user.actions';
+import { Update as UserUpdate, UserActionTypes } from '@user/actions/user.actions';
 import { Create } from '@lost-found/actions/lost-found.actions';
 import { SharedService } from '@shared/services/shared/shared.service';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
@@ -35,6 +26,10 @@ export class LostFoundCreatePageComponent implements OnInit, OnDestroy {
   selectedUser: UserDto;
   quillModules = SharedService.quillModules;
   LostFoundType = LostFoundType;
+  PetType = PetType;
+  Gender = Gender;
+  PetAge = PetAge;
+  PetSize = PetSize;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.select(fromLostFound.getLostFoundCreatePagePending);
   error$ = this.store.select(fromLostFound.getLostFoundCreatePageError);
@@ -48,28 +43,19 @@ export class LostFoundCreatePageComponent implements OnInit, OnDestroy {
     @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
     this.form = this.formBuilder.group({
-      type: ['', Validators.required],
+      applicationType: ['', Validators.required],
+      type: [''],
+      gender: [''],
+      age: [''],
+      size: [''],
       description: [
         '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(100),
-          Validators.maxLength(1000)
-        ])
+        Validators.compose([Validators.required, Validators.minLength(100), Validators.maxLength(1000)])
       ],
-      images: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(4)
-        ])
-      ]
+      images: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(4)])]
     });
 
-    const selectedUserSubscription = this.selectedUser$.subscribe(
-      selectedUser => (this.selectedUser = selectedUser)
-    );
+    const selectedUserSubscription = this.selectedUser$.subscribe(selectedUser => (this.selectedUser = selectedUser));
 
     this.subscriptions.push(selectedUserSubscription);
   }
@@ -80,16 +66,8 @@ export class LostFoundCreatePageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  onButtonToggleChange() {
-    const description = this.form.get('description');
-    description.reset();
-  }
-
   create() {
-    if (
-      this.selectedUser.userData.phoneNumber ||
-      this.selectedUser.userData.facebookUrl
-    ) {
+    if (this.selectedUser.userData.phoneNumber || this.selectedUser.userData.facebookUrl) {
       this.store.dispatch(new Create(this.form.value));
     } else {
       const dialogRef = this.dialog.open(UserDetailsUpdateDialogComponent, {
@@ -118,10 +96,7 @@ export class LostFoundCreatePageComponent implements OnInit, OnDestroy {
           .ofType(UserActionTypes.UPDATE_SUCCESS)
           .pipe(
             tap(() => {
-              if (
-                this.selectedUser.userData.phoneNumber ||
-                this.selectedUser.userData.facebookUrl
-              ) {
+              if (this.selectedUser.userData.phoneNumber || this.selectedUser.userData.facebookUrl) {
                 this.store.dispatch(new Create(this.form.value));
               }
             }),

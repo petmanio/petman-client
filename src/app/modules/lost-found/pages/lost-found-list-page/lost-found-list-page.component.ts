@@ -1,22 +1,31 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit
-} from '@angular/core';
+import pickBy from 'lodash-es/pickBy';
+import identity from 'lodash-es/identity';
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { takeWhile, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { Actions } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 
-import { ListQueryRequestDto, ModalSize, LostFoundDto } from '@petman/common';
+import {
+  Gender,
+  LostFoundDto,
+  LostFoundListQueryRequestDto,
+  LostFoundType,
+  ModalSize,
+  PetAge,
+  PetSize,
+  PetType
+} from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromLostFound from '@lost-found/reducers';
 import { environment } from '@environments/environment';
+import { LayoutActionTypes } from '@app/actions/layout.actions';
 import { Config } from '@shared/components/card/card.component';
 import { List, More } from '@lost-found/actions/lost-found.actions';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
@@ -32,6 +41,12 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
   limit = 12;
   total: number;
   offset = 0;
+  filter: FormGroup;
+  PetType = PetType;
+  Gender = Gender;
+  PetAge = PetAge;
+  PetSize = PetSize;
+  LostFoundType = LostFoundType;
   masonryOptions = {
     mobileFirst: true,
     columns: 1,
@@ -43,6 +58,8 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
       400: 1
     }
   };
+  @ViewChild('mobileFilters')
+  mobileFilters: TemplateRef<any>;
   list$ = this.store.select(fromLostFound.getAll);
   total$ = this.store.select(fromLostFound.getTotal);
   isListLoaded$ = this.store.select(fromLostFound.getIsListLoaded);
@@ -55,35 +72,50 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     private store: Store<fromLostFound.State>,
+    private actions$: Actions,
     private translateService: TranslateService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    @Inject(FormBuilder) private formBuilder: FormBuilder
   ) {
-    const listSubscription = this.list$.subscribe(list => {
-      this.list = list;
-      this.offset = Math.max(0, this.list.length - this.limit);
-    });
-    const totalSubscription = this.total$.subscribe(
-      total => (this.total = total)
-    );
+    const totalSubscription = this.total$.subscribe(total => (this.total = total));
 
-    this.isListLoaded$
+    this.filter = this.formBuilder.group({
+      applicationType: [''],
+      type: [''],
+      gender: [''],
+      age: [''],
+      size: ['']
+    });
+
+    const filterSubscription = this.filter.valueChanges.subscribe(value => {
+      this.limit = 12;
+      this.offset = 0;
+      this.store.dispatch(new List(this.listRequest));
+    });
+
+    this.store.dispatch(new List(this.listRequest));
+
+    const openMobileFiltersSubscription = this.actions$
+      .ofType(LayoutActionTypes.OPEN_MOBILE_FILTERS)
       .pipe(
-        takeWhile(loaded => !loaded),
-        tap(() => this.store.dispatch(new List(this.listRequest)))
+        tap(() => {
+          this.dialog.open(this.mobileFilters);
+        })
       )
       .subscribe();
 
-    this.subscriptions.push(...[listSubscription, totalSubscription]);
+    this.subscriptions.push(...[totalSubscription, openMobileFiltersSubscription, filterSubscription]);
   }
 
   get canLoadMore(): boolean {
     return this.offset + this.limit < this.total;
   }
 
-  private get listRequest(): ListQueryRequestDto {
+  private get listRequest(): LostFoundListQueryRequestDto {
     return {
       offset: this.offset,
-      limit: this.limit
+      limit: this.limit,
+      ...pickBy<LostFoundListQueryRequestDto>(this.filter.value, identity)
     };
   }
 
@@ -98,7 +130,7 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
       avatar: item.user.userData.avatar,
       title: item.user.userData.name,
       subtitle: `<span class="has-text-warning">${this.translateService.instant(
-        item.type
+        item.applicationType
       )}</span> ${this.datePipe.transform(item.created)}`,
       image: item.images && item.images[0],
       content: item.description,
@@ -118,9 +150,7 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
   }
 
   onShare(lostFound: LostFoundDto) {
-    const url =
-      environment.origin +
-      this.router.createUrlTree(['lost-found', lostFound.id]).toString();
+    const url = environment.origin + this.router.createUrlTree(['lost-found', lostFound.id]).toString();
     const dialogRef = this.dialog.open(ShareDialogComponent, {
       width: ModalSize.MEDIUM,
       data: { url }

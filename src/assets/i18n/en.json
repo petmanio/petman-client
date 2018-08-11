@@ -172,5 +172,7 @@
   "RESET": "Reset",
   "PLEASE_FILL_FOR_BETTER_SEARCH": "",
   "MALE": "Male",
-  "FEMALE": "Female"
+  "FEMALE": "Female",
+  "PET_TYPE": "Pet type",
+  "ALL": "All"
 }

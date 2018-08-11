@@ -1,21 +1,23 @@
 <div class="columns is-marginless">
   <div class="column is-10 is-offset-1">
-    <div class="columns is-vcentered">
-      <div class="column is-3 has-text-centered">
-        <app-user-details [redirectAfterSignUp]="url" [loggedIn]="loggedIn$ | async" [isOwner]="(sitter$ | async)?.isOwner" [user]="(sitter$ | async)?.user"></app-user-details>
+    <div class="columns">
+      <div class="column is-4 has-text-centered">
+        <app-user-details style="margin-top: 50px"  [redirectAfterSignUp]="url" [loggedIn]="loggedIn$ | async" [isOwner]="(sitter$ | async)?.isOwner" [user]="(sitter$ | async)?.user"></app-user-details>
         <div>
           <fa-icon icon="money-bill-alt"></fa-icon>
           {{'DAILY_PRICE' | translate}}<br>
           <h5 class="is-lowercase has-text-info">{{(sitter$ | async)?.price | number}} {{ 'AMD' | translate }}</h5>
         </div>
       </div>
-      <div class="column is-9">
-        <app-mz-slider [slides]="slides" [options]="{ height: 500 }"></app-mz-slider>
+      <div class="column">
+        <app-mz-slider [slides]="slides" [options]="{ height: 400 }"></app-mz-slider>
       </div>
     </div>
     <div class="columns">
       <div class="column">
         <p class="has-text-centered has-text-grey is-size-4 is-size-6-touch">{{'DESCRIPTION' | translate}}</p>
+        <br>
+        <mat-divider></mat-divider>
         <br>
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>

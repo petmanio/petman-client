@@ -1,4 +1,5 @@
 import forEach from 'lodash-es/forEach';
+import omit from 'lodash-es/omit';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
@@ -6,12 +7,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 
-import {
-  ListQueryRequestDto,
-  LostFoundDto,
-  LostFoundListResponseDto,
-  LostFoundRequestDto
-} from '@petman/common';
+import { LostFoundListQueryRequestDto, LostFoundDto, LostFoundListResponseDto, LostFoundRequestDto } from '@petman/common';
 
 import { environment } from '@environments/environment';
 import { LostFoundModule } from '@lost-found/lost-found.module';
@@ -20,46 +16,43 @@ import { LostFoundModule } from '@lost-found/lost-found.module';
   providedIn: LostFoundModule
 })
 export class LostFoundService {
-  constructor(
-    @Inject(PLATFORM_ID) protected platformId: Object,
-    private http: HttpClient
-  ) {}
+  constructor(@Inject(PLATFORM_ID) protected platformId: Object, private http: HttpClient) {}
 
   create(body: LostFoundRequestDto): Observable<LostFoundDto> {
     let formData: FormData;
     if (isPlatformBrowser(this.platformId)) {
       formData = new FormData();
-      formData.append('description', body.description);
-      formData.append('type', body.type);
+
+      forEach(omit(body, 'images'), (value, key) => {
+        if (value) {
+          formData.append(key, value);
+        }
+      });
 
       if (body.images instanceof FileList) {
-        forEach(body.images, file =>
-          formData.append('images', file, file.name)
-        );
+        forEach(body.images, file => formData.append('images', file, file.name));
       } else if (body.images instanceof File) {
         formData.append('images', body.images, body.images.name);
       }
     }
     return this.http
       .post<LostFoundDto>(`${environment.api}/api/lost-found`, formData)
-      .pipe(
-        map(response =>
-          plainToClass(LostFoundDto, response, { groups: ['petman-client'] })
-        )
-      );
+      .pipe(map(response => plainToClass(LostFoundDto, response, { groups: ['petman-client'] })));
   }
 
   update(id, body: LostFoundRequestDto): Observable<LostFoundDto> {
     let formData: FormData;
     if (isPlatformBrowser(this.platformId)) {
       formData = new FormData();
-      formData.append('description', body.description);
-      formData.append('type', body.type);
+
+      forEach(omit(body, 'images'), (value, key) => {
+        if (value) {
+          formData.append(key, value);
+        }
+      });
 
       if (body.images instanceof FileList) {
-        forEach(body.images as any, file =>
-          formData.append('images', file, file.name)
-        );
+        forEach(body.images as any, file => formData.append('images', file, file.name));
       } else if (body.images instanceof File) {
         formData.append('images', body.images, body.images.name);
       } else {
@@ -74,11 +67,7 @@ export class LostFoundService {
     }
     return this.http
       .put<LostFoundDto>(`${environment.api}/api/lost-found/${id}`, formData)
-      .pipe(
-        map(response =>
-          plainToClass(LostFoundDto, response, { groups: ['petman-client'] })
-        )
-      );
+      .pipe(map(response => plainToClass(LostFoundDto, response, { groups: ['petman-client'] })));
   }
 
   delete(id: number): Observable<Object> {
@@ -88,14 +77,10 @@ export class LostFoundService {
   getById(id: number): Observable<LostFoundDto> {
     return this.http
       .get<LostFoundDto>(`${environment.api}/api/lost-found/${id}`)
-      .pipe(
-        map(response =>
-          plainToClass(LostFoundDto, response, { groups: ['petman-client'] })
-        )
-      );
+      .pipe(map(response => plainToClass(LostFoundDto, response, { groups: ['petman-client'] })));
   }
 
-  list(query: ListQueryRequestDto): Observable<LostFoundListResponseDto> {
+  list(query: LostFoundListQueryRequestDto): Observable<LostFoundListResponseDto> {
     return this.http
       .get<LostFoundListResponseDto>(`${environment.api}/api/lost-found`, {
         params: <any>query

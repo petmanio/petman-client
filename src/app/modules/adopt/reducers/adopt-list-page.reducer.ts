@@ -18,7 +18,7 @@ export const initialState: State = {
 export function reducer(state = initialState, action: AdoptActions | SharedActions): State {
   switch (action.type) {
     case AdoptActionTypes.LIST:
-      return { ...state, isListLoaded: false, error: null, pending: true };
+      return { ...state, error: null, pending: true };
 
     case AdoptActionTypes.MORE:
       return { ...state, error: null, pending: true };
@@ -29,7 +29,7 @@ export function reducer(state = initialState, action: AdoptActions | SharedActio
 
     case AdoptActionTypes.LIST_FAILURE:
     case AdoptActionTypes.MORE_FAILURE:
-      return { ...state, isListLoaded: false, error: action.payload, pending: false };
+      return { ...state, isListLoaded: true, error: action.payload, pending: false };
 
     case SharedActionTypes.CLEAN_ERROR:
       return initialState;

@@ -78,11 +78,6 @@ export class SitterCreatePageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  onButtonToggleChange() {
-    const description = this.form.get('description');
-    description.reset();
-  }
-
   create() {
     if (
       this.selectedUser.userData.phoneNumber ||

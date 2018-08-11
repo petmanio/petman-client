@@ -9,7 +9,7 @@
             <div class="pm-filters">
               <form [formGroup]="filter">
                 <mat-form-field class="pm-filter-options">
-                  <mat-select formControlName='type' multiple="true" [placeholder]="'TYPE' | translate">
+                  <mat-select formControlName='type' multiple="true" [placeholder]="'PET_TYPE' | translate">
                     <mat-option [value]="item.value" *ngFor="let item of PetType | appKeys">{{ item.value | translate }}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -43,7 +43,7 @@
         <div class="is-hidden-touch pm-filters">
           <form [formGroup]="filter">
             <mat-form-field class="pm-filter-options">
-              <mat-select formControlName='type' multiple="true" [placeholder]="'TYPE' | translate">
+              <mat-select formControlName='type' multiple="true" [placeholder]="'PET_TYPE' | translate">
                 <mat-option [value]="item.value" *ngFor="let item of PetType | appKeys">{{ item.value | translate }}</mat-option>
               </mat-select>
             </mat-form-field>

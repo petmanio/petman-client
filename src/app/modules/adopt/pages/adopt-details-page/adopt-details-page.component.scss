@@ -1,0 +1,9 @@
+@import '../../../../scss/mixins';
+
+mat-chip-list {
+  mat-chip:first-child {
+    @include desktop {
+      margin-left: auto;
+    }
+  }
+}

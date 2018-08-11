@@ -1,8 +1,4 @@
-import {
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector
-} from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromLostFound from '@lost-found/reducers/lost-found.reducer';
 import * as fromLostFoundListPage from '@lost-found/reducers/lost-found-list-page.reducer';
@@ -28,35 +24,18 @@ export const getLostFoundState = createFeatureSelector<State>('lost-found');
 /**
  * Entities
  */
-export const getEntitiesState = createSelector(
-  getLostFoundState,
-  state => state.lostFound
-);
-export const getSelectedId = createSelector(
-  getEntitiesState,
-  fromLostFound.getSelectedId
-);
-export const getTotal = createSelector(
-  getEntitiesState,
-  fromLostFound.getTotal
-);
-export const getIsListLoaded = createSelector(
-  getEntitiesState,
-  fromLostFound.getIsListLoaded
-);
+export const getEntitiesState = createSelector(getLostFoundState, state => state.lostFound);
+export const getSelectedId = createSelector(getEntitiesState, fromLostFound.getSelectedId);
+export const getTotal = createSelector(getEntitiesState, fromLostFound.getTotal);
 export const {
   selectIds: getIds,
   selectEntities: getEntities,
   selectAll: getAll,
   selectTotal: getTotalInStore
 } = fromLostFound.adapter.getSelectors(getEntitiesState);
-export const getSelected = createSelector(
-  getEntities,
-  getSelectedId,
-  (entities, selectedId) => {
-    return selectedId && entities[selectedId];
-  }
-);
+export const getSelected = createSelector(getEntities, getSelectedId, (entities, selectedId) => {
+  return selectedId && entities[selectedId];
+});
 
 /**
  * LostFound create page
@@ -93,15 +72,7 @@ export const getLostFoundUpdatePagePending = createSelector(
 /**
  * LostFound list Page
  */
-export const getLostFoundListPageState = createSelector(
-  getLostFoundState,
-  (state: State) => state.lostFoundListPage
-);
-export const getLostFoundListPageError = createSelector(
-  getLostFoundListPageState,
-  fromLostFoundListPage.getError
-);
-export const getLostFoundListPagePending = createSelector(
-  getLostFoundListPageState,
-  fromLostFoundListPage.getPending
-);
+export const getLostFoundListPageState = createSelector(getLostFoundState, (state: State) => state.lostFoundListPage);
+export const getLostFoundListPageError = createSelector(getLostFoundListPageState, fromLostFoundListPage.getError);
+export const getLostFoundListPagePending = createSelector(getLostFoundListPageState, fromLostFoundListPage.getPending);
+export const getIsListLoaded = createSelector(getLostFoundListPageState, fromLostFoundListPage.getIsListLoaded);

@@ -6,6 +6,46 @@
         color="warn" icon="error"></td-message>
       <p class="pm-intro is-size-5 is-size-6-touch">{{'LOST_AND_FOUND_CREATE_INTO' | translate}}</p>
       <form [formGroup]="form">
+        <div>
+          <mat-hint>{{'PLEASE_FILL_FOR_BETTER_SEARCH' | translate}}</mat-hint>
+          <br>
+          <mat-form-field class="pm-filter-options">
+            <mat-select formControlName='applicationType' [placeholder]="'APPLICATION_TYPE' | translate">
+              <mat-option (click)="form.get('applicationType').reset()">{{'APPLICATION_TYPE' | translate"}}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of LostFoundType | appKeys">{{ item.value | translate }}</mat-option>
+            </mat-select>
+            <mat-hint>{{'REQUIRED' | translate}}</mat-hint>
+            <mat-error *ngIf="form.get('applicationType').hasError('required')">{{'REQUIRED' | translate}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="pm-filter-options">
+            <mat-select formControlName='type' [placeholder]="'PET_TYPE' | translate">
+              <mat-option (click)="form.get('type').reset()">{{'PET_TYPE' | translate}}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of PetType | appKeys">{{ item.value | translate }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="pm-filter-options">
+            <mat-select formControlName='gender' [placeholder]="'GENDER' | translate">
+              <mat-option (click)="form.get('gender').reset()">{{'GENDER' | translate}}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of Gender | appKeys">{{ item.value | translate }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="pm-filter-options">
+            <mat-select formControlName='age' [placeholder]="'AGE' | translate">
+              <mat-option (click)="form.get('age').reset()">{{'AGE' | translate}}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of PetAge | appKeys">{{ item.value | translate }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="pm-filter-options">
+            <mat-select formControlName='size' [placeholder]="'SIZE' | translate">
+              <mat-option (click)="form.get('size').reset()">{{'SIZE' | translate}}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of PetSize | appKeys">{{ item.value | translate }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
         <br>
         <mat-hint>{{'DESCRIPTION' | translate}}</mat-hint>
         <mat-form-field>
@@ -45,14 +85,6 @@
             </div>
           </div>
           <div class="column is-4">
-            <mat-form-field>
-              <mat-select formControlName='type' [placeholder]="'APPLICATION_TYPE' | translate">
-                <mat-option [value]="LostFoundType.LOST">{{ LostFoundType.LOST | translate }}</mat-option>
-                <mat-option [value]="LostFoundType.FOUND">{{ LostFoundType.FOUND | translate }}</mat-option>
-              </mat-select>
-              <mat-hint>{{'REQUIRED' | translate}}</mat-hint>
-              <mat-error *ngIf="form.get('type').hasError('required')">{{'REQUIRED' | translate}}</mat-error>
-            </mat-form-field>
           </div>
         </div>
         <br>

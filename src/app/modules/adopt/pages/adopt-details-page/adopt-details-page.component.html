@@ -1,11 +1,20 @@
 <div class="columns is-marginless">
   <div class="column is-10 is-offset-1">
-    <div class="columns is-vcentered">
-      <div class="column is-3 has-text-centered">
-        <app-user-details [redirectAfterSignUp]="url" [loggedIn]="loggedIn$ | async" [isOwner]="(adopt$ | async)?.isOwner" [user]="(adopt$ | async)?.user"></app-user-details>
+    <div class="columns ">
+      <div class="column is-4 has-text-centered">
+        <app-user-details style="margin-top: 50px"  [redirectAfterSignUp]="url" [loggedIn]="loggedIn$ | async" [isOwner]="(adopt$ | async)?.isOwner" [user]="(adopt$ | async)?.user"></app-user-details>
       </div>
-      <div class="column is-9">
-        <app-mz-slider [slides]="slides" [options]="{ height: 500 }"></app-mz-slider>
+      <div class="column">
+        <app-mz-slider [slides]="slides" [options]="{ height: 400 }"></app-mz-slider>
+        <div class="has-text-grey has-text-right" *ngIf="adopt.type || adopt.gender || adopt.age || adopt.size">
+          <br>
+          <mat-chip-list>
+            <mat-chip *ngIf="adopt.type">{{'PET_TYPE' | translate}} - {{adopt.type | translate}}</mat-chip>
+            <mat-chip *ngIf="adopt.gender">{{'GENDER' | translate}} - {{adopt.gender | translate}}</mat-chip>
+            <mat-chip *ngIf="adopt.age">{{'AGE' | translate}} - {{adopt.age | translate}}</mat-chip>
+            <mat-chip *ngIf="adopt.size">{{'SIZE' | translate}} - {{adopt.size | translate}}</mat-chip>
+          </mat-chip-list>
+        </div>
       </div>
     </div>
     <div class="columns">
@@ -14,13 +23,6 @@
         <br>
         <mat-divider></mat-divider>
         <br>
-        <p class="has-text-left" *ngIf="adopt.type || adopt.gender || adopt.age || adopt.size">
-          <span *ngIf="adopt.type">{{'TYPE' | translate}} - {{adopt.type | translate}}<br></span>
-          <span *ngIf="adopt.gender">{{'GENDER' | translate}} - {{adopt.gender | translate}}<br></span>
-          <span *ngIf="adopt.age">{{'AGE' | translate}} - {{adopt.age | translate}}<br></span>
-          <span *ngIf="adopt.size">{{'SIZE' | translate}} - {{adopt.size | translate}}</span>
-          <br>
-        </p>
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
             <p *ngIf="!(adopt?.description | appIsHtml)">{{adopt?.description}}</p>

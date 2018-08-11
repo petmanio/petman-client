@@ -11,15 +11,18 @@ import { LostFoundDetailsPageComponent } from '@lost-found/pages/lost-found-deta
 import { LostFoundUpdatePageComponent } from '@lost-found/pages/lost-found-update-page/lost-found-update-page.component';
 
 export const routes: Routes = [
-  { path: '', component: LostFoundListPageComponent, pathMatch: 'full' },
+  { path: '', component: LostFoundListPageComponent, pathMatch: 'full', data: { showMobileFilterIcon: true } },
   { path: 'add', component: LostFoundCreatePageComponent, canActivate: [AuthGuard] },
   { path: ':id', component: LostFoundDetailsPageComponent, canActivate: [LostFoundExistsGuard] },
-  { path: ':id/edit', component: LostFoundUpdatePageComponent, canActivate: [AuthGuard, LostFoundExistsGuard, LostFoundOwnerGuard] }
+  {
+    path: ':id/edit',
+    component: LostFoundUpdatePageComponent,
+    canActivate: [AuthGuard, LostFoundExistsGuard, LostFoundOwnerGuard]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LostFoundRoutingModule {
-}
+export class LostFoundRoutingModule {}
