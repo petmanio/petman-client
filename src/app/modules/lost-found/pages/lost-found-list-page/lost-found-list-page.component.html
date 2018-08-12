@@ -1,5 +1,5 @@
 <div class="pm-full-loader">
-  <div *tdLoading="let item until (isListLoaded$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
+  <div *tdLoading="let item until (isListLoaded$ | appRxDelay | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
     <div infinite-scroll
          infiniteScrollContainer="mat-sidenav-content"
          infiniteScrollDistance="2"
