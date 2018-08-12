@@ -75,4 +75,4 @@ export const getLostFoundUpdatePagePending = createSelector(
 export const getLostFoundListPageState = createSelector(getLostFoundState, (state: State) => state.lostFoundListPage);
 export const getLostFoundListPageError = createSelector(getLostFoundListPageState, fromLostFoundListPage.getError);
 export const getLostFoundListPagePending = createSelector(getLostFoundListPageState, fromLostFoundListPage.getPending);
-export const getIsListLoaded = createSelector(getLostFoundListPageState, fromLostFoundListPage.getIsListLoaded);
+export const getListShowLoader = createSelector(getLostFoundListPageState, fromLostFoundListPage.getShowLoader);

@@ -52,7 +52,7 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
   mobileFilters: TemplateRef<any>;
   list$ = this.store.select(fromAdopt.getAll);
   total$ = this.store.select(fromAdopt.getTotal);
-  isListLoaded$ = this.store.select(fromAdopt.getIsListLoaded);
+  showLoader$ = this.store.select(fromAdopt.getListShowLoader);
   error$ = this.store.select(fromAdopt.getAdoptListPageError);
   pending$ = this.store.select(fromAdopt.getAdoptListPagePending);
   selectedUser$ = this.store.select(fromAuth.getSelectedUser);
@@ -82,8 +82,6 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
       this.store.dispatch(new List(this.listRequest));
     });
 
-    this.store.dispatch(new List(this.listRequest));
-
     const openMobileFiltersSubscription = this.actions$
       .ofType(LayoutActionTypes.OPEN_MOBILE_FILTERS)
       .pipe(
@@ -108,7 +106,9 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new List(this.listRequest));
+  }
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());

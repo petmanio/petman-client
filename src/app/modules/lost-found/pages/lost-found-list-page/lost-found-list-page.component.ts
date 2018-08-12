@@ -62,7 +62,7 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
   mobileFilters: TemplateRef<any>;
   list$ = this.store.select(fromLostFound.getAll);
   total$ = this.store.select(fromLostFound.getTotal);
-  isListLoaded$ = this.store.select(fromLostFound.getIsListLoaded);
+  showLoader$ = this.store.select(fromLostFound.getListShowLoader);
   error$ = this.store.select(fromLostFound.getLostFoundListPageError);
   pending$ = this.store.select(fromLostFound.getLostFoundListPagePending);
   selectedUser$ = this.store.select(fromAuth.getSelectedUser);
@@ -93,8 +93,6 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
       this.store.dispatch(new List(this.listRequest));
     });
 
-    this.store.dispatch(new List(this.listRequest));
-
     const openMobileFiltersSubscription = this.actions$
       .ofType(LayoutActionTypes.OPEN_MOBILE_FILTERS)
       .pipe(
@@ -119,7 +117,9 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new List(this.listRequest));
+  }
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());

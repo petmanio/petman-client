@@ -57,4 +57,4 @@ export const getAdoptUpdatePagePending = createSelector(getAdoptUpdatePageState,
 export const getAdoptListPageState = createSelector(getAdoptState, (state: State) => state.adoptListPage);
 export const getAdoptListPageError = createSelector(getAdoptListPageState, fromAdoptListPage.getError);
 export const getAdoptListPagePending = createSelector(getAdoptListPageState, fromAdoptListPage.getPending);
-export const getIsListLoaded = createSelector(getAdoptListPageState, fromAdoptListPage.getIsListLoaded);
+export const getListShowLoader = createSelector(getAdoptListPageState, fromAdoptListPage.getShowLoader);

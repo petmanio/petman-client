@@ -6,30 +6,30 @@ import { AdoptActions, AdoptActionTypes } from '@adopt/actions/adopt.actions';
 export interface State {
   error: HttpErrorResponse;
   pending: boolean;
-  isListLoaded: boolean;
+  showLoader: boolean;
 }
 
 export const initialState: State = {
   error: null,
   pending: false,
-  isListLoaded: false
+  showLoader: null
 };
 
 export function reducer(state = initialState, action: AdoptActions | SharedActions): State {
   switch (action.type) {
     case AdoptActionTypes.LIST:
-      return { ...state, error: null, pending: true };
+      return { ...state, showLoader: true, error: null, pending: true };
 
     case AdoptActionTypes.MORE:
       return { ...state, error: null, pending: true };
 
     case AdoptActionTypes.LIST_SUCCESS:
     case AdoptActionTypes.MORE_SUCCESS:
-      return { ...state, isListLoaded: true, error: null, pending: false };
+      return { ...state, showLoader: false, error: null, pending: false };
 
     case AdoptActionTypes.LIST_FAILURE:
     case AdoptActionTypes.MORE_FAILURE:
-      return { ...state, isListLoaded: true, error: action.payload, pending: false };
+      return { ...state, showLoader: false, error: action.payload, pending: false };
 
     case SharedActionTypes.CLEAN_ERROR:
       return initialState;
@@ -41,4 +41,4 @@ export function reducer(state = initialState, action: AdoptActions | SharedActio
 
 export const getError = (state: State) => state.error;
 export const getPending = (state: State) => state.pending;
-export const getIsListLoaded = (state: State) => state.isListLoaded;
+export const getShowLoader = (state: State) => state.showLoader;
