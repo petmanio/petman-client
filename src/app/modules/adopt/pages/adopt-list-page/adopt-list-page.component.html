@@ -10,25 +10,25 @@
               <form [formGroup]="filter">
                 <mat-form-field class="pm-filter-options">
                   <mat-select formControlName='type' multiple="true" [placeholder]="'PET_TYPE' | translate">
-                    <mat-option [value]="item.value" *ngFor="let item of PetType | appKeys">{{ item.value | translate }}</mat-option>
+                    <mat-option [value]="item.value" *ngFor="let item of PetType | keyvalue">{{ item.value | translate }}</mat-option>
                   </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="pm-filter-options">
                   <mat-select formControlName='gender' multiple="true" [placeholder]="'GENDER' | translate">
-                    <mat-option [value]="item.value" *ngFor="let item of Gender | appKeys">{{ item.value | translate }}</mat-option>
+                    <mat-option [value]="item.value" *ngFor="let item of Gender | keyvalue">{{ item.value | translate }}</mat-option>
                   </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="pm-filter-options">
                   <mat-select formControlName='age' multiple="true" [placeholder]="'AGE' | translate">
-                    <mat-option [value]="item.value" *ngFor="let item of PetAge | appKeys">{{ item.value | translate }}</mat-option>
+                    <mat-option [value]="item.value" *ngFor="let item of PetAge | keyvalue">{{ item.value | translate }}</mat-option>
                   </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="pm-filter-options">
                   <mat-select formControlName='size' multiple="true" [placeholder]="'SIZE' | translate">
-                    <mat-option [value]="item.value" *ngFor="let item of PetSize | appKeys">{{ item.value | translate }}</mat-option>
+                    <mat-option [value]="item.value" *ngFor="let item of PetSize | keyvalue">{{ item.value | translate }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </form>
@@ -44,25 +44,25 @@
           <form [formGroup]="filter">
             <mat-form-field class="pm-filter-options">
               <mat-select formControlName='type' multiple="true" [placeholder]="'PET_TYPE' | translate">
-                <mat-option [value]="item.value" *ngFor="let item of PetType | appKeys">{{ item.value | translate }}</mat-option>
+                <mat-option [value]="item.value" *ngFor="let item of PetType | keyvalue">{{ item.value | translate }}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="pm-filter-options">
               <mat-select formControlName='gender' multiple="true" [placeholder]="'GENDER' | translate">
-                <mat-option [value]="item.value" *ngFor="let item of Gender | appKeys">{{ item.value | translate }}</mat-option>
+                <mat-option [value]="item.value" *ngFor="let item of Gender | keyvalue">{{ item.value | translate }}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="pm-filter-options">
               <mat-select formControlName='age' multiple="true" [placeholder]="'AGE' | translate">
-                <mat-option [value]="item.value" *ngFor="let item of PetAge | appKeys">{{ item.value | translate }}</mat-option>
+                <mat-option [value]="item.value" *ngFor="let item of PetAge | keyvalue">{{ item.value | translate }}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="pm-filter-options">
               <mat-select formControlName='size' multiple="true" [placeholder]="'SIZE' | translate">
-                <mat-option [value]="item.value" *ngFor="let item of PetSize | appKeys">{{ item.value | translate }}</mat-option>
+                <mat-option [value]="item.value" *ngFor="let item of PetSize | keyvalue">{{ item.value | translate }}</mat-option>
               </mat-select>
             </mat-form-field>
 

@@ -21,7 +21,6 @@ import { SharedEffects } from '@shared/effects/shared.effects';
 import { RxDelayPipe } from '@shared/pipes/rx-delay/rx-delay.pipe';
 import { RxDebouncePipe } from '@shared/pipes/rx-debounce/rx-debounce.pipe';
 import { SafeHtmlPipe } from '@shared/pipes/safe-html/safe-html.pipe';
-import { KeysPipe } from '@shared/pipes/keys/keys.pipe';
 import { EllipsisPipe } from '@shared/pipes/ellipsis/ellipsis.pipe';
 import { FromNowPipe } from '@shared/pipes/from-now/from-now.pipe';
 import { IsHtmlPipe } from '@shared/pipes/is-html/is-html.pipe';
@@ -65,7 +64,6 @@ const declarations = [
   EllipsisPipe,
   FromNowPipe,
   SafeHtmlPipe,
-  KeysPipe,
   IsHtmlPipe,
   CardComponent,
   ShareDialogComponent,
