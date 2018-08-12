@@ -10,7 +10,7 @@
           <br>
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='type' [placeholder]="'PET_TYPE' | translate">
-              <mat-option (click)="form.get('type').reset()">{{'PET_TYPE' | translate}}</mat-option>
+              <mat-option>{{'PET_TYPE' | translate}}</mat-option>
               <mat-option [value]="item.value" *ngFor="let item of PetType | appKeys">{{ item.value | translate }}</mat-option>
             </mat-select>
             <mat-hint>{{'REQUIRED' | translate}}</mat-hint>
@@ -19,21 +19,21 @@
 
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='gender' [placeholder]="'GENDER' | translate">
-              <mat-option (click)="form.get('gender').reset()">{{'GENDER' | translate}}</mat-option>
+              <mat-option>{{'GENDER' | translate}}</mat-option>
               <mat-option [value]="item.value" *ngFor="let item of Gender | appKeys">{{ item.value | translate }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='age' [placeholder]="'AGE' | translate">
-              <mat-option (click)="form.get('age').reset()">{{'AGE' | translate}}</mat-option>
+              <mat-option>{{'AGE' | translate}}</mat-option>
               <mat-option [value]="item.value" *ngFor="let item of PetAge | appKeys">{{ item.value | translate }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='size' [placeholder]="'SIZE' | translate">
-              <mat-option (click)="form.get('size').reset()">{{'SIZE' | translate}}</mat-option>
+              <mat-option>{{'SIZE' | translate}}</mat-option>
               <mat-option [value]="item.value" *ngFor="let item of PetSize | appKeys">{{ item.value | translate }}</mat-option>
             </mat-select>
           </mat-form-field>

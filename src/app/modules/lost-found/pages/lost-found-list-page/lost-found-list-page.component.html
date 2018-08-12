@@ -14,7 +14,7 @@
               <form [formGroup]="filter">
                 <mat-form-field class="pm-filter-options">
                   <mat-select formControlName='applicationType' [placeholder]="'APPLICATION_TYPE' | translate">
-                    <mat-option (click)="form.get('applicationType').reset()">{{'APPLICATION_TYPE' | translate}}</mat-option>
+                    <mat-option>{{'APPLICATION_TYPE' | translate}}</mat-option>
                     <mat-option [value]="item.value" *ngFor="let item of LostFoundType | appKeys">{{ item.value | translate }}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -42,15 +42,11 @@
                     <mat-option [value]="item.value" *ngFor="let item of PetSize | appKeys">{{ item.value | translate }}</mat-option>
                   </mat-select>
                 </mat-form-field>
-
-                <button mat-icon-button (click)="filter.reset()">
-                  <mat-icon>clear_all</mat-icon>
-                </button>
               </form>
             </div>
           </mat-dialog-content>
           <mat-dialog-actions align="end">
-            <button mat-raised-button (click)="filter.reset()"></button>
+            <button mat-raised-button (click)="filter.reset()">{{'RESET' | translate}}</button>
             <button mat-raised-button matDialogClose>{{'CLOSE' | translate}}</button>
           </mat-dialog-actions>
         </ng-template>
@@ -59,7 +55,7 @@
           <form [formGroup]="filter">
             <mat-form-field class="pm-filter-options">
               <mat-select formControlName='applicationType' [placeholder]="'APPLICATION_TYPE' | translate">
-                <mat-option (click)="form.get('applicationType').reset()">{{'APPLICATION_TYPE' | translate}}</mat-option>
+                <mat-option>{{'APPLICATION_TYPE' | translate}}</mat-option>
                 <mat-option [value]="item.value" *ngFor="let item of LostFoundType | appKeys">{{ item.value | translate }}</mat-option>
               </mat-select>
             </mat-form-field>

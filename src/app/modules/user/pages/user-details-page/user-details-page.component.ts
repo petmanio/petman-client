@@ -136,7 +136,7 @@ export class UserDetailsPageComponent implements OnInit, OnDestroy {
       title:
         item.type === UserApplicationType.LOST_FOUND
           ? `<span class="has-text-warning">${this.translateService.instant(
-              item.data['type']
+              item.data['applicationType']
             )}</span> `
           : this.translateService.instant('APPLICATION_TYPE_' + item.type),
       subtitle: this.datePipe.transform(item.data.created),
