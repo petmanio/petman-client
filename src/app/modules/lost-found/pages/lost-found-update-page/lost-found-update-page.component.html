@@ -11,7 +11,7 @@
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='applicationType' [placeholder]="'APPLICATION_TYPE' | translate">
               <mat-option>{{'APPLICATION_TYPE' | translate}}</mat-option>
-              <mat-option [value]="item.value" *ngFor="let item of PetType | keyvalue">{{ item.value | translate }}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of LostFoundType | keyvalue">{{ item.value | translate }}</mat-option>
             </mat-select>
             <mat-hint>{{'REQUIRED' | translate}}</mat-hint>
             <mat-error *ngIf="form.get('applicationType').hasError('required')">{{'REQUIRED' | translate}}</mat-error>
