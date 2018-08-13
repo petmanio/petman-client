@@ -10,7 +10,6 @@ import { ModalSize, WalkerDto } from '@petman/common';
 import * as fromAuth from '@auth/reducers';
 import * as fromWalker from '@walker/reducers';
 import { Delete, Select, Update } from '@walker/actions/walker.actions';
-import { SharedService } from '@shared/services/shared/shared.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -22,7 +21,6 @@ import { ConfirmationDialogComponent } from '@shared/components/confirmation-dia
 export class WalkerUpdatePageComponent {
   form: FormGroup;
   walker: WalkerDto;
-  quillModules = SharedService.quillModules;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.pipe(select(fromWalker.getWalkerUpdatePagePending));
   error$ = this.store.pipe(select(fromWalker.getWalkerUpdatePageError));

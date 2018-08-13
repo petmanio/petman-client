@@ -5,12 +5,11 @@ import { MatDialog } from '@angular/material';
 import { map, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
-import { ModalSize, LostFoundDto, LostFoundType, PetType, Gender, PetAge, PetSize } from '@petman/common';
+import { Gender, LostFoundDto, LostFoundType, ModalSize, PetAge, PetSize, PetType } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromLostFound from '@lost-found/reducers';
 import { Delete, Select, Update } from '@lost-found/actions/lost-found.actions';
-import { SharedService } from '@shared/services/shared/shared.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -22,7 +21,6 @@ import { ConfirmationDialogComponent } from '@shared/components/confirmation-dia
 export class LostFoundUpdatePageComponent {
   form: FormGroup;
   lostFound: LostFoundDto;
-  quillModules = SharedService.quillModules;
   LostFoundType = LostFoundType;
   PetType = PetType;
   Gender = Gender;

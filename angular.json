@@ -32,8 +32,8 @@
               "node_modules/@ngx-share/button/styles/themes/material/material-dark-theme.css",
               "node_modules/@ngx-share/button/styles/share-buttons.css",
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
-              "node_modules/quill/dist/quill.bubble.css",
-              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/medium-editor/dist/css/medium-editor.css",
+              "node_modules/medium-editor/dist/css/themes/flat.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -88,8 +88,8 @@
               "node_modules/@ngx-share/button/styles/themes/material/material-dark-theme.css",
               "node_modules/@ngx-share/button/styles/share-buttons.css",
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
-              "node_modules/quill/dist/quill.bubble.css",
-              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/medium-editor/dist/css/medium-editor.css",
+              "node_modules/medium-editor/dist/css/themes/flat.css",
               "src/styles.scss"
             ],
             "scripts": [],

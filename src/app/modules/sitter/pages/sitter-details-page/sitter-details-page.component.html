@@ -21,8 +21,9 @@
         <br>
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
-            <p *ngIf="!(sitter?.description | appIsHtml)">{{sitter?.description}}</p>
-            <div *ngIf="sitter?.description | appIsHtml" class="ql-editor" [innerHTML]="sitter?.description | appSafeHtml"></div>
+            <p>
+              <app-medium-editor [value]="sitter?.description" readonly="true"></app-medium-editor>
+            </p>
           </div>
         </blockquote>
         <br>

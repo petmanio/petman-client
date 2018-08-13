@@ -9,7 +9,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { QuillModule } from 'ngx-quill';
 import { NgPipesModule, StripTagsPipe } from 'ngx-pipes';
 import { NgxMaskModule } from 'ngx-mask';
 
@@ -39,7 +38,8 @@ import { MasonryItemComponent } from '@shared/components/masonry-item/masonry-it
 import { AddApplicationComponent } from '@shared/components/add-application/add-application.component';
 import { GoogleMapComponent } from '@shared/components/google-map/google-map.component';
 import { ControlMessagesComponent } from '@shared/components/control-messages/control-messages.component';
-import { UserDetailsUpdateDialogComponent } from './components/user-details-update-dialog/user-details-update-dialog.component';
+import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
+import { MediumEditorComponent } from '@shared/components/medium-editor/medium-editor.component';
 
 const modules = [
   CommonModule,
@@ -51,7 +51,6 @@ const modules = [
   ShareButtonsModule,
   InfiniteScrollModule,
   PerfectScrollbarModule,
-  QuillModule,
   NgPipesModule,
   NgxMaskModule,
 
@@ -74,7 +73,8 @@ const declarations = [
   AddApplicationComponent,
   GoogleMapComponent,
   ControlMessagesComponent,
-  UserDetailsUpdateDialogComponent
+  UserDetailsUpdateDialogComponent,
+  MediumEditorComponent
 ];
 
 @NgModule({

@@ -17,8 +17,9 @@
           <br>
           <blockquote class="pm-blockquote">
             <div class='pm-blockquote-content'>
-              <p *ngIf="!(walker?.description | appIsHtml)">{{walker?.description}}</p>
-              <div *ngIf="walker?.description | appIsHtml" class="ql-editor" [innerHTML]="walker?.description | appSafeHtml"></div>
+              <p>
+                <app-medium-editor [value]="walker?.description" readonly="true"></app-medium-editor>
+              </p>
             </div>
           </blockquote>
           <div class="field is-grouped" style="margin-top: 100px">

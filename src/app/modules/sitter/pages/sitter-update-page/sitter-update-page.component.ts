@@ -10,7 +10,6 @@ import { ModalSize, SitterDto } from '@petman/common';
 import * as fromAuth from '@auth/reducers';
 import * as fromSitter from '@sitter/reducers';
 import { Delete, Select, Update } from '@sitter/actions/sitter.actions';
-import { SharedService } from '@shared/services/shared/shared.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -22,7 +21,6 @@ import { ConfirmationDialogComponent } from '@shared/components/confirmation-dia
 export class SitterUpdatePageComponent {
   form: FormGroup;
   sitter: SitterDto;
-  quillModules = SharedService.quillModules;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.pipe(select(fromSitter.getSitterUpdatePagePending));
   error$ = this.store.pipe(select(fromSitter.getSitterUpdatePageError));

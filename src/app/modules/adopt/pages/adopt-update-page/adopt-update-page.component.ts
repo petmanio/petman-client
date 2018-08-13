@@ -5,12 +5,11 @@ import { MatDialog } from '@angular/material';
 import { map, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
-import { ModalSize, AdoptDto, Gender, PetType, PetSize, PetAge } from '@petman/common';
+import { AdoptDto, Gender, ModalSize, PetAge, PetSize, PetType } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
 import { Delete, Select, Update } from '@adopt/actions/adopt.actions';
-import { SharedService } from '@shared/services/shared/shared.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -22,7 +21,6 @@ import { ConfirmationDialogComponent } from '@shared/components/confirmation-dia
 export class AdoptUpdatePageComponent {
   form: FormGroup;
   adopt: AdoptDto;
-  quillModules = SharedService.quillModules;
   PetType = PetType;
   Gender = Gender;
   PetAge = PetAge;

@@ -25,8 +25,9 @@
         <br>
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
-            <p *ngIf="!(adopt?.description | appIsHtml)">{{adopt?.description}}</p>
-            <div *ngIf="adopt?.description | appIsHtml" class="ql-editor" [innerHTML]="adopt?.description | appSafeHtml"></div>
+            <p>
+              <app-medium-editor [value]="adopt?.description" readonly="true"></app-medium-editor>
+            </p>
           </div>
         </blockquote>
         <br>

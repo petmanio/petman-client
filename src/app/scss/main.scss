@@ -237,30 +237,6 @@ mat-error {
   }
 }
 
-mat-form-field {
-  .pm-quill {
-    margin-top: -24px;
-    display: block;
-    padding-top: -0.4375em;
-    .ql-toolbar {
-      border: none;
-      padding-right: 0;
-      padding-left: 0;
-    }
-    .ql-container {
-      font-size: 16px;
-      border: none;
-      .ql-tooltip {
-        z-index: 20;
-      }
-    }
-    .ql-editor {
-      padding-right: 0;
-      padding-left: 0;
-    }
-  }
-}
-
 .pm-m-left-auto {
   margin-left: auto;
 }
@@ -278,7 +254,7 @@ mat-form-field {
     background-color: #fff;
     position: relative;
     > p {
-      padding: 1.5rem;
+      padding: 0.75rem;
       word-wrap: break-word;
     }
     &:before {

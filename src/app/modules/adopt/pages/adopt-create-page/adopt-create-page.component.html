@@ -43,7 +43,7 @@
         <mat-hint>{{'DESCRIPTION' | translate}}</mat-hint>
         <mat-form-field>
           <textarea class="is-hidden" formControlName='description' matInput></textarea>
-          <quill-editor class="pm-quill" [style]="{height: '100px'}" [modules]="quillModules" placeholder="" formControlName='description'></quill-editor>
+          <app-medium-editor formControlName="description"></app-medium-editor>
           <mat-hint>{{'DESCRIPTION_HINT' | translate}}</mat-hint>
           <mat-error *ngIf="form.get('description').hasError('minlength') || form.get('description').hasError('maxlength')">
             {{'DESCRIPTION_ERROR' | translate}}

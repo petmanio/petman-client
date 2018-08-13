@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { select, Store } from '@ngrx/store';
@@ -6,13 +6,12 @@ import { Actions } from '@ngrx/effects';
 import { take, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
-import { ModalSize, UserDto, Gender, PetType, PetSize, PetAge } from '@petman/common';
+import { Gender, ModalSize, PetAge, PetSize, PetType, UserDto } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
 import { Update as UserUpdate, UserActionTypes } from '@user/actions/user.actions';
 import { Create } from '@adopt/actions/adopt.actions';
-import { SharedService } from '@shared/services/shared/shared.service';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
 
 @Component({
@@ -24,7 +23,6 @@ import { UserDetailsUpdateDialogComponent } from '@shared/components/user-detail
 export class AdoptCreatePageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   selectedUser: UserDto;
-  quillModules = SharedService.quillModules;
   PetType = PetType;
   Gender = Gender;
   PetAge = PetAge;

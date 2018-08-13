@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  OnInit,
-  OnDestroy
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { select, Store } from '@ngrx/store';
@@ -16,12 +10,8 @@ import { ModalSize, UserDto } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromSitter from '@sitter/reducers';
-import {
-  Update as UserUpdate,
-  UserActionTypes
-} from '@user/actions/user.actions';
+import { Update as UserUpdate, UserActionTypes } from '@user/actions/user.actions';
 import { Create } from '@sitter/actions/sitter.actions';
-import { SharedService } from '@shared/services/shared/shared.service';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
 
 @Component({
@@ -33,7 +23,6 @@ import { UserDetailsUpdateDialogComponent } from '@shared/components/user-detail
 export class SitterCreatePageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   selectedUser: UserDto;
-  quillModules = SharedService.quillModules;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.select(fromSitter.getSitterCreatePagePending);
   error$ = this.store.select(fromSitter.getSitterCreatePageError);

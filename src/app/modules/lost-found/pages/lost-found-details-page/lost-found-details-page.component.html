@@ -26,8 +26,9 @@
         <br>
         <blockquote class="pm-blockquote">
           <div class='pm-blockquote-content'>
-            <p *ngIf="!(lostFound?.description | appIsHtml)">{{lostFound?.description}}</p>
-            <div *ngIf="lostFound?.description | appIsHtml" class="ql-editor" [innerHTML]="lostFound?.description | appSafeHtml"></div>
+            <p>
+              <app-medium-editor [value]="lostFound?.description" readonly="true"></app-medium-editor>
+            </p>
           </div>
         </blockquote>
         <br>
