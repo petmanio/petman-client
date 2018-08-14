@@ -1,11 +1,11 @@
 <div class="columns is-marginless">
   <div class="column is-10 is-offset-1">
-    <div class="columns ">
+    <div class="columns">
       <div class="column is-4 has-text-centered">
         <app-user-details style="margin-top: 50px"  [redirectAfterSignUp]="url" [loggedIn]="loggedIn$ | async" [isOwner]="(adopt$ | async)?.isOwner" [user]="(adopt$ | async)?.user"></app-user-details>
       </div>
       <div class="column">
-        <app-mz-slider [slides]="slides" [options]="{ height: 400 }"></app-mz-slider>
+        <app-gallery [images]="images"></app-gallery>
         <div class="has-text-grey has-text-right" *ngIf="adopt.type || adopt.gender || adopt.age || adopt.size">
           <br>
           <mat-chip-list>

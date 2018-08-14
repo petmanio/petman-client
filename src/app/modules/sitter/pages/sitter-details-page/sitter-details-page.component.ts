@@ -1,10 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit
-} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -18,7 +13,7 @@ import * as fromAuth from '@auth/reducers';
 import * as fromSitter from '@sitter/reducers';
 import { environment } from '@environments/environment';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
-import { SlideConfig } from '@material/components/mz-slider/mz-slider.component';
+import { GALLERY_IMAGE } from 'ngx-image-gallery';
 import { Select } from '@sitter/actions/sitter.actions';
 
 @Component({
@@ -29,7 +24,7 @@ import { Select } from '@sitter/actions/sitter.actions';
 })
 export class SitterDetailsPageComponent implements OnInit, OnDestroy {
   url: string;
-  slides: SlideConfig[] = [];
+  images: GALLERY_IMAGE[] = [];
   sitter: SitterDto;
   sitter$ = this.store.pipe(select(fromSitter.getSelected));
   loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
@@ -53,7 +48,7 @@ export class SitterDetailsPageComponent implements OnInit, OnDestroy {
       this.sitter = sitter;
 
       if (this.sitter) {
-        this.slides = this.sitter.images.map(img => ({ src: img }));
+        this.images = this.sitter.images.map(url => ({ url }));
 
         this.meta.setTag(
           'og:description',

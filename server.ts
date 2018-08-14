@@ -51,6 +51,7 @@ global['Node'] = win['Node'];
 global['navigator'] = win.navigator;
 global['location'] = win.location;
 global['HTMLElement'] = win['HTMLElement'];
+global['Image'] = win['Image'];
 global['getComputedStyle'] = win.getComputedStyle;
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack

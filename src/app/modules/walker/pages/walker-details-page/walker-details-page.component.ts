@@ -18,7 +18,6 @@ import * as fromAuth from '@auth/reducers';
 import * as fromWalker from '@walker/reducers';
 import { environment } from '@environments/environment';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
-import { SlideConfig } from '@material/components/mz-slider/mz-slider.component';
 import { Select } from '@walker/actions/walker.actions';
 
 @Component({
@@ -29,7 +28,6 @@ import { Select } from '@walker/actions/walker.actions';
 })
 export class WalkerDetailsPageComponent implements OnInit, OnDestroy {
   url: string;
-  slides: SlideConfig[] = [];
   walker: WalkerDto;
   walker$ = this.store.pipe(select(fromWalker.getSelected));
   loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));

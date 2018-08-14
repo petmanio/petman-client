@@ -1,0 +1,67 @@
+@import '../../../../scss/mixins';
+
+:host {
+  mat-card {
+    padding: 0;
+  }
+  ngx-image-gallery {
+    /deep/ {
+      img {
+        // FIXME: workaround because library displaying image instead of element with background image
+        object-fit: contain;
+      }
+    }
+    &.pm-gallery-inline {
+      transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+
+      &.visible {
+        transition-delay: 0s;
+        visibility: visible;
+        opacity: 1;
+      }
+
+      &.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      height: 350px;
+      @include tablet {
+        height: 450px;
+      }
+      @include desktop {
+        height: 550px;
+      }
+      /deep/ {
+        .galleria {
+          right: 0;
+          left: 0;
+
+          .images-container {
+            background-color: whitesmoke;
+            border-radius: 3px;
+          }
+        }
+
+        .right-top {
+          display: none;
+        }
+      }
+    }
+
+    &.pm-gallery-fullscreen {
+      /deep/ {
+        .galleria {
+          right: 0;
+          left: 0;
+
+          @include desktop {
+            right: 80px;
+            left: 80px;
+          }
+        }
+
+      }
+    }
+  }
+}

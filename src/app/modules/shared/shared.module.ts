@@ -11,6 +11,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { NgPipesModule, StripTagsPipe } from 'ngx-pipes';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgxImageGalleryModule } from 'ngx-image-gallery';
 
 import { MaterialModule } from '@material/material.module';
 
@@ -40,6 +41,7 @@ import { GoogleMapComponent } from '@shared/components/google-map/google-map.com
 import { ControlMessagesComponent } from '@shared/components/control-messages/control-messages.component';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
 import { MediumEditorComponent } from '@shared/components/medium-editor/medium-editor.component';
+import { GalleryComponent } from '@shared/components/gallery/gallery.component';
 
 const modules = [
   CommonModule,
@@ -53,6 +55,7 @@ const modules = [
   PerfectScrollbarModule,
   NgPipesModule,
   NgxMaskModule,
+  NgxImageGalleryModule,
 
   MaterialModule
 ];
@@ -74,7 +77,8 @@ const declarations = [
   GoogleMapComponent,
   ControlMessagesComponent,
   UserDetailsUpdateDialogComponent,
-  MediumEditorComponent
+  MediumEditorComponent,
+  GalleryComponent
 ];
 
 @NgModule({

@@ -24,7 +24,6 @@ import * as fromUser from '@user/reducers';
 import { environment } from '@environments/environment';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
-import { SlideConfig } from '@material/components/mz-slider/mz-slider.component';
 import { Select, Update, Applications } from '@user/actions/user.actions';
 import { Config } from '@shared/components/card/card.component';
 import { DatePipe } from '@angular/common';
@@ -38,7 +37,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class UserDetailsPageComponent implements OnInit, OnDestroy {
   url: string;
-  slides: SlideConfig[] = [];
   userEntity: UserDto;
   randomCoverPhoto = sample([
     'dog-and-tennis-ball_dribbble.png',

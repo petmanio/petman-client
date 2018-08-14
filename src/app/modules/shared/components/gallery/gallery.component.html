@@ -1,0 +1,18 @@
+<ngx-image-gallery
+  class="pm-gallery-inline"
+  [ngClass]="fullscreen ? 'hidden' : 'visible'"
+  #ngxImageGalleryInline
+  [images]="images"
+  [conf]="inlineConfig"
+  (onImageChange)="galleryInlineImageChange($event)"
+  (onImageClicked)="galleryInlineImageClicked($event)">
+</ngx-image-gallery>
+
+<ngx-image-gallery
+  class="pm-gallery-fullscreen"
+  #ngxImageGallery
+  [images]="images"
+  (onImageChange)="galleryImageChange($event)"
+  (onClose)="galleryClose()"
+  [conf]="config">
+</ngx-image-gallery>

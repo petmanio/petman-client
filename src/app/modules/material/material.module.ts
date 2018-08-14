@@ -31,8 +31,8 @@ import {
   CovalentSearchModule
 } from '@covalent/core';
 
-import { MzSliderComponent } from '@material/components/mz-slider/mz-slider.component';
-import { MzCarouselComponent } from '@material/components/mz-carousel/mz-carousel.component';
+// import { MzSliderComponent } from '@material/components/mz-slider/mz-slider.component';
+// import { MzCarouselComponent } from '@material/components/mz-carousel/mz-carousel.component';
 import { ProgressButtonComponent } from '@material/components/progress-button/progress-button.component';
 
 const modules = [
@@ -66,8 +66,8 @@ const modules = [
 ];
 
 const declarations = [
-  MzSliderComponent,
-  MzCarouselComponent,
+  // MzSliderComponent,
+  // MzCarouselComponent,
   ProgressButtonComponent
 ];
 

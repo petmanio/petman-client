@@ -3,6 +3,11 @@
 
 mat-sidenav {
   width: 250px;
+
+  // FIXME: workaround for slider fullscreen
+  @include desktop {
+    z-index: 1 !important;
+  }
 }
 
 mat-sidenav-container {

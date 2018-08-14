@@ -1,24 +1,19 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit
-} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { MetaService } from '@ngx-meta/core';
 import { StripTagsPipe } from 'ngx-pipes';
+import { GALLERY_IMAGE } from 'ngx-image-gallery';
 
-import { ModalSize, AdoptDto } from '@petman/common';
+import { AdoptDto, ModalSize } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
 import { environment } from '@environments/environment';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
-import { SlideConfig } from '@material/components/mz-slider/mz-slider.component';
 import { Select } from '@adopt/actions/adopt.actions';
 
 @Component({
@@ -29,7 +24,7 @@ import { Select } from '@adopt/actions/adopt.actions';
 })
 export class AdoptDetailsPageComponent implements OnInit, OnDestroy {
   url: string;
-  slides: SlideConfig[] = [];
+  images: GALLERY_IMAGE[] = [];
   adopt: AdoptDto;
   adopt$ = this.store.pipe(select(fromAdopt.getSelected));
   loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
@@ -53,7 +48,7 @@ export class AdoptDetailsPageComponent implements OnInit, OnDestroy {
       this.adopt = adopt;
 
       if (this.adopt) {
-        this.slides = this.adopt.images.map(img => ({ src: img }));
+        this.images = this.adopt.images.map(url => ({ url }));
 
         this.meta.setTag(
           'og:description',

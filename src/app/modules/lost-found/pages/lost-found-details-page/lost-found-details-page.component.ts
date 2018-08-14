@@ -1,10 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit
-} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -12,13 +7,13 @@ import { select, Store } from '@ngrx/store';
 import { MetaService } from '@ngx-meta/core';
 import { StripTagsPipe } from 'ngx-pipes';
 
-import { ModalSize, LostFoundDto } from '@petman/common';
+import { LostFoundDto, ModalSize } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromLostFound from '@lost-found/reducers';
 import { environment } from '@environments/environment';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
-import { SlideConfig } from '@material/components/mz-slider/mz-slider.component';
+import { GALLERY_IMAGE } from 'ngx-image-gallery';
 import { Select } from '@lost-found/actions/lost-found.actions';
 
 @Component({
@@ -29,7 +24,7 @@ import { Select } from '@lost-found/actions/lost-found.actions';
 })
 export class LostFoundDetailsPageComponent implements OnInit, OnDestroy {
   url: string;
-  slides: SlideConfig[] = [];
+  images: GALLERY_IMAGE[] = [];
   lostFound: LostFoundDto;
   lostFound$ = this.store.pipe(select(fromLostFound.getSelected));
   loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
@@ -53,7 +48,7 @@ export class LostFoundDetailsPageComponent implements OnInit, OnDestroy {
       this.lostFound = lostFound;
 
       if (this.lostFound) {
-        this.slides = this.lostFound.images.map(img => ({ src: img }));
+        this.images = this.lostFound.images.map(url => ({ url }));
 
         this.meta.setTag(
           'og:description',
