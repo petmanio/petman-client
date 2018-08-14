@@ -40,6 +40,10 @@
           .images-container {
             background-color: whitesmoke;
             border-radius: 3px;
+            touch-action: pan-y !important;
+            @include tablet {
+              touch-action: none !important;
+            }
           }
         }
 
