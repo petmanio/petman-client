@@ -1,4 +1,4 @@
-<div mat-card-avatar class="pm-cursor-pointer pm-card-avatar pm-avatar-medium" [routerLink]="['/users', user?.id]" [ngStyle]="{'background-image': 'url(' + user?.userData?.avatar + ')'}"></div>
+<div mat-card-avatar class="pm-cursor-pointer pm-card-avatar" [routerLink]="['/users', user?.id]" [ngStyle]="{'background-image': 'url(' + user?.userData?.avatar + ')'}"></div>
 <div class="is-size-4 has-text-grey">{{user?.userData?.name}}</div>
 <ng-container *ngIf="loggedIn; else loginNote">
   <div class="columns is-marginless" *ngIf="!isOwner">

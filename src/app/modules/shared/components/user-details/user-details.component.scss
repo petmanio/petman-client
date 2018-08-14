@@ -1,6 +1,14 @@
+@import '../../../../scss/mixins';
+
 :host {
   display: block;
 }
 .pm-card-avatar {
   display: inline-block;
+  width: 150px;
+  height: 150px;
+  @include tablet {
+    width: 200px;
+    height: 200px;
+  }
 }

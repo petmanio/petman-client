@@ -35,7 +35,9 @@ export class MediumEditorComponent implements ControlValueAccessor, OnInit, OnCh
     targetBlank: true,
     spellcheck: false,
     toolbar: {
-      buttons: ['bold', 'italic', 'quote', 'orderedlist', 'unorderedlist', 'anchor', 'removeFormat']
+      static: true,
+      sticky: true,
+      buttons: ['bold', 'italic', 'orderedlist', 'unorderedlist', 'anchor']
     }
   };
   @ViewChild('editor')
