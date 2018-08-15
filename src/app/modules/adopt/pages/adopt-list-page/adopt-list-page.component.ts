@@ -2,24 +2,25 @@ import pickBy from 'lodash-es/pickBy';
 import identity from 'lodash-es/identity';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { Actions } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AdoptListQueryRequestDto, ModalSize, AdoptDto, Gender, PetType, PetSize, PetAge } from '@petman/common';
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
+import { LayoutActionTypes } from '@app/actions/layout.actions';
 import { environment } from '@environments/environment';
 import { Config } from '@shared/components/card/card.component';
-import { List, More } from '@adopt/actions/adopt.actions';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Actions } from '@ngrx/effects';
-import { LayoutActionTypes } from '@app/actions/layout.actions';
+import { UtilService } from '@shared/services/util/util.service';
+import { List, More } from '@adopt/actions/adopt.actions';
 
 @Component({
   selector: 'app-adopt-list-page',
@@ -37,6 +38,7 @@ export class AdoptListPageComponent implements OnInit, OnDestroy {
   Gender = Gender;
   PetAge = PetAge;
   PetSize = PetSize;
+  keyvaluePipeComparator = UtilService.keyvaluePipeComparator;
   masonryOptions = {
     mobileFirst: true,
     columns: 1,

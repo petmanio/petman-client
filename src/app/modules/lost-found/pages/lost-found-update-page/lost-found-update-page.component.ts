@@ -9,8 +9,9 @@ import { Gender, LostFoundDto, LostFoundType, ModalSize, PetAge, PetSize, PetTyp
 
 import * as fromAuth from '@auth/reducers';
 import * as fromLostFound from '@lost-found/reducers';
-import { Delete, Select, Update } from '@lost-found/actions/lost-found.actions';
+import { UtilService } from '@shared/services/util/util.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
+import { Delete, Select, Update } from '@lost-found/actions/lost-found.actions';
 
 @Component({
   selector: 'app-lost-found-update-page',
@@ -26,6 +27,7 @@ export class LostFoundUpdatePageComponent {
   Gender = Gender;
   PetAge = PetAge;
   PetSize = PetSize;
+  keyvaluePipeComparator = UtilService.keyvaluePipeComparator;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.pipe(select(fromLostFound.getLostFoundUpdatePagePending));
   error$ = this.store.pipe(select(fromLostFound.getLostFoundUpdatePageError));

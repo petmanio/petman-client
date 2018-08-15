@@ -9,8 +9,9 @@ import { AdoptDto, Gender, ModalSize, PetAge, PetSize, PetType } from '@petman/c
 
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
-import { Delete, Select, Update } from '@adopt/actions/adopt.actions';
+import { UtilService } from '@shared/services/util/util.service';
 import { ConfirmationDialogComponent } from '@shared/components/confirmation-dialog/confirmation-dialog.component';
+import { Delete, Select, Update } from '@adopt/actions/adopt.actions';
 
 @Component({
   selector: 'app-adopt-update-page',
@@ -25,6 +26,7 @@ export class AdoptUpdatePageComponent {
   Gender = Gender;
   PetAge = PetAge;
   PetSize = PetSize;
+  keyvaluePipeComparator = UtilService.keyvaluePipeComparator;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.pipe(select(fromAdopt.getAdoptUpdatePagePending));
   error$ = this.store.pipe(select(fromAdopt.getAdoptUpdatePageError));

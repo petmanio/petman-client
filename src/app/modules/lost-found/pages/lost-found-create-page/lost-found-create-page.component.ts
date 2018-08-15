@@ -11,8 +11,9 @@ import { Gender, LostFoundType, ModalSize, PetAge, PetSize, PetType, UserDto } f
 import * as fromAuth from '@auth/reducers';
 import * as fromLostFound from '@lost-found/reducers';
 import { Update as UserUpdate, UserActionTypes } from '@user/actions/user.actions';
-import { Create } from '@lost-found/actions/lost-found.actions';
+import { UtilService } from '@shared/services/util/util.service';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
+import { Create } from '@lost-found/actions/lost-found.actions';
 
 @Component({
   selector: 'app-lost-found-create-page',
@@ -28,6 +29,7 @@ export class LostFoundCreatePageComponent implements OnInit, OnDestroy {
   Gender = Gender;
   PetAge = PetAge;
   PetSize = PetSize;
+  keyvaluePipeComparator = UtilService.keyvaluePipeComparator;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.select(fromLostFound.getLostFoundCreatePagePending);
   error$ = this.store.select(fromLostFound.getLostFoundCreatePageError);

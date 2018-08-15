@@ -11,8 +11,9 @@ import { Gender, ModalSize, PetAge, PetSize, PetType, UserDto } from '@petman/co
 import * as fromAuth from '@auth/reducers';
 import * as fromAdopt from '@adopt/reducers';
 import { Update as UserUpdate, UserActionTypes } from '@user/actions/user.actions';
-import { Create } from '@adopt/actions/adopt.actions';
+import { UtilService } from '@shared/services/util/util.service';
 import { UserDetailsUpdateDialogComponent } from '@shared/components/user-details-update-dialog/user-details-update-dialog.component';
+import { Create } from '@adopt/actions/adopt.actions';
 
 @Component({
   selector: 'app-adopt-create-page',
@@ -27,6 +28,7 @@ export class AdoptCreatePageComponent implements OnInit, OnDestroy {
   Gender = Gender;
   PetAge = PetAge;
   PetSize = PetSize;
+  keyvaluePipeComparator = UtilService.keyvaluePipeComparator;
   selectedUser$ = this.store.pipe(select(fromAuth.getSelectedUser));
   pending$ = this.store.select(fromAdopt.getAdoptCreatePagePending);
   error$ = this.store.select(fromAdopt.getAdoptCreatePageError);

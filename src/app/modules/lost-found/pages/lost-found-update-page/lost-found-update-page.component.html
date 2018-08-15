@@ -11,7 +11,7 @@
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='applicationType' [placeholder]="'APPLICATION_TYPE' | translate">
               <mat-option>{{'APPLICATION_TYPE' | translate}}</mat-option>
-              <mat-option [value]="item.value" *ngFor="let item of LostFoundType | keyvalue">{{ item.value | translate }}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of LostFoundType | keyvalue:keyvaluePipeComparator">{{ item.value | translate }}</mat-option>
             </mat-select>
             <mat-hint>{{'REQUIRED' | translate}}</mat-hint>
             <mat-error *ngIf="form.get('applicationType').hasError('required')">{{'REQUIRED' | translate}}</mat-error>
@@ -20,28 +20,28 @@
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='type' [placeholder]="'PET_TYPE' | translate">
               <mat-option>{{'PET_TYPE' | translate}}</mat-option>
-              <mat-option [value]="item.value" *ngFor="let item of PetType | keyvalue">{{ item.value | translate }}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of PetType | keyvalue:keyvaluePipeComparator">{{ item.value | translate }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='gender' [placeholder]="'GENDER' | translate">
               <mat-option>{{'GENDER' | translate}}</mat-option>
-              <mat-option [value]="item.value" *ngFor="let item of Gender | keyvalue">{{ item.value | translate }}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of Gender | keyvalue:keyvaluePipeComparator">{{ item.value | translate }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='age' [placeholder]="'AGE' | translate">
               <mat-option>{{'AGE' | translate}}</mat-option>
-              <mat-option [value]="item.value" *ngFor="let item of PetAge | keyvalue">{{ item.value | translate }}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of PetAge | keyvalue:keyvaluePipeComparator">{{ item.value | translate }}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="pm-filter-options">
             <mat-select formControlName='size' [placeholder]="'SIZE' | translate">
               <mat-option>{{'SIZE' | translate}}</mat-option>
-              <mat-option [value]="item.value" *ngFor="let item of PetSize | keyvalue">{{ item.value | translate }}</mat-option>
+              <mat-option [value]="item.value" *ngFor="let item of PetSize | keyvalue:keyvaluePipeComparator">{{ item.value | translate }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

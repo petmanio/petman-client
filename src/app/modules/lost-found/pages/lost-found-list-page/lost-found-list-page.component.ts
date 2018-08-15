@@ -27,8 +27,9 @@ import * as fromLostFound from '@lost-found/reducers';
 import { environment } from '@environments/environment';
 import { LayoutActionTypes } from '@app/actions/layout.actions';
 import { Config } from '@shared/components/card/card.component';
-import { List, More } from '@lost-found/actions/lost-found.actions';
+import { UtilService } from '@shared/services/util/util.service';
 import { ShareDialogComponent } from '@shared/components/share-dialog/share-dialog.component';
+import { List, More } from '@lost-found/actions/lost-found.actions';
 
 @Component({
   selector: 'app-lost-found-list-page',
@@ -47,6 +48,7 @@ export class LostFoundListPageComponent implements OnInit, OnDestroy {
   PetAge = PetAge;
   PetSize = PetSize;
   LostFoundType = LostFoundType;
+  keyvaluePipeComparator = UtilService.keyvaluePipeComparator;
   masonryOptions = {
     mobileFirst: true,
     columns: 1,

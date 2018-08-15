@@ -91,6 +91,10 @@ export class UtilService {
     });
   }
 
+  static keyvaluePipeComparator(): number {
+    return 0;
+  }
+
   /**
    * @deprecated moved to TranslateModule
    */
