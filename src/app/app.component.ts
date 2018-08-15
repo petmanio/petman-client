@@ -23,16 +23,16 @@ import * as fromRoot from '@app/reducers';
 import * as fromAuth from '@auth/reducers';
 import * as fromUser from '@user/reducers';
 import { UtilService } from '@shared/services/util/util.service';
-import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
 
+import { AppStorage } from '@storage/universal.inject';
 import { TranslateService } from '@translate/translate.service';
+import { CloseSidenav, OpenSidenav, OpenMobileFilters } from '@app/actions/layout.actions';
 import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
 import { LanguageChangeSnackbarComponent } from '@core/language-change-snackbar/language-change-snackbar.component';
 import { CleanError } from '@shared/actions/shared.actions';
 import { ChangeUser, Logout } from '@auth/actions/auth.actions';
 import { Geolocation } from '@user/actions/user.actions';
 import { Categories } from '@poi/actions/poi.actions';
-import { CloseSidenav, OpenSidenav, OpenMobileFilters } from '@app/actions/layout.actions';
 
 @Component({
   selector: 'app-root',
@@ -66,8 +66,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private translateService: TranslateService,
     private store: Store<fromRoot.State>,
-    private localStorageService: LocalStorageService,
     private utilService: UtilService,
+    @Inject(AppStorage) private appStorage: Storage,
     @Inject(PLATFORM_ID) protected platformId: Object,
     @Inject(MetaService) private meta: MetaService
   ) {
@@ -94,7 +94,7 @@ export class AppComponent implements OnInit, OnDestroy {
         tap((selectedUser: UserDto) => {
           this.selectedUser = selectedUser;
           if (this.selectedUser) {
-            const selectedUserIdFromStorage = this.localStorageService.getItem('selectedUserId');
+            const selectedUserIdFromStorage = parseInt(this.appStorage.getItem('selectedUserId'), 0);
             if (selectedUserIdFromStorage && selectedUserIdFromStorage !== this.selectedUser.id) {
               this.store.dispatch(new ChangeUser(selectedUserIdFromStorage));
             }
@@ -213,13 +213,13 @@ export class AppComponent implements OnInit, OnDestroy {
   private welcomeDialog() {
     if (isPlatformBrowser(this.platformId)) {
       // TODO: use effect init and user$ observable
-      if (!this.localStorageService.getItem('welcomeDialogShowed') && !this.localStorageService.getItem('token')) {
+      if (!this.appStorage.getItem('welcomeDialogShowed') && !this.appStorage.getItem('token')) {
         setTimeout(() => {
           const dialogRef = this.dialog.open(WelcomeDialogComponent, {
             width: '90%'
           });
           dialogRef.afterClosed().subscribe(() => {
-            this.localStorageService.setItem('welcomeDialogShowed', true);
+            this.appStorage.setItem('welcomeDialogShowed', 'true');
           });
         }, 3000);
       }
@@ -227,7 +227,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private languageChangeSnackBar() {
-    const languageChangeAsked = this.localStorageService.getItem('languageChangeSnackBarShowed');
+    const languageChangeAsked = this.appStorage.getItem('languageChangeSnackBarShowed');
 
     if (isPlatformBrowser(this.platformId) && !languageChangeAsked) {
       this.geolocationCountry$
@@ -250,7 +250,7 @@ export class AppComponent implements OnInit, OnDestroy {
                   if (action.dismissedByAction) {
                     this.changeLanguage('hy');
                   }
-                  this.localStorageService.setItem('languageChangeSnackBarShowed', true);
+                  this.appStorage.setItem('languageChangeSnackBarShowed', 'true');
                 });
             }
           }),

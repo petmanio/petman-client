@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Inject, Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -7,15 +7,14 @@ import { plainToClass } from 'class-transformer';
 import { LoginFacebookRequestDto, LoginFacebookResponseDto, UserDto } from '@petman/common';
 
 import { environment } from '@environments/environment';
-import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
+import { AppStorage } from '@storage/universal.inject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService, private ngZone: NgZone) {
-  }
+  constructor(private http: HttpClient, @Inject(AppStorage) private appStorage: Storage, private ngZone: NgZone) {}
 
   getFacebookToken(): Observable<string> {
     return new Observable(observer => {
@@ -36,7 +35,7 @@ export class AuthService {
     return this.http
       .post<LoginFacebookResponseDto>(`${environment.api}/api/auth/login/fb`, options).pipe(
         map(response => {
-          this.localStorageService.setItem('token', response.token);
+          this.appStorage.setItem('token', response.token);
           return response;
         })
       );
@@ -50,14 +49,14 @@ export class AuthService {
   }
 
   logOut() {
-    this.localStorageService.setItem('token', null);
-    this.localStorageService.setItem('selectedUserId', null);
+    this.appStorage.removeItem('token');
+    this.appStorage.removeItem('selectedUserId');
   }
 
   changeUser(selectedUserId: number) {
-    const storedSelectedId = parseInt(this.localStorageService.getItem('selectedUserId'), 0);
+    const storedSelectedId = parseInt(this.appStorage.getItem('selectedUserId'), 0);
     if (selectedUserId !== storedSelectedId) {
-      this.localStorageService.setItem('selectedUserId', selectedUserId);
+      this.appStorage.setItem('selectedUserId', selectedUserId.toString());
     }
   }
 }

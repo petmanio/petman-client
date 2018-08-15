@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -26,6 +27,6 @@ export class CookieStorage implements Storage {
   }
 
   public setItem(key: string, data: string): void {
-    this.cookieService.set(key, data);
+    this.cookieService.set(key, data, moment(new Date()).add(1, 'month').toDate(), '/');
   }
 }

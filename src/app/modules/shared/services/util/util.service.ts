@@ -11,13 +11,13 @@ import {
 import { Language } from '@petman/common';
 
 import { environment } from '@environments/environment';
-import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
+import { AppStorage } from '@storage/universal.inject';
 
 @Injectable()
 export class UtilService {
   constructor(
     private translateService: TranslateService,
-    private localStorageService: LocalStorageService,
+    @Inject(AppStorage) private appStorage: Storage,
     @Inject(PLATFORM_ID) protected platformId: Object
   ) {}
 
@@ -104,7 +104,7 @@ export class UtilService {
 
       if (isPlatformBrowser(this.platformId)) {
         languageKey = UtilService.getBrowserLanguageToEnumKey(
-          this.localStorageService.getItem('language')
+          this.appStorage.getItem('language')
         );
         // TODO: get browser language or from geo this.translateService.getBrowserLang()
       }
@@ -115,7 +115,7 @@ export class UtilService {
 
       const language = Language[languageKey];
 
-      this.localStorageService.setItem('language', language);
+      this.appStorage.setItem('language', language);
 
       this.translateService.addLangs(values(Language));
       this.translateService.setDefaultLang(Language.EN);
