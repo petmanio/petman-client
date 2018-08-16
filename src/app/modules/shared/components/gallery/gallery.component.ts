@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { GALLERY_CONF, GALLERY_IMAGE, NgxImageGalleryComponent } from 'ngx-image-gallery';
 
 @Component({
@@ -7,7 +18,7 @@ import { GALLERY_CONF, GALLERY_IMAGE, NgxImageGalleryComponent } from 'ngx-image
   styleUrls: ['./gallery.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GalleryComponent implements OnInit {
+export class GalleryComponent implements OnInit, OnDestroy {
   @Input()
   images: GALLERY_IMAGE[] = [];
   @ViewChild('ngxImageGallery')
@@ -39,26 +50,34 @@ export class GalleryComponent implements OnInit {
   };
   fullscreen = false;
   private index: number;
+  private interval;
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor(private ref: ChangeDetectorRef, @Inject(PLATFORM_ID) protected platformId: Object) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      // FIXME: workaround because library not detecting image clide change
+      this.interval = setInterval(() => this.ref.markForCheck(), 1000);
+    }
+  }
+
+  ngOnDestroy() {
+    if (isPlatformBrowser(this.platformId)) {
+      clearInterval(this.interval);
+    }
+  }
 
   galleryInlineImageClicked(index: number) {
     this.fullscreen = true;
     this.ngxImageGallery.open(index);
-    // FIXME: workaround because library not detecting image clide change
-    setTimeout(() => this.ref.markForCheck(), 500);
   }
 
   galleryInlineImageChange(index: number) {
     this.index = index;
-    setTimeout(() => this.ref.markForCheck(), 500);
   }
 
   galleryImageChange(index: number) {
     this.index = index;
-    setTimeout(() => this.ref.markForCheck(), 500);
   }
 
   galleryClose() {
