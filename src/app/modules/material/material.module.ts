@@ -12,8 +12,6 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
@@ -23,12 +21,8 @@ import {
 import { LayoutModule } from '@angular/cdk/layout';
 import {
   CovalentFileModule,
-  CovalentLayoutModule,
   CovalentLoadingModule,
-  CovalentMenuModule,
   CovalentMessageModule,
-  CovalentNotificationsModule,
-  CovalentSearchModule
 } from '@covalent/core';
 
 // import { MzSliderComponent } from '@material/components/mz-slider/mz-slider.component';
@@ -43,23 +37,17 @@ const modules = [
   MatFormFieldModule,
   MatToolbarModule,
   MatButtonModule,
-  MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatMenuModule,
   MatSidenavModule,
   MatChipsModule,
-  MatPaginatorModule,
   MatCardModule,
   MatListModule,
   MatButtonToggleModule,
   MatTooltipModule,
   LayoutModule,
 
-  CovalentSearchModule,
-  CovalentNotificationsModule,
-  CovalentMenuModule,
-  CovalentLayoutModule,
   CovalentFileModule,
   CovalentLoadingModule,
   CovalentMessageModule
