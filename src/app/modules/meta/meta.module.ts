@@ -23,7 +23,7 @@ export function metaFactory(translate: TranslateService): MetaLoader {
       'og:title': 'DEFAULT_TITLE',
       'og:description': 'DEFAULT_DESCRIPTION',
       'og:url': 'https://petman.io',
-      'og:image': environment.origin + '/assets/icons/icon-72x72.png',
+      'og:image': environment.origin + '/assets/main-cover.jpg',
       'og:site_name': 'Petman',
       'og:type': 'website',
       'og:locale': 'hy_AM',

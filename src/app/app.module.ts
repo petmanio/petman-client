@@ -1,11 +1,8 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import {
-  BrowserModule,
-  HAMMER_GESTURE_CONFIG
-} from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -31,7 +28,6 @@ import { CustomHeadersInterceptor } from '@app/interseptors/custom-headers/custo
 import { metaReducers, reducers } from '@app/reducers';
 import { NotFoundPageComponent } from '@app/pages/not-found-page/not-found-page.component';
 import { HomePageComponent } from '@app/pages/home-page/home-page.component';
-import { CookieService } from 'ngx-cookie-service';
 import { MetaModule } from '@meta/meta.module';
 
 export function initLanguage(translateService: AppTranslateService): Function {
@@ -63,14 +59,9 @@ export function initLanguage(translateService: AppTranslateService): Function {
     AppRoutingModule
   ],
   providers: [
-    CookieService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CustomHeadersInterceptor,
-      multi: true
-    },
+    { provide: HTTP_INTERCEPTORS,  useClass: CustomHeadersInterceptor,  multi: true },
     { provide: HAMMER_GESTURE_CONFIG, useClass: AppHammerConfig },
-    { provide: APP_INITIALIZER, useFactory: initLanguage, multi: true, deps: [AppTranslateService] },
+    { provide: APP_INITIALIZER, useFactory: initLanguage, multi: true, deps: [AppTranslateService] }
   ],
   bootstrap: [AppComponent]
 })

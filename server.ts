@@ -18,9 +18,7 @@ const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 
 // Our index.html we'll use as our template
-const template = readFileSync(
-  join(DIST_FOLDER, 'petman-client', 'index.html')
-).toString();
+const template = readFileSync(join(DIST_FOLDER, 'petman-client', 'index.html')).toString();
 
 const win = domino.createWindow(template);
 
@@ -44,6 +42,7 @@ Object.defineProperty(win.document.body.style, 'box-shadow', {
 
 global['document'] = win.document;
 global['CSS'] = null;
+global['XMLHttpRequest'] = require('xmlhttprequest').XMLHttpRequest;
 global['Prism'] = null;
 global['window'] = win;
 global['DOMTokenList'] = win['DOMTokenList'];
@@ -55,14 +54,9 @@ global['Image'] = win['Image'];
 global['getComputedStyle'] = win.getComputedStyle;
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const {
-  AppServerModuleNgFactory,
-  LAZY_MODULE_MAP
-} = require('./dist/petman-client-server/main');
+const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/petman-client-server/main');
 
-const {
-  provideModuleMap
-} = require('@nguniversal/module-map-ngfactory-loader');
+const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
 
 // app.engine('html', (_, options, callback) => {
 //   renderModuleFactory(AppServerModuleNgFactory, {
@@ -115,6 +109,14 @@ app.get('*', (req, res) => {
         },
         {
           provide: RESPONSE,
+          useValue: res
+        },
+        {
+          provide: 'REQUEST',
+          useValue: req
+        },
+        {
+          provide: 'RESPONSE',
           useValue: res
         },
         {

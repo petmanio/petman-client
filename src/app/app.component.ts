@@ -1,21 +1,14 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
-  ApplicationRef
-} from '@angular/core';
+import { ApplicationRef, ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatDialog, MatSnackBar } from '@angular/material';
 // TODO: change inport, rxjs is blacklisted
 import { combineLatest, Subscription } from 'rxjs';
-import { delay, tap, filter, take } from 'rxjs/operators';
+import { delay, filter, take, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { MetaService } from '@ngx-meta/core';
+import { CookiesService } from '@ngx-utils/cookies';
 
 import { UserDto } from '@petman/common';
 
@@ -23,10 +16,9 @@ import * as fromRoot from '@app/reducers';
 import * as fromAuth from '@auth/reducers';
 import * as fromUser from '@user/reducers';
 import { UtilService } from '@shared/services/util/util.service';
-
-import { AppStorage } from '@storage/universal.inject';
 import { TranslateService } from '@translate/translate.service';
-import { CloseSidenav, OpenSidenav, OpenMobileFilters } from '@app/actions/layout.actions';
+
+import { CloseSidenav, OpenMobileFilters, OpenSidenav } from '@app/actions/layout.actions';
 import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
 import { LanguageChangeSnackbarComponent } from '@core/language-change-snackbar/language-change-snackbar.component';
 import { CleanError } from '@shared/actions/shared.actions';
@@ -66,8 +58,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private translateService: TranslateService,
     private store: Store<fromRoot.State>,
+    private cookies: CookiesService,
     private utilService: UtilService,
-    @Inject(AppStorage) private appStorage: Storage,
     @Inject(PLATFORM_ID) protected platformId: Object,
     @Inject(MetaService) private meta: MetaService
   ) {
@@ -94,7 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
         tap((selectedUser: UserDto) => {
           this.selectedUser = selectedUser;
           if (this.selectedUser) {
-            const selectedUserIdFromStorage = parseInt(this.appStorage.getItem('selectedUserId'), 0);
+            const selectedUserIdFromStorage = parseInt(this.cookies.get('selectedUserId'), 0);
             if (selectedUserIdFromStorage && selectedUserIdFromStorage !== this.selectedUser.id) {
               this.store.dispatch(new ChangeUser(selectedUserIdFromStorage));
             }
@@ -213,13 +205,13 @@ export class AppComponent implements OnInit, OnDestroy {
   private welcomeDialog() {
     if (isPlatformBrowser(this.platformId)) {
       // TODO: use effect init and user$ observable
-      if (!this.appStorage.getItem('welcomeDialogShowed') && !this.appStorage.getItem('token')) {
+      if (!this.cookies.get('welcomeDialogShowed') && !this.cookies.get('token')) {
         setTimeout(() => {
           const dialogRef = this.dialog.open(WelcomeDialogComponent, {
             width: '90%'
           });
           dialogRef.afterClosed().subscribe(() => {
-            this.appStorage.setItem('welcomeDialogShowed', 'true');
+            this.cookies.put('welcomeDialogShowed', 'true');
           });
         }, 3000);
       }
@@ -227,7 +219,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private languageChangeSnackBar() {
-    const languageChangeAsked = this.appStorage.getItem('languageChangeSnackBarShowed');
+    const languageChangeAsked = this.cookies.get('languageChangeSnackBarShowed');
 
     if (isPlatformBrowser(this.platformId) && !languageChangeAsked) {
       this.geolocationCountry$
@@ -250,7 +242,7 @@ export class AppComponent implements OnInit, OnDestroy {
                   if (action.dismissedByAction) {
                     this.changeLanguage('hy');
                   }
-                  this.appStorage.setItem('languageChangeSnackBarShowed', 'true');
+                  this.cookies.put('languageChangeSnackBarShowed', 'true');
                 });
             }
           }),
