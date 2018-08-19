@@ -1,7 +1,7 @@
 <div class="pm-full-loader">
   <div *tdLoading="let item until !(pending$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'"
     class="columns is-marginless">
-    <div class="column is-8 is-offset-2">
+    <div class="column is-8-fullhd is-offset-2-fullhd is-10-widescreen is-offset-1-widescreen">
       <td-message [opened]="error$ | async" [label]="'INTERNAL_ERROR_TITLE' | translate" [sublabel]="'INTERNAL_ERROR' | translate"
         color="warn" icon="error"></td-message>
       <p class="pm-intro has-text-grey" [innerHTML]="'BECOME_SITTER_INTO' | translate | appSafeHtml"></p>

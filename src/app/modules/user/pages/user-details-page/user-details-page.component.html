@@ -1,7 +1,7 @@
 <div class="pm-full-loader">
   <div *tdLoading="let item until (applications$ | appRxDebounce | async); type:'circular'; mode:'indeterminate'; strategy:'overlay'; color:'accent'">
     <div class="columns is-marginless">
-      <div class="column is-10 is-offset-1">
+      <div class="column is-10-fullhd is-offset-1-fullhd">
         <div class="columns">
           <div class="column">
             <div class="pm-user-profile-cover" [ngStyle]="{'background-image': 'url(/assets/' + randomCoverPhoto + ')'}">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="columns is-marginless">
-      <div class="column is-10 is-offset-1 pm-application-info">
+      <div class="column is-10-fullhd is-offset-1-fullhd pm-application-info">
         <div *ngIf="(applications$ | async)?.length; else noApplications">
           <p class="has-text-centered has-text-grey is-size-4 is-size-6-touch">
             <ng-container *ngIf="(userEntity$ | async)?.isOwner else guest">{{'MY_APPLICATIONS' | translate}}</ng-container>
@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="columns is-marginless">
-      <div class="column is-10 is-offset-1 is-paddingless">
+      <div class="column is-10-fullhd is-offset-1-fullhd is-paddingless">
         <div class="columns is-marginless">
           <div class="column is-paddingless">
             <app-masonry [options]="masonryOptions">
