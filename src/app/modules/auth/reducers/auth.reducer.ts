@@ -35,6 +35,7 @@ export function reducer(
       return { ...state, loggedIn: true, user: action.payload };
 
     case AuthActionTypes.CHANGE_USER:
+    case AuthActionTypes.SET_USER:
       return { ...state, selectedUserId: action.payload };
 
     case AuthActionTypes.LOGOUT:

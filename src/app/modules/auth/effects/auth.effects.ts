@@ -55,12 +55,9 @@ export class AuthEffects {
 
   @Effect({ dispatch: false })
   userChange$ = this.actions$.pipe(
-    ofType(AuthActionTypes.CHANGE_USER),
+    ofType(AuthActionTypes.CHANGE_USER, AuthActionTypes.SET_USER),
     map((action: ChangeUser) => action.payload),
-    tap(selectedUserId => {
-      this.authService.changeUser(selectedUserId);
-      this.router.navigate(['/']);
-    })
+    tap(selectedUserId => this.authService.changeUser(selectedUserId))
   );
 
   @Effect({ dispatch: false })

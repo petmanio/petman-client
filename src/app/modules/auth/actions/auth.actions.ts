@@ -11,6 +11,7 @@ export enum AuthActionTypes {
   USER_FAILURE = '[Auth] User failure',
   USER_SUCCESS = '[Auth] User success',
   CHANGE_USER = '[Auth] Change user',
+  SET_USER = '[Auth] Set user',
 
   LOGOUT = '[Auth] Logout',
   LOGIN_REDIRECT = '[Auth] Login redirect',
@@ -59,6 +60,9 @@ export class UserSuccess implements Action {
   }
 }
 
+/**
+ * Shared
+ */
 export class ChangeUser implements Action {
   readonly type = AuthActionTypes.CHANGE_USER;
 
@@ -66,9 +70,13 @@ export class ChangeUser implements Action {
   }
 }
 
-/**
- * Shared
- */
+export class SetUser implements Action {
+  readonly type = AuthActionTypes.SET_USER;
+
+  constructor(public payload: number) {
+  }
+}
+
 export class Logout implements Action {
   readonly type = AuthActionTypes.LOGOUT;
 
@@ -95,6 +103,7 @@ export type AuthActions =
   | UserFailure
   | UserSuccess
   | ChangeUser
+  | SetUser
   | Logout
   | LoginRedirect
   | ClearError;

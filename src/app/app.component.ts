@@ -22,7 +22,7 @@ import { CloseSidenav, OpenMobileFilters, OpenSidenav } from '@app/actions/layou
 import { WelcomeDialogComponent } from '@core/welcome-dialog/welcome-dialog.component';
 import { LanguageChangeSnackbarComponent } from '@core/language-change-snackbar/language-change-snackbar.component';
 import { CleanError } from '@shared/actions/shared.actions';
-import { ChangeUser, Logout } from '@auth/actions/auth.actions';
+import { ChangeUser, Logout, SetUser } from '@auth/actions/auth.actions';
 import { Geolocation } from '@user/actions/user.actions';
 import { Categories } from '@poi/actions/poi.actions';
 
@@ -88,7 +88,7 @@ export class AppComponent implements OnInit, OnDestroy {
           if (this.selectedUser) {
             const selectedUserIdFromStorage = parseInt(this.cookies.get('selectedUserId'), 0);
             if (selectedUserIdFromStorage && selectedUserIdFromStorage !== this.selectedUser.id) {
-              this.store.dispatch(new ChangeUser(selectedUserIdFromStorage));
+              this.store.dispatch(new SetUser(selectedUserIdFromStorage));
             }
           }
         })
@@ -154,6 +154,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   selectedUserChange($event) {
     this.store.dispatch(new ChangeUser($event));
+    this.router.navigate(['/']);
   }
 
   closeSideNav() {
