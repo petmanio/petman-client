@@ -9,6 +9,7 @@
   "exclude": [
     "test.ts",
     "**/*.spec.ts",
-    "app/modules/material/components/mz-*"
+    "app/modules/material/components/mz-*",
+    "app/modules/storage"
   ]
 }

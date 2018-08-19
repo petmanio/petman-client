@@ -40,10 +40,6 @@
     "@angular/router": "^6.1.2",
     "@angular/service-worker": "^6.1.2",
     "@covalent/core": "^2.0.0-beta.2",
-    "@covalent/dynamic-forms": "^2.0.0-beta.2",
-    "@covalent/highlight": "^2.0.0-beta.2",
-    "@covalent/http": "^2.0.0-beta.2",
-    "@covalent/markdown": "^2.0.0-beta.2",
     "@fortawesome/angular-fontawesome": "^0.1.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-brands-svg-icons": "^5.2.0",
@@ -64,6 +60,7 @@
     "@ngx-share/core": "^6.0.1",
     "@ngx-translate/core": "^10.0.2",
     "@ngx-translate/http-loader": "^3.0.1",
+    "@ngx-utils/cookies": "^3.0.2",
     "@petman/common": "^1.2.0",
     "bulma": "^0.7.1",
     "class-transformer": "^0.1.9",
@@ -88,6 +85,7 @@
     "ngx-pipes": "^2.3.2",
     "normalize.css": "^8.0.0",
     "rxjs": "^6.2.2",
+    "xmlhttprequest": "^1.8.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

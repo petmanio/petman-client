@@ -12,6 +12,8 @@ module.exports = {
     alias: {
       // FIXME: TypeError: decorator is not a function
       // '@nestjs/swagger': '@petman/common/dist/mock/package',
+      // FIXME: @petman/common -> @nest/common -> axios which have conflict with xmlhttprequest
+      'axios': '@petman/common/dist/mock/package',
       'materialize-css': '@petman/common/dist/mock/package'
     }
   },

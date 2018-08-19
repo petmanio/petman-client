@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { CookiesService } from '@ngx-utils/cookies';
 
-import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
 
 @Injectable()
 export class CustomHeadersInterceptor implements HttpInterceptor {
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(private cookies: CookiesService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    let token = this.localStorageService.getItem('token') || '';
+    let token = this.cookies.get('token') || '';
     if (token) {
       token = `bearer ${token}`;
     }
@@ -17,7 +17,7 @@ export class CustomHeadersInterceptor implements HttpInterceptor {
     req = req.clone({
       headers: req.headers
         .set('authorization', token)
-        .set('authorization-selected-user', this.localStorageService.getItem('selectedUserId') || '')
+        .set('authorization-selected-user', this.cookies.get('selectedUserId') || '')
     });
     return next.handle(req);
   }

@@ -26,7 +26,6 @@
       "@user/*": ["app/modules/user/*"],
       "@translate/*": ["app/modules/translate/*"],
       "@meta/*": ["app/modules/meta/*"],
-      "@storage/*": ["app/modules/storage/*"],
       "@app/*": ["app/*"],
       "@nestjs/swagger": ["../node_modules/@petman/common/dist/mock/package"],
       "moment": ["../node_modules/moment/min/moment.min.js"],
