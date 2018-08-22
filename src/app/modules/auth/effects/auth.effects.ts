@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { defer, Observable } from 'rxjs';
+import { defer, EMPTY, Observable } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 
@@ -24,11 +24,15 @@ export class AuthEffects {
   @Effect()
   fbLogin$ = this.actions$.pipe(
     ofType(AuthActionTypes.FB_LOGIN),
-    switchMap(() => this.authService.getFacebookToken()),
-    switchMap(accessToken => {
-      return this.authService.fbLogin({ accessToken }).pipe(
-        map(response => new FbLoginSuccess(response)),
-        catchError(error => of(new FbLoginFailure(error)))
+    switchMap(() => {
+      return this.authService.getFacebookToken().pipe(
+        switchMap(accessToken => {
+          return this.authService.fbLogin({ accessToken }).pipe(
+            map(response => new FbLoginSuccess(response)),
+            catchError(error => of(new FbLoginFailure(error)))
+          );
+        }),
+        catchError(() => EMPTY)
       );
     })
   );
