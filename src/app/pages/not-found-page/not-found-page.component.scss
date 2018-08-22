@@ -2,10 +2,14 @@
 
 :host {
   text-align: center;
-  height: calc(100vh - 205px);
+  height: calc(100vh - 160px);
   display: block;
   background: url('/assets/not-found-cover.jpg') center no-repeat;
   background-size: cover;
+
+  @include tablet {
+    height: calc(100vh - 175px);
+  }
 }
 
 .pm-not-found {

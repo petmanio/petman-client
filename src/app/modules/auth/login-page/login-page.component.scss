@@ -1,8 +1,14 @@
+@import '../../../scss/mixins';
+
 :host {
   text-align: center;
-  height: calc(100vh - 205px);
+  height: calc(100vh - 160px);
   display: block;
   background: #fff;
+
+  @include tablet {
+    height: calc(100vh - 175px);
+  }
 }
 
 app-login-form-social {
