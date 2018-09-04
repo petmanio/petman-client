@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
@@ -24,7 +25,8 @@ export class TranslateService {
     @Inject(REQUEST) private request: Request,
     @Inject(NGXTranslateService) private translate: NGXTranslateService,
     @Inject(MetaService) private meta: MetaService
-  ) {}
+  ) {
+  }
 
   initLanguage(): Promise<any> {
     return new Promise((resolve: Function) => {
@@ -41,7 +43,12 @@ export class TranslateService {
     if (!lang || lang.code === this.translate.currentLang) {
       return;
     }
-    this.cookies.put(STORAGE_LANG_NAME, lang.code);
+    // FIXME: cookieService default expires date not working on produciton build
+    this.cookies.put(STORAGE_LANG_NAME, lang.code, {
+      expires: moment(new Date())
+        .add(1, 'year')
+        .toDate()
+    });
     this.setLanguage({ code: lang.code } as ILang);
   }
 
@@ -83,7 +90,12 @@ export class TranslateService {
       }
     }
     language = language || LANG_DEFAULT;
-    this.cookies.put(STORAGE_LANG_NAME, language.code);
+    // FIXME: cookieService default expires date not working on produciton build
+    this.cookies.put(STORAGE_LANG_NAME, language.code, {
+      expires: moment(new Date())
+        .add(1, 'year')
+        .toDate()
+    });
     return language;
   }
 }

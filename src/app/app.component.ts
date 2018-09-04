@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { ApplicationRef, ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
@@ -212,7 +213,12 @@ export class AppComponent implements OnInit, OnDestroy {
             width: '90%'
           });
           dialogRef.afterClosed().subscribe(() => {
-            this.cookies.put('welcomeDialogShowed', 'true');
+            // FIXME: cookieService default expires date not working on produciton build
+            this.cookies.put('welcomeDialogShowed', 'true', {
+              expires: moment(new Date())
+                .add(1, 'year')
+                .toDate()
+            });
           });
         }, 3000);
       }
@@ -243,7 +249,12 @@ export class AppComponent implements OnInit, OnDestroy {
                   if (action.dismissedByAction) {
                     this.changeLanguage('hy');
                   }
-                  this.cookies.put('languageChangeSnackBarShowed', 'true');
+                  // FIXME: cookieService default expires date not working on produciton build
+                  this.cookies.put('languageChangeSnackBarShowed', 'true', {
+                    expires: moment(new Date())
+                      .add(1, 'year')
+                      .toDate()
+                  });
                 });
             }
           }),
